@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Helvetica;
+      }
+      .end {
+        width: 50%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas
+      id="ctx"
+      width="960"
+      height="697"
+      style="border: 1px solid #000000; background-image: url( './assets/images/background.png' ); background-position: center; background-repeat: no-repeat"
+    >
+    </canvas>
+    <button class="btn btn-danger" onclick="window.close()">Close</button>
+    <div
+      id="end"
+      style="position:absolute; top: 150px; left: 350px; width: 300px; height: 320px; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+    >
+      <h1>You Lose</h1>
+      <p id="scoreText"></p>
+      <p id="destroyedText"></p>
+      <p id="rubbishText"></p>
+      <p id="pestsText"></p>
+      <p id="animalsText"></p>
+      <p id="timeText"></p>
+      <button onclick="startNewGame()">New Game</button>
+    </div>
+  </body>
+  <script>
+    var canvas = document.getElementById("ctx");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "30px Helvetica";
+
+    canvasClick = function(event) {
+      var tempW = 50;
+      var tempH = 50;
+      var { clientX, clientY } = event;
+      var ent = {
+        x: clientX,
+        y: clientY,
+        width: tempW,
+        height: tempH
+      };
+      for (var key in rubbishList) {
+        if (testCollisionEntity(ent, rubbishList[key])) {
+          delete rubbishList[key];
+          score += 10;
+          tappedRubbish += 1;
+        }
+        ctx.fillRect(
+          ent.x - tempW / 2,
+          ent.y - tempH / 2,
+          ent.width,
+          ent.height
+        );
+      }
+      delete ent;
+    };
+    canvas.addEventListener("click", canvasClick);
+
+    var WIDTH = 960;
+    var HEIGHT = 697;
+
+    //setTimeout(function(){ timeWhenGameStarted = Date.now() }, 6000);
+    var timeWhenGameStarted = Date.now();
+
+    var enemyId = 0;
+
+    var frameCount = 0;
+
+    var tappedRubbish = 0;
+
+    var tappedPests = 0;
+
+    var tappedAnimals = 0;
+
+    var score;
+
+    var health;
+
+    var rubbishList = {};
+
+    var imgPaths = {
+      bg: "./assets/images/background.png",
+      r1: "./assets/images/rubbish1.png",
+      r2: "./assets/images/rubbish2.png",
+      r3: "./assets/images/rubbish3.png",
+      a1: "./assets/images/animal1.png",
+      a2: "./assets/images/animal2.png",
+      a3: "./assets/images/animal3.png"
+    };
+
+    var img0 = new Image();
+    img0.src = imgPaths.bg;
+
+    var img1 = new Image();
+    img1.src = imgPaths.r1;
+
+    var img2 = new Image();
+    img2.src = imgPaths.r2;
+
+    var img3 = new Image();
+    img3.src = imgPaths.r3;
+
+    var img4 = new Image();
+    img4.src = imgPaths.a1;
+
+    var img5 = new Image();
+    img5.src = imgPaths.a2;
+
+    var img6 = new Image();
+    img6.src = imgPaths.a3;
+
+    var imgList = [img0, img1, img2, img3, img4, img5];
+
+    Image = function(id, imgId) {
+      var img = new Image();
+      img.src = imgPaths[imgId];
+
+      imgList[id] = img;
+    };
+
+    Enemy = function(id, x, y, spdX, spdY, width, height, imgId) {
+      var enemy = {
+        x: x,
+        spdX: spdX,
+        y: y,
+        spdY: spdY,
+        id: id,
+        width: width,
+        height: height,
+        imgId: imgId
+      };
+
+      rubbishList[id] = enemy;
+    };
+
+    Animal = function(id, x, y, spdX, width, height, imgId) {
+      var enemy = {
+        x: x,
+        spdX: spdX,
+        y: y,
+        name: "A",
+        id: id,
+        width: width,
+        height: height,
+        color: "blue",
+        imgId: imgId
+      };
+
+      rubbishList[id] = enemy;
+    };
+
+    randomlyGenerateRubbish = function() {
+      if (health > 0) {
+        var x = Math.random() * (WIDTH - 10) + 10;
+        var y = 0;
+        // var x = 250;
+        // var y = 250;
+        // var height = 10 + Math.random() * 30;
+        // var width = 10 + Math.random() * 30;
+        var height = 100;
+        var width = 100;
+        var id = enemyId++;
+        var spdX =
+          10 + Math.random() * 20 + (frameCount / 1000) * (frameCount / 1000);
+        var spdY = 2 + Math.random() * 2 + frameCount / 1000;
+        //console.log(frameCount / 1000);
+        var imgId = Math.floor(Math.random() * 3 + 1);
+        Enemy(id, x, y, spdX, spdY, width, height, imgId);
+      }
+    };
+
+    randomlyGenerateAnimal = function() {
+      if (health > 0) {
+        var x = Math.random() * (WIDTH - 10) + 10;
+        var y = 850;
+        // var height = 10 + Math.random() * 30;
+        // var width = 10 + Math.random() * 30;
+        var height = 80;
+        var width = 80;
+        var id = enemyId++;
+        var spdX = 1 + Math.random() * 20;
+        var imgId = Math.floor(Math.random() * 3 + 1);
+        Enemy(id, x, y, spdX, width, height, imgId);
+      }
+    };
+
+    updateEntity = function(something) {
+      updateEnemyPosition(something);
+      drawEntity(something);
+    };
+
+    updateEnemyPosition = function(something) {
+      something.x += something.spdX;
+      something.y += something.spdY;
+      something.spdY += 0.5;
+      if (something.spdX > 0) {
+        something.spdX -= 0.3;
+      } else if (something.spdX < 0) {
+        something.spdX += 0.3;
+      }
+
+      if (something.x < 0 || something.x > WIDTH) {
+        something.spdX *= -1;
+      }
+
+      if (something.y > 953) {
+        health -= 50;
+        score -= 50;
+        for (var key in rubbishList) {
+          if (something === rubbishList[key]) {
+            delete rubbishList[key];
+          }
+        }
+      }
+    };
+
+    updateAnimalPosition = function(something) {
+      something.x += something.spdX;
+      //something.y += something.spdY;
+
+      if (something.x < 0 || something.x > WIDTH) {
+        something.spdX *= -1;
+      }
+    };
+
+    drawEntity = function(something) {
+      ctx.save();
+      ctx.fillStyle = something.color;
+      //ctx.fillRect( something.x - something.width / 2, something.y - something.height / 2, something.width, something.height );
+      
+      ctx.drawImage(
+        imgList[something.imgId],
+        something.x - something.width / 2,
+        something.y - something.height / 2,
+        something.width,
+        something.height
+      );
+      ctx.restore();
+    };
+
+    getDistanceBetweenEntity = function(entity1, entity2) {
+      //return distance (number)
+      var vx = entity1.x - entity2.x;
+      var vy = entity1.y - entity2.y;
+      return Math.sqrt(vx * vx + vy * vy);
+    };
+
+    testCollisionEntity = function(entity1, entity2) {
+      var rect1 = {
+        x: entity1.x - entity1.width / 2,
+        y: entity1.y - entity1.height / 2,
+        width: entity1.width,
+        height: entity1.height
+      };
+
+      var rect2 = {
+        x: entity2.x - entity2.width / 2,
+        y: entity2.y - entity2.height / 2,
+        width: entity2.width,
+        height: entity2.height
+      };
+
+      return testCollisionRectRect(rect1, rect2);
+    };
+
+    testCollisionRectRect = function(rect1, rect2) {
+      return (
+        rect1.x <= rect2.x + rect2.width &&
+        rect2.x <= rect1.x + rect1.width &&
+        rect1.y <= rect2.y + rect2.height &&
+        rect2.y <= rect1.y + rect1.height
+      );
+    };
+
+    update = function() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+      frameCount++;
+      var time = (new Date() - timeWhenGameStarted) / 1000;
+      //setTimeout(function(){ console.log(time) }, 1000);
+
+      if (frameCount % 30 == 0) {
+        setTimeout(function(){ randomlyGenerateRubbish() }, 6000);
+      }
+
+      if (time < 1.5) {      
+        ctx.fillStyle = "green";
+        ctx.fillText("Lowers when rubbish hits the ground", 170, 30);
+      } else if (time > 1.5 && time < 3) {
+        ctx.fillStyle = "brown";
+        ctx.fillText("Increases when you destroy rubbish", 170, 60);
+      } else if (time > 3 && time < 4.5) {
+        ctx.fillStyle = "white";
+        ctx.fillText("How long this round's lasted", 170, 90);
+      } else if (time > 4.5 && time < 6) {
+        ctx.fillStyle = "black";
+        ctx.fillText("Tap rubbish to destroy it!", 280, 60);
+      }
+
+      for (var key in rubbishList) {
+        updateEntity(rubbishList[key]);
+      }
+
+      if (health <= 0) {
+        myStopFunction();
+        health = 0;
+        for (var key in rubbishList) {
+          delete rubbishList[key];
+        }
+        rubbishList = {};
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //ctx.fillText("YOU LOSE", canvas.width / 2, canvas.height / 2);
+        document.getElementById("end").style.display = "block";
+        document.getElementById("scoreText").innerHTML = "Score: " + score;
+        document.getElementById("destroyedText").innerHTML = "You destroyed: ";
+        document.getElementById("rubbishText").innerHTML = tappedRubbish + " pieces of rubbish";
+        document.getElementById("pestsText").innerHTML = tappedPests + " pest animals";
+        document.getElementById("animalsText").innerHTML = tappedAnimals + " non-pest animals";
+        document.getElementById("timeText").innerHTML =
+          "You Survived for: " + time + " seconds";
+      }
+      ctx.fillStyle = "green";
+      ctx.fillText("Health: " + health, 0, 30);
+      ctx.fillStyle = "brown";
+      ctx.fillText("Score: " + score, 0, 60);
+      ctx.fillStyle = "white";
+      ctx.fillText("Time: " + time, 0, 90);
+    };
+
+    var myVar;
+
+    startNewGame = function() {
+      document.getElementById("end").style.display = "none";
+      //setTimeout(function(){ timeWhenGameStarted = Date.now() }, 6000);
+      timeWhenGameStarted = Date.now();
+      frameCount = 0;
+      health = 100;
+      score = 0;
+      tappedRubbish = 0;
+      rubbishList = {};
+      setTimeout(function(){ randomlyGenerateRubbish() }, 6000);
+      //randomlyGenerateRubbish();
+      myVar = setInterval(update, 40);
+    };
+
+    startNewGame();
+
+    function myStopFunction() {
+      clearInterval(myVar);
+    }
+  </script>
+</html>
