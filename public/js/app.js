@@ -65638,7 +65638,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function SideBar() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sidebarlist col-3 overflow-auto"
+    className: "sidebarlist col-md-3 col-sm-12 overflow-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Plants"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Trees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Animals"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Tracks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Birds")));
 }
 
@@ -66596,7 +66596,9 @@ function (_React$Component) {
           }
         }, item.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.description));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SideBar__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SideBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebarlist col-md-9 col-sm-12 overflow-auto"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Content")));
     }
   }]);
 

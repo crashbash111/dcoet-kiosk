@@ -2,7 +2,7 @@ import React from "react";
 
 function SideBar(){
     return(
-        <div className="sidebarlist col-3 overflow-auto">
+        <div className="sidebarlist col-md-3 col-sm-12 overflow-auto">
             <ul>
                 <li>
                     Plants

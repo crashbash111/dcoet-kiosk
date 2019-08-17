@@ -34,7 +34,9 @@ export default class Home extends React.Component
         return(
             <div>
                 <SideBar />
-
+                <div className="sidebarlist col-md-9 col-sm-12 overflow-auto">
+                    <h1>Content</h1>
+                </div>
             </div>
         );
     }
