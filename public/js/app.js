@@ -60512,7 +60512,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65623,6 +65623,29 @@ function DeleteButton(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/SideBar.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/SideBar.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function SideBar() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sidebarlist col-3 overflow-auto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Plants"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Trees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Animals"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Tracks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Birds")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (SideBar);
+
+/***/ }),
+
 /***/ "./resources/js/components/Slideshow.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/Slideshow.js ***!
@@ -66504,6 +66527,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_SideBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SideBar */ "./resources/js/components/SideBar.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66521,6 +66545,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -66571,143 +66596,7 @@ function (_React$Component) {
           }
         }, item.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.description));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        style: {
-          fontSize: "50px",
-          textAlign: "center"
-        }
-      }, "Come Explore Deep Cove!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Featured"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "tiles-grid size-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-up",
-        "data-size": "large",
-        style: {
-          backgroundColor: "green"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://1.bp.blogspot.com/-YHRtmqsa8QA/Tw9yZAEqycI/AAAAAAAAACw/VGkBwvpWOEg/s1600/Animals_Birds_Kiwi_bird_026192_.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Kiwi")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://nzbirdsonline.org.nz/sites/all/files/1200468kpo10.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Kakapo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "https://www.doc.govt.nz/globalassets/images/nature/native-animals/birds/kea/kea-milford-sbernert-1200-4.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Kea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      }, "Birds")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-down",
-        "data-size": "medium",
-        style: {
-          backgroundColor: "orange"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://www.nowuc.com.au/wp-content/uploads/2014/05/possum.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Possum")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://4.bp.blogspot.com/-mls0SKe7NJA/TrJ-vjw5PxI/AAAAAAAAAPA/fh5uLGWZr84/s1600/Stoat_NaturalWildLife_3.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Stoat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      }, "Pests")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-down",
-        "data-size": "medium",
-        style: {
-          backgroundColor: "purple"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://www.multilingualliving.com/wordpress/wp-content/uploads/2011/12/Coca_cola_Santa.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Litter Rush!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://www.multilingualliving.com/wordpress/wp-content/uploads/2011/12/Coca_cola_Santa.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Litter Rush!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      }, "Games")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-left",
-        "data-size": "medium",
-        style: {
-          backgroundColor: "yellow"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "https://cdn.britannica.com/s:300x500/26/65326-050-53232216.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Rat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "https://cdn.britannica.com/s:300x500/26/65326-050-53232216.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Rat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-left",
-        "data-size": "wide",
-        style: {
-          backgroundColor: "red"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Odocoileus_hemionus_sitkensis.jpg/1200px-Odocoileus_hemionus_sitkensis.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Deer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Odocoileus_hemionus_sitkensis.jpg/1200px-Odocoileus_hemionus_sitkensis.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Deer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Browse the categories in the learning section."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "tiles-grid size-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-right",
-        "data-size": "medium",
-        style: {
-          backgroundColor: "lightblue"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "https://www.doc.govt.nz/globalassets/images/nature/native-animals/birds/kea/kea-milford-sbernert-1200-4.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://1.bp.blogspot.com/-YHRtmqsa8QA/Tw9yZAEqycI/AAAAAAAAACw/VGkBwvpWOEg/s1600/Animals_Birds_Kiwi_bird_026192_.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://nzbirdsonline.org.nz/sites/all/files/1200468kpo10.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Birds"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-effect": "animate-slide-right",
-        "data-size": "medium",
-        style: {
-          backgroundColor: "lightblue"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://4.bp.blogspot.com/-mls0SKe7NJA/TrJ-vjw5PxI/AAAAAAAAAPA/fh5uLGWZr84/s1600/Stoat_NaturalWildLife_3.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide",
-        "data-cover": "http://www.nowuc.com.au/wp-content/uploads/2014/05/possum.jpg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Pests"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Activities"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Check out some cool but still educational activities."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "data-role": "tile",
-        "data-size": "medium"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "branding-bar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Litter Rush!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "http://cdn.onlinewebfonts.com/svg/img_249551.png",
-        className: "icon"
-      })))))));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SideBar__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 

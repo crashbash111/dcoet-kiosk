@@ -10790,3 +10790,21 @@ h1 {
   font-size: 40px;
 }
 
+.sidebar div {
+  height: 100%;
+  background-color: red;
+  overflow-y: scroll;
+}
+
+.sidebarlist ul {
+  padding: 25px;
+  color: white;
+  font-weight: bold;
+}
+
+.sidebarlist li {
+  height: 250px;
+  font-size: 36px;
+  text-align: right;
+}
+
