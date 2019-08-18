@@ -1,10 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import {Logo} from "../components/Home/Logo";
-import {MainContent} from "../components/Home/MainContent";
-import {SearchBar} from "../components/Home/SearchBar";
-import {SideBar} from "../components/Home/SideBar";
+import Logo from "../components/Home/Logo";
+import MainContent from "../components/Home/MainContent";
+import SearchBar from "../components/Home/SearchBar";
+import SideBar from "../components/Home/SideBar";
 
 export default class Home extends React.Component
 {
@@ -15,6 +15,8 @@ export default class Home extends React.Component
         this.state = {
             categories: [],
         }
+
+        this.handleCategoryChange = this.handleCategoryChange.bind( this );
     }
 
     componentDidMount()
@@ -22,6 +24,11 @@ export default class Home extends React.Component
         fetch( "./pages/allCategories" )
         .then( response => response.json() )
         .then( data => this.setState( { categories: data } ) );
+    }
+
+    handleCategoryChange( i )
+    {
+        console.log( "clicked category " + i );
     }
 
     render()
@@ -39,18 +46,33 @@ export default class Home extends React.Component
 
         return(
             <div>
+                <div className="grid-container">
+                <div className="grid-item item1">
+                    <Logo />
+                    <img src="/images/logo.png"></img>
+                </div>
+                <div className="grid-item item2">
+                    <SearchBar />
+                </div>
+                <div className="grid-item item3">
+                    <SideBar categories={ this.state.categories } handleChange={ this.handleCategoryChange } />
+                </div>
+                <div className="grid-item item4">
+                    <MainContent />
+                </div>
+            </div>
                 <div>
                     <div>
-                        <Logo />
+                        
                     </div>
                     <div>
-                        <SearchBar />
+                        
                     </div>
                     <div>
-                        <SideBar />
+                        
                     </div>
                     <div>
-                        <MainContent />
+                        
                     </div>
                 </div>
             </div>

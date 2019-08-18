@@ -11,7 +11,8 @@ export default class SideBarEntry extends React.Component
     {
         return(
             <div>
-                Side bar entry
+                <h1>{ this.props.name }</h1>
+                <button onClick={ () => console.log( this.props.id ) }>{ this.props.name }</button>
             </div>
         );
     }

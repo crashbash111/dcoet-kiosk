@@ -45,13 +45,8 @@ export default class Layout extends React.Component
     render()
     {
         return(
-            <div className="grid-container">
-                <div className="grid-item item1">
-                    <img src="/images/logo.png"></img>
-                </div>
-                <div className="grid-item item2"></div>
-                <div className="grid-item item3"></div>
-                <div className="grid-item item4"></div>
+            <div>
+                {this.props.children}
             </div>
         );
 
