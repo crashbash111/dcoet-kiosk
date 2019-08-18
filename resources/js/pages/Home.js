@@ -1,6 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import SideBar from "../components/SideBar";
+
+import {Logo} from "../components/Home/Logo";
+import {MainContent} from "../components/Home/MainContent";
+import {SearchBar} from "../components/Home/SearchBar";
+import {SideBar} from "../components/Home/SideBar";
 
 export default class Home extends React.Component
 {
@@ -31,11 +35,23 @@ export default class Home extends React.Component
             );
         });
 
+        //
+
         return(
             <div>
-                <SideBar />
-                <div className="sidebarlist col-md-9 col-sm-12 overflow-auto">
-                    <h1>Content</h1>
+                <div>
+                    <div>
+                        <Logo />
+                    </div>
+                    <div>
+                        <SearchBar />
+                    </div>
+                    <div>
+                        <SideBar />
+                    </div>
+                    <div>
+                        <MainContent />
+                    </div>
                 </div>
             </div>
         );
