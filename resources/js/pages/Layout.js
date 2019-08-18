@@ -45,21 +45,13 @@ export default class Layout extends React.Component
     render()
     {
         return(
-            <div>
-                <div className="row">
-                    <div className="col-6">
-                        <h1 style={{ display: "inline-block" }}>Deep Cove</h1>
-                    </div>
-                    <div className="col-6">
-                        <Link to="/" className="btn btn-light" role="button">Home</Link>
-                        <Link to="/kiosk" className="btn btn-light" role="button">Kiosk</Link>
-                        <Link to="/admin" className="btn btn-light" role="button">Admin</Link>
-                        <Link to="/splash" className="btn btn-light" role="button">Splash</Link>
-                        <a href="./game/index.html" target="_blank" className="btn btn-light">Game</a>
-                    </div>
+            <div className="grid-container">
+                <div className="grid-item item1">
+                    <img src="/images/logo.png"></img>
                 </div>
-                
-                {this.props.children}
+                <div className="grid-item item2"></div>
+                <div className="grid-item item3"></div>
+                <div className="grid-item item4"></div>
             </div>
         );
 
