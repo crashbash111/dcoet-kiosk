@@ -10674,8 +10674,8 @@ a.text-dark:focus {
   overflow-x: scroll;
   -ms-scroll-snap-type: x proximity;
       scroll-snap-type: x proximity;
-  padding-bottom: calc(.75 * var(--gutter));
-  margin-bottom: calc(-.25 * var(--gutter));
+  padding-bottom: calc(0.75 * var(--gutter));
+  margin-bottom: calc(-0.25 * var(--gutter));
 }
 
 .hs:before,
@@ -10814,6 +10814,16 @@ h1 {
 .item2 {
   grid-column: 2/span 2;
   grid-row: 1;
+}
+
+.item2 input {
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 42px;
+  height: 90px;
+  width: 90%;
+  margin: auto;
+  display: block;
 }
 
 .item3 {
