@@ -10803,7 +10803,12 @@ h1 {
 
 .item1 img {
   width: 90%;
-  align-content: center;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .item2 {
