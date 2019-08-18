@@ -13,6 +13,7 @@ export default class Home extends React.Component
         super( props );
 
         this.state = {
+            activeCategory: -1,
             categories: [],
         }
 
@@ -29,6 +30,9 @@ export default class Home extends React.Component
     handleCategoryChange( i )
     {
         console.log( "clicked category " + i );
+        this.setState({
+            activeCategory: i
+        });
     }
 
     render()
@@ -49,16 +53,15 @@ export default class Home extends React.Component
                 <div className="grid-container">
                 <div className="grid-item item1">
                     <Logo />
-                    <img src="/images/logo.png"></img>
                 </div>
                 <div className="grid-item item2">
                     <SearchBar />
                 </div>
                 <div className="grid-item item3">
-                    <SideBar categories={ this.state.categories } handleChange={ this.handleCategoryChange } />
+                    <SideBar activeCategory={ this.state.activeCategory } categories={ this.state.categories } handleChange={ this.handleCategoryChange } />
                 </div>
                 <div className="grid-item item4">
-                    <MainContent />
+                    <MainContent activeCategory={ this.state.activeCategory } />
                 </div>
             </div>
                 <div>

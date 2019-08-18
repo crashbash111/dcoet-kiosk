@@ -16,7 +16,7 @@ export default class SideBar extends React.Component
         let sideBarEntries = this.props.categories.map( item =>
             {
                 return(
-                    <SideBarEntry key={ item.id } id={ item.id } name={ item.name } description={ item.description } handleChange={ item.handleCategoryChange } />
+                    <SideBarEntry key={ item.id } id={ item.id } isActive={ this.props.activeCategory == item.id } name={ item.name } description={ item.description } handleChange={ this.props.handleChange } />
                 );
             }
         );

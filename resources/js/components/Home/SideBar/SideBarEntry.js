@@ -9,10 +9,20 @@ export default class SideBarEntry extends React.Component
 
     render()
     {
+        let divStyle;
+
+        if( this.props.isActive )
+        {
+            divStyle = {
+                textAlign: "center",
+                color: "blue",
+            };
+        }
+
         return(
-            <div>
+            <div style={divStyle}>
                 <h1>{ this.props.name }</h1>
-                <button onClick={ () => console.log( this.props.id ) }>{ this.props.name }</button>
+                <button onClick={ () => this.props.handleChange( this.props.id ) }>{ this.props.name }</button>
             </div>
         );
     }
