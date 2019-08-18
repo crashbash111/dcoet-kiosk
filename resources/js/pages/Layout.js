@@ -45,7 +45,7 @@ export default class Layout extends React.Component
     render()
     {
         return(
-            <div>
+            <div style={{ height: "100%" }}>
                 {this.props.children}
             </div>
         );

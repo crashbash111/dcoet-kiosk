@@ -15,9 +15,11 @@ export default class Home extends React.Component
         this.state = {
             activeCategory: -1,
             categories: [],
+            searchTerm: "",
         }
 
         this.handleCategoryChange = this.handleCategoryChange.bind( this );
+        this.handleFormChange = this.handleFormChange.bind( this );
     }
 
     componentDidMount()
@@ -35,6 +37,15 @@ export default class Home extends React.Component
         });
     }
 
+    handleFormChange( event )
+    {
+        let { name, value } = event.target;
+
+        this.setState( {
+            [name]: value
+        });
+    }
+
     render()
     {
         let categoryList = this.state.categories.map( item => {
@@ -49,19 +60,19 @@ export default class Home extends React.Component
         //
 
         return(
-            <div>
+            <div style={{ height: "100%" }}>
                 <div className="grid-container">
                 <div className="grid-item item1">
                     <Logo />
                 </div>
                 <div className="grid-item item2">
-                    <SearchBar />
+                    <SearchBar searchTerm={ this.state.searchTerm } handleChange={ this.handleFormChange } />
                 </div>
                 <div className="grid-item item3">
                     <SideBar activeCategory={ this.state.activeCategory } categories={ this.state.categories } handleChange={ this.handleCategoryChange } />
                 </div>
                 <div className="grid-item item4">
-                    <MainContent activeCategory={ this.state.activeCategory } />
+                    <MainContent filter={ this.state.searchTerm } activeCategory={ this.state.activeCategory } />
                 </div>
             </div>
                 <div>

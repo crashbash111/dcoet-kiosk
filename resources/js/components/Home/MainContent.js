@@ -35,12 +35,27 @@ export default class MainContent extends React.Component {
             }
             else {
                 var pagesList = this.state.pages.map(item => {
+
+                    if( this.props.filter != "" )
+                    {
+                        if( !item.heading.toLowerCase().includes( this.props.filter.toLowerCase() ) )
+                        {
+                            return null;
+                        }
+                    }
+
+                    let images = item.images.map( img => {
+
+                        let imgName = "./storage/kiosk_images/" + img.image_name;
+
+                        return(
+                            <div className="slide" data-cover={ imgName }><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.heading }</h3></div>
+                        );
+                    });
+
                     return (
-                        <div data-role="tile" data-effect="animate-slide-up" data-size="large" style={{ backgroundColor: "green" }}>
-                            <div className="slide" data-cover="http://1.bp.blogspot.com/-YHRtmqsa8QA/Tw9yZAEqycI/AAAAAAAAACw/VGkBwvpWOEg/s1600/Animals_Birds_Kiwi_bird_026192_.jpg"><h3>Kiwi</h3></div>
-                            <div className="slide" data-cover="http://nzbirdsonline.org.nz/sites/all/files/1200468kpo10.jpg"><h3>Kakapo</h3></div>
-                            <div className="slide" data-cover="https://www.doc.govt.nz/globalassets/images/nature/native-animals/birds/kea/kea-milford-sbernert-1200-4.jpg"><h3>Kea</h3></div>
-                            <span className="branding-bar">Birds</span>
+                        <div data-role="tile" data-effect="animate-slide-up"  data-size="large" style={{ backgroundColor: "green" }}>
+                            {images}
                         </div>
                     );
                 });
@@ -48,7 +63,18 @@ export default class MainContent extends React.Component {
                 //Making the main content view have a grid of tiles
 
                 return (
-                    <div style={{ display: "grid" }}>
+                    <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
+                        {pagesList}
                         {pagesList}
                     </div>
                 );
