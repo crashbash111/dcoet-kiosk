@@ -31,6 +31,18 @@ class PagesController extends Controller
         return json_encode( $categories );
     }
 
+    public function allGames()
+    {
+        $game1[ "Name" ] = "Litter Rush";
+        $game1[ "Description" ] = "A game about raising awareness about conservation";
+        $game1[ "link" ] = "litter-rush.html";
+        $game1[ "img" ] = "https://upload.wikimedia.org/wikipedia/commons/5/5d/Restless_flycatcher04.jpg";
+
+        $games = [ $game1 ];
+
+        return json_encode( $games );
+    }
+
     public function category( $id )
     {
         $category = Category::where( 'id', $id )->first();

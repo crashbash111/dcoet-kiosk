@@ -8,6 +8,7 @@ export default class MainContent extends React.Component {
         this.state = {
             loading: false,
             pages: [],
+            games: [],
             redirectId: -1,
             redirect: false,
         };
@@ -19,7 +20,13 @@ export default class MainContent extends React.Component {
         this.setState({ loading: true });
         fetch( "./pages/all" )
         .then(response => response.json())
-        .then(data => this.setState({ pages: data, loading: false }));
+        .then(data => this.setState({ pages: data }));
+
+        fetch( "./allGames" )
+        .then( response => response.json() )
+        .then( data => this.setState( { games: data, loading: false } ) );
+
+        console.log( this.state.games );
     }
 
     fetchData() {
@@ -57,6 +64,29 @@ export default class MainContent extends React.Component {
                 )
             }
             else {
+
+                if( this.props.activeCategory == 999 )
+                {
+                    var gamesList = this.state.games.map( item => {
+                        console.log( item.img );
+                        return(
+                            <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-slide-up" data-size="large" style={{ backgroundColor: "black" }}>
+                                <div className="slide" data-cover="https://thekaleidoscope.org/wp-content/uploads/2018/12/Calculus.jpeg"><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3></div>
+                                <div className="slide" data-cover="https://thekaleidoscope.org/wp-content/uploads/2018/12/Calculus.jpeg"><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3></div>
+                            </div>
+                        );
+                    });
+
+                    return(
+                        <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                            
+                            {gamesList}
+                            
+                        </div>
+                        
+                    );
+                }
+
                 var pagesList = this.state.pages.map(item => {
 
                     if( this.props.activeCategory != item.category_id )

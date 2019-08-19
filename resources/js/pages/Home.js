@@ -60,7 +60,7 @@ export default class Home extends React.Component
         //
 
         return(
-            <div style={{ height: "100%" }}>
+            <div style={{ height: "100%", paddingTop: "15px" }}>
                 <div className="grid-container">
                 <div className="grid-item item1">
                     <Logo />

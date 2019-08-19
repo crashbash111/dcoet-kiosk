@@ -21,9 +21,13 @@ export default class SideBar extends React.Component
             }
         );
 
+
+        let gameId = 999;
+
         return(
             <div>
                 { sideBarEntries }
+                <SideBarEntry key={gameId} id={gameId} isActive={ this.props.activeCategory == gameId } name="Games" description="Games lol" handleChange={ this.props.handleChange } />
             </div>
         );
     }
