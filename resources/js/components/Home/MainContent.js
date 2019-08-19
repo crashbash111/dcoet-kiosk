@@ -91,17 +91,6 @@ export default class MainContent extends React.Component {
                 return (
                     <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
                         {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
-                        {pagesList}
                     </div>
                 );
             }
