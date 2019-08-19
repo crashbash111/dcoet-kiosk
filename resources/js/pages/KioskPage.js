@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 export default class KioskPage extends React.Component {
 
@@ -58,6 +59,9 @@ export default class KioskPage extends React.Component {
                         <div style={{ height: "100%", overflowY: "scroll" }}>
                             <h1>{ this.state.page.heading }</h1>
                             <p>{ this.state.page.text }</p>
+                            <br />
+                            <br />
+                            <Link to="/" className="btn btn-lg btn-warning" role="button">Back to Home</Link>
                         </div>
                         <div onClick={ this.handleClick }>
                             <img style={{ opacity: this.state.opacity }} src={ imgPath } width="100%" />
