@@ -1,3 +1,25 @@
+## How to load project
+To load this project you will need to have the following installed on your system:
+<ul>
+    <li>Composer</li>
+    <li>Laravel</li>
+    <li>Node.js</li>
+    <li>Database Software such as MySQL</li>
+    <li>Something to serve the application such as Apache</li>
+</ul>
+
+To set up a branch for general use, run the following:
+ - "npm install"
+ - "composer install"
+ - "composer update"
+ - Create an .env file that links to an SQL database. A dump of a basic database is stored in a .SQL file at root.
+
+Serving the application can be done by running:
+ - "npm run dev"
+ - "php artisan serve"
+
+## Laravel
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
