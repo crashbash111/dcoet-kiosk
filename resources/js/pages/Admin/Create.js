@@ -161,7 +161,7 @@ export default class Create extends React.Component
                                     </label>
                                     <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
                                 </div>
-                                <button onClick={ this.handleClick }>Submit</button>
+                                <button>Submit</button>
                             </form>
                         </div>
                     </div>

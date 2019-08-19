@@ -11,6 +11,7 @@ import Create from "./pages/Admin/Create";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Splash from "./pages/Splash";
+import KioskPage from "./pages/KioskPage";
 
 const app = document.getElementById( 'app' );
 
@@ -20,7 +21,8 @@ ReactDOM.render(
             <Route exact path="/" component={Home} />
             <Route exact path="/splash" component={Splash} />
             <Route exact path="/kiosk" component={CategoryIndex} />
-            <Route path="/kiosk/:id" component={Category} />
+            <Route exact path="/kiosk/:id" component={Category} />
+            <Route exact path="/kiosk/:c/:id" component={KioskPage} />
             <Route path="/birds/:id" component={Birds} />
             <Route exact path="/admin" component={Admin} />
             <Route path="/admin/create" component={Create} />

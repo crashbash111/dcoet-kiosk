@@ -1,0 +1,24 @@
+import React from "react";
+
+export default class SearchBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { searchTerm: '' };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    }
+
+    render() {
+        return (
+            <div>
+                <form>
+                    <input style={{ borderRadius: "15px" }} type="text" name="searchTerm" placeholder="Search..." value={ this.props.searchTerm } onChange={ this.props.handleChange } />
+                </form>
+            </div>
+        );
+    }
+}

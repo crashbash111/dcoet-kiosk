@@ -14,6 +14,7 @@ Route::get( "/", "PagesController@index" );
 
 Route::get( "/pages/all", "PagesController@all" );
 Route::get( "/pages/allCategories", "PagesController@allCategories" );
+Route::get( "/allGames", "PagesController@allGames" );
 
 Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
 

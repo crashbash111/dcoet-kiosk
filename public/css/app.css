@@ -10674,8 +10674,8 @@ a.text-dark:focus {
   overflow-x: scroll;
   -ms-scroll-snap-type: x proximity;
       scroll-snap-type: x proximity;
-  padding-bottom: calc(.75 * var(--gutter));
-  margin-bottom: calc(-.25 * var(--gutter));
+  padding-bottom: calc(0.75 * var(--gutter));
+  margin-bottom: calc(-0.25 * var(--gutter));
 }
 
 .hs:before,
@@ -10685,11 +10685,6 @@ a.text-dark:focus {
 }
 
 /* Demo styles */
-
-html,
-body {
-  height: 100%;
-}
 
 body {
   color: white;
@@ -10788,5 +10783,74 @@ body {
 
 h1 {
   font-size: 40px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: 15vh 85vh;
+  grid-template-columns: 20% auto;
+  height: 100%;
+}
+
+.grid-item {
+  font-size: 30px;
+}
+
+.item1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.item1 img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.item2 {
+  grid-column: 2/span 2;
+  grid-row: 1;
+}
+
+.item2 input {
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 42px;
+  height: 90px;
+  width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.item3 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.item4 {
+  grid-column: 2/span 2;
+  grid-row: 2;
+}
+
+.sidebar div {
+  height: 200px;
+  background-color: red;
+  overflow-y: scroll;
+}
+
+.sidebarlist ul {
+  padding: 25px;
+  color: white;
+  font-weight: bold;
+}
+
+.sidebarlist li {
+  height: 250px;
+  font-size: 36px;
+  text-align: right;
 }
 

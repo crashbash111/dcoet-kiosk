@@ -45,20 +45,7 @@ export default class Layout extends React.Component
     render()
     {
         return(
-            <div>
-                <div className="row">
-                    <div className="col-6">
-                        <h1 style={{ display: "inline-block" }}>Deep Cove</h1>
-                    </div>
-                    <div className="col-6">
-                        <Link to="/" className="btn btn-light" role="button">Home</Link>
-                        <Link to="/kiosk" className="btn btn-light" role="button">Kiosk</Link>
-                        <Link to="/admin" className="btn btn-light" role="button">Admin</Link>
-                        <Link to="/splash" className="btn btn-light" role="button">Splash</Link>
-                        <a href="./game/index.html" target="_blank" className="btn btn-light">Game</a>
-                    </div>
-                </div>
-                
+            <div style={{ height: "100%" }}>
                 {this.props.children}
             </div>
         );
