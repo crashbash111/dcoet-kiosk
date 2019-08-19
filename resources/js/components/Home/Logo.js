@@ -11,9 +11,7 @@ export default class Logo extends React.Component
     render()
     {
         return(
-            <div>
                 <img src="/images/logo.png"></img>
-            </div>
         );
     }
 }
