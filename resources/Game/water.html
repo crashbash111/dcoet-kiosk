@@ -453,13 +453,25 @@
         backgroundObj.imgId = 1;
       }
 
+      // ctx.drawImage(
+      //   imgList[backgroundObj.imgId],
+      //   0,
+      //   0,
+      //   (ctx.canvas.width = innerWidth),
+      //   (ctx.canvas.height = innerHeight)
+      // );
+
       ctx.drawImage(
-        imgList[backgroundObj.imgId],
-        0,
-        0,
-        (ctx.canvas.width = innerWidth),
-        (ctx.canvas.height = innerHeight)
-      );
+                imgList[backgroundObj.imgId],
+                0,
+                0,
+                this.width,
+                this.height,
+                0,
+                0,
+                (ctx.canvas.width = innerWidth),
+                (ctx.canvas.height = innerHeight)
+            );
 
       for (var key in rubbishList) {
         updateRubbishEntity(rubbishList[key]);
