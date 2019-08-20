@@ -33,7 +33,7 @@
         <canvas id="ctx"></canvas>
         <div
             id="instructions"
-            style="position:absolute; top:32.5%; left:32.5%; width:35%; height:32.5%; border-top: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:32.5%; border-top: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
             <h1 style="font-size:2.5vmin">INSTRUCTIONS</h1>
             <p id="healthInstruct" style="font-size:2vmin"></p>
@@ -43,14 +43,21 @@
         </div>
         <div
             id="instructionsBTN"
-            style="position:absolute; top:65%; left:32.5%; width:35%; height:2.5%; border-bottom: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:63.75%; left:32.5%; width:35%; height:5%; border-bottom: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
             <button
                 id="startBtn"
-                style="position: absolute; top:5%; left:25%; width:50%; height:90%; font-size:1.5vmin;"
+                style="position: absolute; top:5%; left:25%; width:50%; height:45%; font-size:1.5vmin;"
                 onclick="startNewGame()"
             >
                 Start Game
+            </button>
+            <button
+                id="mainBtn"
+                style="position: absolute; top:55%; left:25%; width:50%; height:45%; font-size:1.5vmin;"
+                onclick="window.location.href='./mainmenu.html'"
+            >
+                Main Menu
             </button>
         </div>
         <div
