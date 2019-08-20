@@ -32,45 +32,33 @@
     <body>
         <canvas id="ctx"></canvas>
         <div
-            id="instructions"
-            style="position:absolute; top:30%; left:30%; width:40%; height:10%; border-top: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            id="levelSelect"
+            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
             <h1 style="font-size:2.5vmin">LEVEL SELECT</h1>
-            <h1 id="selectText" style="font-size:2vmin"></h1>
-        </div>
-        <div
-            id="survivalMode"
-            style="position:absolute; top:40%; left:30%; width:20%; height:30%; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
-        >
+            <h3 id="selectText" style="font-size:2vmin"></h3>
             <p id="survivalText" style="font-size:2vmin"></p>
-            <button
-                id="startBtn"
-                style="position: absolute; top:85%; left:20%; width:60%; height:10%; font-size:1.5vmin;"
-                onclick="window.location.href='./index.html'"
-            >
-                Start Game
-            </button>
-        </div>
-        <div
-            id="timedMode"
-            style="position:absolute; top:40%; left:50%; width:20%; height:30%; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
-        >
             <p id="timedText" style="font-size:2vmin"></p>
             <button
-                id="mainBtn"
-                style="position: absolute; top:85%; left:20%; width:60%; height:10%; font-size:1.5vmin;"
+                id="survivalBtn"
+                style="font-size:1.5vmin;"
+                onclick="window.location.href='./index.html'"
+            >
+                Survival
+            </button>
+            <button
+                id="timedBtn"
+                style="font-size:1.5vmin;"
                 onclick="window.location.href='./water.html'"
             >
-                Start Game
+                Timed
             </button>
         </div>
     </body>
     <script>
-        document.getElementById("instructions").style.display = "block";
+        document.getElementById("levelSelect").style.display = "block";
         document.getElementById("selectText").innerHTML =
             "Choose which mode you want to play:";
-        document.getElementById("survivalMode").style.display = "block";
-        document.getElementById("timedMode").style.display = "block";
         document.getElementById("survivalText").innerHTML =
             "Survival mode keeps going until your health reaches 0";
         document.getElementById("timedText").innerHTML =

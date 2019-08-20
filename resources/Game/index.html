@@ -33,15 +33,29 @@
         <canvas id="ctx"></canvas>
         <div
             id="instructions"
-            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:32.5%; border-top: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
             <h1 style="font-size:2.5vmin">INSTRUCTIONS</h1>
             <p id="healthInstruct" style="font-size:2vmin"></p>
             <p id="scoreInstruct" style="font-size:2vmin"></p>
             <p id="timeInstruct" style="font-size:2vmin"></p>
             <p id="instructionText" style="font-size:2vmin"></p>
+            <button
+                id="startBtn"
+                style="font-size:1.5vmin;"
+                onclick="startNewGame()"
+            >
+                Start Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:1.5vmin;"
+                onclick="window.location.href='./mainmenu.html'"
+            >
+                Main Menu
+            </button>
         </div>
-        <div
+        <!-- <div
             id="instructionsBTN"
             style="position:absolute; top:63.75%; left:32.5%; width:35%; height:5%; border-bottom: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
@@ -59,21 +73,21 @@
             >
                 Main Menu
             </button>
-        </div>
+        </div> -->
         <div
             id="stats"
             style="position:absolute; 
-      top: 8px; left: 8px; width: 120px; height: 130px; 
-      border-left: 1px solid black; border:  1px solid black; 
-      background-image: url( './assets/images/stats.png' ); text-align: left; display: none"
+            top: 1.5%; left: 1%; width: 7%; height: width; 
+            border-left: 1px solid black; border:  1px solid black; 
+            background-image: url( './assets/images/stats.png' ); text-align: left; display: none;"
         >
-            <h3 id="healthStat"></h3>
-            <h3 id="scoreStat"></h3>
-            <h3 id="timeStat"></h3>
+            <h3 id="healthStat" style="font-size:2vmin"></h3>
+            <h3 id="scoreStat" style="font-size:2vmin"></h3>
+            <h3 id="timeStat" style="font-size:2vmin"></h3>
         </div>
         <div
             id="end"
-            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:32.5%; border-top: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
             <h1 style="font-size:2.5vmin">You Lose</h1>
             <p id="scoreText" style="font-size:2vmin"></p>
@@ -82,8 +96,22 @@
             <p id="pestsText" style="font-size:2vmin"></p>
             <p id="animalsText" style="font-size:2vmin"></p>
             <p id="timeText" style="font-size:2vmin"></p>
+            <button
+                id="newBtn"
+                style="font-size:1.5vmin;"
+                onclick="startNewGame()"
+            >
+                New Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:1.5vmin;"
+                onclick="window.location.href='./mainmenu.html'"
+            >
+                Main Menu
+            </button>
         </div>
-        <div
+        <!-- <div
             id="endBTN"
             style="position:absolute; top:63.75%; left:32.5%; width:35%; height:5%; border-bottom: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; background:blanchedalmond; text-align: center; display: none"
         >
@@ -101,7 +129,7 @@
             >
                 Main Menu
             </button>
-        </div>
+        </div> -->
     </body>
     <script>
         var canvas = document.getElementById("ctx");
@@ -372,8 +400,8 @@
                 var y = 0;
                 // var height = 10 + Math.random() * 30;
                 // var width = 10 + Math.random() * 30;
-                var height = 100;
-                var width = 100;
+                var height = canvas.height / 10;
+                var width = canvas.width / 12;
                 var id = rubbishID++;
                 var spdX =
                     10 +
@@ -393,11 +421,11 @@
                 } else {
                     var x = canvas.width;
                 }
-                var y = canvas.height - 40;
+                var y = canvas.height * 0.95;
                 // var height = 10 + Math.random() * 30;
                 // var width = 10 + Math.random() * 30;
-                var height = 140;
-                var width = 140;
+                var height = canvas.height / 7.5;
+                var width = canvas.width / 10;
                 var id = animalID++;
                 var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
                 var imgId = getRandomInt(8, 11);
@@ -413,11 +441,11 @@
                 } else {
                     var x = canvas.width;
                 }
-                var y = canvas.height - 40;
+                var y = canvas.height * 0.95;
                 // var height = 10 + Math.random() * 30;
                 // var width = 10 + Math.random() * 30;
-                var height = 140;
-                var width = 140;
+                var height = canvas.height / 7.5;
+                var width = canvas.width / 10;
                 var id = pestID++;
                 var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
                 var imgId = getRandomInt(14, 17);
@@ -566,7 +594,6 @@
             "Time is how long the current round has lasted";
         document.getElementById("instructionText").innerHTML =
             "Tap rubbish or pests, be careful not to tap non-pests!";
-        document.getElementById("instructionsBTN").style.display = "block";
 
         update = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -621,17 +648,6 @@
                 (ctx.canvas.width = innerWidth),
                 (ctx.canvas.height = innerHeight)
             );
-
-            // var styles = {
-            //     htmlElement: {
-            //         background:
-            //             "url(./assets/images/background1.png) no-repeat center center fixed",
-            //         WebkitBackgroundSize: "cover",
-            //         MozBackgroundSize: "cover",
-            //         OBackgroundSize: "cover",
-            //         backgroundSize: "cover"
-            //     }
-            // };
 
             for (var key in rubbishList) {
                 updateRubbishEntity(rubbishList[key]);
@@ -692,7 +708,6 @@
                 }
                 document.getElementById("timeText").innerHTML =
                     "You Survived for: " + t + " seconds";
-                document.getElementById("endBTN").style.display = "block";
             }
             document.getElementById("stats").style.display = "block";
             document.getElementById("healthStat").innerHTML =
@@ -707,9 +722,7 @@
             ctx.canvas.width = innerWidth;
             ctx.canvas.height = innerHeight;
             document.getElementById("end").style.display = "none";
-            document.getElementById("endBTN").style.display = "none";
             document.getElementById("instructions").style.display = "none";
-            document.getElementById("instructionsBTN").style.display = "none";
             timeWhenGameStarted = Date.now();
             frameCount = 0;
             health = 100;
