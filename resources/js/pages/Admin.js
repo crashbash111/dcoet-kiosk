@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 import ItemRow from "../components/Admin/ItemRow";
+import AdminSidebar from "./Admin/AdminSidebar";
 import Axios from "axios";
 
 export default class Admin extends React.Component
@@ -42,7 +43,8 @@ export default class Admin extends React.Component
             );
 
         return(
-            <div>
+            <div className="xadmin">
+                <AdminSidebar/>
                 <h2>Admin</h2>
                 <br />
                 <h2>Pages</h2>

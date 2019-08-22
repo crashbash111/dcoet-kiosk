@@ -10737,6 +10737,46 @@ textarea {
   padding: 10px;
 }
 
+.xadmin body {
+  text-align: center;
+}
+
+.xadmin .opensidebar {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.xadmin .sidebar {
+  width: 0px;
+  height: 100%;
+  background: #01283D;
+  transition: 0.5s;
+  white-space: pre;
+  overflow-x: hidden;
+}
+
+.xadmin .sidebar img {
+  width: 280px;
+  display: block;
+  padding: 30px 10px 30px 10px;
+}
+
+.xadmin .sidebar a {
+  background: #013856;
+  color: #0296E6;
+  width: 100%;
+  font-size: 26px;
+  display: block;
+  text-decoration: none;
+  padding: 24px 8px 24px 32px;
+  transition: 0.3s;
+}
+
+.xadmin .sidebar a:hover {
+  color: #03A7FF;
+  font-size: 32px;
+}
+
 .kiosk-panel {
   padding: 25px;
   overflow-y: scroll;
