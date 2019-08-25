@@ -66271,9 +66271,12 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Admin).call(this));
     _this.state = {
-      birds: []
+      birds: [],
+      //stores page width
+      width: window.innerWidth
     };
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    _this.handleWindowResize = _this.handleWindowResize.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -66288,6 +66291,26 @@ function (_React$Component) {
         return _this2.setState({
           birds: data
         });
+      });
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      window.addEventListener('resize', this.handleWindowResize);
+    } //handles page resizing for dynamic layouts
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.handleWindowResize);
+    }
+  }, {
+    key: "handleWindowResize",
+    value: function handleWindowResize() {
+      this.setState(function (state) {
+        return {
+          width: window.innerWidth
+        };
       });
     }
   }, {
@@ -66322,19 +66345,25 @@ function (_React$Component) {
           categoryName: i.categoryName,
           handleDelete: _this3.handleDelete
         });
-      });
+      }); //variables for page sizing (dynamic rendering)
+
+      var width = this.state.width;
+      var isMobile = width <= 500;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "xadmin"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: isMobile ? 'area2' : 'area1'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        isMobile: isMobile
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: isMobile ? 'area3' : 'area2'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/admin/create"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
       }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        style: {
-          width: "1300px"
-        },
         className: "admin-table"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Text body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, items)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Text body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, items))));
     }
   }]);
 
@@ -66408,14 +66437,14 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "opensidebar",
+        className: "sidebartoggle",
         onClick: this.toggleSidebar
       }, "\u2630 open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sidebar",
-        style: {
-          width: this.state.sidebarOpen ? '300px' : '0px'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: this.state.sidebarOpen ? 'sidebar sidebaropened' : 'sidebar sidebarclosed'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sidebartoggle",
+        onClick: this.toggleSidebar
+      }, "\u2190 Close"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "/images/logo.png"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
@@ -66425,10 +66454,7 @@ function (_React$Component) {
         href: "./#"
       }, "Entry 3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
-      }, "Entry 4"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "opensidebar",
-        onClick: this.toggleSidebar
-      }, "\u2190 Close")));
+      }, "Entry 4")));
     }
   }]);
 

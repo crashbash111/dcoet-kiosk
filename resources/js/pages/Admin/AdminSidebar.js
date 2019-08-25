@@ -19,15 +19,17 @@ export default class AdminSidebar extends React.Component {
     render() {
         return (
             <div>
-                <span className="opensidebar" onClick={this.toggleSidebar}>&#9776; open</span>
-                <div className="sidebar" style={{ width: this.state.sidebarOpen ? '300px' : '0px' }}>
+                <span className="sidebartoggle" onClick={this.toggleSidebar}>&#9776; open</span>
+                <div className={this.state.sidebarOpen ? 'sidebar sidebaropened' : 'sidebar sidebarclosed'}>
+                {/*<div className="sidebar" style={{ width: this.state.sidebarOpen ? '300px' : '0px' }}>*/}
+                <span className="sidebartoggle" onClick={this.toggleSidebar}>&#8592; Close</span>
                     <img src="/images/logo.png"></img>
                     
                     <a href="./#">Entry 1</a>
                     <a href="./#">Entry 2</a>
                     <a href="./#">Entry 3</a>
                     <a href="./#">Entry 4</a>
-                    <span className="opensidebar" onClick={this.toggleSidebar}>&#8592; Close</span>
+                    
                 </div>
             </div>
 
