@@ -31,7 +31,7 @@ export default class Admin extends React.Component
             let notId = t => t.id !== id;
             let updatedList = this.state.birds.filter( notId );
             this.setState( { birds: updatedList } );
-            Axios.delete( "/pages/" + id );
+            Axios.delete( "./pages/" + id );
         }
     }
 
