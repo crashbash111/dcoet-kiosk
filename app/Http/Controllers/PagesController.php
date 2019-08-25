@@ -66,6 +66,8 @@ class PagesController extends Controller
 
     public function store( Request $request )
     {
+        $request->all();
+
         $this->validate( $request, [
             "heading" => "required",
             "text" => "required",
@@ -80,7 +82,8 @@ class PagesController extends Controller
             "image_5" => "image|nullable|max:1999",
             "image_5_alt" => "nullable",
             "image_6" => "image|nullable|max:1999",
-            "image_6_alt" => "nullable"
+            "image_6_alt" => "nullable",
+            "photos" => "required",
         ]);
 
         $page = new Page;
@@ -89,6 +92,51 @@ class PagesController extends Controller
         $page->category_id = $request->input( 'category' );
 
         $page->save();
+
+        //return $request->all();
+
+        //return $request->all();
+
+        $allowedFileExtension = [ 'jpg', 'jpeg', 'png' ];
+        //$files = $request->all()[ "photos" ];
+
+        $files = $request->file( "photos" );
+
+        //return $request->file( "image_1" );
+
+        //return $files;
+
+        foreach( $files as $file )
+        {
+            //return "there";
+            $fileName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array( $extension, $allowedFileExtension );
+
+            if( $check )
+            {
+                //return $file;
+
+                $img = new Image;
+                //filename to store
+                $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                //upload image
+                $path = $file->storeAs( 'public/kiosk_images', $fileNameToStore );
+                $img->alt = "";
+                $img->image_name = $fileNameToStore;
+                $img->page_id = $page->id;
+
+                $img->save();
+            }
+        }
+
+        return "here";
+
+        if( $request->hasFile( 'photos' ) )
+        {
+            
+            
+        }
 
         $images = [ "image_1", "image_2", "image_3", "image_4", "image_5", "image_6" ];
         $image_alts = [ $request->image_1_alt, $request->image_2_alt, $request->image_3_alt, $request->image_4_alt, $request->image_5_alt, $request->image_6_alt ];

@@ -54,33 +54,21 @@ export default class Home extends React.Component {
         //
 
         return (
-            <div style={{ height: "100%", paddingTop: "15px" }}>
-                <div className="grid-container">
-                    <div className="grid-item item1">
-                        <Logo />
-                    </div>
-                    <div className="grid-item item2">
-                        <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} />
-                    </div>
-                    <div className="grid-item item3">
-                        <SideBar activeCategory={this.state.activeCategory} categories={this.state.categories} handleChange={this.handleCategoryChange} />
-                    </div>
-                    <div className="grid-item item4">
-                        <MainContent filter={this.state.searchTerm} activeCategory={this.state.activeCategory} />
-                    </div>
-                </div>
-                <div>
-                    <div>
-
-                    </div>
-                    <div>
-
-                    </div>
-                    <div>
-
-                    </div>
-                    <div>
-
+            <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
+                <div style={{ backgroundColor: "rgba( 25, 25, 25, 0.8 )", paddingTop: "15px" }}>
+                    <div className="grid-container">
+                        <div className="grid-item item1">
+                            <Logo />
+                        </div>
+                        <div className="grid-item item2">
+                            <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} />
+                        </div>
+                        <div className="grid-item item3">
+                            <SideBar activeCategory={this.state.activeCategory} categories={this.state.categories} handleChange={this.handleCategoryChange} />
+                        </div>
+                        <div className="grid-item item4">
+                            <MainContent filter={this.state.searchTerm} activeCategory={this.state.activeCategory} />
+                        </div>
                     </div>
                 </div>
             </div>

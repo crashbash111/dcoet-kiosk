@@ -14,6 +14,7 @@ export default class SideBarEntry extends React.Component
         if( this.props.isActive )
         {
             divStyle = {
+                height: "150px",
                 textAlign: "center",
                 color: "blue",
             };

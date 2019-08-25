@@ -110,7 +110,7 @@ export default class MainContent extends React.Component {
                     });
 
                     return (
-                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-slide-up" data-size="large" style={{ backgroundColor: "green" }}>
+                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-fade" data-size="large" style={{ backgroundColor: "green" }}>
                             {images}
                         </div>
                     );
@@ -119,7 +119,7 @@ export default class MainContent extends React.Component {
                 //Making the main content view have a grid of tiles
 
                 return (
-                    <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                    <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
                         {pagesList}
                     </div>
                 );

@@ -43,9 +43,9 @@ export default class Admin extends React.Component {
         let result = confirm("Are you sure you want to delete this item?");
         if (result) {
             let notId = t => t.id !== id;
-            let updatedList = this.state.birds.filter(notId);
-            this.setState({ birds: updatedList });
-            Axios.delete("/pages/" + id);
+            let updatedList = this.state.birds.filter( notId );
+            this.setState( { birds: updatedList } );
+            Axios.delete( "./pages/" + id );
         }
     }
 
