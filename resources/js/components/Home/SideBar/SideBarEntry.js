@@ -20,9 +20,8 @@ export default class SideBarEntry extends React.Component
         }
 
         return(
-            <div style={divStyle}>
+            <div style={divStyle} onClick={ () => this.props.handleChange( this.props.id ) }>
                 <h1>{ this.props.name }</h1>
-                <button onClick={ () => this.props.handleChange( this.props.id ) }>{ this.props.name }</button>
             </div>
         );
     }
