@@ -10742,21 +10742,19 @@ textarea {
   grid-template-rows: 100%;
   grid-template-columns: 20% auto;
   height: 100%;
-  background: red;
 }
 
-.xadmin .area1 {
+.xadmin .leftarea {
   grid-column: 1/span 1;
   grid-row: 1;
-  background: blue;
 }
 
-.xadmin .area2 {
+.xadmin .rightarea {
   grid-column: 2/span 1;
   grid-row: 1;
 }
 
-.xadmin .area3 {
+.xadmin .fullarea {
   grid-column: 1/span 2;
   grid-row: 1;
 }
@@ -10776,7 +10774,11 @@ textarea {
   color: lightgray;
 }
 
-.xadmin .sidebaropened {
+.xadmin .leftarea .sidebaropened {
+  width: 20%;
+}
+
+.xadmin .fullarea .sidebaropened {
   width: 100%;
 }
 
@@ -10790,11 +10792,11 @@ textarea {
   transition: 0.5s;
   white-space: pre;
   overflow-x: hidden;
-  display: block;
 }
 
 .xadmin .sidebar img {
-  width: 280px;
+  width: 100%;
+  max-width: 280px;
   display: block;
   padding: 30px 10px 30px 10px;
 }

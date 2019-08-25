@@ -10,6 +10,7 @@ export default class AdminSidebar extends React.Component {
         this.toggleSidebar = this.toggleSidebar.bind(this);
     }
 
+
     toggleSidebar() {
         this.setState(state => ({
             sidebarOpen: !state.sidebarOpen
@@ -18,11 +19,12 @@ export default class AdminSidebar extends React.Component {
 
     render() {
         return (
-            <div>
+            <span>
+                
                 <span className="sidebartoggle" onClick={this.toggleSidebar}>&#9776; open</span>
-                <div className={this.state.sidebarOpen ? 'sidebar sidebaropened' : 'sidebar sidebarclosed'}>
+                <div className={(this.props.isMobile && !this.state.sidebarOpen) ? 'sidebar sidebarclosed' : 'sidebar sidebaropened'}>
                 {/*<div className="sidebar" style={{ width: this.state.sidebarOpen ? '300px' : '0px' }}>*/}
-                <span className="sidebartoggle" onClick={this.toggleSidebar}>&#8592; Close</span>
+                {this.props.isMobile ? <span className="sidebartoggle" onClick={this.toggleSidebar}>&#8592; Close</span> : null}
                     <img src="/images/logo.png"></img>
                     
                     <a href="./#">Entry 1</a>
@@ -31,7 +33,7 @@ export default class AdminSidebar extends React.Component {
                     <a href="./#">Entry 4</a>
                     
                 </div>
-            </div>
+            </span>
 
         )
     }

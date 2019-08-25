@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import ItemRow from "../components/Admin/ItemRow";
-import AdminSidebar from "./Admin/AdminSidebar";
+import AdminSidebar from "../components/Admin/AdminSidebar";
 import Axios from "axios";
 
 export default class Admin extends React.Component {
@@ -55,14 +55,14 @@ export default class Admin extends React.Component {
         );
         //variables for page sizing (dynamic rendering)
         const {width} = this.state;
-        const isMobile = width <= 500;
+        const isMobile = width <= 900;
 
         return (
             <div className="xadmin">
-                <div className={isMobile ? 'area2' : 'area1'} >
+                <div className={isMobile ? 'fullarea' : 'leftarea'} >
                     <AdminSidebar isMobile={isMobile}/>
                 </div>
-                <div className={isMobile ? 'area3' : 'area2'}>
+                <div className={isMobile ? 'fullarea' : 'rightarea'}>
                     <h2>Admin</h2>
                     <br />
                     <h2>Pages</h2>
