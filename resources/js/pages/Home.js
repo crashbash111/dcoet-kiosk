@@ -55,7 +55,7 @@ export default class Home extends React.Component {
 
         return (
             <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
-                <div style={{ backgroundColor: "rgba( 25, 25, 25, 0.8 )", paddingTop: "15px" }}>
+                <div style={{ backgroundColor: "rgba( 25, 25, 25, 0.8 )"}}>
                     <div className="grid-container">
                         <div className="grid-item logospace">
                             <Logo />

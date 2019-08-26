@@ -59,9 +59,7 @@ export default class Admin extends React.Component {
 
         return (
             <div className="xadmin">
-                <div className={isMobile ? 'fullarea' : 'leftarea'} >
-                    <AdminSidebar isMobile={isMobile}/>
-                </div>
+                <AdminSidebar isMobile={isMobile}/>
                 <div className={isMobile ? 'fullarea' : 'rightarea'}>
                     <h2>Admin</h2>
                     <br />

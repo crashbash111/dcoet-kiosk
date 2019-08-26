@@ -54,9 +54,9 @@ export default class KioskPage extends React.Component {
             let imgPath = "./storage/kiosk_images/" + this.state.page.images[ this.state.index ].image_name;
 
             return (
-                <div>
-                    <div style={{ height: "100%", display: "grid", gridTemplateColumns: "25% auto" }}>
-                        <div style={{ height: "100vh", padding: "10px", overflowY: "scroll", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
+                <div className="hideScroll">
+                    <div style={{ height: "100vh", display: "grid", gridTemplateColumns: "25% auto" }}>
+                        <div style={{ height: "100vh", padding: "10px", overflowY: "hidden", overflowX: "hidden", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
                             <h1 style={{ textAlign: "center", fontSize: "75px" }}>{ this.state.page.heading }</h1>
                             <p style={{ fontSize: "25px" }}>{ this.state.page.text }</p>
                             <br />
@@ -66,7 +66,7 @@ export default class KioskPage extends React.Component {
                             </div>
                         </div>
                         <div onClick={ this.handleClick }>
-                            <img style={{ opacity: this.state.opacity }} src={ imgPath } width="100%" />
+                            <img style={{ opacity: this.state.opacity }} src={ imgPath } height="100%" overflowY="hidden" overflowX="hidden" />
                         </div>
                     </div>
                 </div>

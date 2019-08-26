@@ -95,7 +95,7 @@ textarea {
 .xadmin {
   display: grid;
   //grid-gap: 10px;
-  grid-template-rows: 100%;
+  grid-template-rows: 40px auto;
   grid-template-columns: 300px auto;
   height: 100%;
 }
@@ -103,19 +103,25 @@ textarea {
 .xadmin .leftarea {
   //takes up left side
   grid-column: 1 / span 1;
-  grid-row: 1;
+  grid-row: 1 / span 2;
 }
 
 .xadmin .rightarea {
   //takes up right side
   grid-column: 2 / span 1;
-  grid-row: 1;
+  grid-row: 1 / span 2;
+  padding: 24px 24px 24px 24px;
 }
 
 .xadmin .fullarea {
   //takes up all space
   grid-column: 1 / span 2;
-  grid-row: 1;
+  grid-row: 2;
+}
+
+.xadmin .topbar {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
 }
 
 .xadmin body{
@@ -127,6 +133,8 @@ textarea {
   cursor: pointer;
   transition: 0.3s;
   color: white;
+  grid-column: 1 / span 2;
+  grid-row: 1;
 }
 
 .xadmin .sidebartoggle:hover{
@@ -242,7 +250,7 @@ h1 {
   display: grid;
   //grid-gap: 10px;
   grid-template-rows: 15vh 85vh;
-  grid-template-columns: 20% auto;
+  grid-template-columns: 300px auto;
   height: 100%;
 }
 
@@ -275,8 +283,8 @@ h1 {
 .searchspace input {
   padding-left: 30px;
   padding-right: 30px;
-  font-size: 42px;
-  height: 90px;
+  font-size: 5vh;
+  height: 10vh;
   width: 90%;
   margin: auto;
   display: block;
@@ -286,19 +294,25 @@ h1 {
 .leftcategories {
   grid-column: 1;
   grid-row: 2;
+  padding: 24px 24px 24px 24px;
+}
+
+.leftcategories h1:hover{
+  font-size-adjust: inherit;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 .leftcategories .sideentry{
-  left: 20px;
+  left: 5px;
   color: gray;
-  
   transition: 0.5s;
 }
 
 
 .leftcategories .sideentryselected{
   color: white;
-  left: 50px;
+  left: 25px;
   transition: 0.5s;
 }
 
@@ -307,6 +321,7 @@ h1 {
 .rightcontent {
   grid-column: 2 / span 2;
   grid-row: 2;
+  //padding: 24px 24px 24px 24px;
 }
 
 .sidebar div {
@@ -326,4 +341,28 @@ h1 {
   height: 250px;
   font-size: 36px;
   text-align: right;
+}
+
+.homeslideshow{
+  overflow: hidden;
+}
+
+video{
+  min-width: 100%;
+  max-height: 83vh;
+  overflow-y: hidden;
+}
+.leftcategories::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.rightcontent::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.hideScroll::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
