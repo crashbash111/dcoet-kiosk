@@ -290,13 +290,18 @@ h1 {
 
 .leftcategories .sideentry{
   left: 20px;
-  color: yellow;
+  color: gray;
+  
+  transition: 0.5s;
 }
 
+
 .leftcategories .sideentryselected{
-  color: red;
+  color: white;
   left: 50px;
+  transition: 0.5s;
 }
+
 
 //main content tiles - main homepage
 .rightcontent {
