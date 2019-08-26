@@ -27,13 +27,19 @@
                 -o-background-size: cover;
                 background-size: cover;
             }
+            @keyframes menuAnim{
+                from {top:-500px; opacity:0;}
+                to {top:1; opacity:1;}
+            }
         </style>
     </head>
     <body>
         <canvas id="ctx"></canvas>
         <div
             id="levelSelect"
-            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">LEVEL SELECT</h1>
             <h3 id="selectText" style="font-size:3.5vmin"></h3>

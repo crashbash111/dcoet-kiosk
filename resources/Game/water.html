@@ -27,13 +27,23 @@
                 -o-background-size: cover;
                 background-size: cover;
             }
+            @keyframes instructAnim{
+                from {top:-500px; opacity:0;}
+                to {top:1; opacity:1;}
+            }
+            @keyframes endAnim{
+                from {top:-500px; opacity:0;}
+                to {top:1; opacity:1;}
+            }
         </style>
     </head>
     <body>
         <canvas id="ctx"></canvas>
         <div
             id="instructions"
-            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:30%; left:32.5%; width:35%; height:width;
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
+            animation-name: instructAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
             <p id="healthInstruct" style="font-size:3.5vmin"></p>
@@ -87,7 +97,9 @@
         </div>
         <div
             id="end"
-            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; border: 3px solid black; background:blanchedalmond; text-align: center; display: none"
+            style="position:absolute; top:22.5%; left:32.5%; width:35%; height:width;
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
+            animation-name: endAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">Time's Up!</h1>
             <p id="scoreText" style="font-size:3.5vmin"></p>
@@ -339,10 +351,11 @@
                 var height = canvas.height / 10;
                 var width = canvas.width / 12;
                 var id = rubbishID++;
-                var spdX =
-                    20 +
-                    Math.random() * 20 +
-                    (frameCount / 1000) * (frameCount / 1000);
+                // var spdX =
+                //     20 +
+                //     Math.random() * 20 +
+                //     (frameCount / 1000) * (frameCount / 1000);
+                var spdX = 20 + Math.random() * 20 * (side == 0 ? 2 : -3);
                 var spdY = 2 + Math.random() * 2 + frameCount / 1000;
                 var imgId = getRandomInt(2, 5);
                 Rubbish(id, x, y, spdX, spdY, width, height, imgId, side);
@@ -387,11 +400,11 @@
             something.y += something.spdY;
             something.spdY += 0.5;
 
-            if (something.spdX > 0) {
-                something.spdX -= 0.3;
-            } else if (something.spdX < 0) {
-                something.spdX += 0.3;
-            }
+            // if (something.spdX > 0) {
+            //     something.spdX -= 0.3;
+            // } else if (something.spdX < 0) {
+            //     something.spdX += 0.3;
+            // }
 
             if (something.x < 0 || something.x > canvas.width) {
                 something.spdX *= -1;
