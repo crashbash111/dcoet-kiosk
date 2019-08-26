@@ -9,6 +9,7 @@ import Category from "./pages/Category";
 import CategoryIndex from "./pages/CategoryIndex";
 import Create from "./pages/Admin/Create";
 import CreateCategory from "./pages/Admin/CreateCategory";
+import EditPage from "./pages/Admin/EditPage";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Splash from "./pages/Splash";
@@ -27,6 +28,7 @@ ReactDOM.render(
             <Route path="/birds/:id" component={Birds} />
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/create" component={Create} />
+            <Route exact path="/admin/:id/edit" component={EditPage} />
             <Route exact path="/admin/createCategory" component={CreateCategory} />
         </Layout>
     </HashRouter>,

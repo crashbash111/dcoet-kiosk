@@ -66,7 +66,7 @@ class PagesController extends Controller
 
     public function store( Request $request )
     {
-        $request->all();
+        return $request->all();
 
         $this->validate( $request, [
             "heading" => "required",
@@ -183,7 +183,19 @@ class PagesController extends Controller
 
     public function update( Request $request, $id )
     {
+        $p = Page::findOrFail( $id );
+        $p->update( $request->all() );
 
+        return response()->json( $p, 200 );
+
+        // $count = 0;
+
+        // foreach( $files as $file )
+        // {
+        //     $count += 1;
+        // }
+
+        // return $count;
     }
 
     public function destroy( $id )
