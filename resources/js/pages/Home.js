@@ -57,16 +57,16 @@ export default class Home extends React.Component {
             <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
                 <div style={{ backgroundColor: "rgba( 25, 25, 25, 0.8 )", paddingTop: "15px" }}>
                     <div className="grid-container">
-                        <div className="grid-item item1">
+                        <div className="grid-item logospace">
                             <Logo />
                         </div>
-                        <div className="grid-item item2">
+                        <div className="grid-item searchspace">
                             <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} />
                         </div>
-                        <div className="grid-item item3">
+                        <div className="grid-item leftcategories">
                             <SideBar activeCategory={this.state.activeCategory} categories={this.state.categories} handleChange={this.handleCategoryChange} />
                         </div>
-                        <div className="grid-item item4">
+                        <div className="grid-item rightcontent">
                             <MainContent filter={this.state.searchTerm} activeCategory={this.state.activeCategory} />
                         </div>
                     </div>

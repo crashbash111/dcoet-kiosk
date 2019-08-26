@@ -252,12 +252,12 @@ h1 {
   font-size: 30px;
 }
 
-.item1 {
+.logospace {
   grid-column: 1;
   grid-row: 1;
 }
 
-.item1 img {
+.logospace img {
   width: auto;
   max-width: 100%;
   height: auto;
@@ -267,12 +267,12 @@ h1 {
   display: block;
 }
 
-.item2 {
+.searchspace {
   grid-column: 2 / span 2;
   grid-row: 1;
 }
 
-.item2 input {
+.searchspace input {
   padding-left: 30px;
   padding-right: 30px;
   font-size: 42px;
@@ -282,12 +282,24 @@ h1 {
   display: block;
 }
 
-.item3 {
+//categories - main homepage
+.leftcategories {
   grid-column: 1;
   grid-row: 2;
 }
 
-.item4 {
+.leftcategories .sideentry{
+  left: 20px;
+  color: yellow;
+}
+
+.leftcategories .sideentryselected{
+  color: red;
+  left: 50px;
+}
+
+//main content tiles - main homepage
+.rightcontent {
   grid-column: 2 / span 2;
   grid-row: 2;
 }
