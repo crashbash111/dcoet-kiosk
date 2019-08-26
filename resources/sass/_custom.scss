@@ -289,9 +289,10 @@ h1 {
   padding: 24px 24px 24px 24px;
 }
 
-.leftcategories h1{
+.leftcategories h1:hover{
   font-size-adjust: inherit;
   font-size: 40px;
+  cursor: pointer;
 }
 
 .leftcategories .sideentry{
@@ -312,7 +313,7 @@ h1 {
 .rightcontent {
   grid-column: 2 / span 2;
   grid-row: 2;
-  padding: 24px 24px 24px 24px;
+  //padding: 24px 24px 24px 24px;
 }
 
 .sidebar div {
@@ -333,9 +334,15 @@ h1 {
   font-size: 36px;
   text-align: right;
 }
+
+.homeslideshow{
+  overflow: hidden;
+}
+
 video{
-  height: 100%;
-  width: 100%;
+  min-width: 100%;
+  max-height: 83vh;
+  overflow-y: hidden;
 }
 .leftcategories::-webkit-scrollbar {
   width: 0px;  /* Remove scrollbar space */
@@ -343,6 +350,11 @@ video{
 }
 
 .rightcontent::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.hideScroll::-webkit-scrollbar {
   width: 0px;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
