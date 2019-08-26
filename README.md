@@ -1,4 +1,5 @@
 <img src="http://www.deepcovehostel.co.nz/graphics/logo.png" alt="Deep Cove Logo">
+
 ## How to load project
 To load this project you will need to have the following installed on your system:
 <ul>
