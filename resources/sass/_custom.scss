@@ -95,7 +95,7 @@ textarea {
 .xadmin {
   display: grid;
   //grid-gap: 10px;
-  grid-template-rows: 100%;
+  grid-template-rows: 40px auto;
   grid-template-columns: 300px auto;
   height: 100%;
 }
@@ -103,19 +103,25 @@ textarea {
 .xadmin .leftarea {
   //takes up left side
   grid-column: 1 / span 1;
-  grid-row: 1;
+  grid-row: 1 / span 2;
 }
 
 .xadmin .rightarea {
   //takes up right side
   grid-column: 2 / span 1;
-  grid-row: 1;
+  grid-row: 1 / span 2;
+  padding: 24px 24px 24px 24px;
 }
 
 .xadmin .fullarea {
   //takes up all space
   grid-column: 1 / span 2;
-  grid-row: 1;
+  grid-row: 2;
+}
+
+.xadmin .topbar {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
 }
 
 .xadmin body{
@@ -127,6 +133,8 @@ textarea {
   cursor: pointer;
   transition: 0.3s;
   color: white;
+  grid-column: 1 / span 2;
+  grid-row: 1;
 }
 
 .xadmin .sidebartoggle:hover{
