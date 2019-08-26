@@ -23,7 +23,7 @@ export default class SideBar extends React.Component {
 
         let gameId = 999;
 
-        sideBarEntries.push(<SideBarEntry key={gameId} id={gameId} isActive={this.props.activeCategory == gameId} name="Games" description="Games lol" handleChange={this.props.handleChange} />);
+        sideBarEntries.push(<SideBarEntry key={gameId} id={gameId} isActive={this.props.activeCategory == gameId} name="Games" description="Fun interactive activites." handleChange={this.props.handleChange} />);
 
         return (
             <div className="no-scrollbar" style={{ display: "grid", gridTemplateRows: "repeat(6, 75px)", overflowY: "scroll", overflowX: "hidden" }}>
