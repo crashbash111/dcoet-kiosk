@@ -47,7 +47,9 @@ export default class MainContent extends React.Component {
         if (this.props.activeCategory == -1) {
             return (
                 <div>
-                    Select a category to get started
+                    <video class="video-container video-container-overlay" autoplay="" loop="" muted="" data-reactid=".0.1.0.0">
+                        <source type="video/mp4" data-reactid=".0.1.0.0.0" src="./storage/kiosk_images/181129_DC_Banner_Video_Cropped.mp4"/>
+                    </video>
                 </div>
             );
         }
