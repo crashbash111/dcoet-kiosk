@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html id="rootObject">
     <head>
         <style>
-            html {
-                height: 100%;
-            }
             body {
                 font-family: Helvetica;
                 height: 100%;
@@ -20,6 +17,7 @@
                 height: 100%;
             }
             html {
+                height: 100%;
                 background: url(./assets/images/background3.png) no-repeat
                     center center fixed;
                 -webkit-background-size: cover;
@@ -41,15 +39,15 @@
         <canvas id="ctx"></canvas>
         <div
             id="instructions"
-            style="position:absolute; top:30%; left:32.5%; width:35%; height:width;
+            style="position:absolute; top:20%; left:27.5%; width:45%; height:width;
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
             animation-name: instructAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
-            <p id="healthInstruct" style="font-size:3.5vmin"></p>
-            <p id="scoreInstruct" style="font-size:3.5vmin"></p>
+            <p id="instructText" style="font-size:3.5vmin"></p>
+            <!-- <p id="scoreInstruct" style="font-size:3.5vmin"></p>
             <p id="timeInstruct" style="font-size:3.5vmin"></p>
-            <p id="instructionText" style="font-size:3.5vmin"></p>
+            <p id="instructionText" style="font-size:3.5vmin"></p> -->
             <button
                 id="startBtn"
                 style="font-size:4.5vmin;"
@@ -490,14 +488,17 @@
         };
 
         document.getElementById("instructions").style.display = "block";
-        document.getElementById("healthInstruct").innerHTML =
-            "Health lowers when rubbish hits the ground";
-        document.getElementById("scoreInstruct").innerHTML =
-            "Score increases when you destroy rubbish";
-        document.getElementById("timeInstruct").innerHTML =
-            "Time is how long the current round has left";
-        document.getElementById("instructionText").innerHTML =
+        document.getElementById("instructText").innerHTML =
+            "Health lowers when rubbish hits the ground<br/><br/>" +
+            "Score increases when you destroy rubbish<br/><br/>" + 
+            "Time is how long the current round has left<br/><br/>" +
             "Be careful not to tap animals!";
+        // document.getElementById("scoreInstruct").innerHTML =
+        //     "Score increases when you destroy rubbish";
+        // document.getElementById("timeInstruct").innerHTML =
+        //     "Time is how long the current round has left";
+        // document.getElementById("instructionText").innerHTML =
+        //     "Be careful not to tap animals!";
 
         update = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -516,20 +517,26 @@
             }
 
             if (health <= 50) {
-                backgroundObj.imgId = 1;
+                // backgroundObj.imgId = 1;
+                document.getElementById("rootObject").style = 
+                "background: url(./assets/images/background4.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+            }
+            else {
+                document.getElementById("rootObject").style = 
+                "background: url(./assets/images/background3.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
             }
 
-            ctx.drawImage(
-                imgList[backgroundObj.imgId],
-                0,
-                0,
-                this.width,
-                this.height,
-                0,
-                0,
-                (ctx.canvas.width = innerWidth),
-                (ctx.canvas.height = innerHeight)
-            );
+            // ctx.drawImage(
+            //     imgList[backgroundObj.imgId],
+            //     0,
+            //     0,
+            //     this.width,
+            //     this.height,
+            //     0,
+            //     0,
+            //     (ctx.canvas.width = innerWidth),
+            //     (ctx.canvas.height = innerHeight)
+            // );
 
             for (var key in rubbishList) {
                 updateRubbishEntity(rubbishList[key]);

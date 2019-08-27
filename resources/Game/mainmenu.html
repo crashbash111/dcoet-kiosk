@@ -2,9 +2,6 @@
 <html>
     <head>
         <style>
-            html {
-                height: 100%;
-            }
             body {
                 font-family: Helvetica;
                 height: 100%;
@@ -20,6 +17,7 @@
                 height: 100%;
             }
             html {
+                height: 100%;
                 background: url(./assets/images/background5.png) no-repeat
                     center center fixed;
                 -webkit-background-size: cover;
@@ -37,14 +35,14 @@
         <canvas id="ctx"></canvas>
         <div
             id="levelSelect"
-            style="position:absolute; top:31.25%; left:32.5%; width:35%; height:width; 
+            style="position:absolute; top:25%; left:32.5%; width:35%; height:width; 
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
             animation-name: menuAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">LEVEL SELECT</h1>
             <h3 id="selectText" style="font-size:3.5vmin"></h3>
-            <p id="survivalText" style="font-size:3.5vmin"></p>
-            <p id="timedText" style="font-size:3.5vmin"></p>
+            <!-- <p id="survivalText" style="font-size:3.5vmin"></p>
+            <p id="timedText" style="font-size:3.5vmin"></p> -->
             <button
                 id="survivalBtn"
                 style="font-size:4.5vmin;"
@@ -59,15 +57,23 @@
             >
                 Timed
             </button>
+            <button
+                style="font-size:4.5vmin;"
+                onclick="window.close()"
+            >
+                Close
+            </button>
         </div>
     </body>
     <script>
         document.getElementById("levelSelect").style.display = "block";
         document.getElementById("selectText").innerHTML =
-            "Choose which mode you want to play:";
-        document.getElementById("survivalText").innerHTML =
-            "Survival mode keeps going until your health reaches 0";
-        document.getElementById("timedText").innerHTML =
+            "Choose which mode you want to play:<br/><br/>" + 
+            "Survival mode keeps going until your health reaches 0<br/><br/>" +
             "Timed mode is about getting the highest score possible in a set amount of time";
+        // document.getElementById("survivalText").innerHTML =
+        //     "Survival mode keeps going until your health reaches 0";
+        // document.getElementById("timedText").innerHTML =
+        //     "Timed mode is about getting the highest score possible in a set amount of time";
     </script>
 </html>
