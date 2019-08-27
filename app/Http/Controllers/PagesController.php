@@ -66,7 +66,6 @@ class PagesController extends Controller
 
     public function store( Request $request )
     {
-        return $request->all();
 
         $this->validate( $request, [
             "heading" => "required",
@@ -109,7 +108,11 @@ class PagesController extends Controller
         foreach( $files as $file )
         {
             //return "there";
-            $fileName = $file->getClientOriginalName();
+            $fileNameWithExt = $file->getClientOriginalName();
+            $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME );
+
+            $fileName = strtr( $fileName, [' ' => ''] );
+
             $extension = $file->getClientOriginalExtension();
             $check = in_array( $extension, $allowedFileExtension );
 
@@ -121,7 +124,7 @@ class PagesController extends Controller
                 //filename to store
                 $fileNameToStore = $fileName . "_" . time() . "." . $extension;
                 //upload image
-                $path = $file->storeAs( 'public/kiosk_images', $fileNameToStore );
+                $path = $file->storeAs( '/public/kiosk_images', $fileNameToStore );
                 $img->alt = "";
                 $img->image_name = $fileNameToStore;
                 $img->page_id = $page->id;
@@ -134,7 +137,6 @@ class PagesController extends Controller
 
         if( $request->hasFile( 'photos' ) )
         {
-            
             
         }
 

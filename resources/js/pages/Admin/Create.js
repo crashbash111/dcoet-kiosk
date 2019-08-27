@@ -104,7 +104,7 @@ export default class Create extends React.Component {
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ redirect: false });
+                this.setState({ redirect: true });
             })
             .catch(err => console.log(err.response.data));
     }

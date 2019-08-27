@@ -37,6 +37,12 @@ export default class MainContent extends React.Component {
         this.setState({ redirectId: i, redirect: true });
     }
 
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     render() {
 
         if (this.state.redirect) {
@@ -102,14 +108,51 @@ export default class MainContent extends React.Component {
                         }
                     }
 
-                    let images = item.images.map(img => {
+                    let x = this.getRandomInt( 0, item.images.length - 1 );
+                    console.log( x );
 
-                        let imgName = "./storage/kiosk_images/" + img.image_name;
+                    return (
+                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ "./storage/kiosk_images/" + item.images[ x ].image_name } data-size="large" style={{ backgroundColor: "green" }}>
+                            <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.heading }</h3>
+                        </div>
+                    );
 
-                        return (
-                            <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
-                        );
-                    });
+                    let images;
+
+                    if( item.images.length < 2 )
+                    {
+                        let imgNameNew;
+
+                        images = item.images.map(img => {
+
+                            let imgName = "./storage/kiosk_images/" + img.image_name;
+    
+                            imgNameNew = imgName;
+
+                            console.log( imgName );
+    
+                            return (
+                                <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
+                                
+                            );
+                        });
+                        images.push( <div className="slide" data-cover={imgNameNew}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div> );
+                    }
+                    else
+                    {
+                        images = item.images.map(img => {
+
+                            let imgName = "./storage/kiosk_images/" + img.image_name;
+    
+                            console.log( imgName );
+    
+                            return (
+                                <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
+                            );
+                        });
+                    }
+
+                    
 
                     return (
                         <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-fade" data-size="large" style={{ backgroundColor: "green" }}>
