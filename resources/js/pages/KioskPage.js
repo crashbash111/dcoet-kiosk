@@ -57,14 +57,13 @@ export default class KioskPage extends React.Component {
                 <div className="hideScroll">
                     <div onClick={ this.handleClick } style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
                     
-                        <div className="hideScroll" style={{ height: "100vh", width: "35vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
-                            <h1 style={{ textAlign: "center", fontSize: "75px" }}>{ this.state.page.heading }</h1>
-                            <p style={{ fontSize: "25px" }}>{ this.state.page.text }</p>
-                            <br />
-                            <br />
+                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
+                            <h1 style={{ textAlign: "center", fontSize: "4em" }}>{ this.state.page.heading }</h1>
                             <div style={{ textAlign: "center" }}>
                                 <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
                             </div>
+                            <p style={{ fontSize: "25px" }}>{ this.state.page.text }</p>
+                            
                         </div>
                         
                     

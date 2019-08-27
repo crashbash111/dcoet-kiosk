@@ -50,15 +50,15 @@ export default class MainContent extends React.Component {
             return <Redirect to={target} />
         }
 
-        if (this.props.activeCategory == -1) {
-            return (
-                <div className="homeslideshow">
-                    <video loop={true} autoPlay={true}>
-                        <source type="video/mp4" data-reactid=".0.1.0.0.0" src="./storage/kiosk_images/181129_DC_Banner_Video_Cropped.mp4"/>
-                    </video>
-                </div>
-            );
-        }
+        // if (this.props.activeCategory == -1) {
+        //     return (
+        //         <div className="homeslideshow">
+        //             <video loop={true} autoPlay={true}>
+        //                 <source type="video/mp4" data-reactid=".0.1.0.0.0" src="./storage/kiosk_images/181129_DC_Banner_Video_Cropped.mp4"/>
+        //             </video>
+        //         </div>
+        //     );
+        // }
 
         if (this.state.pages == null) {
             return (
@@ -78,7 +78,7 @@ export default class MainContent extends React.Component {
                     var gamesList = this.state.games.map( item => {
                         console.log( item.img );
                         return(
-                            <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
+                            <div onClick={() => window.open( "../Resources/Game/index.html", "_blank" )} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
                                 <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3>
                             </div>
                         );
