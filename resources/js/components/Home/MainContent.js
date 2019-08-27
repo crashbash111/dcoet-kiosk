@@ -96,15 +96,16 @@ export default class MainContent extends React.Component {
 
                 var pagesList = this.state.pages.map(item => {
 
-                    if( this.props.activeCategory != item.category_id )
-                    {
-                        return null;
-                    }
+                    
 
                     if (this.props.filter != "") {
                         if (!item.heading.toLowerCase().includes(this.props.filter.toLowerCase())) {
                             return null;
                         }
+                    }
+                    else if( this.props.activeCategory != item.category_id )
+                    {
+                        return null;
                     }
 
                     let x = this.getRandomInt( 0, item.images.length - 1 );
