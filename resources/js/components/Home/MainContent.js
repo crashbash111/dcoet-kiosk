@@ -109,7 +109,7 @@ export default class MainContent extends React.Component {
                     }
 
                     let x = this.getRandomInt( 0, item.images.length - 1 );
-                    console.log( x );
+                    //console.log( x );
 
                     return (
                         <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ "./storage/kiosk_images/" + item.images[ x ].image_name } data-size="large" style={{ backgroundColor: "green" }}>
