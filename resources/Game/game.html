@@ -18,12 +18,16 @@
             }
             html {
                 height: 100%;
-                background: url(./assets/images/background1.png) no-repeat
+                background: url(./assets/images/background5.png) no-repeat
                     center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
+            }
+            @keyframes menuAnim{
+                from {top:-500px; opacity:0;}
+                to {top:1; opacity:1;}
             }
             @keyframes instructAnim{
                 from {top:-500px; opacity:0;}
@@ -38,16 +42,36 @@
     <body>
         <canvas id="ctx"></canvas>
         <div
+            id="levelSelect"
+            style="position:absolute; top:20%; left:30%; width:40%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">LEVEL SELECT</h1>
+            <h3 id="selectText" style="font-size:3.5vmin"></h3>
+            <button
+                id="survivalBtn"
+                style="font-size:4.5vmin;"
+                onclick="instructMenu()"
+            >
+                Survival
+            </button>
+            <button
+                id="timedBtn"
+                style="font-size:4.5vmin;"
+                onclick="instructMenu()"
+            >
+                Timed
+            </button>
+        </div>
+        <div
             id="instructions"
-            style="position:absolute; top:20%; left:27.5%; width:45%; height:width;
+            style="position:absolute; top:15%; left:20%; width:60%; height:width;
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
             animation-name: instructAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
             <p id="instructText" style="font-size:3.5vmin"></p>
-            <!-- <p id="scoreInstruct" style="font-size:3.5vmin"></p>
-            <p id="timeInstruct" style="font-size:3.5vmin"></p>
-            <p id="instructionText" style="font-size:3.5vmin"></p> -->
             <button
                 id="startBtn"
                 style="font-size:4.5vmin;"
@@ -58,7 +82,7 @@
             <button
                 id="mainBtn"
                 style="font-size:4.5vmin;"
-                onclick="window.location.href='./mainmenu.html'"
+                onclick="mainMenu()"
             >
                 Main Menu
             </button>
@@ -71,8 +95,6 @@
             background-image: url( './assets/images/stats.png' ); text-align: left; display: none;"
         >
             <h3 id="statText" style="font-size:3vmin"></h3>
-            <!-- <h3 id="scoreStat" style="font-size:3vmin"></h3>
-            <h3 id="timeStat" style="font-size:3vmin"></h3> -->
         </div>
         <div
             id="end"
@@ -82,11 +104,6 @@
         >
             <h1 style="font-size:4vmin">You Lose</h1>
             <p id="endText" style="font-size:3.5vmin"></p>
-            <!-- <p id="tappedText" style="font-size:3.5vmin"></p>
-            <p id="rubbishText" style="font-size:3.5vmin"></p>
-            <p id="pestsText" style="font-size:3.5vmin"></p>
-            <p id="animalsText" style="font-size:3.5vmin"></p>
-            <p id="timeText" style="font-size:3.5vmin"></p> -->
             <button
                 id="newBtn"
                 style="font-size:4.5vmin;"
@@ -97,7 +114,7 @@
             <button
                 id="mainBtn"
                 style="font-size:4.5vmin;"
-                onclick="window.location.href='./mainmenu.html'"
+                onclick="mainMenu()"
             >
                 Main Menu
             </button>
@@ -166,6 +183,8 @@
 
         var timeWhenGameStarted = Date.now();
 
+        var timeOut = 10;
+
         var backgroundObj = {};
 
         var backgroundID = 0;
@@ -197,6 +216,9 @@
         var imgPaths = {
             bg1: "./assets/images/background1.png",
             bg2: "./assets/images/background2.png",
+            bg3: "./assets/images/background3.png",
+            bg4: "./assets/images/background4.png",
+            bg5: "./assets/images/background5.png",
             r1: "./assets/images/rubbish1.png",
             r2: "./assets/images/rubbish2.png",
             r3: "./assets/images/rubbish3.png",
@@ -209,6 +231,12 @@
             af1: "./assets/images/animal1F.png",
             af2: "./assets/images/animal2F.png",
             af3: "./assets/images/animal3F.png",
+            wa1: "./assets/images/wateranimal1.png",
+            wa2: "./assets/images/wateranimal2.png",
+            wa3: "./assets/images/wateranimal3.png",
+            waf1: "./assets/images/wateranimal1F.png",
+            waf2: "./assets/images/wateranimal2F.png",
+            waf3: "./assets/images/wateranimal3F.png",
             p1: "./assets/images/pest1.png",
             p2: "./assets/images/pest2.png",
             p3: "./assets/images/pest3.png",
@@ -224,58 +252,85 @@
         img1.src = imgPaths.bg2;
 
         var img2 = new Image();
-        img2.src = imgPaths.r1;
+        img2.src = imgPaths.bg3;
 
         var img3 = new Image();
-        img3.src = imgPaths.r2;
+        img3.src = imgPaths.bg4;
 
         var img4 = new Image();
-        img4.src = imgPaths.r3;
+        img4.src = imgPaths.bg5;
 
         var img5 = new Image();
-        img5.src = imgPaths.rf1;
+        img5.src = imgPaths.r1;
 
         var img6 = new Image();
-        img6.src = imgPaths.rf2;
+        img6.src = imgPaths.r2;
 
         var img7 = new Image();
-        img7.src = imgPaths.rf3;
+        img7.src = imgPaths.r3;
 
         var img8 = new Image();
-        img8.src = imgPaths.a1;
+        img8.src = imgPaths.rf1;
 
         var img9 = new Image();
-        img9.src = imgPaths.a2;
+        img9.src = imgPaths.rf2;
 
         var img10 = new Image();
-        img10.src = imgPaths.a3;
+        img10.src = imgPaths.rf3;
 
         var img11 = new Image();
-        img11.src = imgPaths.af1;
+        img11.src = imgPaths.a1;
 
         var img12 = new Image();
-        img12.src = imgPaths.af2;
+        img12.src = imgPaths.a2;
 
         var img13 = new Image();
-        img13.src = imgPaths.af3;
+        img13.src = imgPaths.a3;
 
         var img14 = new Image();
-        img14.src = imgPaths.p1;
+        img14.src = imgPaths.af1;
 
         var img15 = new Image();
-        img15.src = imgPaths.p2;
+        img15.src = imgPaths.af2;
 
         var img16 = new Image();
-        img16.src = imgPaths.p3;
+        img16.src = imgPaths.af3;
 
         var img17 = new Image();
-        img17.src = imgPaths.pf1;
+        img17.src = imgPaths.wa1;
 
         var img18 = new Image();
-        img18.src = imgPaths.pf2;
+        img18.src = imgPaths.wa2;
 
         var img19 = new Image();
-        img19.src = imgPaths.pf3;
+        img19.src = imgPaths.wa3;
+
+        var img20 = new Image();
+        img20.src = imgPaths.waf1;
+
+        var img21 = new Image();
+        img21.src = imgPaths.waf2;
+
+        var img22 = new Image();
+        img22.src = imgPaths.waf3;
+
+        var img23 = new Image();
+        img23.src = imgPaths.p1;
+
+        var img24 = new Image();
+        img24.src = imgPaths.p2;
+
+        var img25 = new Image();
+        img25.src = imgPaths.p3;
+
+        var img26 = new Image();
+        img26.src = imgPaths.pf1;
+
+        var img27 = new Image();
+        img27.src = imgPaths.pf2;
+
+        var img28 = new Image();
+        img28.src = imgPaths.pf3;
 
         var imgList = [
             img0,
@@ -297,7 +352,16 @@
             img16,
             img17,
             img18,
-            img19
+            img19,
+            img20,
+            img21,
+            img22,
+            img23,
+            img24,
+            img25,
+            img26,
+            img27,
+            img28
         ];
 
         Image = function(id, imgId) {
@@ -366,46 +430,57 @@
         }
 
         randomlyGenerateRubbish = function() {
-            if (health > 0) {
+            if (health > -10000) {
                 var side = getRandomInt(0, 2);
+                //survival mode
                 var x = Math.random() * (canvas.width - 10) + 10;
                 var y = 0;
-                // var height = 10 + Math.random() * 30;
-                // var width = 10 + Math.random() * 30;
+
+                //timed mode
+                // var x = getRandomInt(canvas.width * 0.45, canvas.width * 0.56);
+                // var y = canvas.height * 0.1;
                 var height = canvas.height / 10;
                 var width = canvas.width / 12;
                 var id = rubbishID++;
-                // var spdX =
-                //     10 +
-                //     Math.random() * 20 +
-                //     (frameCount / 1000) * (frameCount / 1000);
                 var spdX = 20 + Math.random() * 20 * (side == 0 ? 1.5 : -3);
                 var spdY = 2 + Math.random() * 2 + frameCount / 1000;
-                var imgId = getRandomInt(2, 5);
+                var imgId = getRandomInt(5,8);
                 Rubbish(id, x, y, spdX, spdY, width, height, imgId, side);
             }
         };
 
         randomlyGenerateAnimal = function() {
-            if (health > 0) {
+            if (health > -10000) {
                 var side = getRandomInt(0, 2);
                 if (side == 0) {
                     var x = 0;
                 } else {
                     var x = canvas.width;
                 }
+                //Survival mode
                 var y = canvas.height * 0.95;
-                // var height = 10 + Math.random() * 30;
-                // var width = 10 + Math.random() * 30;
+
+                // Timed mode
+                // var y = getRandomInt(
+                //     canvas.height * 0.38,
+                //     canvas.height * 0.95
+                // );
                 var height = canvas.height / 7.5;
                 var width = canvas.width / 10;
                 var id = animalID++;
                 var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
-                var imgId = getRandomInt(8, 11);
+
+                //Survival
+                var imgId = getRandomInt(11, 14);
+
+                //Timed mode
+                // var imgId = getRandomInt(17, 20);
+
                 Animal(id, x, y, spdX, width, height, imgId, side);
             }
         };
 
+        //Survival mode only
         randomlyGeneratePest = function() {
             if (health > 0) {
                 var side = getRandomInt(0, 2);
@@ -415,13 +490,11 @@
                     var x = canvas.width;
                 }
                 var y = canvas.height * 0.95;
-                // var height = 10 + Math.random() * 30;
-                // var width = 10 + Math.random() * 30;
                 var height = canvas.height / 7.5;
                 var width = canvas.width / 10;
                 var id = pestID++;
                 var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
-                var imgId = getRandomInt(14, 17);
+                var imgId = getRandomInt(23, 26);
                 Pest(id, x, y, spdX, width, height, imgId, side);
             }
         };
@@ -446,12 +519,6 @@
             something.y += something.spdY;
             something.spdY += 0.5;
 
-            // if (something.spdX > 0) {
-            //     something.spdX -= 0.3;
-            // } else if (something.spdX < 0) {
-            //     something.spdX += 0.3;
-            // }
-
             if (something.x < 0 || something.x > canvas.width) {
                 something.spdX *= -1;
             }
@@ -469,6 +536,7 @@
 
         updateAnimalPosition = function(something) {
             something.x += something.spdX;
+
             if (something.side == 0) {
                 if (something.x > canvas.width) {
                     for (var key in animalList) {
@@ -488,6 +556,7 @@
             }
         };
 
+        //Survival mode only
         updatePestPosition = function(something) {
             something.x += something.spdX;
 
@@ -543,7 +612,6 @@
         };
 
         getDistanceBetweenEntity = function(entity1, entity2) {
-            //return distance (number)
             var vx = entity1.x - entity2.x;
             var vy = entity1.y - entity2.y;
             return Math.sqrt(vx * vx + vy * vy);
@@ -576,24 +644,45 @@
             );
         };
 
-        document.getElementById("instructions").style.display = "block";
-        document.getElementById("instructText").innerHTML =
+        document.getElementById("levelSelect").style.display = "block";
+        document.getElementById("selectText").innerHTML =
+        "Choose which mode you want to play:<br/><br/>" + 
+        "Survival mode keeps going until your health reaches 0<br/><br/>" +
+        "Timed mode is about getting the highest score possible in a set amount of time";
+
+        instructMenu = function(){
+            document.getElementById("instructions").style.display = "block";
+            document.getElementById("instructText").innerHTML =
             "Health lowers when rubbish hits the ground or pests make it through<br/><br/>" +
+            "(there are no pests in timed mode)<br/><br/>" +
             "Score increases when you destroy rubbish or pests<br/><br/>" +
-            "Time is how long the current round has lasted<br/><br/>" +
+            "In Survival Time is how long the current round has lasted, in Timed it's how long is left<br/><br/>" +
             "Tap rubbish or pests, be careful not to tap non-pests!";
-        // document.getElementById("scoreInstruct").innerHTML =
-        //     "Score increases when you destroy rubbish or pests";
-        // document.getElementById("timeInstruct").innerHTML =
-        //     "Time is how long the current round has lasted";
-        // document.getElementById("instructionText").innerHTML =
-        //     "Tap rubbish or pests, be careful not to tap non-pests!";
+            document.getElementById("levelSelect").style.display = "none";
+        }    
+
+        mainMenu = function(){
+            document.getElementById("levelSelect").style.display = "block";
+            document.getElementById("selectText").innerHTML =
+            "Choose which mode you want to play:<br/><br/>" + 
+            "Survival mode keeps going until your health reaches 0<br/><br/>" +
+            "Timed mode is about getting the highest score possible in a set amount of time";
+            document.getElementById("instructions").style.display = "none";
+            document.getElementById("stats").style.display = "none";
+            document.getElementById("end").style.display = "none";
+            document.getElementById("rootObject").style = 
+                "background: url(./assets/images/background5.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+        }  
 
         update = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             frameCount++;
             var time = (new Date() - timeWhenGameStarted) / 1000;
             var t = time.toFixed(1);
+
+            //Timed mode
+            var roundTime = timeOut - t;
+            var timeLeft = roundTime.toFixed(1);
 
             if (frameCount % 30 == 0) {
                 randomlyGenerateRubbish();
@@ -603,12 +692,13 @@
                 randomlyGenerateAnimal();
             }
 
+            //Survival mode only
             if (frameCount % 50 == 0) {
                 randomlyGeneratePest();
             }
 
+            //Survival mode
             if (health <= 50) {
-                // backgroundObj.imgId = 1;
                 document.getElementById("rootObject").style = 
                 "background: url(./assets/images/background2.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
             }
@@ -617,37 +707,15 @@
                 "background: url(./assets/images/background1.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
             }
 
-            // ctx.drawImage(
-            //   imgList[backgroundObj.imgId],
-            //   0,
-            //   0,
-            //   (ctx.canvas.width = innerWidth),
-            //   (ctx.canvas.height = innerHeight)
-            // );
-
-            // ctx.drawImage(
-            //     imgList[backgroundObj.imgId],
-            //     x of clip,
-            //     y of clip,
-            //     width of clip,
-            //     height of clip,
-            //     x on canvas,
-            //     y on canvas,
-            //     width on canvas,
-            //     height on canvas
-            // );
-
-            // ctx.drawImage(
-            //     imgList[backgroundObj.imgId],
-            //     0,
-            //     0,
-            //     canvas.width,
-            //     canvas.height,
-            //     0,
-            //     0,
-            //     (ctx.canvas.width = innerWidth),
-            //     (ctx.canvas.height = innerHeight)
-            // );
+            //Timed mode
+            // if (health <= 50) {
+            //     document.getElementById("rootObject").style = 
+            //     "background: url(./assets/images/background4.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+            // }
+            // else {
+            //     document.getElementById("rootObject").style = 
+            //     "background: url(./assets/images/background3.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+            // }
 
             for (var key in rubbishList) {
                 updateRubbishEntity(rubbishList[key]);
@@ -657,13 +725,21 @@
                 updateAnimalEntity(animalList[key]);
             }
 
+            //Survival mode only
             for (var key in pestList) {
                 updatePestEntity(pestList[key]);
             }
 
             if (health <= 0) {
+                //Timed mode
+                //if (time >= 10)
+
                 myStopFunction();
                 health = 0;
+
+                //Timed mode
+                //health = health;
+
                 for (var key in rubbishList) {
                     delete rubbishList[key];
                 }
@@ -674,6 +750,7 @@
                 }
                 animalList = {};
 
+                //Survival mode
                 for (var key in pestList) {
                     delete pestList[key];
                 }
@@ -688,39 +765,12 @@
                     tappedPests + " pest animal(s)<br/><br/>" +
                     tappedAnimals + " non-pest animal(s)<br/><br/>" +
                     "You Survived for: " + t + " seconds";
-                // document.getElementById("tappedText").innerHTML =
-                //     "You got rid of: ";
-                // if (tappedRubbish < 1 || tappedRubbish > 1) {
-                //     document.getElementById("rubbishText").innerHTML =
-                //         tappedRubbish + " pieces of rubbish";
-                // } else if (tappedRubbish == 1) {
-                //     document.getElementById("rubbishText").innerHTML =
-                //         tappedRubbish + " piece of rubbish";
-                // }
-                // if (tappedPests < 1 || tappedPests > 1) {
-                //     document.getElementById("pestsText").innerHTML =
-                //         tappedPests + " pest animals";
-                // } else if (tappedPests == 1) {
-                //     document.getElementById("pestsText").innerHTML =
-                //         tappedPests + " pest animal";
-                // }
-                // if (tappedAnimals < 1 || tappedAnimals > 1) {
-                //     document.getElementById("animalsText").innerHTML =
-                //         tappedAnimals + " non-pest animals";
-                // } else if (tappedAnimals == 1) {
-                //     document.getElementById("animalsText").innerHTML =
-                //         tappedAnimals + " non-pest animal";
-                // }
-                // document.getElementById("timeText").innerHTML =
-                //     "You Survived for: " + t + " seconds";
             }
             document.getElementById("stats").style.display = "block";
             document.getElementById("statText").innerHTML = 
             "Health: " + health + "<br/><br/>" +
             "Score: " + score + "<br/><br/>" +
             "Time: " + t;
-            // document.getElementById("scoreStat").innerHTML = "Score: " + score;
-            // document.getElementById("timeStat").innerHTML = "Time: " + t;
         };
 
         var myVar;
@@ -729,6 +779,7 @@
             ctx.canvas.width = innerWidth;
             ctx.canvas.height = innerHeight;
             document.getElementById("end").style.display = "none";
+            document.getElementById("levelSelect").style.display = "none";
             document.getElementById("instructions").style.display = "none";
             timeWhenGameStarted = Date.now();
             frameCount = 0;
