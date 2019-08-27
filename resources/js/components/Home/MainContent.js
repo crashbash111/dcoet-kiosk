@@ -78,9 +78,8 @@ export default class MainContent extends React.Component {
                     var gamesList = this.state.games.map( item => {
                         console.log( item.img );
                         return(
-                            <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-slide-up" data-size="large" style={{ backgroundColor: "black" }}>
-                                <div className="slide" data-cover="https://thekaleidoscope.org/wp-content/uploads/2018/12/Calculus.jpeg"><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3></div>
-                                <div className="slide" data-cover="https://thekaleidoscope.org/wp-content/uploads/2018/12/Calculus.jpeg"><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3></div>
+                            <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
+                                <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3>
                             </div>
                         );
                     });
