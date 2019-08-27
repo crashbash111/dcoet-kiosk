@@ -16,6 +16,7 @@ To set up a branch for general use, run the following:
  - "composer update"
  - Create an .env file that links to an SQL database. A dump of a basic database is stored in a .SQL file at root.
  - "php artisan storage:link" (You may have to delete the storage directory under /public for this to function correctly.
+ - "php artisan key:generate"
 
 Serving the application can be done by running:
  - "npm run dev"
