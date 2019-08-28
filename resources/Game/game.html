@@ -744,6 +744,7 @@
         update = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             frameCount++;
+
             var time = (new Date() - timeWhenGameStarted) / 1000;
             var t = time.toFixed(1);
 
@@ -821,7 +822,7 @@
                 }
             }  
 
-            if (mode == 1 && health <= 0 || mode == 2 && time >= 10) {
+            if (mode == 1 && health <= 0 || mode == 2 && time >= 3) {
                 //Timed mode
                 //if (time >= 10)
 
@@ -830,6 +831,7 @@
                     health = 0;
                 }
                 else if (mode == 2){
+                    myStopFunction();
                     health = health;
                 }
                 //Timed mode
@@ -872,19 +874,12 @@
                     tappedAnimals + " non-pest animal(s)<br/><br/>";
                 }
             }
-            document.getElementById("stats").style.display = "block";
-            if (mode == 1){
+           
+                document.getElementById("stats").style.display = "block";
                 document.getElementById("statText").innerHTML = 
                 "Health: " + health + "<br/><br/>" +
-                "Score: " + score + "<br/><br/>" +
-                "Time: " + t;
-            }
-            else if (mode == 2){
-                document.getElementById("statText").innerHTML = 
-                "Health: " + health + "<br/><br/>" +
-                "Score: " + score + "<br/><br/>" +
-                "Time: " + timeLeft;
-            }
+                "Score: " + score + "<br/><br/>" + 
+                "Time: " + (mode == 1 ? t : timeLeft);
         };
 
         var myVar;
