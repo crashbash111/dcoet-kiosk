@@ -52,26 +52,49 @@
             <button
                 id="survivalBtn"
                 style="font-size:4.5vmin;"
-                onclick="instructMenu()"
+                onclick="survivalInstructMenu()"
             >
                 Survival
             </button>
             <button
                 id="timedBtn"
                 style="font-size:4.5vmin;"
-                onclick="instructMenu()"
+                onclick="timedInstructMenu()"
             >
                 Timed
             </button>
         </div>
         <div
-            id="instructions"
+            id="survivalInstructions"
             style="position:absolute; top:15%; left:20%; width:60%; height:width;
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
             animation-name: instructAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
-            <p id="instructText" style="font-size:3.5vmin"></p>
+            <p id="survivalInstructText" style="font-size:3.5vmin"></p>
+            <button
+                id="startBtn"
+                style="font-size:4.5vmin;"
+                onclick="startNewGame()"
+            >
+                Start Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:4.5vmin;"
+                onclick="mainMenu()"
+            >
+                Main Menu
+            </button>
+        </div>
+        <div
+            id="timedInstructions"
+            style="position:absolute; top:15%; left:20%; width:60%; height:width;
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
+            animation-name: instructAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
+            <p id="timedInstructText" style="font-size:3.5vmin"></p>
             <button
                 id="startBtn"
                 style="font-size:4.5vmin;"
@@ -180,6 +203,8 @@
         };
 
         canvas.addEventListener("click", canvasClick);
+
+        var mode = 0;
 
         var timeWhenGameStarted = Date.now();
 
@@ -433,8 +458,14 @@
             if (health > -10000) {
                 var side = getRandomInt(0, 2);
                 //survival mode
-                var x = Math.random() * (canvas.width - 10) + 10;
-                var y = 0;
+                if (mode == 1){
+                    var x = Math.random() * (canvas.width - 10) + 10;
+                    var y = 0;
+                }
+                else if (mode == 2){
+                    var x = getRandomInt(canvas.width * 0.45, canvas.width * 0.56);
+                    var y = canvas.height * 0.1;
+                }
 
                 //timed mode
                 // var x = getRandomInt(canvas.width * 0.45, canvas.width * 0.56);
@@ -445,7 +476,7 @@
                 var spdX = 20 + Math.random() * 20 * (side == 0 ? 1.5 : -3);
                 var spdY = 2 + Math.random() * 2 + frameCount / 1000;
                 var imgId = getRandomInt(5,8);
-                Rubbish(id, x, y, spdX, spdY, width, height, imgId, side);
+                Rubbish(id, x, y, spdX, spdY, width, height, imgId, side);  
             }
         };
 
@@ -457,8 +488,17 @@
                 } else {
                     var x = canvas.width;
                 }
+
                 //Survival mode
-                var y = canvas.height * 0.95;
+                if (mode == 1){
+                    var y = canvas.height * 0.95;
+                }
+                else if (mode == 2){
+                    var y = getRandomInt(
+                        canvas.height * 0.38,
+                        canvas.height * 0.95
+                    );
+                }
 
                 // Timed mode
                 // var y = getRandomInt(
@@ -471,7 +511,12 @@
                 var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
 
                 //Survival
-                var imgId = getRandomInt(11, 14);
+                if (mode == 1){
+                    var imgId = getRandomInt(11, 14);
+                }
+                else if (mode == 2){
+                    var imgId = getRandomInt(17, 20);
+                }
 
                 //Timed mode
                 // var imgId = getRandomInt(17, 20);
@@ -482,21 +527,23 @@
 
         //Survival mode only
         randomlyGeneratePest = function() {
-            if (health > 0) {
-                var side = getRandomInt(0, 2);
-                if (side == 0) {
-                    var x = 0;
-                } else {
-                    var x = canvas.width;
+            if (mode == 1){
+                if (health > 0) {
+                    var side = getRandomInt(0, 2);
+                    if (side == 0) {
+                        var x = 0;
+                    } else {
+                        var x = canvas.width;
+                    }
+                    var y = canvas.height * 0.95;
+                    var height = canvas.height / 7.5;
+                    var width = canvas.width / 10;
+                    var id = pestID++;
+                    var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
+                    var imgId = getRandomInt(23, 26);
+                    Pest(id, x, y, spdX, width, height, imgId, side);
                 }
-                var y = canvas.height * 0.95;
-                var height = canvas.height / 7.5;
-                var width = canvas.width / 10;
-                var id = pestID++;
-                var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
-                var imgId = getRandomInt(23, 26);
-                Pest(id, x, y, spdX, width, height, imgId, side);
-            }
+            }    
         };
 
         updateRubbishEntity = function(something) {
@@ -558,40 +605,42 @@
 
         //Survival mode only
         updatePestPosition = function(something) {
-            something.x += something.spdX;
+            if (mode == 1){
+                something.x += something.spdX;
 
-            if (something.side == 0) {
-                if (something.x > canvas.width) {
-                    for (var key in pestList) {
-                        if (something === pestList[key]) {
-                            delete pestList[key];
+                if (something.side == 0) {
+                    if (something.x > canvas.width) {
+                        for (var key in pestList) {
+                            if (something === pestList[key]) {
+                                delete pestList[key];
+                            }
+                        }
+                    }
+                    if (something.x > canvas.width - 10) {
+                        health -= 20;
+                        score -= 30;
+                        for (var key in pestList) {
+                            if (something === pestList[key]) {
+                                delete pestList[key];
+                            }
                         }
                     }
                 }
-                if (something.x > canvas.width - 10) {
-                    health -= 20;
-                    score -= 30;
-                    for (var key in pestList) {
-                        if (something === pestList[key]) {
-                            delete pestList[key];
+                else if (something.side == 1) {
+                    if (something.x < 0) {
+                        for (var key in pestList) {
+                            if (something === pestList[key]) {
+                                delete pestList[key];
+                            }
                         }
                     }
-                }
-            }
-            else if (something.side == 1) {
-                if (something.x < 0) {
-                    for (var key in pestList) {
-                        if (something === pestList[key]) {
-                            delete pestList[key];
-                        }
-                    }
-                }
-                if (something.x < 0) {
-                    health -= 20;
-                    score -= 30;
-                    for (var key in pestList) {
-                        if (something === pestList[key]) {
-                            delete pestList[key];
+                    if (something.x < 0) {
+                        health -= 20;
+                        score -= 30;
+                        for (var key in pestList) {
+                            if (something === pestList[key]) {
+                                delete pestList[key];
+                            }
                         }
                     }
                 }
@@ -650,16 +699,31 @@
         "Survival mode keeps going until your health reaches 0<br/><br/>" +
         "Timed mode is about getting the highest score possible in a set amount of time";
 
-        instructMenu = function(){
-            document.getElementById("instructions").style.display = "block";
-            document.getElementById("instructText").innerHTML =
+        survivalInstructMenu = function(){
+            document.getElementById("survivalInstructions").style.display = "block";
+            document.getElementById("survivalInstructText").innerHTML =
             "Health lowers when rubbish hits the ground or pests make it through<br/><br/>" +
             "(there are no pests in timed mode)<br/><br/>" +
             "Score increases when you destroy rubbish or pests<br/><br/>" +
             "In Survival Time is how long the current round has lasted, in Timed it's how long is left<br/><br/>" +
             "Tap rubbish or pests, be careful not to tap non-pests!";
             document.getElementById("levelSelect").style.display = "none";
-        }    
+            mode = 1;
+            console.log(mode);
+        }  
+
+        timedInstructMenu = function(){
+            document.getElementById("timedInstructions").style.display = "block";
+            document.getElementById("timedInstructText").innerHTML =
+            "Health lowers when rubbish hits the ground or pests make it through<br/><br/>" +
+            "(there are no pests in timed mode)<br/><br/>" +
+            "Score increases when you destroy rubbish or pests<br/><br/>" +
+            "In Survival Time is how long the current round has lasted, in Timed it's how long is left<br/><br/>" +
+            "Tap rubbish or pests, be careful not to tap non-pests!";
+            document.getElementById("levelSelect").style.display = "none";
+            mode = 2;
+            console.log(mode);
+        }  
 
         mainMenu = function(){
             document.getElementById("levelSelect").style.display = "block";
@@ -667,11 +731,14 @@
             "Choose which mode you want to play:<br/><br/>" + 
             "Survival mode keeps going until your health reaches 0<br/><br/>" +
             "Timed mode is about getting the highest score possible in a set amount of time";
-            document.getElementById("instructions").style.display = "none";
+            document.getElementById("survivalInstructions").style.display = "none";
+            document.getElementById("timedInstructions").style.display = "none";
             document.getElementById("stats").style.display = "none";
             document.getElementById("end").style.display = "none";
             document.getElementById("rootObject").style = 
                 "background: url(./assets/images/background5.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+            mode = 0;
+            console.log(mode);
         }  
 
         update = function() {
@@ -688,24 +755,46 @@
                 randomlyGenerateRubbish();
             }
 
-            if (frameCount % 45 == 0) {
-                randomlyGenerateAnimal();
+            if (mode == 1){
+                if (frameCount % 25 == 0) {
+                    randomlyGenerateAnimal();
+                }
+            }
+            else if (mode == 2){
+                if (frameCount % 20 == 0) {
+                    randomlyGenerateAnimal();
+                }
             }
 
             //Survival mode only
-            if (frameCount % 50 == 0) {
-                randomlyGeneratePest();
-            }
+            if (mode == 1){
+                if (frameCount % 50 == 0) {
+                    randomlyGeneratePest();
+                }
+            }   
 
             //Survival mode
-            if (health <= 50) {
-                document.getElementById("rootObject").style = 
-                "background: url(./assets/images/background2.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+            if (mode == 1){
+                if (health <= 50) {
+                    document.getElementById("rootObject").style = 
+                    "background: url(./assets/images/background2.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+                }
+                else {
+                    document.getElementById("rootObject").style = 
+                    "background: url(./assets/images/background1.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+                }
             }
-            else {
-                document.getElementById("rootObject").style = 
-                "background: url(./assets/images/background1.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+            else if (mode == 2){
+                if (health <= 50) {
+                    document.getElementById("rootObject").style = 
+                    "background: url(./assets/images/background4.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+                }
+                else {
+                    document.getElementById("rootObject").style = 
+                    "background: url(./assets/images/background3.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+                }
             }
+            
 
             //Timed mode
             // if (health <= 50) {
@@ -726,17 +815,23 @@
             }
 
             //Survival mode only
-            for (var key in pestList) {
-                updatePestEntity(pestList[key]);
-            }
+            if (mode == 1){
+                for (var key in pestList) {
+                    updatePestEntity(pestList[key]);
+                }
+            }  
 
-            if (health <= 0) {
+            if (mode == 1 && health <= 0 || mode == 2 && time >= 10) {
                 //Timed mode
                 //if (time >= 10)
 
-                myStopFunction();
-                health = 0;
-
+                if (mode == 1){
+                    myStopFunction();
+                    health = 0;
+                }
+                else if (mode == 2){
+                    health = health;
+                }
                 //Timed mode
                 //health = health;
 
@@ -751,26 +846,45 @@
                 animalList = {};
 
                 //Survival mode
-                for (var key in pestList) {
-                    delete pestList[key];
+                if (mode == 1){
+                    for (var key in pestList) {
+                        delete pestList[key];
+                    }
+                    pestList = {};
                 }
-                pestList = {};
-
+                
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 document.getElementById("end").style.display = "block";
-                document.getElementById("endText").innerHTML =
+                if (mode == 1){
+                    document.getElementById("endText").innerHTML =
                     "Score: " + score +
                     "<br/><br/>You got rid of:<br/><br/>" +
                     tappedRubbish + " piece(s) of rubbish<br/><br/>" +
                     tappedPests + " pest animal(s)<br/><br/>" +
                     tappedAnimals + " non-pest animal(s)<br/><br/>" +
                     "You Survived for: " + t + " seconds";
+                }
+                else if (mode == 2){
+                    document.getElementById("endText").innerHTML =
+                    "Score: " + score +
+                    "<br/><br/>You got rid of:<br/><br/>" +
+                    tappedRubbish + " piece(s) of rubbish<br/><br/>" +
+                    tappedAnimals + " non-pest animal(s)<br/><br/>";
+                }
             }
             document.getElementById("stats").style.display = "block";
-            document.getElementById("statText").innerHTML = 
-            "Health: " + health + "<br/><br/>" +
-            "Score: " + score + "<br/><br/>" +
-            "Time: " + t;
+            if (mode == 1){
+                document.getElementById("statText").innerHTML = 
+                "Health: " + health + "<br/><br/>" +
+                "Score: " + score + "<br/><br/>" +
+                "Time: " + t;
+            }
+            else if (mode == 2){
+                document.getElementById("statText").innerHTML = 
+                "Health: " + health + "<br/><br/>" +
+                "Score: " + score + "<br/><br/>" +
+                "Time: " + timeLeft;
+            }
         };
 
         var myVar;
@@ -780,7 +894,8 @@
             ctx.canvas.height = innerHeight;
             document.getElementById("end").style.display = "none";
             document.getElementById("levelSelect").style.display = "none";
-            document.getElementById("instructions").style.display = "none";
+            document.getElementById("survivalInstructions").style.display = "none";
+            document.getElementById("timedInstructions").style.display = "none";
             timeWhenGameStarted = Date.now();
             frameCount = 0;
             health = 100;
