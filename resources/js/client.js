@@ -9,10 +9,13 @@ import Category from "./pages/Category";
 import CategoryIndex from "./pages/CategoryIndex";
 import Create from "./pages/Admin/Create";
 import CreateCategory from "./pages/Admin/CreateCategory";
+import CreatePowerpoint from "./pages/Admin/CreatePowerpoint";
 import Home from "./pages/Home";
-import Layout from "./pages/Layout";
-import Splash from "./pages/Splash";
 import KioskPage from "./pages/KioskPage";
+import Layout from "./pages/Layout";
+import PowerpointPage from "./pages/PowerpointPage";
+import Powerpoints from "./pages/Admin/Powerpoints";
+import Splash from "./pages/Splash";
 
 const app = document.getElementById( 'app' );
 
@@ -28,6 +31,9 @@ ReactDOM.render(
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/create" component={Create} />
             <Route exact path="/admin/createCategory" component={CreateCategory} />
+            <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
+            <Route exact path="/powerpoint/:id" component={PowerpointPage} />
+            <Route exact path="/powerpoints" component={Powerpoints} />
         </Layout>
     </HashRouter>,
 app );
