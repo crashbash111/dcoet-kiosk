@@ -59,9 +59,7 @@ export default class Admin extends React.Component {
 
         return (
             <div className="xadmin">
-                <div className={isMobile ? 'fullarea' : 'leftarea'} >
-                    <AdminSidebar isMobile={isMobile}/>
-                </div>
+                <AdminSidebar isMobile={isMobile}/>
                 <div className={isMobile ? 'fullarea' : 'rightarea'}>
                     <h2>Admin</h2>
                     <br />
@@ -69,7 +67,7 @@ export default class Admin extends React.Component {
                     <br />
                     <Link to="/admin/create"><button className="btn btn-primary">Create New</button></Link>
                     <br />
-                    <table className="admin-table">
+                    <table className="admin-table" style={{ tableLayout: "fixed", width: "120vh" }}>
                         <thead>
                             <tr>
                                 <th>Heading</th>

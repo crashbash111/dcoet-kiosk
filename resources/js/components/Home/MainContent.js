@@ -37,6 +37,12 @@ export default class MainContent extends React.Component {
         this.setState({ redirectId: i, redirect: true });
     }
 
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     render() {
 
         if (this.state.redirect) {
@@ -44,15 +50,15 @@ export default class MainContent extends React.Component {
             return <Redirect to={target} />
         }
 
-        if (this.props.activeCategory == -1) {
-            return (
-                <div className="homeslideshow">
-                    <video loop={true} autoPlay={true}>
-                        <source type="video/mp4" data-reactid=".0.1.0.0.0" src="./storage/kiosk_images/181129_DC_Banner_Video_Cropped.mp4"/>
-                    </video>
-                </div>
-            );
-        }
+        // if (this.props.activeCategory == -1) {
+        //     return (
+        //         <div className="homeslideshow">
+        //             <video loop={true} autoPlay={true}>
+        //                 <source type="video/mp4" data-reactid=".0.1.0.0.0" src="./storage/kiosk_images/181129_DC_Banner_Video_Cropped.mp4"/>
+        //             </video>
+        //         </div>
+        //     );
+        // }
 
         if (this.state.pages == null) {
             return (
@@ -72,9 +78,8 @@ export default class MainContent extends React.Component {
                     var gamesList = this.state.games.map( item => {
                         console.log( item.img );
                         return(
-                            <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-slide-up" data-size="large" style={{ backgroundColor: "black" }}>
-                                <div className="slide" data-cover="https://thekaleidoscope.org/wp-content/uploads/2018/12/Calculus.jpeg"><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3></div>
-                                <div className="slide" data-cover="https://thekaleidoscope.org/wp-content/uploads/2018/12/Calculus.jpeg"><h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3></div>
+                            <div onClick={() => window.open( "../Resources/Game/index.html", "_blank" )} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
+                                <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3>
                             </div>
                         );
                     });
@@ -91,25 +96,63 @@ export default class MainContent extends React.Component {
 
                 var pagesList = this.state.pages.map(item => {
 
-                    if( this.props.activeCategory != item.category_id )
-                    {
-                        return null;
-                    }
+                    
 
                     if (this.props.filter != "") {
                         if (!item.heading.toLowerCase().includes(this.props.filter.toLowerCase())) {
                             return null;
                         }
                     }
+                    else if( this.props.activeCategory != item.category_id )
+                    {
+                        return null;
+                    }
 
-                    let images = item.images.map(img => {
+                    let x = this.getRandomInt( 0, item.images.length - 1 );
+                    //console.log( x );
 
-                        let imgName = "./storage/kiosk_images/" + img.image_name;
+                    return (
+                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ "./storage/kiosk_images/" + item.images[ x ].image_name } data-size="large" style={{ backgroundColor: "green" }}>
+                            <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.heading }</h3>
+                        </div>
+                    );
 
-                        return (
-                            <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
-                        );
-                    });
+                    let images;
+
+                    if( item.images.length < 2 )
+                    {
+                        let imgNameNew;
+
+                        images = item.images.map(img => {
+
+                            let imgName = "./storage/kiosk_images/" + img.image_name;
+    
+                            imgNameNew = imgName;
+
+                            console.log( imgName );
+    
+                            return (
+                                <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
+                                
+                            );
+                        });
+                        images.push( <div className="slide" data-cover={imgNameNew}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div> );
+                    }
+                    else
+                    {
+                        images = item.images.map(img => {
+
+                            let imgName = "./storage/kiosk_images/" + img.image_name;
+    
+                            console.log( imgName );
+    
+                            return (
+                                <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
+                            );
+                        });
+                    }
+
+                    
 
                     return (
                         <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-fade" data-size="large" style={{ backgroundColor: "green" }}>
