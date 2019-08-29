@@ -65502,10 +65502,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Category__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Category */ "./resources/js/pages/Category.js");
 /* harmony import */ var _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/CategoryIndex */ "./resources/js/pages/CategoryIndex.js");
 /* harmony import */ var _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Admin/Create */ "./resources/js/pages/Admin/Create.js");
-/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
-/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
-/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
+/* harmony import */ var _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Admin/CreateCategory */ "./resources/js/pages/Admin/CreateCategory.js");
+/* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
+/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
 /* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
+/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
+/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
+/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
+/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
 
  //import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
@@ -65519,15 +65523,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var app = document.getElementById('app');
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Layout__WEBPACK_IMPORTED_MODULE_9__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Layout__WEBPACK_IMPORTED_MODULE_12__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/",
-  component: _pages_Home__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _pages_Home__WEBPACK_IMPORTED_MODULE_10__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/splash",
-  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_15__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk",
@@ -65548,8 +65556,25 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
   path: "/admin",
   component: _pages_Admin__WEBPACK_IMPORTED_MODULE_3__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
   path: "/admin/create",
   component: _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/admin/createCategory",
+  component: _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_8__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/admin/createPowerpoint",
+  component: _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_9__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/powerpoint/:id",
+  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_13__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/powerpoints",
+  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_14__["default"]
 }))), app);
 
 /***/ }),
@@ -65628,13 +65653,16 @@ function (_React$Component) {
         src: "/images/logo.png"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
-      }, "Entry 1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
-      }, "Entry 2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
-      }, "Entry 3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "Pages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
-      }, "Entry 4")));
+      }, "Games"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "returns",
+        href: "./#"
+      }, "\u2190 Kiosk View")));
     }
   }]);
 
@@ -65768,7 +65796,10 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/images/logo.png"
+        style: {
+          height: "80vh"
+        },
+        src: "./images/logo.png"
       });
     }
   }]);
@@ -65885,7 +65916,16 @@ function (_React$Component) {
       }
 
       if (this.props.activeCategory == -1) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Select a category to get started");
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "homeslideshow"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+          loop: true,
+          autoPlay: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+          type: "video/mp4",
+          "data-reactid": ".0.1.0.0.0",
+          src: "./storage/kiosk_images/181129_DC_Banner_Video_Cropped.mp4"
+        })));
       }
 
       if (this.state.pages == null) {
@@ -65961,7 +66001,7 @@ function (_React$Component) {
                 return _this3.handleClick(item.id);
               },
               "data-role": "tile",
-              "data-effect": "animate-slide-up",
+              "data-effect": "animate-fade",
               "data-size": "large",
               style: {
                 backgroundColor: "green"
@@ -65970,10 +66010,11 @@ function (_React$Component) {
           }); //Making the main content view have a grid of tiles
 
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "no-scrollbar",
             style: {
               height: "100%",
               display: "grid",
-              gridTemplateColumns: "auto auto auto",
+              gridTemplateColumns: "auto auto auto auto",
               gridRowGap: "15px",
               overflowY: "scroll"
             }
@@ -66138,14 +66179,23 @@ function (_React$Component) {
         });
       });
       var gameId = 999;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, sideBarEntries, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideBar_SideBarEntry__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      sideBarEntries.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideBar_SideBarEntry__WEBPACK_IMPORTED_MODULE_1__["default"], {
         key: gameId,
         id: gameId,
         isActive: this.props.activeCategory == gameId,
         name: "Games",
-        description: "Games lol",
+        description: "Fun interactive activites.",
         handleChange: this.props.handleChange
       }));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "no-scrollbar",
+        style: {
+          display: "grid",
+          gridTemplateRows: "repeat(6, 75px)",
+          overflowY: "scroll",
+          overflowX: "hidden"
+        }
+      }, sideBarEntries);
     }
   }]);
 
@@ -66204,17 +66254,8 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var divStyle;
-
-      if (this.props.isActive) {
-        divStyle = {
-          textAlign: "center",
-          color: "blue"
-        };
-      }
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: divStyle,
+        className: this.props.isActive ? 'sideentryselected' : 'sideentry',
         onClick: function onClick() {
           return _this.props.handleChange(_this.props.id);
         }
@@ -66418,7 +66459,7 @@ function (_React$Component) {
         this.setState({
           birds: updatedList
         });
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]("/pages/" + id);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]("./pages/" + id);
       }
     }
   }, {
@@ -66525,9 +66566,11 @@ function (_React$Component) {
       file2: null,
       file3: null,
       file4: null,
-      redirect: false
+      redirect: false,
+      photos: []
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleChangeNew = _this.handleChangeNew.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.change = _this.change.bind(_assertThisInitialized(_this));
@@ -66535,6 +66578,7 @@ function (_React$Component) {
     _this.image_2 = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.image_3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.image_4 = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.photos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
@@ -66544,13 +66588,30 @@ function (_React$Component) {
       console.log(event.target.files);
     }
   }, {
-    key: "handleChange",
-    value: function handleChange(event) {
+    key: "handleChangeNew",
+    value: function handleChangeNew(event) {
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value,
           type = _event$target.type,
           files = _event$target.files;
+      console.log("ree");
+      console.log(event.target.files);
+      console.log("tub");
+      this.setState(_defineProperty({}, name, files));
+      console.log(files);
+      console.log("sam");
+      console.log(this.photos.current.files);
+      console.log("wheeze");
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target2 = event.target,
+          name = _event$target2.name,
+          value = _event$target2.value,
+          type = _event$target2.type,
+          files = _event$target2.files;
 
       if (type == "file") {
         this.setState(_defineProperty({}, name, files[0]));
@@ -66572,11 +66633,21 @@ function (_React$Component) {
       formData.append("heading", this.state.heading);
       formData.append("text", this.state.text);
       formData.append("category", this.state.category_id);
-      formData.append("image_1", this.state.file1);
-      formData.append("image_2", this.state.file2);
-      formData.append("image_3", this.state.file3);
-      formData.append("image_4", this.state.file4);
-      console.log(this.image_1.current.files[0]);
+      var files = this.photos.current.files;
+
+      for (var i = 0; i < files.length; ++i) {
+        var file = files[i];
+
+        if (!file.type.match("image.*")) {
+          continue;
+        }
+
+        console.log(file);
+        formData.append("photos[]", file, file.name);
+      } //formData.append( "photos[]", Array.from( this.photos.current.files ) );
+      //console.log(this.photos.current.files);
+
+
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         url: "./pages",
         method: "POST",
@@ -66679,55 +66750,14 @@ function (_React$Component) {
         }
       }, "Category is required")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image #1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "file1",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        multiple: true,
+        name: "photos",
         className: "form-control",
         type: "file",
         accept: "image/png, image/jpeg",
-        ref: this.image_1,
-        onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          color: "orange",
-          display: this.state.file == null ? "none" : "block"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image #2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "file2",
-        className: "form-control",
-        type: "file",
-        accept: "image/png, image/jpeg",
-        ref: this.image_2,
-        onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          color: "orange",
-          display: this.state.file == null ? "none" : "block"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image #3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "file3",
-        className: "form-control",
-        type: "file",
-        accept: "image/png, image/jpeg",
-        ref: this.image_3,
-        onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          color: "orange",
-          display: this.state.file == null ? "none" : "block"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image #4"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "file4",
-        className: "form-control",
-        type: "file",
-        accept: "image/png, image/jpeg",
-        ref: this.image_4,
-        onChange: this.handleChange
+        ref: this.photos,
+        onChange: this.handleChangeNew
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: {
           color: "orange",
@@ -66772,6 +66802,428 @@ function (_React$Component) {
   }]);
 
   return Create;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin/CreateCategory.js":
+/*!****************************************************!*\
+  !*** ./resources/js/pages/Admin/CreateCategory.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CreateCategory; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var CreateCategory =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CreateCategory, _React$Component);
+
+  function CreateCategory(props) {
+    var _this;
+
+    _classCallCheck(this, CreateCategory);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CreateCategory).call(this, props));
+    _this.state = {
+      name: "",
+      description: ""
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CreateCategory, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      var formData = new FormData();
+      formData.append("name", this.state.name);
+      formData.append("description", this.state.description);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          width: "100%"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Category Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "name",
+        onChange: this.handleChange,
+        value: this.state.name,
+        placeholder: "Enter a category name..."
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        rows: "10",
+        className: "form-control",
+        name: "description",
+        onChange: this.handleChange,
+        value: this.state.description,
+        placeholder: "Enter a category description..."
+      }))))));
+    }
+  }]);
+
+  return CreateCategory;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin/CreatePowerpoint.js":
+/*!******************************************************!*\
+  !*** ./resources/js/pages/Admin/CreatePowerpoint.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CreatePowerpoint; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var CreatePowerpoint =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CreatePowerpoint, _React$Component);
+
+  function CreatePowerpoint(props) {
+    var _this;
+
+    _classCallCheck(this, CreatePowerpoint);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CreatePowerpoint).call(this, props));
+    _this.state = {
+      title: "",
+      redirect: false
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.pptImages = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
+  }
+
+  _createClass(CreatePowerpoint, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var formData = new FormData();
+      formData.append("title", this.state.title);
+      var files = this.pptImages.current.files;
+
+      for (var i = 0; i < files.length; ++i) {
+        var file = files[i];
+
+        if (!file.type.match("image.*")) {
+          continue;
+        }
+
+        formData.append("photos[]", file, file.name);
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        url: "./powerpoints",
+        method: "POST",
+        headers: {},
+        data: formData
+      }).then(function (response) {
+        console.log(response);
+
+        _this2.setState({
+          redirect: true
+        });
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.redirect) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+          to: "/Admin"
+        });
+      }
+
+      var imgList = Array();
+
+      if (this.pptImages.current != null && this.pptImages.current.files != null) {
+        for (var i = 0; i < this.pptImages.current.files.length; ++i) {
+          var file = this.pptImages.current.files[i];
+          imgList.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: "inline-block"
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, file.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            src: URL.createObjectURL(file),
+            style: {
+              height: "200px"
+            }
+          })));
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Create Powerpoint", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "create-form",
+        onSubmit: this.handleSubmit,
+        encType: "multipart/form-data"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "title",
+        value: this.state.title,
+        onChange: this.handleChange,
+        placeholder: "Enter title here..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.title.length > 2 ? "none" : "block"
+        }
+      }, "Title requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        multiple: true,
+        name: "photos",
+        className: "form-control",
+        type: "file",
+        accept: "image/png, image/jpeg",
+        ref: this.pptImages,
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "orange",
+          display: this.state.file == null ? "none" : "block"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          width: "200vh"
+        }
+      }, imgList));
+    }
+  }]);
+
+  return CreatePowerpoint;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin/Powerpoints.js":
+/*!*************************************************!*\
+  !*** ./resources/js/pages/Admin/Powerpoints.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Powerpoints; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var Powerpoints =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Powerpoints, _React$Component);
+
+  function Powerpoints(props) {
+    var _this;
+
+    _classCallCheck(this, Powerpoints);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Powerpoints).call(this, props));
+    _this.state = {
+      loading: true,
+      ppts: [],
+      redirect: false,
+      redirectId: -1
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Powerpoints, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch("./powerpoints/all").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          ppts: data,
+          loading: false
+        });
+
+        console.log(data);
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(id) {
+      this.setState({
+        redirectId: id,
+        redirect: true
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      if (this.state.redirect) {
+        var r = "./powerpoint/" + this.state.redirectId;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: r
+        });
+      }
+
+      if (this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+      }
+
+      var pptList = Array();
+
+      for (var i = 0; i < this.state.ppts.length; ++i) {
+        var pt = this.state.ppts[i];
+        pptList.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          onClick: function onClick() {
+            return _this3.handleClick(pt.id);
+          },
+          style: {
+            width: "300px",
+            height: "200px",
+            backgroundImage: "url('./storage/ppt_images/" + (pt.ppt_images.length > 0 ? pt.ppt_images[0].filepath : "default.png") + "')",
+            backgroundPosition: "center",
+            backgroundSize: "300px 200px",
+            backgroundRepeat: "no-repeat"
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+          style: {
+            textShadow: "2px 2px #000000"
+          }
+        }, pt.title)));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "List of powerpoints"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "auto auto",
+          gridRowGap: "50px"
+        }
+      }, pptList));
+    }
+  }]);
+
+  return Powerpoints;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
@@ -67242,29 +67694,35 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: "100%",
-          paddingTop: "15px"
+          backgroundImage: "url( './images/background_main.jpg' )",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          backgroundColor: "rgba( 25, 25, 25, 0.8 )"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "grid-item item1"
+        className: "grid-item logospace"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "grid-item item2"
+        className: "grid-item searchspace"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home_SearchBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
         searchTerm: this.state.searchTerm,
         handleChange: this.handleFormChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "grid-item item3"
+        className: "grid-item leftcategories"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home_SideBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
         activeCategory: this.state.activeCategory,
         categories: this.state.categories,
         handleChange: this.handleCategoryChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "grid-item item4"
+        className: "grid-item rightcontent"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home_MainContent__WEBPACK_IMPORTED_MODULE_3__["default"], {
         filter: this.state.searchTerm,
         activeCategory: this.state.activeCategory
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)));
+      })))));
     }
   }]);
 
@@ -67374,9 +67832,11 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading...");
       } else {
         var imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hideScroll"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
-            height: "100%",
+            height: "100vh",
             display: "grid",
             gridTemplateColumns: "25% auto"
           }
@@ -67384,7 +67844,8 @@ function (_React$Component) {
           style: {
             height: "100vh",
             padding: "10px",
-            overflowY: "scroll",
+            overflowY: "hidden",
+            overflowX: "hidden",
             backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )"
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -67411,7 +67872,9 @@ function (_React$Component) {
             opacity: this.state.opacity
           },
           src: imgPath,
-          width: "100%"
+          height: "100%",
+          overflowY: "hidden",
+          overflowX: "hidden"
         }))));
       }
     }
@@ -67506,6 +67969,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
+          width: "100%",
           height: "100%"
         }
       }, this.props.children);
@@ -67537,6 +68001,155 @@ function (_React$Component) {
   }]);
 
   return Layout;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/PowerpointPage.js":
+/*!**********************************************!*\
+  !*** ./resources/js/pages/PowerpointPage.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PowerpointPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var PowerpointPage =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PowerpointPage, _React$Component);
+
+  function PowerpointPage(props) {
+    var _this;
+
+    _classCallCheck(this, PowerpointPage);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PowerpointPage).call(this, props));
+    _this.state = {
+      loading: true,
+      title: "",
+      photos: [],
+      slideIndex: -1,
+      maxIndex: -1
+    };
+    _this.handleLeftClick = _this.handleLeftClick.bind(_assertThisInitialized(_this));
+    _this.handleRightClick = _this.handleRightClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PowerpointPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.setState({
+        loading: true
+      });
+      fetch("./powerpoints/" + this.props.match.params.id).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this2.setState({
+          title: data.title,
+          photos: data.ppt_images,
+          slideIndex: 0
+        });
+      }).then(function () {
+        _this2.setState({
+          maxIndex: _this2.state.photos.length,
+          loading: false
+        });
+      });
+    }
+  }, {
+    key: "handleLeftClick",
+    value: function handleLeftClick(event) {
+      this.setState(function (prevState) {
+        if (prevState.slideIndex > 0) {
+          return {
+            slideIndex: prevState.slideIndex - 1
+          };
+        }
+      });
+    }
+  }, {
+    key: "handleRightClick",
+    value: function handleRightClick(event) {
+      var _this3 = this;
+
+      this.setState(function (prevState) {
+        if (prevState.slideIndex < _this3.state.maxIndex - 1) {
+          return {
+            slideIndex: prevState.slideIndex + 1
+          };
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "50vh auto 50vh",
+          width: "100%",
+          height: "100%",
+          backgroundRepeat: "no-repeat",
+          backgroundImage: "url( './storage/ppt_images/" + this.state.photos[this.state.slideIndex].filepath + "' )"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          backgroundColor: "blue",
+          opacity: "0",
+          height: "100%"
+        },
+        onClick: this.handleLeftClick
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          backgroundColor: "white",
+          opacity: "0",
+          height: "100%"
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          backgroundColor: "red",
+          opacity: "0",
+          height: "100%"
+        },
+        onClick: this.handleRightClick
+      }));
+    }
+  }]);
+
+  return PowerpointPage;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
@@ -67661,8 +68274,8 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

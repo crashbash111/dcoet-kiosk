@@ -10740,7 +10740,7 @@ textarea {
 .xadmin {
   display: grid;
   grid-template-rows: 100%;
-  grid-template-columns: 20% auto;
+  grid-template-columns: 300px auto;
   height: 100%;
 }
 
@@ -10775,7 +10775,7 @@ textarea {
 }
 
 .xadmin .leftarea .sidebaropened {
-  width: 20%;
+  width: 300px;
 }
 
 .xadmin .fullarea .sidebaropened {
@@ -10810,6 +10810,14 @@ textarea {
   text-decoration: none;
   padding: 24px 8px 24px 32px;
   transition: 0.3s;
+}
+
+.xadmin .sidebar .returns {
+  position: absolute;
+  bottom: 0;
+  background: #0B1114;
+  color: #697D87;
+  padding: 8px 8px 8px 32px;
 }
 
 .xadmin .sidebar a:hover {
@@ -10868,7 +10876,7 @@ h1 {
 .grid-container {
   display: grid;
   grid-template-rows: 15vh 85vh;
-  grid-template-columns: 20% auto;
+  grid-template-columns: 300px auto;
   height: 100%;
 }
 
@@ -10876,12 +10884,12 @@ h1 {
   font-size: 30px;
 }
 
-.item1 {
+.logospace {
   grid-column: 1;
   grid-row: 1;
 }
 
-.item1 img {
+.logospace img {
   width: auto;
   max-width: 100%;
   height: auto;
@@ -10891,27 +10899,46 @@ h1 {
   display: block;
 }
 
-.item2 {
+.searchspace {
   grid-column: 2/span 2;
   grid-row: 1;
 }
 
-.item2 input {
+.searchspace input {
   padding-left: 30px;
   padding-right: 30px;
-  font-size: 42px;
-  height: 90px;
+  font-size: 5vh;
+  height: 10vh;
   width: 90%;
   margin: auto;
   display: block;
 }
 
-.item3 {
+.leftcategories {
   grid-column: 1;
   grid-row: 2;
+  padding: 24px 24px 24px 24px;
 }
 
-.item4 {
+.leftcategories h1:hover {
+  font-size-adjust: inherit;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.leftcategories .sideentry {
+  left: 5px;
+  color: gray;
+  transition: 0.5s;
+}
+
+.leftcategories .sideentryselected {
+  color: white;
+  left: 25px;
+  transition: 0.5s;
+}
+
+.rightcontent {
   grid-column: 2/span 2;
   grid-row: 2;
 }
@@ -10932,5 +10959,36 @@ h1 {
   height: 250px;
   font-size: 36px;
   text-align: right;
+}
+
+.homeslideshow {
+  overflow: hidden;
+}
+
+video {
+  min-width: 100%;
+  max-height: 83vh;
+  overflow-y: hidden;
+}
+
+.leftcategories::-webkit-scrollbar {
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.rightcontent::-webkit-scrollbar {
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.hideScroll::-webkit-scrollbar {
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
