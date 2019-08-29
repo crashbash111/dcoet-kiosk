@@ -14,6 +14,8 @@ export default class Home extends React.Component {
             activeCategory: -1,
             categories: [],
             searchTerm: "",
+            oldCategory: -1,
+            swtiched: false,
         }
 
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -39,6 +41,31 @@ export default class Home extends React.Component {
         this.setState({
             [name]: value
         });
+
+        if( name == "searchTerm" )
+        {
+            if( value == "" )
+            {
+                this.setState( prevState => {
+                    return(
+                        {
+                            switched: false,
+                            activeCategory: prevState.oldCategory
+                        }
+                    );
+                });
+            }
+
+            if( value != "" )
+            {
+                console.log( this.state.oldCategory );
+                if( !this.state.switched )
+                {
+                    this.setState( { oldCategory: this.state.activeCategory } );
+                }
+                this.setState( { activeCategory: -1, switched : true } );
+            }
+        }
     }
 
     render() {

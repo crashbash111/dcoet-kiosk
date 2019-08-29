@@ -10,6 +10,7 @@ import CategoryIndex from "./pages/CategoryIndex";
 import Create from "./pages/Admin/Create";
 import CreateCategory from "./pages/Admin/CreateCategory";
 import CreatePowerpoint from "./pages/Admin/CreatePowerpoint";
+import EditPage from "./pages/Admin/EditPage";
 import Home from "./pages/Home";
 import KioskPage from "./pages/KioskPage";
 import Layout from "./pages/Layout";
@@ -30,6 +31,7 @@ ReactDOM.render(
             <Route path="/birds/:id" component={Birds} />
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/create" component={Create} />
+            <Route exact path="/admin/:id/edit" component={EditPage} />
             <Route exact path="/admin/createCategory" component={CreateCategory} />
             <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
             <Route exact path="/powerpoint/:id" component={PowerpointPage} />

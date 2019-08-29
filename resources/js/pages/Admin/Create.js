@@ -107,7 +107,6 @@ export default class Create extends React.Component {
                 this.setState({ redirect: true });
             })
             .catch(err => console.log(err.response.data));
-
     }
 
     componentDidMount() {
