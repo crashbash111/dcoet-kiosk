@@ -2,38 +2,36 @@ import React from "react";
 import Axios from "axios";
 
 import { Redirect } from "react-router-dom";
+import { Url } from "url";
 
 export default class Create extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            heading: "",
-            text: "",
-            img: "",
-            category_id: -1,
+            page: null,
+            loading: true,
             categories: [],
-            file1: null,
-            file2: null,
-            file3: null,
-            file4: null,
             redirect: false,
-            photos: [],
+            photos: null,
+            audios: null,
         }
 
         this.handleChange = this.handleChange.bind(this);
 
-        this.handleChangeNew = this.handleChangeNew.bind( this );
+        this.handleChangeNew = this.handleChangeNew.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.change = this.change.bind(this);
-        this.image_1 = React.createRef();
-        this.image_2 = React.createRef();
-        this.image_3 = React.createRef();
-        this.image_4 = React.createRef();
+
+        this.addStat = this.addStat.bind(this);
+        this.handleStatNameChange = this.handleStatNameChange.bind( this );
+        this.handleStatValueChange = this.handleStatValueChange.bind( this );
+        this.handleStatRemove = this.handleStatRemove.bind( this );
 
         this.photos = React.createRef();
+        this.audios = React.createRef();
     }
 
     change(event) {
@@ -43,22 +41,55 @@ export default class Create extends React.Component {
     handleChangeNew(event) {
         const { name, value, type, files } = event.target;
 
-        console.log( "ree" );
-        console.log( event.target.files );
-        console.log( "tub" );
-
         this.setState({ [name]: files });
-        console.log(files);
 
-        console.log( "sam" );
-        console.log( this.photos.current.files );
-        console.log( "wheeze" );
+        console.log(this.audios.current.files);
+    }
+
+    addStat(event) {
+        event.preventDefault();
+        this.setState(
+            {
+                stats: this.state.stats.concat([{ name: "", value: "" }])
+            }
+        );
+        console.log(this.state);
+    }
+
+    handleStatNameChange = idx => event => {
+        let newStats = this.state.stats.map((stat, sidx) => {
+
+            if (idx !== sidx) return stat;
+            return { ...stat, name: event.target.value };
+
+        });
+
+        this.setState({ stats: newStats });
+
+        console.log(this.state);
+    }
+
+    handleStatValueChange = idx => event => {
+        let newStats = this.state.stats.map((stat, sidx) => {
+
+            if (idx !== sidx) return stat;
+            return { ...stat, value: event.target.value };
+
+        });
+
+        this.setState( { stats: newStats } );
+    }
+
+    handleStatRemove = idx => event => {
+        event.preventDefault();
+        this.setState({
+            stats: this.state.stats.filter( ( s, sidx ) => idx !== sidx )
+        });
     }
 
     handleChange(event) {
         const { name, value, type, files } = event.target;
-        if (type == "file")
-        {
+        if (type == "file") {
             this.setState({ [name]: files[0] });
             console.log(files);
             console.log(files[0]);
@@ -72,25 +103,34 @@ export default class Create extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         let formData = new FormData();
-        formData.append("heading", this.state.heading);
-        formData.append("text", this.state.text);
-        formData.append("category", this.state.category_id);
+        formData.append("heading", this.state.page.heading);
+        formData.append("text", this.state.page.text);
+        formData.append("category", this.state.page.category_id);
 
         var files = this.photos.current.files;
 
-        for( var i = 0; i < files.length; ++i )
-        {
-            var file = files[ i ];
+        for (var i = 0; i < files.length; ++i) {
+            var file = files[i];
 
-            if( !file.type.match( "image.*" ) )
-            {
+            if (!file.type.match("image.*")) {
                 continue;
             }
 
-            console.log( file );
+            console.log(file);
 
+            formData.append("photos[]", file, file.name);
+        }
 
-            formData.append( "photos[]", file, file.name );
+        var stats = this.state.page.stats;
+
+        for( var i = 0; i < stats.length; ++i )
+        {
+            var stat = stats[ i ];
+
+            formData.append( "statsNames[]", stat.name );
+            formData.append( "statsValues[]", stat.value );
+
+            console.log( stat );
         }
 
         //formData.append( "photos[]", Array.from( this.photos.current.files ) );
@@ -99,20 +139,36 @@ export default class Create extends React.Component {
             url: "./pages",
             method: "POST",
             headers: {
+                "Content-Type": "application/json"
             },
             data: formData
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ redirect: true });
+                this.setState({ redirect: false });
             })
             .catch(err => console.log(err.response.data));
     }
 
     componentDidMount() {
+        this.setState( { loading: true } );
+
         fetch("./pages/allCategories")
             .then(response => response.json())
             .then(data => this.setState({ categories: data }));
+
+        if( this.props.match != null && this.props.match.params != null && this.props.match.params.id != null )
+        {
+            
+            fetch( "./pages/" + this.props.match.params.id )
+                .then( response => response.json() )
+                .then( data => { this.setState( { page: data } ); console.log( data ); } );
+        }
+        else
+        {
+            this.setState( { page: { heading: "", text: "", image: [], category_id: -1, stats: [] }, loading: false } );
+        }
+        
     }
 
     handleClick(e) {
@@ -126,6 +182,15 @@ export default class Create extends React.Component {
             );
         }
 
+        if( this.loading || this.state.page == null )
+        {
+            return(
+                <div>
+                    Loading...
+                </div>
+            )
+        }
+
         let items = this.state.categories.map(item => {
             return (
                 <div>
@@ -135,7 +200,105 @@ export default class Create extends React.Component {
                     <br />
                 </div>
             )
-        })
+        });
+
+        let count = 0;
+
+        let statFields = this.state.page.stats.map((item, idx) => {
+
+            count++;
+
+            return (
+                <div>
+                    {count > 1 ? <hr /> : null}
+                    <div style={{ display: "grid", gridTemplateColumns: "auto 50px" }}>
+                        <div>
+                            <div className="form-group">
+                                <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} name`} value={ item.name } onChange={this.handleStatNameChange(idx)} />
+                            </div>
+                            <div className="form-group">
+                                <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} value`} value={ item.value } onChange={this.handleStatValueChange(idx)} />
+                            </div>
+                        </div>
+                        <div>
+                            <button style={{ width: "100%", height: "100%" }} className="btn btn-danger" onClick={ this.handleStatRemove( idx ) }>Delete</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+
+        let statTableItems = this.state.page.stats.map( item => {
+            return (
+                <div>
+                    <h3 style={{ textAlign: "center" }}>{ item.name }</h3>
+                    <p style={{ textAlign: "center" }}>{ item.value }</p>
+                </div>
+            );
+        });
+
+        return (
+            <div style={{ height: "100%" }}>
+                <div style={{ height: "100%", display: "grid", gridTemplateColumns: "75vh auto" }}>
+                    <div className="no-scrollbar" style={{ overflowY: "scroll" }}>
+                        <h2>Create New Page</h2>
+                        <br />
+                        <div style={{ alignContent: "center", justifyContent: "center", textAlign: "center" }}>
+                            <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
+                                <div className="form-group">
+                                    <label><h3>Heading</h3>
+                                        <input className="form-control" type="text" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
+                                        <p style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
+                                    </label>
+                                </div>
+                                <div className="form-group">
+                                    <label><h3>Text Body</h3>
+                                        <textarea rows="10" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter text here..." />
+                                        <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Text requires at least 3 characters</p>
+                                    </label>
+                                </div>
+                                <div className="form-group">
+                                    <h3>Category</h3>
+                                    {items}
+                                    <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
+                                </div>
+                                <div>
+                                    <button onClick={this.addStat}>Add Stat</button>
+                                </div>
+                                <div>
+                                    Stat fields
+                                    {statFields}
+                                </div>
+                                <div className="form-group">
+                                    <label><h3>Images</h3>
+                                        <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
+                                    </label>
+                                    <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+                                </div>
+                                <div className="form-group">
+                                    <label><h3>Audio Files</h3>
+                                        <p>Optional field. Add sounds here of the animal.</p>
+                                        <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
+                                    </label>
+                                </div>
+                                <button>Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div style={{ height: "100%" }}>
+                        <div style={{ height: "100vh", display: "grid", gridTemplateColumns: "40vh auto", backgroundSize: "cover", backgroundPosition: "center", backgroundImage: "url('" + (this.state.photos != null ? URL.createObjectURL(this.photos.current.files[0]) : "") + "')" }}>
+                            <div className="no-scrollbar" style={{ overflowY: "scroll", height: "100vh", width: "45vh", padding: "10px", overflowX: "hidden", opacity: "0.8", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
+                                <h1>{this.state.page.heading}</h1>
+                                <p className="btn btn-primary">Back to home</p>
+                                { this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{ statTableItems }</div> : null }
+                                <p>{this.state.page.text}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        );
 
         return (
             <div>
@@ -167,6 +330,12 @@ export default class Create extends React.Component {
                                         <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
                                     </label>
                                     <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+                                </div>
+                                <div className="form-group">
+                                    <label><h3>Audio Files</h3>
+                                        <p>Optional field. Add sounds here of the animal.</p>
+                                        <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
+                                    </label>
                                 </div>
                                 {/*<br />
                                 <br />

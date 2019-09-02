@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Page;
 use App\Category;
 use App\Image;
+use App\Audio;
+use App\Stat;
 
 class PagesController extends Controller
 {
@@ -21,6 +23,7 @@ class PagesController extends Controller
         {
             $page->categoryName = $page->category->name;
             $page->imgs = $page->images;
+            $page->stats = Stat::where( "page_id", $page->id )->get();
         }
         return json_encode( $pages );
     }
@@ -70,18 +73,6 @@ class PagesController extends Controller
         $this->validate( $request, [
             "heading" => "required",
             "text" => "required",
-            "image_1" => "image|nullable|max:1999",
-            "image_1_alt" => "nullable",
-            "image_2" => "image|nullable|max:1999",
-            "image_2_alt" => "nullable",
-            "image_3" => "image|nullable|max:1999",
-            "image_3_alt" => "nullable",
-            "image_4" => "image|nullable|max:1999",
-            "image_4_alt" => "nullable",
-            "image_5" => "image|nullable|max:1999",
-            "image_5_alt" => "nullable",
-            "image_6" => "image|nullable|max:1999",
-            "image_6_alt" => "nullable",
             "photos" => "required",
         ]);
 
@@ -133,37 +124,22 @@ class PagesController extends Controller
             }
         }
 
-        return "here";
+        $statsNames = $request->input( "statsNames" );
+        $statsValues = $request->input( "statsValues" );
 
-        if( $request->hasFile( 'photos' ) )
+        $x = 0;
+
+        while( $x < sizeof( $statsNames ) )
         {
-            
-        }
+            $s = new Stat;
 
-        $images = [ "image_1", "image_2", "image_3", "image_4", "image_5", "image_6" ];
-        $image_alts = [ $request->image_1_alt, $request->image_2_alt, $request->image_3_alt, $request->image_4_alt, $request->image_5_alt, $request->image_6_alt ];
+            $s->name = $statsNames[ $x ];
+            $s->value = $statsValues[ $x ];
+            $s->page_id = $page->id;
 
-        for( $i = 0; $i < 6; ++$i )
-        {
-            if( $request->hasFile( $images[ $i ] ) )
-            {
-                $img = new Image;
-                //get filename with ext
-                $fileNameWithExt = $request->file( $images[ $i ] )->getClientOriginalName();
-                //get filename without ext
-                $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME );
-                //get extension
-                $extension = pathinfo( $fileNameWithExt, PATHINFO_EXTENSION );
-                //filename to store
-                $fileNameToStore = $fileName . "_" . time() . "." . $extension;
-                //upload image
-                $path = $request->file( $images[ $i ] )->storeAs( 'public/kiosk_images', $fileNameToStore );
-                $img->alt = $image_alts[ $i ];
-                $img->image_name = $fileNameToStore;
-                $img->page_id = $page->id;
+            $s->save();
 
-                $img->save();
-            }
+            $x++;
         }
 
         return $page;
@@ -174,6 +150,7 @@ class PagesController extends Controller
         $page = Page::find( $id );
         $page->categoryName = $page->category->name;
         $page->image = $page->images;
+        $page->stats = Stat::where( "page_id", $id )->get();
         $page->img = [ "https://upload.wikimedia.org/wikipedia/commons/5/5d/Restless_flycatcher04.jpg" ];
         return json_encode( $page );
     }

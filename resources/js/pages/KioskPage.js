@@ -53,6 +53,15 @@ export default class KioskPage extends React.Component {
         {
             let imgPath = "./storage/kiosk_images/" + this.state.page.images[ this.state.index ].image_name;
 
+            let statTableItems = this.state.page.stats.map( item => {
+                return (
+                    <div>
+                        <h3 style={{ textAlign: "center" }}>{ item.name }</h3>
+                        <p style={{ textAlign: "center" }}>{ item.value }</p>
+                    </div>
+                );
+            });
+
             return (
                 <div className="hideScroll">
                     <div onClick={ this.handleClick } style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
@@ -62,6 +71,7 @@ export default class KioskPage extends React.Component {
                             <div style={{ textAlign: "center" }}>
                                 <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
                             </div>
+                            { this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{ statTableItems }</div> : null }
                             <p style={{ fontSize: "25px" }}>{ this.state.page.text }</p>
                             
                         </div>
