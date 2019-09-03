@@ -23,6 +23,6 @@ class Page extends Model
 
     public function stats()
     {
-        return $this->hasMany( Stats::class );
+        return $this->hasMany( Stat::class );
     }
 }
