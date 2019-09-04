@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import Loader from "../components/Loader";
 
 export default class KioskPage extends React.Component {
 
@@ -46,7 +47,7 @@ export default class KioskPage extends React.Component {
         if( this.state.loading )
         {
             return (
-                <h1>Loading...</h1>
+                <Loader />
             );
         }
         else

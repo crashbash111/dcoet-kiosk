@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../Loader";
 import { Redirect } from "react-router-dom";
 
 export default class MainContent extends React.Component {
@@ -68,7 +69,7 @@ export default class MainContent extends React.Component {
         else {
             if (this.state.loading) {
                 return (
-                    <h1>Loading...</h1>
+                    <Loader />
                 )
             }
             else {

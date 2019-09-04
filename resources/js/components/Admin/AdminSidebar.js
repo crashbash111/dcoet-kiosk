@@ -30,7 +30,7 @@ export default class AdminSidebar extends React.Component {
 
                         <a href="./#">Dashboard</a>
                         <a href="./#">Categories</a>
-                        <a href="./#">Pages</a>
+                        <a href="./#/powerpoints">Slideshows</a>
                         <a href="./#">Games</a>
                         <a className="returns" href="./#">&#8592; Kiosk View</a>
 
