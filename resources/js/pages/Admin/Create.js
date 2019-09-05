@@ -2,7 +2,6 @@ import React from "react";
 import Axios from "axios";
 
 import { Redirect } from "react-router-dom";
-import { Url } from "url";
 
 export default class Create extends React.Component {
     constructor(props) {
@@ -10,12 +9,13 @@ export default class Create extends React.Component {
 
         this.state = {
             page: null,
+            statsToDelete: [],
+            imagesToDelete: [],
             loading: true,
             categories: [],
             redirect: false,
             photos: null,
             audios: null,
-            statsToRemove: [],
             editMode: (this.props.match != null && this.props.match.params != null && this.props.match.params.id != null),
         }
 
@@ -31,6 +31,10 @@ export default class Create extends React.Component {
         this.handleStatNameChange = this.handleStatNameChange.bind(this);
         this.handleStatValueChange = this.handleStatValueChange.bind(this);
         this.handleStatRemove = this.handleStatRemove.bind(this);
+        this.handleStatDeleteUndo = this.handleStatDeleteUndo.bind(this);
+
+        this.handleImageDelete = this.handleImageDelete.bind( this );
+        this.handleImageDeleteUndo = this.handleImageDeleteUndo.bind( this );
 
         this.photos = React.createRef();
         this.audios = React.createRef();
@@ -52,7 +56,7 @@ export default class Create extends React.Component {
         event.preventDefault();
         this.setState(
             {
-                stats: this.state.stats.concat([{ id: -1, name: "", value: "" }])
+                page: { ...this.state.page, stats: this.state.page.stats.concat([{ id: -1, name: "", value: "" }]) }
             }
         );
         console.log(this.state);
@@ -66,7 +70,7 @@ export default class Create extends React.Component {
 
         });
 
-        this.setState( { page: { ...this.state.page, stats: newStats } } );
+        this.setState({ page: { ...this.state.page, stats: newStats } });
 
         console.log(this.state);
     }
@@ -84,9 +88,47 @@ export default class Create extends React.Component {
 
     handleStatRemove = idx => event => {
         event.preventDefault();
-        this.setState(
-            { page: { ...this.state.page, stats: this.state.page.stats.filter((s, sidx) => idx !== sidx) }
+
+        if (this.state.page.stats[idx].id != -1) {
+            this.setState({
+                statsToDelete: this.state.statsToDelete.concat(this.state.page.stats[idx].id)
+            });
+        }
+        else {
+            this.setState(
+                {
+                    //statsToDelete: this.state.stats.statsToDelete.concat(  )
+                    page: { ...this.state.page, stats: this.state.page.stats.filter((s, sidx) => (idx !== sidx)) }
+                });
+        }
+
+        //console.log( idx );
+        //console.log( this.state.page.stats[ idx ].id );
+    }
+
+    handleStatDeleteUndo = idx => event => {
+        event.preventDefault();
+
+        this.setState(prevState => {
+            return (
+                {
+                    statsToDelete: prevState.statsToDelete.map(item => {
+                        if (item == prevState.page.stats[idx].id) {
+                            return null;
+                        }
+                        return item;
+                    })
+                }
+            )
         });
+    }
+
+    handleImageDelete = idx => event => {
+        event.preventDefault();
+    }
+
+    handleImageDeleteUndo = idx => event => {
+        event.preventDefault();
     }
 
     handleChange(event) {
@@ -107,6 +149,11 @@ export default class Create extends React.Component {
         let formData = new FormData();
         if (this.state.editMode) {
             formData.append("_method", "PUT");
+            
+            this.state.statsToDelete.map( item => {
+                formData.append( "statsToDelete[]", item );
+            });
+
         }
         formData.append("heading", this.state.page.heading);
         formData.append("text", this.state.page.text);
@@ -121,8 +168,6 @@ export default class Create extends React.Component {
                 continue;
             }
 
-            console.log(file);
-
             formData.append("photos[]", file, file.name);
         }
 
@@ -131,7 +176,9 @@ export default class Create extends React.Component {
         for (var i = 0; i < stats.length; ++i) {
             var stat = stats[i];
 
-            formData.append( "statsIds[]", stat.id );
+            if( this.state.statsToDelete.includes( stat.id ) ) continue;
+
+            formData.append("statsIds[]", stat.id);
             formData.append("statsNames[]", stat.name);
             formData.append("statsValues[]", stat.value);
 
@@ -141,7 +188,7 @@ export default class Create extends React.Component {
         //formData.append( "photos[]", Array.from( this.photos.current.files ) );
         //console.log(this.photos.current.files);
         Axios({
-            url: "./pages" + ( this.state.editMode ? "/" + this.props.match.params.id : "" ),
+            url: "./pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -210,8 +257,10 @@ export default class Create extends React.Component {
 
             count++;
 
+            let softDeleted = this.state.statsToDelete.includes(item.id);
+
             return (
-                <div>
+                <div style={softDeleted ? { opacity: "0.4" } : null}>
                     {count > 1 ? <hr /> : null}
                     <div style={{ display: "grid", gridTemplateColumns: "auto 50px" }}>
                         <div>
@@ -223,7 +272,7 @@ export default class Create extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <button style={{ width: "100%", height: "100%" }} className="btn btn-danger" onClick={this.handleStatRemove(idx)}>Delete</button>
+                            <button style={{ width: "100%", height: "100%" }} className={softDeleted ? "btn btn-primary" : "btn btn-danger"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
                         </div>
                     </div>
                 </div>
@@ -247,28 +296,30 @@ export default class Create extends React.Component {
 
             let x = this.photos.current.files.length;
 
-            for( var y = 0; y < x; ++y )
-            {
-                let imgPath = URL.createObjectURL( this.photos.current.files[ y ] );
-                currentImages.push( <div>
+            for (var y = 0; y < x; ++y) {
+                let imgPath = URL.createObjectURL(this.photos.current.files[y]);
+
+                currentImages.push(<div>
                     <img src={imgPath} style={{ height: "100px" }} />
-                </div> );
+                    <button onClick={  this.removeCurrentImage( idx ) }>Delete</button>
+                </div>);
             }
         }
 
         let oldImages = null;
 
-        if( this.state.page.image != null && this.state.page.image.length > 0 )
-        {
+        if (this.state.page.image != null && this.state.page.image.length > 0) {
             oldImages = Array();
 
-            oldImages = this.state.page.image.map( item => {
+            oldImages = this.state.page.image.map(item => {
 
                 let imgPath = "./storage/kiosk_images/" + item.image_name;
 
-                return(
+                let softDeleted = this.state.imagesToDelete.includes( item.id );
+
+                return (
                     <div>
-                        <img src={ imgPath } style={{ width: "100px" }} />
+                        <img src={imgPath} style={{ width: "100px" }} />
                     </div>
                 );
             });
@@ -314,15 +365,15 @@ export default class Create extends React.Component {
                                 </div>
                                 {
                                     this.state.page.image != null ?
-                                    <div>
                                         <div>
-                                            Current Images
                                             <div>
-                                                {oldImages}
+                                                Current Images
+                                            <div>
+                                                    {oldImages}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    : null
+                                        : null
                                 }
                                 {
                                     this.photos.current != null ?

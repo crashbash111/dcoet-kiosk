@@ -210,30 +210,42 @@ class PagesController extends Controller
             }
         }
 
-        $statsIds = $request->input( "statsIds" );
-        $statsNames = $request->input( "statsNames" );
-        $statsValues = $request->input( "statsValues" );
+        $statsIds = $request->input("statsIds");
+        $statsNames = $request->input("statsNames");
+        $statsValues = $request->input("statsValues");
 
         $x = 0;
 
-        while( $x < sizeof( $statsNames ) )
-        {
-            if( $page->stats->find( $statsIds[ $x ] ) != null )
-            {
-                $s = $page->stats()->find( $statsIds[ $x ] );
-            }
-            else
-            {
+        while ($x < sizeof($statsNames)) {
+            if ($page->stats->find($statsIds[$x]) != null) {
+                $s = $page->stats->find($statsIds[$x]);
+            } else {
                 $s = new Stat;
             }
-            
-            $s->name = $statsNames[ $x ];
-            $s->value = $statsValues[ $x ];
+
+            $s->name = $statsNames[$x];
+            $s->value = $statsValues[$x];
             $s->page_id = $page->id;
 
             $s->save();
 
             $x++;
+        }
+
+        $statsToDelete = $request->input("statsToDelete");
+
+        $x = 0;
+
+        if (is_array($statsToDelete)) {
+            while ($x < sizeof($statsToDelete)) {
+                if ($page->stats->find($statsToDelete[$x]) != null) {
+                    $d = $page->stats->find($statsToDelete[$x]);
+
+                    $d->delete();
+                }
+
+                $x++;
+            }
         }
 
         return $page;
