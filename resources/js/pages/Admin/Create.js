@@ -11,6 +11,7 @@ export default class Create extends React.Component {
             page: null,
             statsToDelete: [],
             imagesToDelete: [],
+            audiosToDelete: [],
             loading: true,
             categories: [],
             redirect: false,
@@ -33,8 +34,11 @@ export default class Create extends React.Component {
         this.handleStatRemove = this.handleStatRemove.bind(this);
         this.handleStatDeleteUndo = this.handleStatDeleteUndo.bind(this);
 
-        this.handleImageDelete = this.handleImageDelete.bind( this );
-        this.handleImageDeleteUndo = this.handleImageDeleteUndo.bind( this );
+        this.handleImageDelete = this.handleImageDelete.bind(this);
+        this.handleImageDeleteUndo = this.handleImageDeleteUndo.bind(this);
+
+        this.handleAudioDelete = this.handleAudioDelete.bind( this );
+        this.handleAudioDeleteUndo = this.handleAudioDeleteUndo.bind( this );
 
         this.photos = React.createRef();
         this.audios = React.createRef();
@@ -47,7 +51,14 @@ export default class Create extends React.Component {
     handleChangeNew(event) {
         const { name, value, type, files } = event.target;
 
-        this.setState({ page: { ...this.state.page, [name]: files } });
+        if (name == "audios") {
+            
+        }
+        else if (name == "photos") {
+
+        }
+
+        this.forceUpdate();
 
         console.log(this.state);
     }
@@ -125,10 +136,75 @@ export default class Create extends React.Component {
 
     handleImageDelete = idx => event => {
         event.preventDefault();
+
+        //console.log( "t" );
+
+        //console.log(this.state.page.image[idx].id);
+
+        this.setState({
+            imagesToDelete: this.state.imagesToDelete.concat(this.state.page.image[idx].id)
+        });
+    }
+
+    handleImageSoftDelete = idx => event => {
+        event.preventDefault();
+
+        this.setState(prevState => {
+            return (
+                {
+                    statsToDelete: prevState.imagesToDelete.map(item => {
+                        if (item == prevState.page.image[idx].id) {
+                            return null;
+                        }
+                        return item;
+                    })
+                }
+            )
+        });
     }
 
     handleImageDeleteUndo = idx => event => {
         event.preventDefault();
+
+        //console.log( "b" );
+
+        this.setState(prevState => {
+            return (
+                {
+                    imagesToDelete: prevState.imagesToDelete.map(item => {
+                        if (item == prevState.page.image[idx].id) {
+                            return null;
+                        }
+                        return item;
+                    })
+                }
+            )
+        });
+    }
+
+    handleAudioDelete = idx => event => {
+        event.preventDefault();
+
+        this.setState({
+            audiosToDelete: this.state.audiosToDelete.concat(this.state.page.audios[idx].id)
+        });
+    }
+
+    handleAudioDeleteUndo = idx => event => {
+        event.preventDefault();
+
+        this.setState(prevState => {
+            return (
+                {
+                    audiosToDelete: prevState.audiosToDelete.map(item => {
+                        if (item == prevState.page.audios[idx].id) {
+                            return null;
+                        }
+                        return item;
+                    })
+                }
+            )
+        });
     }
 
     handleChange(event) {
@@ -149,11 +225,14 @@ export default class Create extends React.Component {
         let formData = new FormData();
         if (this.state.editMode) {
             formData.append("_method", "PUT");
-            
-            this.state.statsToDelete.map( item => {
-                formData.append( "statsToDelete[]", item );
+
+            this.state.statsToDelete.map(item => {
+                formData.append("statsToDelete[]", item);
             });
 
+            this.state.imagesToDelete.map(item => {
+                formData.append("imagesToDelete[]", item);
+            })
         }
         formData.append("heading", this.state.page.heading);
         formData.append("text", this.state.page.text);
@@ -176,13 +255,36 @@ export default class Create extends React.Component {
         for (var i = 0; i < stats.length; ++i) {
             var stat = stats[i];
 
-            if( this.state.statsToDelete.includes( stat.id ) ) continue;
+            if (this.state.statsToDelete.includes(stat.id)) continue;
 
             formData.append("statsIds[]", stat.id);
             formData.append("statsNames[]", stat.name);
             formData.append("statsValues[]", stat.value);
 
             console.log(stat);
+        }
+
+        var audios = Array();
+
+        if( this.audios.current != null )
+        {
+            audios = this.audios.current.files;
+        }
+
+        for( var i = 0; i < audios.length; ++i )
+        {
+            var audio = audios[ i ];
+
+            console.log( audio );
+
+            if (!audio.type.match("audio.*")) {
+                continue;
+            }
+            if( this.state.audiosToDelete.includes( audio.id ) ){
+                continue;
+            }
+
+            formData.append( "audios[]", audio, audio.name );
         }
 
         //formData.append( "photos[]", Array.from( this.photos.current.files ) );
@@ -216,7 +318,7 @@ export default class Create extends React.Component {
                 .then(data => { this.setState({ page: data }); console.log(data); });
         }
         else {
-            this.setState({ page: { heading: "", text: "", image: [], category_id: -1, stats: [] }, loading: false });
+            this.setState({ page: { heading: "", text: "", image: [], category_id: -1, stats: [], audios: [] }, loading: false });
         }
 
     }
@@ -280,6 +382,9 @@ export default class Create extends React.Component {
         });
 
         let statTableItems = this.state.page.stats.map(item => {
+
+
+
             return (
                 <div>
                     <h3 style={{ textAlign: "center" }}>{item.name}</h3>
@@ -301,7 +406,7 @@ export default class Create extends React.Component {
 
                 currentImages.push(<div>
                     <img src={imgPath} style={{ height: "100px" }} />
-                    <button onClick={  this.removeCurrentImage( idx ) }>Delete</button>
+
                 </div>);
             }
         }
@@ -309,17 +414,56 @@ export default class Create extends React.Component {
         let oldImages = null;
 
         if (this.state.page.image != null && this.state.page.image.length > 0) {
-            oldImages = Array();
 
-            oldImages = this.state.page.image.map(item => {
+            oldImages = this.state.page.image.map((item, idx) => {
 
                 let imgPath = "./storage/kiosk_images/" + item.image_name;
 
-                let softDeleted = this.state.imagesToDelete.includes( item.id );
+                let softDeleted = this.state.imagesToDelete.includes(item.id);
+
+                let deletedStyle = { opacity: "0.4" };
 
                 return (
-                    <div>
+                    <div style={softDeleted ? deletedStyle : null}>
                         <img src={imgPath} style={{ width: "100px" }} />
+                        <button onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
+                    </div>
+                );
+            });
+        }
+
+        let currentAudios = null;
+
+        if (this.audios.current != null) {
+
+            currentAudios = Array();
+
+            let x = this.audios.current.files.length;
+
+            for (var y = 0; y < x; ++y) {
+                let audioPath = URL.createObjectURL(this.audios.current.files[y]);
+
+                currentAudios.push(<div>
+                    <embed src={audioPath} />
+                </div>);
+            }
+        }
+
+        let oldAudios = null;
+
+        if (this.state.page.audios != null && this.state.page.audios.length > 0) {
+            oldAudios = this.state.page.audios.map((item, idx) => {
+
+                let audioPath = "./storage/audio_files/" + item.filepath;
+
+                let softDeleted = this.state.audiosToDelete.includes(item.id);
+
+                let deletedStyle = { opacity: "0.4" };
+
+                return (
+                    <div style={ softDeleted ? deletedStyle : null }>
+                        <embed src={audioPath} />
+                        <button onClick={ softDeleted ? this.handleAudioDeleteUndo( idx ) : this.handleAudioDelete( idx ) }>Delete</button>
                     </div>
                 );
             });
@@ -392,6 +536,28 @@ export default class Create extends React.Component {
                                         <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
                                     </label>
                                 </div>
+                                {
+                                    this.state.page.audios != null ?
+                                        <div>
+                                            Current audios
+                                            <div>
+                                                {oldAudios}
+                                            </div>
+                                        </div>
+                                        :
+                                        null
+                                }
+                                {
+                                    this.audios.current != null ?
+                                        <div>
+                                            Currently selected audio files
+                                            <div>
+                                                {currentAudios}
+                                            </div>
+                                        </div>
+                                        :
+                                        null
+                                }
                                 <button>Submit</button>
                             </form>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
 use App\Page;
 use App\Category;
 use App\Image;
@@ -69,7 +70,7 @@ class PagesController extends Controller
         $this->validate($request, [
             "heading" => "required",
             "text" => "required",
-            "photos" => "required",
+            "photos" => "required|max:10000",
         ]);
 
         $page = new Page;
@@ -123,16 +124,49 @@ class PagesController extends Controller
 
         $x = 0;
 
-        while ($x < sizeof($statsNames)) {
-            $s = new Stat;
+        if (is_array($statsNames)) {
+            while ($x < sizeof($statsNames)) {
+                $s = new Stat;
 
-            $s->name = $statsNames[$x];
-            $s->value = $statsValues[$x];
-            $s->page_id = $page->id;
+                $s->name = $statsNames[$x];
+                $s->value = $statsValues[$x];
+                $s->page_id = $page->id;
 
-            $s->save();
+                $s->save();
 
-            $x++;
+                $x++;
+            }
+        }
+
+        $files = $request->file("audios");
+
+        //return $request->file( "image_1" );
+
+        //return $files;
+
+        foreach ($files as $file) {
+            //return "there";
+            $fileNameWithExt = $file->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+
+            $fileName = strtr($fileName, [' ' => '']);
+
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array($extension, $allowedFileExtension);
+
+            if ($check) {
+                //return $file;
+
+                $a = new Audio;
+                //filename to store
+                $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                //upload image
+                $path = $file->storeAs('/public/audio_files', $fileNameToStore);
+                $a->filepath = $fileNameToStore;
+                $a->page_id = $page->id;
+
+                $a->save();
+            }
         }
 
         return $page;
@@ -144,7 +178,7 @@ class PagesController extends Controller
         $page->categoryName = $page->category->name;
         $page->image = $page->images;
         $page->stats = Stat::where("page_id", $id)->get();
-        $page->img = ["https://upload.wikimedia.org/wikipedia/commons/5/5d/Restless_flycatcher04.jpg"];
+        $page->audios = Audio::where( "page_id", $id )->get();
         return json_encode($page);
     }
 
@@ -216,20 +250,51 @@ class PagesController extends Controller
 
         $x = 0;
 
-        while ($x < sizeof($statsNames)) {
-            if ($page->stats->find($statsIds[$x]) != null) {
-                $s = $page->stats->find($statsIds[$x]);
-            } else {
-                $s = new Stat;
+        if (is_array($statsNames)) {
+            while ($x < sizeof($statsNames)) {
+                if ($page->stats->find($statsIds[$x]) != null) {
+                    $s = $page->stats->find($statsIds[$x]);
+                } else {
+                    $s = new Stat;
+                }
+
+                $s->name = $statsNames[$x];
+                $s->value = $statsValues[$x];
+                $s->page_id = $page->id;
+
+                $s->save();
+
+                $x++;
             }
+        }
 
-            $s->name = $statsNames[$x];
-            $s->value = $statsValues[$x];
-            $s->page_id = $page->id;
+        $files = $request->file( "audios" );
 
-            $s->save();
+        //return $files;
 
-            $x++;
+        foreach ($files as $file) {
+            //return "there";
+            $fileNameWithExt = $file->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+
+            $fileName = strtr($fileName, [' ' => '']);
+
+            $extension = $file->getClientOriginalExtension();
+            //$check = in_array($extension, $allowedFileExtension);
+
+            if (true) {
+                //return $file;
+
+                $a = new Audio;
+                //filename to store
+                $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                //upload image
+                $path = $file->storeAs('/public/audio_files', $fileNameToStore);
+                $a->filepath = $fileNameToStore;
+                $a->page_id = $page->id;
+
+                $a->save();
+            }
         }
 
         $statsToDelete = $request->input("statsToDelete");
@@ -242,6 +307,53 @@ class PagesController extends Controller
                     $d = $page->stats->find($statsToDelete[$x]);
 
                     $d->delete();
+                }
+
+                $x++;
+            }
+        }
+
+        $imagesToDelete = $request->input("imagesToDelete");
+
+        $x = 0;
+
+        if (is_array($imagesToDelete)) {
+            while ($x < sizeof($imagesToDelete)) {
+                if ($page->images->find($imagesToDelete[$x]) != null) {
+                    $d = $page->images->find($imagesToDelete[$x]);
+
+                    $file = Storage::get('/public/kiosk_images/' . $d->file_name);
+
+                    if ($file != null) {
+                        Storage::delete($file);
+                    }
+
+                    $d->delete();
+                }
+
+                $x++;
+            }
+        }
+
+        $audiosToDelete = $request->input( "audiosToDelete" );
+
+        $x = 0;
+
+        if( is_array( $audiosToDelete ) )
+        {
+            while( $x < sizeof( $audiosToDelete ) )
+            {
+                if( $page->audios->find( $audiosToDelete[ $x ] != null ) )
+                {
+                    $a = $page->audios->find( $audiosToDelete[ $x ] );
+
+                    $file = Storage::get( '/public/audio_files/' . $a->filepath );
+
+                    if( $file != null ) {
+                        Storage::delete( $file );
+                    }
+
+                    $a->delete();
                 }
 
                 $x++;
