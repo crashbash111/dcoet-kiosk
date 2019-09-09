@@ -1,22 +1,19 @@
-import React from "react";
+import React, {Component } from "react";
+import Keyboard from "react-simple-keyboard";
+import "simple-keyboard/build/css/index.css";
 
 export default class SearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '' };
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    }
+    
 
     render() {
         return (
             <div>
                 <form>
-                    <input style={{ borderRadius: "15px" }} type="text" name="searchTerm" placeholder="Search..." value={ this.props.searchTerm } onChange={ this.props.handleChange } />
+                    <input onFocus={ this.props.onFocus } style={{ borderRadius: "15px" }} type="text" name="searchTerm" placeholder="Search..." value={ this.props.searchTerm } onChange={ this.props.handleChange } />
                 </form>
             </div>
         );
