@@ -69,6 +69,15 @@ export default class KioskPage extends React.Component {
                 );
             });
 
+            let audioItems = this.state.page.audios.map( item => {
+                let filePath = "./storage/audio_files/" + item.filepath;
+                return (
+                    <div>
+                        <embed src={ filePath } />
+                    </div>
+                )
+            });
+
             return (
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                     {props => (
@@ -80,6 +89,7 @@ export default class KioskPage extends React.Component {
                                         <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
                                     </div>
                                     {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                                    { this.state.page.audios.length > 0 ? <div>Audios<div>{ audioItems }</div></div> : null }
                                     <p style={{ fontSize: "25px" }}>{this.state.page.text}</p>
                                 </div>
                             </div>

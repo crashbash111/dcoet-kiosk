@@ -109,11 +109,17 @@ export default class MainContent extends React.Component {
                         return null;
                     }
 
-                    let x = this.getRandomInt( 0, item.images.length - 1 );
+                    let x = -1;
+                    let path = "";
+                    if( item.images.length > 0 )
+                    {
+                        x = this.getRandomInt( 0, item.images.length - 1 );
+                        path = "./storage/kiosk_images/" + item.images[ x ].image_name;
+                    }
                     //console.log( x );
 
                     return (
-                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ "./storage/kiosk_images/" + item.images[ x ].image_name } data-size="large" style={{ backgroundColor: "green" }}>
+                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ x != -1 ? path : "" } data-size="large" style={{ backgroundColor: "green" }}>
                             <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.heading }</h3>
                         </div>
                     );

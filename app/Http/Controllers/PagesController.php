@@ -22,7 +22,7 @@ class PagesController extends Controller
         $pages = Page::all();
         foreach ($pages as $page) {
             $page->categoryName = $page->category->name;
-            $page->imgs = $page->images;
+            $page->images = Image::where( "page_id", $page->id )->get();
             $page->stats = Stat::where("page_id", $page->id)->get();
         }
         return json_encode($pages);
@@ -176,7 +176,7 @@ class PagesController extends Controller
     {
         $page = Page::find($id);
         $page->categoryName = $page->category->name;
-        $page->image = $page->images;
+        $page->image = Image::where( "page_id", $id )->get();
         $page->stats = Stat::where("page_id", $id)->get();
         $page->audios = Audio::where( "page_id", $id )->get();
         return json_encode($page);
