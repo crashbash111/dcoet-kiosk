@@ -71383,7 +71383,7 @@ function (_React$Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           display: "grid",
-          gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 70vh",
+          gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 85vh",
           transition: "grid-template-rows 2s"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -71413,9 +71413,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home_MainContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
         filter: this.state.searchTerm,
         activeCategory: this.state.activeCategory
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "grid-container"
-      })));
+      }))))));
     }
   }]);
 

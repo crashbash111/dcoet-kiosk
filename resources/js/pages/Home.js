@@ -124,7 +124,7 @@ export default class Home extends React.Component {
                                 <SideBar activeCategory={this.state.activeCategory} categories={this.state.categories} handleChange={this.handleCategoryChange} />
                             </div>
                         </div>
-                        <div style={{ display: "grid", gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 70vh", transition: "grid-template-rows 2s" }}>
+                        <div style={{ display: "grid", gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 85vh", transition: "grid-template-rows 2s" }}>
                             <div className="grid-item searchspace">
                                 <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} onFocus={this.onFocus} />
                                 {this.state.showKeyboard ? <div style={{ color: "black", zIndex: "10" }}><Keyboard
@@ -140,12 +140,6 @@ export default class Home extends React.Component {
                                 <MainContent filter={this.state.searchTerm} activeCategory={this.state.activeCategory} />
                             </div>
                         </div>
-                    </div>
-                    <div className="grid-container">
-
-
-
-
                     </div>
                 </div>
             </div>
