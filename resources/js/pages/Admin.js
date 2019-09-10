@@ -12,19 +12,26 @@ export default class Admin extends React.Component {
         super();
         this.state = {
             pages: [],
+            categories: [],
             loading: true,
             //stores page width
             width: window.innerWidth,
             currentPage: 1,
             postsPerPage: 10,
+            activeCategory: -1,
         };
 
         this.handleDelete = this.handleDelete.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
+        this.paginate = this.paginate.bind( this );
+        this.changeActiveCategory = this.changeActiveCategory.bind( this );
     }
 
     componentDidMount() {
         this.setState({ loading: true });
+        fetch( "./pages/allCategories" )
+            .then( response => response.json() )
+            .then( data => this.setState( { categories: data } ) );
         fetch("./pages/all")
             .then(response => response.json())
             .then(data => this.setState({ pages: data, loading: false }));
@@ -57,6 +64,8 @@ export default class Admin extends React.Component {
 
     paginate = pageNumber => this.setState( { currentPage: pageNumber } );
 
+    changeActiveCategory = num => this.setState( { activeCategory: num, currentPage: 1 } );
+
     render() {
         // const items = this.state.birds.map(
         //     i => <ItemRow key={i.id} id={i.id} heading={i.heading} text={i.text} images={i.imgs} categoryName={i.categoryName} handleDelete={this.handleDelete} />
@@ -68,7 +77,9 @@ export default class Admin extends React.Component {
         //get current post
         const indexOfLastPage = this.state.currentPage * this.state.postsPerPage;
         const indexOfFirstPage = indexOfLastPage - this.state.postsPerPage;
-        const currentPages = this.state.pages.slice(indexOfFirstPage, indexOfLastPage);
+        const filteredPages = this.state.pages.filter( m => m.category_id == this.state.activeCategory );
+        const currentPages = filteredPages.slice(indexOfFirstPage, indexOfLastPage);
+        
 
         return (
             <div className="xadmin">
@@ -80,8 +91,8 @@ export default class Admin extends React.Component {
                     <br />
                     <Link to="/admin/create"><button className="btn btn-primary">Create New</button></Link>
                     <br />
-                    <AdminTable pages={currentPages} loading={this.state.loading} />
-                    <MyPagination postsPerPage={ this.state.postsPerPage } totalPosts={ this.state.pages.length } paginate={ this.paginate } />
+                    <AdminTable pages={currentPages} categories={this.state.categories} loading={this.state.loading} changeActiveCategory={ this.changeActiveCategory } activeCategory={ this.state.activeCategory } />
+                    <MyPagination postsPerPage={ this.state.postsPerPage } totalPosts={ filteredPages.length } paginate={ this.paginate } />
                 </div>
             </div>
         );

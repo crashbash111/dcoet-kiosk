@@ -60618,7 +60618,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68460,13 +68460,40 @@ __webpack_require__.r(__webpack_exports__);
 
 var AdminTable = function AdminTable(_ref) {
   var pages = _ref.pages,
-      loading = _ref.loading;
+      categories = _ref.categories,
+      loading = _ref.loading,
+      changeActiveCategory = _ref.changeActiveCategory,
+      activeCategory = _ref.activeCategory;
 
+  //const [ activeCategory, setActiveCategory ] = useState( -1 );
   if (loading) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Loading");
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  var activeCategoryStyle = {
+    backgroundColor: "blue"
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      height: "65vh",
+      display: "grid",
+      gridTemplateColumns: "auto auto auto"
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateRows: "repeat( " + categories.length + ", minmax( 30px, auto ) )",
+      overflowY: scroll
+    }
+  }, categories.map(function (category) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: category.id,
+      style: category.id == activeCategory ? activeCategoryStyle : null,
+      onClick: function onClick() {
+        return changeActiveCategory(category.id);
+      }
+    }, category.name);
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "list-group mb-4",
     style: {
       color: "black"
@@ -68476,7 +68503,7 @@ var AdminTable = function AdminTable(_ref) {
       key: page.id,
       className: "list-group-item"
     }, page.heading);
-  }));
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Currently selected"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AdminTable);
@@ -69298,16 +69325,27 @@ function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "changeActiveCategory", function (num) {
+      return _this.setState({
+        activeCategory: num,
+        currentPage: 1
+      });
+    });
+
     _this.state = {
       pages: [],
+      categories: [],
       loading: true,
       //stores page width
       width: window.innerWidth,
       currentPage: 1,
-      postsPerPage: 10
+      postsPerPage: 10,
+      activeCategory: -1
     };
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     _this.handleWindowResize = _this.handleWindowResize.bind(_assertThisInitialized(_this));
+    _this.paginate = _this.paginate.bind(_assertThisInitialized(_this));
+    _this.changeActiveCategory = _this.changeActiveCategory.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -69318,6 +69356,13 @@ function (_React$Component) {
 
       this.setState({
         loading: true
+      });
+      fetch("./pages/allCategories").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this2.setState({
+          categories: data
+        });
       });
       fetch("./pages/all").then(function (response) {
         return response.json();
@@ -69368,6 +69413,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // const items = this.state.birds.map(
       //     i => <ItemRow key={i.id} id={i.id} heading={i.heading} text={i.text} images={i.imgs} categoryName={i.categoryName} handleDelete={this.handleDelete} />
       // );
@@ -69377,7 +69424,10 @@ function (_React$Component) {
 
       var indexOfLastPage = this.state.currentPage * this.state.postsPerPage;
       var indexOfFirstPage = indexOfLastPage - this.state.postsPerPage;
-      var currentPages = this.state.pages.slice(indexOfFirstPage, indexOfLastPage);
+      var filteredPages = this.state.pages.filter(function (m) {
+        return m.category_id == _this3.state.activeCategory;
+      });
+      var currentPages = filteredPages.slice(indexOfFirstPage, indexOfLastPage);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "xadmin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -69390,10 +69440,13 @@ function (_React$Component) {
         className: "btn btn-primary"
       }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AdminTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
         pages: currentPages,
-        loading: this.state.loading
+        categories: this.state.categories,
+        loading: this.state.loading,
+        changeActiveCategory: this.changeActiveCategory,
+        activeCategory: this.state.activeCategory
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_6__["default"], {
         postsPerPage: this.state.postsPerPage,
-        totalPosts: this.state.pages.length,
+        totalPosts: filteredPages.length,
         paginate: this.paginate
       })));
     }
