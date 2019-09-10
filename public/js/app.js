@@ -68445,6 +68445,44 @@ function DeleteButton(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/AdminTable.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/AdminTable.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var AdminTable = function AdminTable(_ref) {
+  var pages = _ref.pages,
+      loading = _ref.loading;
+
+  if (loading) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Loading");
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "list-group mb-4",
+    style: {
+      color: "black"
+    }
+  }, pages.map(function (page) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: page.id,
+      className: "list-group-item"
+    }, page.heading);
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AdminTable);
+
+/***/ }),
+
 /***/ "./resources/js/components/Home/Logo.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/Home/Logo.js ***!
@@ -69073,6 +69111,48 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/MyPagination.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/MyPagination.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var MyPagination = function MyPagination(_ref) {
+  var postsPerPage = _ref.postsPerPage,
+      totalPosts = _ref.totalPosts,
+      paginate = _ref.paginate;
+  var pageNumbers = [];
+
+  for (var i = 1; i <= Math.ceil(totalPosts / postsPerPage); ++i) {
+    pageNumbers.push(i);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "pagination"
+  }, pageNumbers.map(function (number) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: number,
+      className: "page-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      onClick: function onClick() {
+        return paginate(number);
+      },
+      className: "page-link"
+    }, number));
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MyPagination);
+
+/***/ }),
+
 /***/ "./resources/js/components/Slideshow.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/Slideshow.js ***!
@@ -69168,8 +69248,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Admin_ItemRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Admin/ItemRow */ "./resources/js/components/Admin/ItemRow.js");
 /* harmony import */ var _components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Admin/AdminSidebar */ "./resources/js/components/Admin/AdminSidebar.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_AdminTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AdminTable */ "./resources/js/components/AdminTable.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_MyPagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/MyPagination */ "./resources/js/components/MyPagination.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69188,6 +69270,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -69205,10 +69291,20 @@ function (_React$Component) {
     _classCallCheck(this, Admin);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Admin).call(this));
+
+    _defineProperty(_assertThisInitialized(_this), "paginate", function (pageNumber) {
+      return _this.setState({
+        currentPage: pageNumber
+      });
+    });
+
     _this.state = {
-      birds: [],
+      pages: [],
+      loading: true,
       //stores page width
-      width: window.innerWidth
+      width: window.innerWidth,
+      currentPage: 1,
+      postsPerPage: 10
     };
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     _this.handleWindowResize = _this.handleWindowResize.bind(_assertThisInitialized(_this));
@@ -69220,11 +69316,15 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      this.setState({
+        loading: true
+      });
       fetch("./pages/all").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
-          birds: data
+          pages: data,
+          loading: false
         });
       });
     }
@@ -69258,32 +69358,26 @@ function (_React$Component) {
           return t.id !== id;
         };
 
-        var updatedList = this.state.birds.filter(notId);
+        var updatedList = this.state.pages.filter(notId);
         this.setState({
           birds: updatedList
         });
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]("./pages/" + id);
+        axios__WEBPACK_IMPORTED_MODULE_5___default.a["delete"]("./pages/" + id);
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      var items = this.state.birds.map(function (i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_ItemRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: i.id,
-          id: i.id,
-          heading: i.heading,
-          text: i.text,
-          images: i.imgs,
-          categoryName: i.categoryName,
-          handleDelete: _this3.handleDelete
-        });
-      }); //variables for page sizing (dynamic rendering)
-
+      // const items = this.state.birds.map(
+      //     i => <ItemRow key={i.id} id={i.id} heading={i.heading} text={i.text} images={i.imgs} categoryName={i.categoryName} handleDelete={this.handleDelete} />
+      // );
+      //variables for page sizing (dynamic rendering)
       var width = this.state.width;
-      var isMobile = width <= 900;
+      var isMobile = width <= 900; //get current post
+
+      var indexOfLastPage = this.state.currentPage * this.state.postsPerPage;
+      var indexOfFirstPage = indexOfLastPage - this.state.postsPerPage;
+      var currentPages = this.state.pages.slice(indexOfFirstPage, indexOfLastPage);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "xadmin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -69294,13 +69388,14 @@ function (_React$Component) {
         to: "/admin/create"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
-      }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "admin-table",
-        style: {
-          tableLayout: "fixed",
-          width: "120vh"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Text body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, items))));
+      }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AdminTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        pages: currentPages,
+        loading: this.state.loading
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        postsPerPage: this.state.postsPerPage,
+        totalPosts: this.state.pages.length,
+        paginate: this.paginate
+      })));
     }
   }]);
 
