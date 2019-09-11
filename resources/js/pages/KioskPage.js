@@ -30,7 +30,7 @@ export default class KioskPage extends React.Component {
     }
 
     handleClick(event) {
-        var t = setInterval(this.fade, 10);
+        {/*var t = setInterval(this.fade, 10);
         setTimeout(() => {
             clearInterval(t);
             this.setState({ opacity: 1 });
@@ -39,7 +39,12 @@ export default class KioskPage extends React.Component {
                     { index: (this.state.index + 1) % this.state.page.images.length }
                 );
             });
-        }, 250);
+        }, 250);*/}
+        this.setState(prevState => {
+            return (
+                { index: (this.state.index + 1) % this.state.page.images.length }
+            );
+        });
     }
 
     fade() {
@@ -92,11 +97,11 @@ export default class KioskPage extends React.Component {
             return (
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                     {props => (
-                        <div className="hideScroll" style={props}>
+                        <div className="hideScroll fixTransitions" style={props}>
                             <Palette src={imgPath}>
                                 {(palette) => (
-                                    <div onClick={ this.handleClick } style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
-                                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundColor: palette.data.darkVibrant }}>
+                                    <div onClick={ this.handleClick } style= {{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover", transition: "background-image 1s" }}>
+                                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", transition: "background-color 1s, color 1s", backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant, color: palette.loading ? "black" : palette.data.darkMuted }}>
                                             <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
                                             <div style={{ textAlign: "center" }}>
                                                 <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
