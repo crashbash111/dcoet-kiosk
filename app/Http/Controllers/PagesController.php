@@ -176,7 +176,7 @@ class PagesController extends Controller
     {
         $page = Page::find($id);
         $page->categoryName = $page->category->name;
-        $page->image = Image::where( "page_id", $id )->get();
+        $page->images = Image::where( "page_id", $id )->get();
         $page->stats = Stat::where("page_id", $id)->get();
         $page->audios = Audio::where( "page_id", $id )->get();
         return json_encode($page);

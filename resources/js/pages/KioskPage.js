@@ -58,7 +58,15 @@ export default class KioskPage extends React.Component {
             );
         }
         else {
-            let imgPath = "./storage/kiosk_images/" + this.state.page.image[this.state.index].image_name;
+            let imgPath;
+            try //try
+            {
+                imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
+            }
+            catch( e ) //catch
+            {
+                console.error( e.message ); //console log error
+            }
 
             let statTableItems = this.state.page.stats.map(item => {
                 return (
