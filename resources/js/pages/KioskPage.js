@@ -13,6 +13,7 @@ export default class KioskPage extends React.Component {
             loading: true,
             page: {},
             index: 0,
+            transitionTime: "0.5s"
         };
 
         this.fade = this.fade.bind(this);
@@ -68,9 +69,9 @@ export default class KioskPage extends React.Component {
             {
                 imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
             }
-            catch( e ) //catch
+            catch (e) //catch
             {
-                console.error( e.message ); //console log error
+                console.error(e.message); //console log error
             }
 
             let statTableItems = this.state.page.stats.map(item => {
@@ -91,7 +92,7 @@ export default class KioskPage extends React.Component {
                 )
             });
 
-            
+
 
 
             return (
@@ -100,11 +101,11 @@ export default class KioskPage extends React.Component {
                         <div className="hideScroll fixTransitions" style={props}>
                             <Palette src={imgPath}>
                                 {(palette) => (
-                                    <div onClick={ this.handleClick } style= {{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover", transition: "background-image 1s" }}>
-                                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", transition: "background-color 1s, color 1s", backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant, color: palette.loading ? "black" : palette.data.darkMuted }}>
+                                    <div onClick={this.handleClick} style={{ backgroundImage: "url(' " + imgPath + " ')", backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant, opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover", transition: "background-image " + this.state.transitionTime }}>
+                                        <div className="hideScroll" style={{ filter: "color blur(18px)", height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime, backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant, color: palette.loading ? "black" : palette.data.darkMuted }}>
                                             <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
                                             <div style={{ textAlign: "center" }}>
-                                                <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
+                                                <Link to="/" className="btn btn-lg btn-light" style={{transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime, backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted, color: palette.loading ? "black" : palette.data.lightVibrant}} role="button">Back to Home</Link>
                                             </div>
                                             {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
                                             {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
