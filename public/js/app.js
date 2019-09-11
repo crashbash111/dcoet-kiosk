@@ -60618,7 +60618,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71687,7 +71687,16 @@ function (_React$Component) {
       if (this.state.loading) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null);
       } else {
-        var imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
+        var imgPath;
+
+        try //try
+        {
+          imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
+        } catch (e) //catch
+        {
+          console.error(e.message); //console log error
+        }
+
         var statTableItems = this.state.page.stats.map(function (item) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
             style: {
