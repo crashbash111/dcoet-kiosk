@@ -35,7 +35,7 @@ export default class KioskPage extends React.Component {
             this.setState({ opacity: 1 });
             this.setState(prevState => {
                 return (
-                    { index: (this.state.index + 1) % this.state.page.images.length }
+                    { index: (this.state.index + 1) % this.state.page.image.length }
                 );
             });
         }, 250);
@@ -58,7 +58,7 @@ export default class KioskPage extends React.Component {
             );
         }
         else {
-            let imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
+            let imgPath = "./storage/kiosk_images/" + this.state.page.image[this.state.index].image_name;
 
             let statTableItems = this.state.page.stats.map(item => {
                 return (
