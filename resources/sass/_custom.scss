@@ -366,3 +366,8 @@ video{
   width: 0px;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
+
+.fixTransitions{
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
