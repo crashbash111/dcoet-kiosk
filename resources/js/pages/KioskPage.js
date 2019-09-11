@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { Spring } from 'react-spring/renderprops';
+import { Palette } from 'react-palette';
 
 export default class KioskPage extends React.Component {
 
@@ -41,10 +42,9 @@ export default class KioskPage extends React.Component {
         }, 250);
     }
 
-    fade()
-    {
-        this.setState( prevState => {
-            return(
+    fade() {
+        this.setState(prevState => {
+            return (
                 { opacity: prevState.opacity - 0.04 }
             );
         });
@@ -69,30 +69,38 @@ export default class KioskPage extends React.Component {
                 );
             });
 
-            let audioItems = this.state.page.audios.map( item => {
+            let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
                     <div>
-                        <embed src={ filePath } />
+                        <embed src={filePath} />
                     </div>
                 )
             });
+
+            
+
 
             return (
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                     {props => (
                         <div className="hideScroll" style={props}>
-                            <div onClick={this.handleClick} style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
-                                <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
-                                    <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
-                                    <div style={{ textAlign: "center" }}>
-                                        <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
+                            <Palette image={imgPath}>
+                                {(palette) => (
+                                    <div onClick={() => console.log(palette)} style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
+                                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundColor: palette.lightVibrant }}>
+                                            <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
+                                            <div style={{ textAlign: "center" }}>
+                                                <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
+                                            </div>
+                                            {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                                            {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                                            <p style={{ fontSize: "25px" }}>{this.state.page.text}</p>
+                                        </div>
                                     </div>
-                                    {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                    { this.state.page.audios.length > 0 ? <div>Audios<div>{ audioItems }</div></div> : null }
-                                    <p style={{ fontSize: "25px" }}>{this.state.page.text}</p>
-                                </div>
-                            </div>
+                                )}
+                            </Palette>
+
                         </div>
                     )}
                 </Spring>

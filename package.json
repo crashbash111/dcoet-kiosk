@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "history": "^4.9.0",
+        "react-palette": "^1.0.1",
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
         "react-scripts": "^3.1.1",
