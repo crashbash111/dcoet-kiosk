@@ -36,7 +36,7 @@ export default class KioskPage extends React.Component {
             this.setState({ opacity: 1 });
             this.setState(prevState => {
                 return (
-                    { index: (this.state.index + 1) % this.state.page.image.length }
+                    { index: (this.state.index + 1) % this.state.page.images.length }
                 );
             });
         }, 250);
@@ -93,10 +93,10 @@ export default class KioskPage extends React.Component {
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                     {props => (
                         <div className="hideScroll" style={props}>
-                            <Palette image={imgPath}>
+                            <Palette src={imgPath}>
                                 {(palette) => (
-                                    <div onClick={() => console.log(palette)} style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
-                                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundColor: palette.lightVibrant }}>
+                                    <div onClick={ this.handleClick } style={{ backgroundImage: "url(' " + imgPath + " ')", opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover" }}>
+                                        <div className="hideScroll" style={{ height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", backgroundColor: palette.data.darkVibrant }}>
                                             <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
                                             <div style={{ textAlign: "center" }}>
                                                 <Link to="/" className="btn btn-lg btn-light" role="button">Back to Home</Link>
