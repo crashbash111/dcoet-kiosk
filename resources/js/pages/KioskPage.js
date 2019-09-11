@@ -35,7 +35,7 @@ export default class KioskPage extends React.Component {
             this.setState({ opacity: 1 });
             this.setState(prevState => {
                 return (
-                    { index: (this.state.index + 1) % this.state.page.images.length }
+                    { index: (this.state.index + 1) % this.state.page.image.length }
                 );
             });
         }, 250);
