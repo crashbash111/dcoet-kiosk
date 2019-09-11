@@ -25,6 +25,8 @@ Route::resource( "pages", "PagesController" );
 Route::get( "/powerpoints/all", "PowerpointController@all" );
 Route::resource( "powerpoints", "PowerpointController" );
 
+Route::resource( "categories", "CategoryController" );
+
 Route::get( "/test1", "PagesController@test1" );
 Route::get( "/test2", "PagesController@test2" );
 Route::get( "/data1", "PagesController@data1" );

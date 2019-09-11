@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 export default class AdminSidebar extends React.Component {
 
     constructor() {
@@ -29,7 +31,7 @@ export default class AdminSidebar extends React.Component {
                         <img src="./images/logo.png"></img>
 
                         <a href="./#">Dashboard</a>
-                        <a href="./#">Categories</a>
+                        <Link to="./admin/createCategory">Create Category</Link>
                         <a href="./#/powerpoints">Slideshows</a>
                         <a href="./#">Games</a>
                         <a className="returns" href="./#">&#8592; Kiosk View</a>

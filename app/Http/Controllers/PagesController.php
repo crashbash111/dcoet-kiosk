@@ -22,7 +22,7 @@ class PagesController extends Controller
         $pages = Page::all();
         foreach ($pages as $page) {
             $page->categoryName = $page->category->name;
-            $page->images = Image::where( "page_id", $page->id )->get();
+            $page->images = Image::where("page_id", $page->id)->get();
             $page->stats = Stat::where("page_id", $page->id)->get();
         }
         return json_encode($pages);
@@ -176,9 +176,9 @@ class PagesController extends Controller
     {
         $page = Page::find($id);
         $page->categoryName = $page->category->name;
-        $page->images = Image::where( "page_id", $id )->get();
+        $page->images = Image::where("page_id", $id)->get();
         $page->stats = Stat::where("page_id", $id)->get();
-        $page->audios = Audio::where( "page_id", $id )->get();
+        $page->audios = Audio::where("page_id", $id)->get();
         return json_encode($page);
     }
 
@@ -268,35 +268,37 @@ class PagesController extends Controller
             }
         }
 
-        $files = $request->file( "audios" );
+        $files = $request->file("audios");
 
         //return $files;
 
-        foreach ($files as $file) {
-            //return "there";
-            $fileNameWithExt = $file->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        if (is_array($files)) {
+            foreach ($files as $file) {
+                //return "there";
+                $fileNameWithExt = $file->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '']);
+                $fileName = strtr($fileName, [' ' => '']);
 
-            $extension = $file->getClientOriginalExtension();
-            //$check = in_array($extension, $allowedFileExtension);
+                $extension = $file->getClientOriginalExtension();
+                //$check = in_array($extension, $allowedFileExtension);
 
-            if (true) {
-                //return $file;
+                if (true) {
+                    //return $file;
 
-                $a = new Audio;
-                //filename to store
-                $fileNameToStore = $fileName . "_" . time() . "." . $extension;
-                //upload image
-                $path = $file->storeAs('/public/audio_files', $fileNameToStore);
-                $a->filepath = $fileNameToStore;
-                $a->page_id = $page->id;
+                    $a = new Audio;
+                    //filename to store
+                    $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                    //upload image
+                    $path = $file->storeAs('/public/audio_files', $fileNameToStore);
+                    $a->filepath = $fileNameToStore;
+                    $a->page_id = $page->id;
 
-                $a->save();
+                    $a->save();
+                }
             }
         }
-
+        
         $statsToDelete = $request->input("statsToDelete");
 
         $x = 0;
@@ -335,22 +337,19 @@ class PagesController extends Controller
             }
         }
 
-        $audiosToDelete = $request->input( "audiosToDelete" );
+        $audiosToDelete = $request->input("audiosToDelete");
 
         $x = 0;
 
-        if( is_array( $audiosToDelete ) )
-        {
-            while( $x < sizeof( $audiosToDelete ) )
-            {
-                if( $page->audios->find( $audiosToDelete[ $x ] != null ) )
-                {
-                    $a = $page->audios->find( $audiosToDelete[ $x ] );
+        if (is_array($audiosToDelete)) {
+            while ($x < sizeof($audiosToDelete)) {
+                if ($page->audios->find($audiosToDelete[$x] != null)) {
+                    $a = $page->audios->find($audiosToDelete[$x]);
 
-                    $file = Storage::get( '/public/audio_files/' . $a->filepath );
+                    $file = Storage::get('/public/audio_files/' . $a->filepath);
 
-                    if( $file != null ) {
-                        Storage::delete( $file );
+                    if ($file != null) {
+                        Storage::delete($file);
                     }
 
                     $a->delete();

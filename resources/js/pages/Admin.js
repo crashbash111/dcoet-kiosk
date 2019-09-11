@@ -19,12 +19,14 @@ export default class Admin extends React.Component {
             currentPage: 1,
             postsPerPage: 10,
             activeCategory: -1,
+            activePage: -1,
         };
 
         this.handleDelete = this.handleDelete.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
         this.paginate = this.paginate.bind( this );
         this.changeActiveCategory = this.changeActiveCategory.bind( this );
+        this.changeActivePage = this.changeActivePage.bind( this );
     }
 
     componentDidMount() {
@@ -64,7 +66,9 @@ export default class Admin extends React.Component {
 
     paginate = pageNumber => this.setState( { currentPage: pageNumber } );
 
-    changeActiveCategory = num => this.setState( { activeCategory: num, currentPage: 1 } );
+    changeActiveCategory = num => this.setState( { activeCategory: num, currentPage: 1, activePage: -1 } );
+
+    changeActivePage = num => this.setState( { activePage : num } );
 
     render() {
         // const items = this.state.birds.map(
@@ -91,7 +95,8 @@ export default class Admin extends React.Component {
                     <br />
                     <Link to="/admin/create"><button className="btn btn-primary">Create New</button></Link>
                     <br />
-                    <AdminTable pages={currentPages} categories={this.state.categories} loading={this.state.loading} changeActiveCategory={ this.changeActiveCategory } activeCategory={ this.state.activeCategory } />
+                    <AdminTable pages={currentPages} categories={this.state.categories} loading={this.state.loading} changeActiveCategory={ this.changeActiveCategory } activeCategory={ this.state.activeCategory }
+                        changeActivePage={ this.changeActivePage } activePage={ this.state.activePage } postsPerPage={ this.state.postsPerPage } />
                     <MyPagination postsPerPage={ this.state.postsPerPage } totalPosts={ filteredPages.length } paginate={ this.paginate } />
                 </div>
             </div>
