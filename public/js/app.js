@@ -78981,6 +78981,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sidebartoggle",
         onClick: this.toggleSidebar
@@ -78994,10 +78996,14 @@ function (_React$Component) {
       }, "\u2190 Close") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "./images/logo.png"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "./#"
-      }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "./admin/createCategory"
-      }, "Create Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: function onClick() {
+          return _this2.props.handleTabClick(0);
+        }
+      }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: function onClick() {
+          return _this2.props.handleTabClick(1);
+        }
+      }, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#/powerpoints"
       }, "Slideshows"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
@@ -79012,6 +79018,68 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/CategoryTable.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Admin/CategoryTable.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var CategoryTable = function CategoryTable(_ref) {
+  var categories = _ref.categories,
+      shownCategory = _ref.shownCategory,
+      categoryClick = _ref.categoryClick;
+  var selectedStyle = {
+    backgroundColor: "blue"
+  };
+  var categoryItems = categories.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: item.id,
+      onClick: function onClick() {
+        return categoryClick(item.id);
+      },
+      style: item.id == shownCategory ? selectedStyle : null
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, item.name));
+  });
+  var currentCategory = null;
+
+  if (shownCategory != -1) {
+    currentCategory = categories.find(function (m) {
+      return m.id == shownCategory;
+    });
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "auto auto"
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateRows: "repeat(" + categories.length + ", minmax( 30px, auto ))"
+    }
+  }, categoryItems), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentCategory != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, currentCategory.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, currentCategory.description.length > 40 ? currentCategory.description.substring(0, 40) + "..." : currentCategory.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/admin/createCategory/" + currentCategory.id,
+    className: "btn btn-success"
+  }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/admin/createCategory/" + currentCategory.id,
+    className: "btn btn-danger"
+  }, "Delete")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Nothing selected")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CategoryTable);
 
 /***/ }),
 
@@ -79094,6 +79162,8 @@ function DeleteButton(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 var AdminTable = function AdminTable(_ref) {
@@ -79155,7 +79225,13 @@ var AdminTable = function AdminTable(_ref) {
         return changeActivePage(page.id);
       }
     }, page.heading);
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentPage != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, currentPage.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, currentPage.text.length > 60 ? currentPage.text.substring(0, 60) + "..." : currentPage.text)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Nothing selected")));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentPage != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, currentPage.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, currentPage.text.length > 60 ? currentPage.text.substring(0, 60) + "..." : currentPage.text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/admin/create/" + currentPage.id,
+    className: "btn btn-success"
+  }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/admin/create/" + currentPage.id,
+    className: "btn btn-danger"
+  }, "Delete")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Nothing selected")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AdminTable);
@@ -79356,6 +79432,7 @@ function (_React$Component) {
             var gamesList = this.state.games.map(function (item) {
               console.log(item.img);
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                key: item.id,
                 onClick: function onClick() {
                   return window.open("../Resources/Game/index.html", "_blank");
                 },
@@ -79401,6 +79478,7 @@ function (_React$Component) {
 
 
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              key: item.id,
               onClick: function onClick() {
                 return _this3.handleClick(item.id);
               },
@@ -79424,6 +79502,7 @@ function (_React$Component) {
                 imgNameNew = imgName;
                 console.log(imgName);
                 return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                  key: img.id,
                   className: "slide",
                   "data-cover": imgName
                 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -79445,6 +79524,7 @@ function (_React$Component) {
                 var imgName = "./storage/kiosk_images/" + img.image_name;
                 console.log(imgName);
                 return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                  key: img.id,
                   className: "slide",
                   "data-cover": imgName
                 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -79930,7 +80010,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AdminTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AdminTable */ "./resources/js/components/AdminTable.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_MyPagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/MyPagination */ "./resources/js/components/MyPagination.js");
+/* harmony import */ var _components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Admin/CategoryTable */ "./resources/js/components/Admin/CategoryTable.js");
+/* harmony import */ var _components_MyPagination__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/MyPagination */ "./resources/js/components/MyPagination.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79950,6 +80031,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -79991,6 +80073,12 @@ function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "categoryClick", function (num) {
+      return _this.setState({
+        shownCategory: num
+      });
+    });
+
     _this.state = {
       pages: [],
       categories: [],
@@ -80000,13 +80088,17 @@ function (_React$Component) {
       currentPage: 1,
       postsPerPage: 10,
       activeCategory: -1,
-      activePage: -1
+      activePage: -1,
+      tabIndex: 0,
+      shownCategory: -1
     };
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     _this.handleWindowResize = _this.handleWindowResize.bind(_assertThisInitialized(_this));
     _this.paginate = _this.paginate.bind(_assertThisInitialized(_this));
     _this.changeActiveCategory = _this.changeActiveCategory.bind(_assertThisInitialized(_this));
     _this.changeActivePage = _this.changeActivePage.bind(_assertThisInitialized(_this));
+    _this.handleTabClick = _this.handleTabClick.bind(_assertThisInitialized(_this));
+    _this.categoryClick = _this.categoryClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -80072,6 +80164,13 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "handleTabClick",
+    value: function handleTabClick(id) {
+      this.setState({
+        tabIndex: id
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -80089,14 +80188,8 @@ function (_React$Component) {
         return m.category_id == _this3.state.activeCategory;
       });
       var currentPages = filteredPages.slice(indexOfFirstPage, indexOfLastPage);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "xadmin"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        isMobile: isMobile
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: isMobile ? 'fullarea' : 'rightarea'
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/admin/create"
+      var c1 = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "./admin/create"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
       }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AdminTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -80108,11 +80201,30 @@ function (_React$Component) {
         changeActivePage: this.changeActivePage,
         activePage: this.state.activePage,
         postsPerPage: this.state.postsPerPage
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
         postsPerPage: this.state.postsPerPage,
         totalPosts: filteredPages.length,
         paginate: this.paginate
-      })));
+      }));
+      var c2 = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "./admin/createCategory"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary"
+      }, "Create New")), !this.state.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        categories: this.state.categories,
+        shownCategory: this.state.shownCategory,
+        categoryClick: this.categoryClick
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading..."));
+      var children = [c1, c2];
+      var child = children[this.state.tabIndex];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "xadmin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        isMobile: isMobile,
+        handleTabClick: this.handleTabClick
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: isMobile ? 'fullarea' : 'rightarea'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), child));
     }
   }]);
 
@@ -80559,7 +80671,9 @@ function (_React$Component) {
       }
 
       var items = this.state.categories.map(function (item) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, item.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, item.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
           name: "category_id",
           value: item.id,
@@ -80574,6 +80688,7 @@ function (_React$Component) {
         var softDeleted = _this4.state.statsToDelete.includes(item.id);
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: item.id,
           style: softDeleted ? {
             opacity: "0.4"
           } : null
@@ -80610,7 +80725,9 @@ function (_React$Component) {
         }, softDeleted ? "Undo" : "Delete"))));
       });
       var statTableItems = this.state.page.stats.map(function (item) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           style: {
             textAlign: "center"
           }
@@ -80628,7 +80745,9 @@ function (_React$Component) {
 
         for (var y = 0; y < x; ++y) {
           var imgPath = URL.createObjectURL(this.photos.current.files[y]);
-          currentImages.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          currentImages.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: y
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: imgPath,
             style: {
               height: "100px"
@@ -80649,6 +80768,7 @@ function (_React$Component) {
             opacity: "0.4"
           };
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: item.id,
             style: softDeleted ? deletedStyle : null
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: imgPath,
@@ -80669,7 +80789,9 @@ function (_React$Component) {
 
         for (var y = 0; y < _x; ++y) {
           var audioPath = URL.createObjectURL(this.audios.current.files[y]);
-          currentAudios.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("embed", {
+          currentAudios.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: y
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("embed", {
             src: audioPath
           })));
         }
@@ -80687,6 +80809,7 @@ function (_React$Component) {
             opacity: "0.4"
           };
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: item.id,
             style: softDeleted ? deletedStyle : null
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("embed", {
             src: audioPath
@@ -82206,6 +82329,7 @@ function (_React$Component) {
 
       var categoryList = this.state.categories.map(function (item) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: item.id,
           "data-role": "tile",
           "data-size": "medium",
           style: {
@@ -82347,7 +82471,8 @@ function (_React$Component) {
     _this.state = {
       loading: true,
       page: {},
-      index: 0
+      index: 0,
+      transitionTime: "0.5s"
     };
     _this.fade = _this.fade.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
@@ -82377,20 +82502,23 @@ function (_React$Component) {
     value: function handleClick(event) {
       var _this3 = this;
 
-      var t = setInterval(this.fade, 10);
-      setTimeout(function () {
-        clearInterval(t);
-
-        _this3.setState({
-          opacity: 1
-        });
-
-        _this3.setState(function (prevState) {
-          return {
-            index: (_this3.state.index + 1) % _this3.state.page.images.length
-          };
-        });
-      }, 250);
+      {
+        /*var t = setInterval(this.fade, 10);
+        setTimeout(() => {
+           clearInterval(t);
+           this.setState({ opacity: 1 });
+           this.setState(prevState => {
+               return (
+                   { index: (this.state.index + 1) % this.state.page.images.length }
+               );
+           });
+        }, 250);*/
+      }
+      this.setState(function (prevState) {
+        return {
+          index: (_this3.state.index + 1) % _this3.state.page.images.length
+        };
+      });
     }
   }, {
     key: "fade",
@@ -82420,7 +82548,9 @@ function (_React$Component) {
         }
 
         var statTableItems = this.state.page.stats.map(function (item) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: item.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
             style: {
               textAlign: "center"
             }
@@ -82432,7 +82562,9 @@ function (_React$Component) {
         });
         var audioItems = this.state.page.audios.map(function (item) {
           var filePath = "./storage/audio_files/" + item.filepath;
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("embed", {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: item.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("embed", {
             src: filePath
           }));
         });
@@ -82445,7 +82577,7 @@ function (_React$Component) {
           }
         }, function (props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "hideScroll",
+            className: "hideScroll fixTransitions",
             style: props
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_palette__WEBPACK_IMPORTED_MODULE_4__["Palette"], {
             src: imgPath
@@ -82454,20 +82586,25 @@ function (_React$Component) {
               onClick: _this4.handleClick,
               style: {
                 backgroundImage: "url(' " + imgPath + " ')",
+                backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant,
                 opacity: _this4.state.opacity,
                 backgroundPosition: "center",
-                backgroundSize: "cover"
+                backgroundSize: "cover",
+                transition: "background-image " + _this4.state.transitionTime
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "hideScroll",
               style: {
+                filter: "color blur(18px)",
                 height: "100vh",
                 width: "45vh",
                 padding: "10px",
                 overflowY: "scroll",
                 overflowX: "hidden",
                 opacity: "0.8",
-                backgroundColor: palette.data.darkVibrant
+                transition: "background-color " + _this4.state.transitionTime + ", color " + _this4.state.transitionTime,
+                backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant,
+                color: palette.loading ? "black" : palette.data.darkMuted
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
               style: {
@@ -82481,6 +82618,11 @@ function (_React$Component) {
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
               to: "/",
               className: "btn btn-lg btn-light",
+              style: {
+                transition: "background-color " + _this4.state.transitionTime + ", color " + _this4.state.transitionTime,
+                backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted,
+                color: palette.loading ? "black" : palette.data.lightVibrant
+              },
               role: "button"
             }, "Back to Home")), _this4.state.page.stats.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               style: {

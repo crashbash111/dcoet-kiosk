@@ -344,7 +344,7 @@ export default class Create extends React.Component {
 
         let items = this.state.categories.map(item => {
             return (
-                <div>
+                <div key={item.id}>
                     <label>{item.name}
                         <input type="radio" name="category_id" value={item.id} checked={this.state.page.category_id == item.id} onChange={this.handleChange} />
                     </label>
@@ -362,7 +362,7 @@ export default class Create extends React.Component {
             let softDeleted = this.state.statsToDelete.includes(item.id);
 
             return (
-                <div style={softDeleted ? { opacity: "0.4" } : null}>
+                <div key={ item.id } style={softDeleted ? { opacity: "0.4" } : null}>
                     {count > 1 ? <hr /> : null}
                     <div style={{ display: "grid", gridTemplateColumns: "auto 50px" }}>
                         <div>
@@ -386,7 +386,7 @@ export default class Create extends React.Component {
 
 
             return (
-                <div>
+                <div key={ item.id }>
                     <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                     <p style={{ textAlign: "center" }}>{item.value}</p>
                 </div>
@@ -404,7 +404,7 @@ export default class Create extends React.Component {
             for (var y = 0; y < x; ++y) {
                 let imgPath = URL.createObjectURL(this.photos.current.files[y]);
 
-                currentImages.push(<div>
+                currentImages.push(<div key={ y }>
                     <img src={imgPath} style={{ height: "100px" }} />
 
                 </div>);
@@ -424,7 +424,7 @@ export default class Create extends React.Component {
                 let deletedStyle = { opacity: "0.4" };
 
                 return (
-                    <div style={softDeleted ? deletedStyle : null}>
+                    <div key={ item.id } style={softDeleted ? deletedStyle : null}>
                         <img src={imgPath} style={{ width: "100px" }} />
                         <button onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
                     </div>
@@ -443,7 +443,7 @@ export default class Create extends React.Component {
             for (var y = 0; y < x; ++y) {
                 let audioPath = URL.createObjectURL(this.audios.current.files[y]);
 
-                currentAudios.push(<div>
+                currentAudios.push(<div key={ y }>
                     <embed src={audioPath} />
                 </div>);
             }
@@ -461,7 +461,7 @@ export default class Create extends React.Component {
                 let deletedStyle = { opacity: "0.4" };
 
                 return (
-                    <div style={ softDeleted ? deletedStyle : null }>
+                    <div key={ item.id } style={ softDeleted ? deletedStyle : null }>
                         <embed src={audioPath} />
                         <button onClick={ softDeleted ? this.handleAudioDeleteUndo( idx ) : this.handleAudioDelete( idx ) }>Delete</button>
                     </div>

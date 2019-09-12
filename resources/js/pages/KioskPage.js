@@ -76,7 +76,7 @@ export default class KioskPage extends React.Component {
 
             let statTableItems = this.state.page.stats.map(item => {
                 return (
-                    <div>
+                    <div key={ item.id }>
                         <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                         <p style={{ textAlign: "center" }}>{item.value}</p>
                     </div>
@@ -86,7 +86,7 @@ export default class KioskPage extends React.Component {
             let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
-                    <div>
+                    <div key={ item.id }>
                         <embed src={filePath} />
                     </div>
                 )

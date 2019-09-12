@@ -103,7 +103,7 @@ export default class Home extends React.Component {
     render() {
         let categoryList = this.state.categories.map(item => {
             return (
-                <div data-role="tile" data-size="medium" style={{ backgroundColor: "lightblue" }}>
+                <div key={ item.id } data-role="tile" data-size="medium" style={{ backgroundColor: "lightblue" }}>
                     <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                     <p>{item.description}</p>
                 </div>

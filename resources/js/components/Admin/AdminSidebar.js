@@ -30,8 +30,8 @@ export default class AdminSidebar extends React.Component {
                         {this.props.isMobile ? <span className="sidebartoggle" onClick={this.toggleSidebar}>&#8592; Close</span> : null}
                         <img src="./images/logo.png"></img>
 
-                        <a href="./#">Dashboard</a>
-                        <Link to="./admin/createCategory">Create Category</Link>
+                        <a onClick={ () => this.props.handleTabClick( 0 ) }>Dashboard</a>
+                        <a onClick={ () => this.props.handleTabClick( 1 ) }>Categories</a>
                         <a href="./#/powerpoints">Slideshows</a>
                         <a href="./#">Games</a>
                         <a className="returns" href="./#">&#8592; Kiosk View</a>

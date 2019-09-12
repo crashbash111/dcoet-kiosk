@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AdminTable = ({ pages, categories, loading, changeActiveCategory, activeCategory, changeActivePage, activePage, postsPerPage }) => {
     //const [ activeCategory, setActiveCategory ] = useState( -1 );
@@ -37,6 +38,9 @@ const AdminTable = ({ pages, categories, loading, changeActiveCategory, activeCa
                 <div>
                     <h1>{ currentPage.heading }</h1>
                     <p>{ currentPage.text.length > 60 ?  currentPage.text.substring( 0, 60 ) + "..." : currentPage.text }</p>
+                    <br />
+                    <Link to={ "/admin/create/" + currentPage.id } className="btn btn-success">Edit</Link>
+                    <Link to={ "/admin/create/" + currentPage.id } className="btn btn-danger">Delete</Link>
                 </div>
                 :
                 <h2>Nothing selected</h2>

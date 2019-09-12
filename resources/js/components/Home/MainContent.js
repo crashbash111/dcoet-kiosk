@@ -79,7 +79,7 @@ export default class MainContent extends React.Component {
                     var gamesList = this.state.games.map( item => {
                         console.log( item.img );
                         return(
-                            <div onClick={() => window.open( "../Resources/Game/index.html", "_blank" )} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
+                            <div key={ item.id } onClick={() => window.open( "../Resources/Game/index.html", "_blank" )} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
                                 <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.Name }</h3>
                             </div>
                         );
@@ -119,7 +119,7 @@ export default class MainContent extends React.Component {
                     //console.log( x );
 
                     return (
-                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ x != -1 ? path : "" } data-size="large" style={{ backgroundColor: "green" }}>
+                        <div key={ item.id } onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={ x != -1 ? path : "" } data-size="large" style={{ backgroundColor: "green" }}>
                             <h3 style={{ textShadow: "2px 2px #111111" }}>{ item.heading }</h3>
                         </div>
                     );
@@ -139,7 +139,7 @@ export default class MainContent extends React.Component {
                             console.log( imgName );
     
                             return (
-                                <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
+                                <div key={ img.id } className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
                                 
                             );
                         });
@@ -154,7 +154,7 @@ export default class MainContent extends React.Component {
                             console.log( imgName );
     
                             return (
-                                <div className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
+                                <div key={ img.id } className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
                             );
                         });
                     }
