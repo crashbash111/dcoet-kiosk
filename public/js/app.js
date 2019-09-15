@@ -79719,6 +79719,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "no-scrollbar",
         style: {
+          height: "100%",
           display: "grid",
           gridTemplateRows: "repeat(6, 75px)",
           overflowY: "scroll",
