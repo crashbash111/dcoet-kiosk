@@ -29,14 +29,6 @@
                 from {top:-500px; opacity:0;}
                 to {top:1; opacity:1;}
             }
-            @keyframes instructAnim{
-                from {top:-500px; opacity:0;}
-                to {top:1; opacity:1;}
-            }
-            @keyframes endAnim{
-                from {top:-500px; opacity:0;}
-                to {top:1; opacity:1;}
-            }
         </style>
     </head>
     <body>
@@ -68,7 +60,7 @@
             id="survivalInstructions"
             style="position:absolute; top:15%; left:20%; width:60%; height:width;
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
-            animation-name: instructAnim; animation-duration: 0.3s"
+            animation-name: menuAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
             <p id="survivalInstructText" style="font-size:3.5vmin"></p>
@@ -91,7 +83,7 @@
             id="timedInstructions"
             style="position:absolute; top:15%; left:20%; width:60%; height:width;
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
-            animation-name: instructAnim; animation-duration: 0.3s"
+            animation-name: menuAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
             <p id="timedInstructText" style="font-size:3.5vmin"></p>
@@ -121,11 +113,11 @@
         </div>
         <div
             id="end"
-            style="position:absolute; top:22.5%; left:32.5%; width:35%; height:width; 
+            style="position:absolute; top:15%; left:25%; width:50%; height:width; 
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
-            animation-name: endAnim; animation-duration: 0.3s"
+            animation-name: menuAnim; animation-duration: 0.3s"
         >
-            <h1 style="font-size:4vmin">You Lose</h1>
+            <h1 style="font-size:4vmin">Game Over</h1>
             <p id="endText" style="font-size:3.5vmin"></p>
             <button
                 id="newBtn"
@@ -164,40 +156,22 @@
                     score += 10;
                     tappedRubbish += 1;
                 }
-                ctx.fillRect(
-                    ent.x - tempW / 2,
-                    ent.y - tempH / 2,
-                    ent.width,
-                    ent.height
-                );
             }
             for (var key in animalList) {
                 if (testCollisionEntity(ent, animalList[key])) {
                     delete animalList[key];
-                    score -= 20;
+                    score -= 15;
                     health -= 20;
                     tappedAnimals += 1;
                 }
-                ctx.fillRect(
-                    ent.x - tempW / 2,
-                    ent.y - tempH / 2,
-                    ent.width,
-                    ent.height
-                );
             }
             for (var key in pestList) {
                 if (testCollisionEntity(ent, pestList[key])) {
                     delete pestList[key];
-                    score += 20;
-                    health += 20;
+                    score += 35;
+                    health += 10;
                     tappedPests += 1;
                 }
-                ctx.fillRect(
-                    ent.x - tempW / 2,
-                    ent.y - tempH / 2,
-                    ent.width,
-                    ent.height
-                );
             }
             delete ent;
         };
@@ -208,7 +182,7 @@
 
         var timeWhenGameStarted = Date.now();
 
-        var timeOut = 10;
+        var timeOut = 30;
 
         var backgroundObj = {};
 
@@ -457,7 +431,6 @@
         randomlyGenerateRubbish = function() {
             if (health > -10000) {
                 var side = getRandomInt(0, 2);
-                //survival mode
                 if (mode == 1){
                     var x = Math.random() * (canvas.width - 10) + 10;
                     var y = 0;
@@ -466,10 +439,6 @@
                     var x = getRandomInt(canvas.width * 0.45, canvas.width * 0.56);
                     var y = canvas.height * 0.1;
                 }
-
-                //timed mode
-                // var x = getRandomInt(canvas.width * 0.45, canvas.width * 0.56);
-                // var y = canvas.height * 0.1;
                 var height = canvas.height / 10;
                 var width = canvas.width / 12;
                 var id = rubbishID++;
@@ -488,8 +457,6 @@
                 } else {
                     var x = canvas.width;
                 }
-
-                //Survival mode
                 if (mode == 1){
                     var y = canvas.height * 0.95;
                 }
@@ -499,33 +466,20 @@
                         canvas.height * 0.95
                     );
                 }
-
-                // Timed mode
-                // var y = getRandomInt(
-                //     canvas.height * 0.38,
-                //     canvas.height * 0.95
-                // );
                 var height = canvas.height / 7.5;
                 var width = canvas.width / 10;
                 var id = animalID++;
                 var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
-
-                //Survival
                 if (mode == 1){
                     var imgId = getRandomInt(11, 14);
                 }
                 else if (mode == 2){
                     var imgId = getRandomInt(17, 20);
                 }
-
-                //Timed mode
-                // var imgId = getRandomInt(17, 20);
-
                 Animal(id, x, y, spdX, width, height, imgId, side);
             }
         };
 
-        //Survival mode only
         randomlyGeneratePest = function() {
             if (mode == 1){
                 if (health > 0) {
@@ -571,8 +525,8 @@
             }
 
             if (something.y > canvas.height - 10) {
-                // health -= 15;
-                // score -= 10;
+                health -= 15;
+                score -= 5;
                 for (var key in rubbishList) {
                     if (something === rubbishList[key]) {
                         delete rubbishList[key];
@@ -603,7 +557,6 @@
             }
         };
 
-        //Survival mode only
         updatePestPosition = function(something) {
             if (mode == 1){
                 something.x += something.spdX;
@@ -617,8 +570,8 @@
                         }
                     }
                     if (something.x > canvas.width - 10) {
-                        health -= 20;
-                        score -= 30;
+                        health -= 30;
+                        score -= 10;
                         for (var key in pestList) {
                             if (something === pestList[key]) {
                                 delete pestList[key];
@@ -635,8 +588,8 @@
                         }
                     }
                     if (something.x < 0) {
-                        health -= 20;
-                        score -= 30;
+                        health -= 30;
+                        score -= 10;
                         for (var key in pestList) {
                             if (something === pestList[key]) {
                                 delete pestList[key];
@@ -658,12 +611,6 @@
                 something.height
             );
             ctx.restore();
-        };
-
-        getDistanceBetweenEntity = function(entity1, entity2) {
-            var vx = entity1.x - entity2.x;
-            var vy = entity1.y - entity2.y;
-            return Math.sqrt(vx * vx + vy * vy);
         };
 
         testCollisionEntity = function(entity1, entity2) {
@@ -709,7 +656,6 @@
             "Tap rubbish or pests, be careful not to tap non-pests!";
             document.getElementById("levelSelect").style.display = "none";
             mode = 1;
-            console.log(mode);
         }  
 
         timedInstructMenu = function(){
@@ -722,7 +668,6 @@
             "Tap rubbish or pests, be careful not to tap non-pests!";
             document.getElementById("levelSelect").style.display = "none";
             mode = 2;
-            console.log(mode);
         }  
 
         mainMenu = function(){
@@ -738,7 +683,6 @@
             document.getElementById("rootObject").style = 
                 "background: url(./assets/images/background5.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
             mode = 0;
-            console.log(mode);
         }  
 
         update = function() {
@@ -748,7 +692,6 @@
             var time = (new Date() - timeWhenGameStarted) / 1000;
             var t = time.toFixed(1);
 
-            //Timed mode
             var roundTime = timeOut - t;
             var timeLeft = roundTime.toFixed(1);
 
@@ -757,24 +700,22 @@
             }
 
             if (mode == 1){
-                if (frameCount % 25 == 0) {
+                if (frameCount % 45 == 0) {
                     randomlyGenerateAnimal();
                 }
             }
             else if (mode == 2){
-                if (frameCount % 20 == 0) {
+                if (frameCount % 25 == 0) {
                     randomlyGenerateAnimal();
                 }
             }
 
-            //Survival mode only
             if (mode == 1){
                 if (frameCount % 50 == 0) {
                     randomlyGeneratePest();
                 }
             }   
 
-            //Survival mode
             if (mode == 1){
                 if (health <= 50) {
                     document.getElementById("rootObject").style = 
@@ -797,16 +738,6 @@
             }
             
 
-            //Timed mode
-            // if (health <= 50) {
-            //     document.getElementById("rootObject").style = 
-            //     "background: url(./assets/images/background4.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
-            // }
-            // else {
-            //     document.getElementById("rootObject").style = 
-            //     "background: url(./assets/images/background3.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
-            // }
-
             for (var key in rubbishList) {
                 updateRubbishEntity(rubbishList[key]);
             }
@@ -815,17 +746,13 @@
                 updateAnimalEntity(animalList[key]);
             }
 
-            //Survival mode only
             if (mode == 1){
                 for (var key in pestList) {
                     updatePestEntity(pestList[key]);
                 }
             }  
 
-            if (mode == 1 && health <= 0 || mode == 2 && time >= 3) {
-                //Timed mode
-                //if (time >= 10)
-
+            if (mode == 1 && health <= 0 || mode == 2 && time >= 30) {
                 if (mode == 1){
                     myStopFunction();
                     health = 0;
@@ -834,8 +761,6 @@
                     myStopFunction();
                     health = health;
                 }
-                //Timed mode
-                //health = health;
 
                 for (var key in rubbishList) {
                     delete rubbishList[key];
@@ -847,7 +772,6 @@
                 }
                 animalList = {};
 
-                //Survival mode
                 if (mode == 1){
                     for (var key in pestList) {
                         delete pestList[key];
@@ -859,8 +783,9 @@
                 document.getElementById("end").style.display = "block";
                 if (mode == 1){
                     document.getElementById("endText").innerHTML =
-                    "Score: " + score +
-                    "<br/><br/>You got rid of:<br/><br/>" +
+                    "Score: " + score + "<br/><br/>" +
+                    "Time: " + t + "<br/><br/>" +
+                    "You got rid of:<br/><br/>" +
                     tappedRubbish + " piece(s) of rubbish<br/><br/>" +
                     tappedPests + " pest animal(s)<br/><br/>" +
                     tappedAnimals + " non-pest animal(s)<br/><br/>" +
@@ -868,8 +793,9 @@
                 }
                 else if (mode == 2){
                     document.getElementById("endText").innerHTML =
-                    "Score: " + score +
-                    "<br/><br/>You got rid of:<br/><br/>" +
+                    "Score: " + score + "<br/><br/>" +
+                    "Health: " + health + "<br/><br/>" +
+                    "You got rid of:<br/><br/>" +
                     tappedRubbish + " piece(s) of rubbish<br/><br/>" +
                     tappedAnimals + " non-pest animal(s)<br/><br/>";
                 }
