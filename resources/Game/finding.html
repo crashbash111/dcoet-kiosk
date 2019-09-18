@@ -167,7 +167,7 @@
 
         var imgList = [];
 
-        for (var i = 0; i < 12; i++){
+        for (var i = 0; i < 11; i++){
             var img = new Image();
             img.src = imgPaths[i];
             imgList.push(img);
@@ -252,12 +252,6 @@
             ctx.restore();
         };
 
-        // getDistanceBetweenEntity = function(entity1, entity2) {
-        //     var vx = entity1.x - entity2.x;
-        //     var vy = entity1.y - entity2.y;
-        //     return Math.sqrt(vx * vx + vy * vy);
-        // };
-
         testCollisionEntity = function(entity1, entity2) {
             var rect1 = {
                 x: entity1.x - entity1.width / 2,
@@ -327,7 +321,6 @@
             var roundTime = (timeOut - t) + timeBonus;
             var timeLeft = roundTime.toFixed(1);
 
-            //score = (timeLeft * 0.8) * 50;
             score = (foundObjects * 10) - (hiddenObjects * 15) - (t * 5) + (timeLeft * 15);
 
             for (var key in hiddenObjectList) {
@@ -378,9 +371,6 @@
             foundObjects = 0;
             totalObjects = 0;
             hiddenObjectList = {};
-            // for (hiddenObjects = 0; hiddenObjects < 5; hiddenObjects++) {
-            //     randomlyGenerateObject();
-            // }
             var numRows = 8;
             var numColumns = 12;
 
