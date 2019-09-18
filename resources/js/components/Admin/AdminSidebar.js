@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 export default class AdminSidebar extends React.Component {
 
     constructor() {
@@ -28,9 +30,9 @@ export default class AdminSidebar extends React.Component {
                         {this.props.isMobile ? <span className="sidebartoggle" onClick={this.toggleSidebar}>&#8592; Close</span> : null}
                         <img src="./images/logo.png"></img>
 
-                        <a href="./#">Dashboard</a>
-                        <a href="./#">Categories</a>
-                        <a href="./#">Pages</a>
+                        <a onClick={ () => this.props.handleTabClick( 0 ) }>Dashboard</a>
+                        <a onClick={ () => this.props.handleTabClick( 1 ) }>Categories</a>
+                        <a href="./#/powerpoints">Slideshows</a>
                         <a href="./#">Games</a>
                         <a className="returns" href="./#">&#8592; Kiosk View</a>
 

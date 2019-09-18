@@ -30,9 +30,9 @@ ReactDOM.render(
             <Route exact path="/kiosk/:c/:id" component={KioskPage} />
             <Route path="/birds/:id" component={Birds} />
             <Route exact path="/admin" component={Admin} />
-            <Route exact path="/admin/create" component={Create} />
-            <Route exact path="/admin/:id/edit" component={EditPage} />
-            <Route exact path="/admin/createCategory" component={CreateCategory} />
+            <Route exact path="/admin/create/:id?" component={Create} />
+            {/* <Route exact path="/admin/:id/edit" component={EditPage} /> */}
+            <Route exact path="/admin/createCategory/:id?" component={CreateCategory} />
             <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
             <Route exact path="/powerpoint/:id" component={PowerpointPage} />
             <Route exact path="/powerpoints" component={Powerpoints} />
