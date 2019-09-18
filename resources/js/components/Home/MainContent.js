@@ -124,7 +124,7 @@ export default class MainContent extends React.Component {
                     console.log(x);
 
                     return (
-                        <Spring from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
+                        <Spring key={ item.id } from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
                             {paramx => (
                                 <div key={item.id} onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={x != -1 ? path : ""} data-size="large"
                                     style={{ 
