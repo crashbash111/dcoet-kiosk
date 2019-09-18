@@ -70486,7 +70486,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79174,7 +79174,8 @@ var AdminTable = function AdminTable(_ref) {
       activeCategory = _ref.activeCategory,
       changeActivePage = _ref.changeActivePage,
       activePage = _ref.activePage,
-      postsPerPage = _ref.postsPerPage;
+      postsPerPage = _ref.postsPerPage,
+      handleDelete = _ref.handleDelete;
 
   //const [ activeCategory, setActiveCategory ] = useState( -1 );
   if (loading) {
@@ -79228,10 +79229,13 @@ var AdminTable = function AdminTable(_ref) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentPage != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, currentPage.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, currentPage.text.length > 60 ? currentPage.text.substring(0, 60) + "..." : currentPage.text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/admin/create/" + currentPage.id,
     className: "btn btn-success"
-  }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/admin/create/" + currentPage.id,
+  }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: function onSubmit() {
+      return handleDelete(currentPage.id);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-danger"
-  }, "Delete")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Nothing selected")));
+  }, "Delete"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Nothing selected")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AdminTable);
@@ -79314,6 +79318,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_spring_renderprops__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-spring/renderprops */ "./node_modules/react-spring/renderprops.js");
+/* harmony import */ var react_spring_renderprops__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_spring_renderprops__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79336,6 +79342,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var MainContent =
 /*#__PURE__*/
 function (_React$Component) {
@@ -79353,6 +79360,11 @@ function (_React$Component) {
       games: [],
       redirectId: -1,
       redirect: false
+    }; //shows config for rendering tiles
+
+    _this.tileConfig = {
+      fadeTime: "0.1s",
+      defaultBackColour: "#2794C3"
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
@@ -79457,7 +79469,8 @@ function (_React$Component) {
                 overflowY: "scroll"
               }
             }, gamesList);
-          }
+          } //renders each individual tile
+
 
           var pagesList = this.state.pages.map(function (item) {
             if (_this3.props.filter != "") {
@@ -79474,25 +79487,40 @@ function (_React$Component) {
             if (item.images.length > 0) {
               x = _this3.getRandomInt(0, item.images.length - 1);
               path = "./storage/kiosk_images/" + item.images[x].image_name;
-            } //console.log( x );
+            }
 
-
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            console.log(x);
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_spring_renderprops__WEBPACK_IMPORTED_MODULE_3__["Spring"], {
               key: item.id,
-              onClick: function onClick() {
-                return _this3.handleClick(item.id);
+              from: {
+                opacity: 0,
+                transform: "translateY(20px)"
               },
-              "data-role": "tile",
-              "data-cover": x != -1 ? path : "",
-              "data-size": "large",
-              style: {
-                backgroundColor: "green"
+              to: {
+                opacity: 1,
+                transform: "translateY(0px)"
               }
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-              style: {
-                textShadow: "2px 2px #111111"
-              }
-            }, item.heading));
+            }, function (paramx) {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                key: item.id,
+                onClick: function onClick() {
+                  return _this3.handleClick(item.id);
+                },
+                "data-role": "tile",
+                "data-cover": x != -1 ? path : "",
+                "data-size": "large",
+                style: {
+                  opacity: paramx.opacity,
+                  transform: paramx.transform,
+                  transition: _this3.tileConfig.fadeTime,
+                  backgroundColor: _this3.tileConfig.defaultBackColour
+                }
+              }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+                style: {
+                  textShadow: "2px 2px #111111"
+                }
+              }, item.heading));
+            });
             var images;
 
             if (item.images.length < 2) {
@@ -80159,7 +80187,7 @@ function (_React$Component) {
 
         var updatedList = this.state.pages.filter(notId);
         this.setState({
-          birds: updatedList
+          pages: updatedList
         });
         axios__WEBPACK_IMPORTED_MODULE_5___default.a["delete"]("./pages/" + id);
       }
@@ -80201,7 +80229,8 @@ function (_React$Component) {
         activeCategory: this.state.activeCategory,
         changeActivePage: this.changeActivePage,
         activePage: this.state.activePage,
-        postsPerPage: this.state.postsPerPage
+        postsPerPage: this.state.postsPerPage,
+        handleDelete: this.handleDelete
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
         postsPerPage: this.state.postsPerPage,
         totalPosts: filteredPages.length,
@@ -80453,7 +80482,8 @@ function (_React$Component) {
       redirect: false,
       photos: null,
       audios: null,
-      editMode: _this.props.match != null && _this.props.match.params != null && _this.props.match.params.id != null
+      editMode: _this.props.match != null && _this.props.match.params != null && _this.props.match.params.id != null,
+      error: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleChangeNew = _this.handleChangeNew.bind(_assertThisInitialized(_this));
@@ -80488,7 +80518,8 @@ function (_React$Component) {
           type = _event$target.type,
           files = _event$target.files;
 
-      if (name == "audios") {} else if (name == "photos") {}
+      if (name == "audios") {} else if (name == "photos") {//this.setState( { page: { ...this.state.page, image: event.target.files } } );
+      }
 
       this.forceUpdate();
       console.log(this.state);
@@ -80535,6 +80566,14 @@ function (_React$Component) {
       var _this2 = this;
 
       event.preventDefault();
+
+      if (this.state.page.heading.length < 3 || this.state.page.text.length < 3 || this.state.page.category_id == -1 || !this.state.editMode && this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length < 1) {
+        this.setState({
+          error: true
+        });
+        return;
+      }
+
       var formData = new FormData();
 
       if (this.state.editMode) {
@@ -80607,7 +80646,7 @@ function (_React$Component) {
         console.log("from form submit ", response);
 
         _this2.setState({
-          redirect: false
+          redirect: true
         });
       })["catch"](function (err) {
         return console.log(err.response.data);
@@ -80681,6 +80720,12 @@ function (_React$Component) {
           checked: _this4.state.page.category_id == item.id,
           onChange: _this4.handleChange
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      });
+      var itemsNew = this.state.categories.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: item.id,
+          value: item.id
+        }, item.name);
       });
       var count = 0;
       var statFields = this.state.page.stats.map(function (item, idx) {
@@ -80846,7 +80891,8 @@ function (_React$Component) {
         onSubmit: this.handleSubmit,
         encType: "multipart/form-data"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group",
+        id: "heading"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         type: "text",
@@ -80875,7 +80921,16 @@ function (_React$Component) {
         }
       }, "Text requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Category"), items, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "category_id",
+        value: this.state.page.category_id,
+        onChange: this.handleChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        disabled: true,
+        hidden: true,
+        value: "-1"
+      }, "--Select a category--"), itemsNew), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: {
           color: "red",
           display: this.state.page.category_id != -1 ? "none" : "block"
@@ -80907,7 +80962,9 @@ function (_React$Component) {
         accept: "audio/*",
         ref: this.audios,
         onChange: this.handleChangeNew
-      }))), this.state.page.audios != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Current audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldAudios)) : null, this.audios.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Currently selected audio files", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), this.state.page.audios != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Current audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldAudios)) : null, this.audios.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Currently selected audio files", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to fulfill all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary"
+      }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: "100%"
         }
@@ -81111,7 +81168,8 @@ function (_React$Component) {
       description: "",
       editMode: _this.props.match != null && _this.props.match.params != null && _this.props.match.params.id != null,
       redirect: false,
-      loading: false
+      loading: false,
+      error: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -81130,6 +81188,13 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(event) {
       var _this2 = this;
+
+      if (this.state.name.length < 3 || this.state.description.length < 3) {
+        this.setState({
+          error: true
+        });
+        return;
+      }
 
       console.log(this.state);
       event.preventDefault();
@@ -81200,7 +81265,12 @@ function (_React$Component) {
         onChange: this.handleChange,
         value: this.state.name,
         placeholder: "Enter a category name..."
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.name.length > 3 ? "none" : "block"
+        }
+      }, "Name is required")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         rows: "10",
@@ -81209,7 +81279,12 @@ function (_React$Component) {
         onChange: this.handleChange,
         value: this.state.description,
         placeholder: "Enter a category description..."
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.description.length > 3 ? "none" : "block"
+        }
+      }, "Description is required")), this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to check all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
       }, "Submit"))));
     }

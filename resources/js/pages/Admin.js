@@ -64,7 +64,7 @@ export default class Admin extends React.Component {
         if (result) {
             let notId = t => t.id !== id;
             let updatedList = this.state.pages.filter(notId);
-            this.setState({ birds: updatedList });
+            this.setState({ pages: updatedList });
             Axios.delete("./pages/" + id);
         }
     }
@@ -101,7 +101,7 @@ export default class Admin extends React.Component {
             <Link to="./admin/create"><button className="btn btn-primary">Create New</button></Link>
             <br />
             <AdminTable pages={currentPages} categories={this.state.categories} loading={this.state.loading} changeActiveCategory={this.changeActiveCategory} activeCategory={this.state.activeCategory}
-                changeActivePage={this.changeActivePage} activePage={this.state.activePage} postsPerPage={this.state.postsPerPage} />
+                changeActivePage={this.changeActivePage} activePage={this.state.activePage} postsPerPage={this.state.postsPerPage} handleDelete={ this.handleDelete } />
             <MyPagination postsPerPage={this.state.postsPerPage} totalPosts={filteredPages.length} paginate={this.paginate} /></div>
         );
 

@@ -2,8 +2,6 @@ import React from "react";
 import Loader from "../Loader";
 import { Redirect } from "react-router-dom";
 import { Spring } from 'react-spring/renderprops';
-import Tile from "./Tile";
-import ItemRow from "../Admin/ItemRow";
 
 export default class MainContent extends React.Component {
     constructor(props) {
@@ -32,7 +30,7 @@ export default class MainContent extends React.Component {
             .then(response => response.json())
             .then(data => this.setState({ games: data, loading: false }));
 
-        //console.log(this.state.games);
+        console.log(this.state.games);
     }
 
     fetchData() {
@@ -77,7 +75,7 @@ export default class MainContent extends React.Component {
 
                 if (this.props.activeCategory == 999) {
                     var gamesList = this.state.games.map(item => {
-                        //console.log(item.img);
+                        console.log(item.img);
                         return (
                             <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
                                 <h3 style={{ textShadow: "2px 2px #111111" }}>{item.Name}</h3>
@@ -107,7 +105,6 @@ export default class MainContent extends React.Component {
                     else if (this.props.activeCategory != item.category_id) {
                         return null;
                     }
-
                     //renders tile providing above conditions are met
                     return (
                         <Tile key={item.id} item={item} handleClick={this.handleClick} />
