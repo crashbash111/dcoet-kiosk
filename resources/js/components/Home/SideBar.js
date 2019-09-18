@@ -6,7 +6,7 @@ export default class SideBar extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(props);
+        //console.log(props);
     }
 
     render() {

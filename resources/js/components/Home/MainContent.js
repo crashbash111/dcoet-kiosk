@@ -34,7 +34,7 @@ export default class MainContent extends React.Component {
             .then(response => response.json())
             .then(data => this.setState({ games: data, loading: false }));
 
-        console.log(this.state.games);
+        //console.log(this.state.games);
     }
 
     fetchData() {
@@ -83,7 +83,7 @@ export default class MainContent extends React.Component {
 
                 if (this.props.activeCategory == 999) {
                     var gamesList = this.state.games.map(item => {
-                        console.log(item.img);
+                        //console.log(item.img);
                         return (
                             <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
                                 <h3 style={{ textShadow: "2px 2px #111111" }}>{item.Name}</h3>
@@ -103,9 +103,6 @@ export default class MainContent extends React.Component {
 
                 //renders each individual tile
                 var pagesList = this.state.pages.map(item => {
-
-
-
                     if (this.props.filter != "") {
                         if (!item.heading.toLowerCase().includes(this.props.filter.toLowerCase())) {
                             return null;
@@ -121,10 +118,9 @@ export default class MainContent extends React.Component {
                         x = this.getRandomInt(0, item.images.length - 1);
                         path = "./storage/kiosk_images/" + item.images[x].image_name;
                     }
-                    console.log(x);
-
+                    //console.log(x);
                     return (
-                        <Spring from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
+                        <Spring key={item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
                             {paramx => (
                                 <div key={item.id} onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={x != -1 ? path : ""} data-size="large"
                                     style={{ 
@@ -135,20 +131,14 @@ export default class MainContent extends React.Component {
                                 </div>
                             )}
                         </Spring>
-
                     );
                     let images;
                     if (item.images.length < 2) {
                         let imgNameNew;
-
                         images = item.images.map(img => {
-
                             let imgName = "./storage/kiosk_images/" + img.image_name;
-
                             imgNameNew = imgName;
-
                             console.log(imgName);
-
                             return (
                                 <div key={img.id} className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
 
@@ -158,19 +148,13 @@ export default class MainContent extends React.Component {
                     }
                     else {
                         images = item.images.map(img => {
-
                             let imgName = "./storage/kiosk_images/" + img.image_name;
-
                             console.log(imgName);
-
                             return (
                                 <div key={img.id} className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
                             );
                         });
                     }
-
-
-
                     return (
                         <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-fade" data-size="large" style={{ backgroundColor: "green" }}>
                             {images}

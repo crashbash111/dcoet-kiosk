@@ -52,7 +52,7 @@ export default class Home extends React.Component {
     }
 
     onKeyPress = button => {
-        console.log(button);
+        //console.log(button);
     }
 
     componentDidMount() {
@@ -62,7 +62,7 @@ export default class Home extends React.Component {
     }
 
     handleCategoryChange(i) {
-        console.log("clicked category " + i);
+        //console.log("clicked category " + i);
         this.setState({
             activeCategory: i
         });
@@ -91,7 +91,7 @@ export default class Home extends React.Component {
             }
 
             if (value != "") {
-                console.log(this.state.oldCategory);
+                //console.log(this.state.oldCategory);
                 if (!this.state.switched) {
                     this.setState({ oldCategory: this.state.activeCategory });
                 }
