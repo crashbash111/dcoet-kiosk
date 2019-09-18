@@ -12,6 +12,8 @@
 */
 Route::get( "/", "PagesController@index" );
 
+Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
+
 Route::get( "/pages/all", "PagesController@all" );
 Route::get( "/pages/allCategories", "PagesController@allCategories" );
 Route::get( "/allGames", "PagesController@allGames" );
@@ -21,6 +23,11 @@ Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
 Route::get( "/category/{id}/pages", [ "uses" => "PagesController@categoryPages" ] );
 
 Route::resource( "pages", "PagesController" );
+
+Route::get( "/powerpoints/all", "PowerpointController@all" );
+Route::resource( "powerpoints", "PowerpointController" );
+
+Route::resource( "categories", "CategoryController" );
 
 Route::get( "/test1", "PagesController@test1" );
 Route::get( "/test2", "PagesController@test2" );

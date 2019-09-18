@@ -15,4 +15,14 @@ class Page extends Model
     {
         return $this->hasMany( Image::class );
     }
+
+    public function audio()
+    {
+        return $this->hasMany( Audio::class );
+    }
+
+    public function stats()
+    {
+        return $this->hasMany( Stat::class );
+    }
 }

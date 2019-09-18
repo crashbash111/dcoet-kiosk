@@ -90,6 +90,114 @@ textarea {
   padding: 10px;
 }
 
+//admin
+
+.xadmin {
+  display: grid;
+  //grid-gap: 10px;
+  grid-template-rows: 40px auto;
+  grid-template-columns: 300px auto;
+  height: 100%;
+}
+
+.xadmin .leftarea {
+  //takes up left side
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+}
+
+.xadmin .rightarea {
+  //takes up right side
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 2;
+  padding: 24px 24px 24px 24px;
+}
+
+.xadmin .fullarea {
+  //takes up all space
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+.xadmin .topbar {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
+}
+
+.xadmin body{
+  text-align: center;
+}
+
+.xadmin .sidebartoggle{
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.xadmin .sidebartoggle:hover{
+  color: lightgray;
+}
+
+.xadmin .leftarea .sidebaropened{
+  width: 300px;
+}
+
+.xadmin .fullarea .sidebaropened{
+  width: 100%;
+}
+
+.xadmin .sidebarclosed{
+  width: 0px;
+}
+
+.xadmin .sidebar{
+  //width: 0px; //300px
+  height: 100%;
+  background: #01283D;
+  transition: 0.5s;
+  white-space: pre;
+  overflow-x: hidden;
+  //display: block;
+}
+
+.xadmin .sidebar img{
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  padding: 30px 10px 30px 10px;
+}
+
+.xadmin .sidebar a{
+  background: #013856;
+  color: #0296E6;
+  width: 100%;
+  
+  //height: 30px;
+  font-size: 26px;
+  display: block;
+  text-decoration: none;
+  padding: 24px 8px 24px 32px;
+  transition: 0.3s;
+}
+
+.xadmin .sidebar .returns{
+  position: absolute;
+  bottom: 0;
+  background: #0B1114;
+  color: #697D87;
+  padding: 8px 8px 8px 32px;
+}
+
+.xadmin .sidebar a:hover{
+  color: #03A7FF;
+  font-size: 32px;
+}
+
+//end admin
+
 .kiosk-panel {
   padding: 25px;
   overflow-y: scroll;
@@ -142,7 +250,7 @@ h1 {
   display: grid;
   //grid-gap: 10px;
   grid-template-rows: 15vh 85vh;
-  grid-template-columns: 20% auto;
+  grid-template-columns: 300px auto;
   height: 100%;
 }
 
@@ -152,12 +260,12 @@ h1 {
   font-size: 30px;
 }
 
-.item1 {
+.logospace {
   grid-column: 1;
   grid-row: 1;
 }
 
-.item1 img {
+.logospace img {
   width: auto;
   max-width: 100%;
   height: auto;
@@ -167,29 +275,53 @@ h1 {
   display: block;
 }
 
-.item2 {
+.searchspace {
   grid-column: 2 / span 2;
   grid-row: 1;
 }
 
-.item2 input {
+.searchspace input {
   padding-left: 30px;
   padding-right: 30px;
-  font-size: 42px;
-  height: 90px;
+  font-size: 5vh;
+  height: 10vh;
   width: 90%;
   margin: auto;
   display: block;
 }
 
-.item3 {
+//categories - main homepage
+.leftcategories {
   grid-column: 1;
   grid-row: 2;
+  padding: 24px 24px 24px 24px;
 }
 
-.item4 {
+.leftcategories h1:hover{
+  font-size-adjust: inherit;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.leftcategories .sideentry{
+  left: 5px;
+  color: gray;
+  transition: 0.5s;
+}
+
+
+.leftcategories .sideentryselected{
+  color: white;
+  left: 25px;
+  transition: 0.5s;
+}
+
+
+//main content tiles - main homepage
+.rightcontent {
   grid-column: 2 / span 2;
   grid-row: 2;
+  //padding: 24px 24px 24px 24px;
 }
 
 .sidebar div {
@@ -209,4 +341,33 @@ h1 {
   height: 250px;
   font-size: 36px;
   text-align: right;
+}
+
+.homeslideshow{
+  overflow: hidden;
+}
+
+video{
+  min-width: 100%;
+  max-height: 83vh;
+  overflow-y: hidden;
+}
+.leftcategories::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.rightcontent::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.hideScroll::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.fixTransitions{
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
