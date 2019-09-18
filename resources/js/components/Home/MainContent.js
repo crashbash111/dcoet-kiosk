@@ -17,11 +17,7 @@ export default class MainContent extends React.Component {
             redirect: false,
         };
 
-        //shows config for rendering tiles
-        this.tileConfig = {
-            fadeTime: "0.1s",
-            defaultBackColour: "#2794C3",
-        };
+
 
         this.handleClick = this.handleClick.bind(this);
     }
@@ -47,11 +43,7 @@ export default class MainContent extends React.Component {
         this.setState({ redirectId: i, redirect: true });
     }
 
-    getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+
 
     render() {
 
@@ -105,54 +97,20 @@ export default class MainContent extends React.Component {
 
                 //renders each individual tile
                 var pagesList = this.state.pages.map(item => {
-                    
-                    //console.log(x);
-
+                    //Checks for search in progress
                     if (this.props.filter != "") {
                         if (!item.heading.toLowerCase().includes(this.props.filter.toLowerCase())) {
                             return null;
                         }
                     }
+                    //only renders if active category is equal
                     else if (this.props.activeCategory != item.category_id) {
                         return null;
                     }
-            
-                    let x = -1;
-                    let path = "";
-                    if (item.images.length > 0) {
-                        x = this.getRandomInt(0, item.images.length - 1);
-                        path = "./storage/kiosk_images/" + item.images[x].image_name;
-                    }
-                    return (
-                        <Tile key={item.id} item={item} x={x} path={path} tileConfig={this.tileConfig} handleClick={this.handleClick}></Tile>
-                    );
-                    let images;
-                    if (item.images.length < 2) {
-                        let imgNameNew;
-                        images = item.images.map(img => {
-                            let imgName = "./storage/kiosk_images/" + img.image_name;
-                            imgNameNew = imgName;
-                            console.log(imgName);
-                            return (
-                                <div key={img.id} className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
 
-                            );
-                        });
-                        images.push(<div className="slide" data-cover={imgNameNew}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>);
-                    }
-                    else {
-                        images = item.images.map(img => {
-                            let imgName = "./storage/kiosk_images/" + img.image_name;
-                            console.log(imgName);
-                            return (
-                                <div key={img.id} className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
-                            );
-                        });
-                    }
+                    //renders tile providing above conditions are met
                     return (
-                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-fade" data-size="large" style={{ backgroundColor: "green" }}>
-                            {images}
-                        </div>
+                        <Tile key={item.id} item={item} handleClick={this.handleClick} />
                     );
                 });
 
