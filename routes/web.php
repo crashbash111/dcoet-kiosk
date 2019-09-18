@@ -12,6 +12,8 @@
 */
 Route::get( "/", "PagesController@index" );
 
+Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
+
 Route::get( "/pages/all", "PagesController@all" );
 Route::get( "/pages/allCategories", "PagesController@allCategories" );
 Route::get( "/allGames", "PagesController@allGames" );
