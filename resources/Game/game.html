@@ -212,156 +212,45 @@
 
         var pestList = {};
 
-        var imgPaths = {
-            bg1: "./assets/images/background1.png",
-            bg2: "./assets/images/background2.png",
-            bg3: "./assets/images/background3.png",
-            bg4: "./assets/images/background4.png",
-            bg5: "./assets/images/background5.png",
-            r1: "./assets/images/rubbish1.png",
-            r2: "./assets/images/rubbish2.png",
-            r3: "./assets/images/rubbish3.png",
-            rf1: "./assets/images/rubbish1F.png",
-            rf2: "./assets/images/rubbish2F.png",
-            rf3: "./assets/images/rubbish3F.png",
-            a1: "./assets/images/animal1.png",
-            a2: "./assets/images/animal2.png",
-            a3: "./assets/images/animal3.png",
-            af1: "./assets/images/animal1F.png",
-            af2: "./assets/images/animal2F.png",
-            af3: "./assets/images/animal3F.png",
-            wa1: "./assets/images/wateranimal1.png",
-            wa2: "./assets/images/wateranimal2.png",
-            wa3: "./assets/images/wateranimal3.png",
-            waf1: "./assets/images/wateranimal1F.png",
-            waf2: "./assets/images/wateranimal2F.png",
-            waf3: "./assets/images/wateranimal3F.png",
-            p1: "./assets/images/pest1.png",
-            p2: "./assets/images/pest2.png",
-            p3: "./assets/images/pest3.png",
-            pf1: "./assets/images/pest1F.png",
-            pf2: "./assets/images/pest2F.png",
-            pf3: "./assets/images/pest3F.png"
-        };
-
-        var img0 = new Image();
-        img0.src = imgPaths.bg1;
-
-        var img1 = new Image();
-        img1.src = imgPaths.bg2;
-
-        var img2 = new Image();
-        img2.src = imgPaths.bg3;
-
-        var img3 = new Image();
-        img3.src = imgPaths.bg4;
-
-        var img4 = new Image();
-        img4.src = imgPaths.bg5;
-
-        var img5 = new Image();
-        img5.src = imgPaths.r1;
-
-        var img6 = new Image();
-        img6.src = imgPaths.r2;
-
-        var img7 = new Image();
-        img7.src = imgPaths.r3;
-
-        var img8 = new Image();
-        img8.src = imgPaths.rf1;
-
-        var img9 = new Image();
-        img9.src = imgPaths.rf2;
-
-        var img10 = new Image();
-        img10.src = imgPaths.rf3;
-
-        var img11 = new Image();
-        img11.src = imgPaths.a1;
-
-        var img12 = new Image();
-        img12.src = imgPaths.a2;
-
-        var img13 = new Image();
-        img13.src = imgPaths.a3;
-
-        var img14 = new Image();
-        img14.src = imgPaths.af1;
-
-        var img15 = new Image();
-        img15.src = imgPaths.af2;
-
-        var img16 = new Image();
-        img16.src = imgPaths.af3;
-
-        var img17 = new Image();
-        img17.src = imgPaths.wa1;
-
-        var img18 = new Image();
-        img18.src = imgPaths.wa2;
-
-        var img19 = new Image();
-        img19.src = imgPaths.wa3;
-
-        var img20 = new Image();
-        img20.src = imgPaths.waf1;
-
-        var img21 = new Image();
-        img21.src = imgPaths.waf2;
-
-        var img22 = new Image();
-        img22.src = imgPaths.waf3;
-
-        var img23 = new Image();
-        img23.src = imgPaths.p1;
-
-        var img24 = new Image();
-        img24.src = imgPaths.p2;
-
-        var img25 = new Image();
-        img25.src = imgPaths.p3;
-
-        var img26 = new Image();
-        img26.src = imgPaths.pf1;
-
-        var img27 = new Image();
-        img27.src = imgPaths.pf2;
-
-        var img28 = new Image();
-        img28.src = imgPaths.pf3;
-
-        var imgList = [
-            img0,
-            img1,
-            img2,
-            img3,
-            img4,
-            img5,
-            img6,
-            img7,
-            img8,
-            img9,
-            img10,
-            img11,
-            img12,
-            img13,
-            img14,
-            img15,
-            img16,
-            img17,
-            img18,
-            img19,
-            img20,
-            img21,
-            img22,
-            img23,
-            img24,
-            img25,
-            img26,
-            img27,
-            img28
+        var imgPaths = [
+            "./assets/images/background1.png",
+            "./assets/images/background2.png",
+            "./assets/images/background3.png",
+            "./assets/images/background4.png",
+            "./assets/images/background5.png",
+            "./assets/images/rubbish1.png",
+            "./assets/images/rubbish2.png",
+            "./assets/images/rubbish3.png",
+            "./assets/images/rubbish1F.png",
+            "./assets/images/rubbish2F.png",
+            "./assets/images/rubbish3F.png",
+            "./assets/images/animal1.png",
+            "./assets/images/animal2.png",
+            "./assets/images/animal3.png",
+            "./assets/images/animal1F.png",
+            "./assets/images/animal2F.png",
+            "./assets/images/animal3F.png",
+            "./assets/images/wateranimal1.png",
+            "./assets/images/wateranimal2.png",
+            "./assets/images/wateranimal3.png",
+            "./assets/images/wateranimal1F.png",
+            "./assets/images/wateranimal2F.png",
+            "./assets/images/wateranimal3F.png",
+            "./assets/images/pest1.png",
+            "./assets/images/pest2.png",
+            "./assets/images/pest3.png",
+            "./assets/images/pest1F.png",
+            "./assets/images/pest2F.png",
+            "./assets/images/pest3F.png"
         ];
+
+        var imgList = [];
+
+        for (var i = 0; i < 29; i++){
+            var img = new Image();
+            img.src = imgPaths[i];
+            imgList.push(img);
+        }
 
         Image = function(id, imgId) {
             var img = new Image();

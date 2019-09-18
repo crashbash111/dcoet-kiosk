@@ -106,14 +106,16 @@
                 width: tempW,
                 height: tempH
             };
+            var deleted = false;
             for (var key in hiddenObjectList) {
                 if (testCollisionEntity(ent, hiddenObjectList[key])) {
                     delete hiddenObjectList[key];
                     hiddenObjects -= 1;
                     foundObjects += 1;
                     if (hiddenObjects >= 1){
-                        timeBonus += 3;
-                    }        
+                        timeBonus += 1;
+                    }
+                    deleted = true;        
                 } 
                 ctx.fillRect(
                     ent.x - tempW / 2,
@@ -123,7 +125,7 @@
                 );
             }
             delete ent;
-            if (!(testCollisionEntity(ent, hiddenObjectList[key]))) {
+            if (!deleted) {
                     timeBonus -= 1;
             }
         };
@@ -147,66 +149,30 @@
 
         var score;
 
-        var imgPaths = {
-            a1: "./assets/images/stats.png",
-            a2: "./assets/images/stats.png",
-            a3: "./assets/images/stats.png",
-            af1: "./assets/images/stats.png",
-            af2: "./assets/images/stats.png",
-            af3: "./assets/images/stats.png",
-            t1: "./assets/images/tree1.png",
-            t2: "./assets/images/tree2.png",
-            t3: "./assets/images/tree3.png",
-            t4: "./assets/images/tree4.png",
-            t5: "./assets/images/tree5.png"
-        };
+        var totalObjects = 0;
 
-        var img0 = new Image();
-        img0.src = imgPaths.a1;
-
-        var img1 = new Image();
-        img1.src = imgPaths.a2;
-
-        var img2 = new Image();
-        img2.src = imgPaths.a3;
-
-        var img3 = new Image();
-        img3.src = imgPaths.af1;
-
-        var img4 = new Image();
-        img4.src = imgPaths.af2;
-
-        var img5 = new Image();
-        img5.src = imgPaths.af3;
-
-        var img6 = new Image();
-        img6.src = imgPaths.t1;
-
-        var img7 = new Image();
-        img7.src = imgPaths.t2;
-
-        var img8 = new Image();
-        img8.src = imgPaths.t3;
-
-        var img9 = new Image();
-        img9.src = imgPaths.t4;
-
-        var img10 = new Image();
-        img10.src = imgPaths.t5;
-
-        var imgList = [
-            img0,
-            img1,
-            img2,
-            img3,
-            img4,
-            img5,
-            img6,
-            img7,
-            img8,
-            img9,
-            img10
+        var imgPaths = [
+            "./assets/images/animal1.png",
+            "./assets/images/animal2.png",
+            "./assets/images/animal3.png",
+            "./assets/images/animal1f.png",
+            "./assets/images/animal2f.png",
+            "./assets/images/animal3f.png",
+            "./assets/images/tree1.png",
+            "./assets/images/tree2.png",
+            "./assets/images/tree3.png",
+            "./assets/images/tree4.png",
+            "./assets/images/tree5.png"
         ];
+
+        var imgList = [];
+
+        for (var i = 0; i < 12; i++){
+            var img = new Image();
+            img.src = imgPaths[i];
+            imgList.push(img);
+        }
+        
 
         Image = function(id, imgId) {
             var img = new Image();
@@ -335,6 +301,23 @@
             document.getElementById("end").style.display = "none";
         };
 
+        highScore = function(){
+            var http = new XMLHttpRequest();
+            var url = 'http://101.100.138.143/dcoet-kiosk/public/findingGamePost';
+            var initials = 'ASS';
+            var params = 'name=' + initials + '&score=' + score;
+            http.open('POST', url, true);
+
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            http.onreadystatechange = function(){
+                if(http.readyState == 4 && http.status == 200){
+                    alert(http.responseText);
+                }
+            }
+            http.send(params);
+        }
+
         update = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             frameCount++;
@@ -344,7 +327,8 @@
             var roundTime = (timeOut - t) + timeBonus;
             var timeLeft = roundTime.toFixed(1);
 
-            score = (timeLeft - t) * 10;
+            //score = (timeLeft * 0.8) * 50;
+            score = (foundObjects * 10) - (hiddenObjects * 15) - (t * 5) + (timeLeft * 15);
 
             for (var key in hiddenObjectList) {
                 updateHiddenEntity(hiddenObjectList[key]);
@@ -354,7 +338,7 @@
                 updateTreeEntity(treeList[key]);
             }
 
-            if (foundObjects == 5) {
+            if (foundObjects == totalObjects) {
                 myStopFunction();
 
                 for (var key in hiddenObjectList) {
@@ -370,6 +354,7 @@
                     "There was " + hiddenObjects + " animal(s) left<br/><br/>" +
                     "You had " + timeLeft + " seconds remaining<br/><br/>" + 
                     "Final Score: " + score.toFixed(0);
+                highScore();
             }
 
             document.getElementById("stats").style.display = "block";
@@ -391,12 +376,11 @@
             treeList = {};
             hiddenObjects = 0;
             foundObjects = 0;
+            totalObjects = 0;
             hiddenObjectList = {};
-            randomlyGenerateObject();
-            randomlyGenerateTree();
-            for (hiddenObjects = 1; hiddenObjects < 5; hiddenObjects++) {
-                randomlyGenerateObject();
-            }
+            // for (hiddenObjects = 0; hiddenObjects < 5; hiddenObjects++) {
+            //     randomlyGenerateObject();
+            // }
             var numRows = 8;
             var numColumns = 12;
 
@@ -419,9 +403,15 @@
                         posY +
                             getRandomInt(
                                 -canvas.height * 0.02,
-                                canvas.height * 0.2
+                                canvas.height * 0.15
                             )
                     );
+                    var genAnimal = getRandomInt(0, 10);
+                    if (genAnimal == 1){
+                        randomlyGenerateObject();
+                        hiddenObjects += 1;
+                        totalObjects = hiddenObjects;
+                    }
                 }
             }
             myVar = setInterval(update, 40);
