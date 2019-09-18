@@ -21,7 +21,7 @@ export default class Tile extends React.Component {
         return (
             <Spring key={this.props.item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
                 {paramx => (
-                    <div key={this.props.item.id} onClick={() => this.handleClick(this.props.item.id)} data-role="tile" data-cover={this.props.x != -1 ? this.props.path : ""} data-size="large"
+                    <div key={this.props.item.id} onClick={() => this.props.handleClick(this.props.item.id)} data-role="tile" data-cover={this.props.x != -1 ? this.props.path : ""} data-size="large"
                         style={{
                             opacity: paramx.opacity, transform: paramx.transform, transition: this.props.tileConfig.fadeTime,
                             backgroundColor: this.props.tileConfig.defaultBackColour

@@ -124,7 +124,7 @@ export default class MainContent extends React.Component {
                         path = "./storage/kiosk_images/" + item.images[x].image_name;
                     }
                     return (
-                        <Tile key={item.id} item={item} x={x} path={path} tileConfig={this.tileConfig}></Tile>
+                        <Tile key={item.id} item={item} x={x} path={path} tileConfig={this.tileConfig} handleClick={this.handleClick}></Tile>
                     );
                     let images;
                     if (item.images.length < 2) {
