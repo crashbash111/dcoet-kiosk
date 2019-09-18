@@ -2,6 +2,8 @@ import React from "react";
 import Loader from "../Loader";
 import { Redirect } from "react-router-dom";
 import { Spring } from 'react-spring/renderprops';
+import Tile from "./Tile";
+import ItemRow from "../Admin/ItemRow";
 
 export default class MainContent extends React.Component {
     constructor(props) {
@@ -103,6 +105,9 @@ export default class MainContent extends React.Component {
 
                 //renders each individual tile
                 var pagesList = this.state.pages.map(item => {
+                    
+                    //console.log(x);
+
                     if (this.props.filter != "") {
                         if (!item.heading.toLowerCase().includes(this.props.filter.toLowerCase())) {
                             return null;
@@ -111,26 +116,15 @@ export default class MainContent extends React.Component {
                     else if (this.props.activeCategory != item.category_id) {
                         return null;
                     }
-
+            
                     let x = -1;
                     let path = "";
                     if (item.images.length > 0) {
                         x = this.getRandomInt(0, item.images.length - 1);
                         path = "./storage/kiosk_images/" + item.images[x].image_name;
                     }
-                    //console.log(x);
                     return (
-                        <Spring key={item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
-                            {paramx => (
-                                <div key={item.id} onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={x != -1 ? path : ""} data-size="large"
-                                    style={{ 
-                                        opacity: paramx.opacity, transform: paramx.transform, transition: this.tileConfig.fadeTime,
-                                        backgroundColor: this.tileConfig.defaultBackColour 
-                                    }}>
-                                    <h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3>
-                                </div>
-                            )}
-                        </Spring>
+                        <Tile key={item.id} item={item} x={x} path={path} tileConfig={this.tileConfig}></Tile>
                     );
                     let images;
                     if (item.images.length < 2) {
