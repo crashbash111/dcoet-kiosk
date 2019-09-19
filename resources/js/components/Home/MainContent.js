@@ -2,6 +2,7 @@ import React from "react";
 import Loader from "../Loader";
 import { Redirect } from "react-router-dom";
 import { Spring } from 'react-spring/renderprops';
+import Tile from './Tile';
 
 export default class MainContent extends React.Component {
     constructor(props) {
