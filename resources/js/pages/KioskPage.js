@@ -13,7 +13,8 @@ export default class KioskPage extends React.Component {
             loading: true,
             page: {},
             index: 0,
-            transitionTime: "0.5s"
+            transitionTime: "0.5s",
+            imgPath: ""
         };
 
         this.fade = this.fade.bind(this);
@@ -76,7 +77,7 @@ export default class KioskPage extends React.Component {
 
             let statTableItems = this.state.page.stats.map(item => {
                 return (
-                    <div key={ item.id }>
+                    <div key={item.id}>
                         <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                         <p style={{ textAlign: "center" }}>{item.value}</p>
                     </div>
@@ -86,7 +87,7 @@ export default class KioskPage extends React.Component {
             let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
-                    <div key={ item.id }>
+                    <div key={item.id}>
                         <embed src={filePath} />
                     </div>
                 )
@@ -101,16 +102,27 @@ export default class KioskPage extends React.Component {
                         <div className="hideScroll fixTransitions" style={props}>
                             <Palette src={imgPath}>
                                 {(palette) => (
-                                    <div onClick={this.handleClick} style={{ backgroundImage: "url(' " + imgPath + " ')", backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant, opacity: this.state.opacity, backgroundPosition: "center", backgroundSize: "cover", transition: "background-image " + this.state.transitionTime }}>
-                                        <div className="hideScroll" style={{ filter: "color blur(18px)", height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime, backgroundColor: palette.loading ? "lightgray" : palette.data.lightVibrant, color: palette.loading ? "black" : palette.data.darkMuted }}>
-                                            <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
-                                            <div style={{ textAlign: "center" }}>
-                                                <Link to="/" className="btn btn-lg btn-light" style={{transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime, backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted, color: palette.loading ? "black" : palette.data.lightVibrant}} role="button">Back to Home</Link>
+                                    //<div>
+                                        <div onClick={this.handleClick}
+                                            scr={imgPath}
+                                            onError={() => this.div.style = { backgroundImage: "url(' ./storage/ui/err.png ')" }}
+                                            style={{
+                                                backgroundImage: "url(' " + imgPath + "')",
+                                                backgroundColor: !palette.loading ? palette.data.lightVibrant : "",
+                                                opacity: this.state.opacity,
+                                                backgroundPosition: "center",
+                                                backgroundSize: "cover",
+                                                transition: "background-image " + this.state.transitionTime,
+                                            }} >
+                                            <div className="hideScroll" style={{ filter: "color blur(18px)", height: "100vh", width: "45vh", padding: "10px", overflowY: "scroll", overflowX: "hidden", opacity: "0.8", transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime, backgroundColor: !palette.loading ? palette.data.lightVibrant : "", color: !palette.loading ? palette.data.darkMuted : "" }}>
+                                                <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
+                                                <div style={{ textAlign: "center" }}>
+                                                    <Link to="/" className="btn btn-lg btn-light" style={{ transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime, backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted, color: palette.loading ? "black" : palette.data.lightVibrant }} role="button">Back to Home</Link>
+                                                </div>
+                                                {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                                                {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                                                <p style={{ fontSize: "25px" }}>{this.state.page.text}</p>
                                             </div>
-                                            {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                            {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
-                                            <p style={{ fontSize: "25px" }}>{this.state.page.text}</p>
-                                        </div>
                                     </div>
                                 )}
                             </Palette>
@@ -120,5 +132,10 @@ export default class KioskPage extends React.Component {
                 </Spring>
             );
         }
+    }
+
+    setBackupImg(event) {
+        console.log("error called");
+        event.style.backgroundImage = "url(' ./storage/ui/err.png ')";
     }
 }
