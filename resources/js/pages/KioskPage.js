@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { Spring } from 'react-spring/renderprops';
 import { Palette } from 'react-palette';
+import { blockStatement, whileStatement } from "@babel/types";
 
 export default class KioskPage extends React.Component {
 
@@ -16,7 +17,7 @@ export default class KioskPage extends React.Component {
             transitionTime: "0.5s",
             imgPath: "",
             sideOpen: true,
-            sideSize: "45",
+            sideSize: "25",
         };
 
         this.fade = this.fade.bind(this);
@@ -122,29 +123,46 @@ export default class KioskPage extends React.Component {
                                                 //styling for the side panel
                                                 filter: "color blur(18px)",
                                                 height: "100vh",
-                                                width: this.state.sideOpen ? this.state.sideSize + "vh" : "0px",
-                                                padding: this.state.sideOpen ? "10px 10px 10px 10px" : "10px 0px 10px 0px",
-                                                overflowY: "scroll",
+                                                width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                overflowY: "hidden",
                                                 overflowX: "hidden",
                                                 opacity: "0.8",
                                                 transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
                                                 backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
                                                 color: !palette.loading ? palette.data.darkMuted : "white",
                                             }}>
-                                            <h1 style={{ textAlign: "center", fontSize: "4em" }}>{this.state.page.heading}</h1>
-                                            <div style={{ textAlign: "center" }}>
-                                                <Link to="/" className="btn btn-lg btn-light"
-                                                    style={{
-                                                        transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime,
-                                                        backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted,
-                                                        color: palette.loading ? "black" : palette.data.lightVibrant,
-                                                        width: "160px",
-                                                    }}
-                                                    role="button">Back to Home</Link>
+                                            <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
+                                            
+                                            <div className="hideScroll" style={{
+                                                overflowY: "scroll",
+                                                width: "100%",
+                                                flex: "1",
+                                                padding: this.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
+                                                background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
+                                            }}>
+                                                {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                                                {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                                                <p style={{
+                                                    fontSize: "22px",
+                                                    textAlign: "justify",
+                                                    paddingBottom: "50px",
+                                                }}>{this.state.page.text}
+                                                </p>
                                             </div>
-                                            {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                            {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
-                                            <p style={{ fontSize: "25px", width: this.state.sideSize - 3 + "vh", display: "block" }}>{this.state.page.text}</p>
+                                            <Link to="/" className="returns"
+                                                style={{
+                                                    //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                                                    color: palette.loading ? "white" : palette.data.lightVibrant,
+                                                    padding: "8px 8px 8px 32px",
+                                                    width: this.state.sideSize + "vw",
+                                                    display: "block",
+                                                    bottom: "0px",
+                                                    position: "absolute",
+                                                    textDecoration: "none",
+                                                    fontSize: "25px",
+                                                }} >&#8592; Back to Home</Link>
                                         </div>
                                     </div>
                                 )}
