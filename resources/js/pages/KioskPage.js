@@ -106,63 +106,96 @@ export default class KioskPage extends React.Component {
                             <Palette src={imgPath}>
                                 {(palette) => (
                                     //<div>
-                                    <div onClick={this.handleClick}
-                                        scr={imgPath}
-                                        onError={() => this.div.style = { backgroundImage: "url(' ./storage/ui/err.png ')" }}
-                                        style={{
-                                            //styling for the background
-                                            backgroundImage: "url(' " + imgPath + "')",
-                                            backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
-                                            opacity: this.state.opacity,
-                                            backgroundPosition: "center",
-                                            backgroundSize: "cover",
-                                            transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
-                                        }} >
-                                        <div className="hideScroll"
+                                    <div>
+                                        <div onClick={this.handleClick}
+                                            scr={imgPath}
+                                            onError={() => this.div.style = { backgroundImage: "url(' ./storage/ui/err.png ')" }}
                                             style={{
-                                                //styling for the side panel
-                                                filter: "color blur(18px)",
-                                                height: "100vh",
-                                                width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                overflowY: "hidden",
-                                                overflowX: "hidden",
-                                                opacity: "0.8",
-                                                transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
-                                                backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
-                                                color: !palette.loading ? palette.data.darkMuted : "white",
-                                            }}>
-                                            <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
-                                            
-                                            <div className="hideScroll" style={{
-                                                overflowY: "scroll",
-                                                width: "100%",
-                                                flex: "1",
-                                                padding: this.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
-                                                background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
-                                            }}>
-                                                {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                                {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
-                                                <p style={{
-                                                    fontSize: "22px",
-                                                    textAlign: "justify",
-                                                    paddingBottom: "50px",
-                                                }}>{this.state.page.text}
-                                                </p>
-                                            </div>
-                                            <Link to="/" className="returns"
+                                                //styling for the background
+                                                backgroundImage: "url(' " + imgPath + "')",
+                                                backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                                                opacity: this.state.opacity,
+                                                backgroundPosition: "center",
+                                                backgroundSize: "cover",
+                                                transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
+                                            }} >
+                                            <div className="hideScroll"
                                                 style={{
-                                                    //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
-                                                    color: palette.loading ? "white" : palette.data.lightVibrant,
-                                                    padding: "8px 8px 8px 32px",
-                                                    width: this.state.sideSize + "vw",
-                                                    display: "block",
-                                                    bottom: "0px",
-                                                    position: "absolute",
-                                                    textDecoration: "none",
-                                                    fontSize: "25px",
-                                                }} >&#8592; Back to Home</Link>
+                                                    //styling for the side panel
+                                                    filter: "color blur(18px)",
+                                                    height: "100vh",
+                                                    width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    overflowY: "hidden",
+                                                    overflowX: "hidden",
+                                                    opacity: "0.8",
+                                                    transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
+                                                    backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
+                                                    color: !palette.loading ? palette.data.darkMuted : "white",
+                                                }}>
+
+                                                <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
+
+
+                                                <div className="hideScroll" style={{
+                                                    overflowY: "scroll",
+                                                    width: "100%",
+                                                    flex: "1",
+                                                    padding: this.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
+                                                    background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
+                                                }}>
+                                                    {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                                                    {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                                                    <p style={{
+                                                        fontSize: "22px",
+                                                        textAlign: "justify",
+                                                        paddingBottom: "50px",
+                                                        //width: this.state.sideSize - 3 + "vw",
+                                                       // overflowX: "hidden",
+                                                    }}>{this.state.page.text}
+                                                    </p>
+                                                </div>
+                                                <Link to="/" className="returns"
+                                                    style={{
+                                                        //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                                                        color: palette.loading ? "white" : palette.data.lightVibrant,
+                                                        padding: "8px 8px 8px 32px",
+                                                        width: this.state.sideSize + "vw",
+                                                        display: "block",
+                                                        bottom: "0px",
+                                                        position: "absolute",
+                                                        textDecoration: "none",
+                                                        fontSize: "25px",
+                                                        transition: this.state.transitionTime,
+                                                    }} >&#8592; Back to Home</Link>
+                                            </div>
+
+                                        </div>
+                                        <div style={{
+                                            position: "absolute",
+                                            right: "10px",
+                                            bottom: "10px",
+                                            textAlign: "right",
+                                        }}>
+                                            <button onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} className="btn btn-lg btn-light"
+                                                style={{
+                                                    transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime,
+                                                    backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted,
+                                                    color: palette.loading ? "black" : palette.data.lightVibrant,
+                                                    width: "160px",
+                                                    margin: "0px 0px 10px 0px",
+                                                }}
+                                                role="button">Toggle Sidebar</button>
+                                            <p style={{
+                                                color: "white",
+                                                margin: "0px",
+                                                backgroundColor: "rgba(0,0,0,.4)",
+                                                opacity: "50%",
+                                                padding: "10px",
+                                                }}>
+                                                &copy; Sample Copyright Information 2019 - All rights reserved
+                                            </p>
                                         </div>
                                     </div>
                                 )}
