@@ -18,6 +18,7 @@ export default class Create extends React.Component {
             photos: null,
             audios: null,
             editMode: (this.props.match != null && this.props.match.params != null && this.props.match.params.id != null),
+            error: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -55,7 +56,7 @@ export default class Create extends React.Component {
             
         }
         else if (name == "photos") {
-
+            //this.setState( { page: { ...this.state.page, image: event.target.files } } );
         }
 
         this.forceUpdate();
@@ -222,6 +223,13 @@ export default class Create extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        if( this.state.page.heading.length < 3 || this.state.page.text.length < 3 || this.state.page.category_id == -1 || !this.state.editMode && this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length < 1 )
+        {
+            this.setState( { error: true } );
+            return;
+        }
+
         let formData = new FormData();
         if (this.state.editMode) {
             formData.append("_method", "PUT");
@@ -299,7 +307,7 @@ export default class Create extends React.Component {
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ redirect: false });
+                this.setState({ redirect: true });
             })
             .catch(err => console.log(err.response.data));
     }
@@ -353,6 +361,14 @@ export default class Create extends React.Component {
             )
         });
 
+        let itemsNew = this.state.categories.map( item => {
+            return (
+                <option key={ item.id } value={ item.id }>
+                    { item.name }
+                </option>
+            )
+        })
+
         let count = 0;
 
         let statFields = this.state.page.stats.map((item, idx) => {
@@ -382,9 +398,6 @@ export default class Create extends React.Component {
         });
 
         let statTableItems = this.state.page.stats.map(item => {
-
-
-
             return (
                 <div key={ item.id }>
                     <h3 style={{ textAlign: "center" }}>{item.name}</h3>
@@ -477,7 +490,7 @@ export default class Create extends React.Component {
                         <br />
                         <div style={{ alignContent: "center", justifyContent: "center", textAlign: "center" }}>
                             <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
-                                <div className="form-group">
+                                <div className="form-group" id="heading">
                                     <label><h3>Heading</h3>
                                         <input className="form-control" type="text" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
                                         <p style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
@@ -491,7 +504,10 @@ export default class Create extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <h3>Category</h3>
-                                    {items}
+                                    <select className="form-control" name="category_id" value={ this.state.page.category_id } onChange={ this.handleChange }>
+                                        <option disabled hidden value="-1">--Select a category--</option>
+                                        {itemsNew}
+                                    </select>
                                     <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
                                 </div>
                                 <div>
@@ -558,7 +574,12 @@ export default class Create extends React.Component {
                                         :
                                         null
                                 }
-                                <button>Submit</button>
+                                { this.state.error ? 
+                                    <div>Make sure to fulfill all validation rules and try again.</div>
+                                    :
+                                    null
+                                }
+                                <button className="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>

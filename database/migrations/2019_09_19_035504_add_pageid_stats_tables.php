@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ActuallyAddPageIdToAudioTable extends Migration
+class AddPageidStatsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ActuallyAddPageIdToAudioTable extends Migration
      */
     public function up()
     {
-        Schema::table('audio', function (Blueprint $table) {
+        Schema::table('stats', function (Blueprint $table) {
             $table->integer( "page_id" );
         });
     }
@@ -25,7 +25,7 @@ class ActuallyAddPageIdToAudioTable extends Migration
      */
     public function down()
     {
-        Schema::table('audio', function (Blueprint $table) {
+        Schema::table('stats', function (Blueprint $table) {
             $table->dropColumn( "page_id" );
         });
     }

@@ -144,28 +144,30 @@ class PagesController extends Controller
 
         //return $files;
 
-        foreach ($files as $file) {
-            //return "there";
-            $fileNameWithExt = $file->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        if (is_array($files)) {
+            foreach ($files as $file) {
+                //return "there";
+                $fileNameWithExt = $file->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '']);
+                $fileName = strtr($fileName, [' ' => '']);
 
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedFileExtension);
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedFileExtension);
 
-            if ($check) {
-                //return $file;
+                if ($check) {
+                    //return $file;
 
-                $a = new Audio;
-                //filename to store
-                $fileNameToStore = $fileName . "_" . time() . "." . $extension;
-                //upload image
-                $path = $file->storeAs('/public/audio_files', $fileNameToStore);
-                $a->filepath = $fileNameToStore;
-                $a->page_id = $page->id;
+                    $a = new Audio;
+                    //filename to store
+                    $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                    //upload image
+                    $path = $file->storeAs('/public/audio_files', $fileNameToStore);
+                    $a->filepath = $fileNameToStore;
+                    $a->page_id = $page->id;
 
-                $a->save();
+                    $a->save();
+                }
             }
         }
 
@@ -298,7 +300,7 @@ class PagesController extends Controller
                 }
             }
         }
-        
+
         $statsToDelete = $request->input("statsToDelete");
 
         $x = 0;

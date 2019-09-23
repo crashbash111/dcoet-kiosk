@@ -14,6 +14,7 @@ export default class CreateCategory extends React.Component
             editMode: (this.props.match != null && this.props.match.params != null && this.props.match.params.id != null),
             redirect: false,
             loading: false,
+            error: false,
         };
 
         this.handleChange = this.handleChange.bind( this );
@@ -29,6 +30,12 @@ export default class CreateCategory extends React.Component
 
     handleSubmit( event )
     {
+        if( this.state.name.length < 3 || this.state.description.length < 3 )
+        {
+            this.setState( { error: true } );
+            return;
+        }
+
         console.log( this.state );
         event.preventDefault();
         let formData = new FormData();
@@ -79,12 +86,22 @@ export default class CreateCategory extends React.Component
                             <label><h3>Name</h3>
                                 <input className="form-control" type="text" name="name" onChange={ this.handleChange } value={ this.state.name } placeholder="Enter a category name..." />
                             </label>
+                            <p style={{ color: "red", display: this.state.name.length > 3 ? "none" : "block" }}>Name is required</p>
                         </div>
                         <div className="form-group">
                             <label><h3>Description</h3>
                                 <textarea rows="10" className="form-control" name="description" onChange={ this.handleChange } value={ this.state.description } placeholder="Enter a category description..." />
                             </label>
+                            <p style={{ color: "red", display: this.state.description.length > 3 ? "none" : "block" }}>Description is required</p>
                         </div>
+                        {
+                            this.state.error ?
+                            <div>
+                                Make sure to check all validation rules and try again.
+                            </div>
+                            :
+                            null
+                        }
                         <button className="btn btn-primary">Submit</button>
                     </form>
                 </div>

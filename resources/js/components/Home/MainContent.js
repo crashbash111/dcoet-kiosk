@@ -2,6 +2,7 @@ import React from "react";
 import Loader from "../Loader";
 import { Redirect } from "react-router-dom";
 import { Spring } from 'react-spring/renderprops';
+import Tile from './Tile';
 
 export default class MainContent extends React.Component {
     constructor(props) {
@@ -15,11 +16,7 @@ export default class MainContent extends React.Component {
             redirect: false,
         };
 
-        //shows config for rendering tiles
-        this.tileConfig = {
-            fadeTime: "0.1s",
-            defaultBackColour: "#2794C3",
-        };
+
 
         this.handleClick = this.handleClick.bind(this);
     }
@@ -34,7 +31,7 @@ export default class MainContent extends React.Component {
             .then(response => response.json())
             .then(data => this.setState({ games: data, loading: false }));
 
-        //console.log(this.state.games);
+        console.log(this.state.games);
     }
 
     fetchData() {
@@ -45,11 +42,7 @@ export default class MainContent extends React.Component {
         this.setState({ redirectId: i, redirect: true });
     }
 
-    getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+
 
     render() {
 
@@ -83,7 +76,7 @@ export default class MainContent extends React.Component {
 
                 if (this.props.activeCategory == 999) {
                     var gamesList = this.state.games.map(item => {
-                        //console.log(item.img);
+                        console.log(item.img);
                         return (
                             <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
                                 <h3 style={{ textShadow: "2px 2px #111111" }}>{item.Name}</h3>
@@ -103,62 +96,19 @@ export default class MainContent extends React.Component {
 
                 //renders each individual tile
                 var pagesList = this.state.pages.map(item => {
+                    //Checks for search in progress
                     if (this.props.filter != "") {
                         if (!item.heading.toLowerCase().includes(this.props.filter.toLowerCase())) {
                             return null;
                         }
                     }
+                    //only renders if active category is equal
                     else if (this.props.activeCategory != item.category_id) {
                         return null;
                     }
-
-                    let x = -1;
-                    let path = "";
-                    if (item.images.length > 0) {
-                        x = this.getRandomInt(0, item.images.length - 1);
-                        path = "./storage/kiosk_images/" + item.images[x].image_name;
-                    }
-                    //console.log(x);
+                    //renders tile providing above conditions are met
                     return (
-                        <Spring key={item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
-                            {paramx => (
-                                <div key={item.id} onClick={() => this.handleClick(item.id)} data-role="tile" data-cover={x != -1 ? path : ""} data-size="large"
-                                    style={{ 
-                                        opacity: paramx.opacity, transform: paramx.transform, transition: this.tileConfig.fadeTime,
-                                        backgroundColor: this.tileConfig.defaultBackColour 
-                                    }}>
-                                    <h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3>
-                                </div>
-                            )}
-                        </Spring>
-                    );
-                    let images;
-                    if (item.images.length < 2) {
-                        let imgNameNew;
-                        images = item.images.map(img => {
-                            let imgName = "./storage/kiosk_images/" + img.image_name;
-                            imgNameNew = imgName;
-                            console.log(imgName);
-                            return (
-                                <div key={img.id} className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
-
-                            );
-                        });
-                        images.push(<div className="slide" data-cover={imgNameNew}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>);
-                    }
-                    else {
-                        images = item.images.map(img => {
-                            let imgName = "./storage/kiosk_images/" + img.image_name;
-                            console.log(imgName);
-                            return (
-                                <div key={img.id} className="slide" data-cover={imgName}><h3 style={{ textShadow: "2px 2px #111111" }}>{item.heading}</h3></div>
-                            );
-                        });
-                    }
-                    return (
-                        <div onClick={() => this.handleClick(item.id)} data-role="tile" data-effect="animate-fade" data-size="large" style={{ backgroundColor: "green" }}>
-                            {images}
-                        </div>
+                        <Tile key={item.id} item={item} handleClick={this.handleClick} />
                     );
                 });
 
