@@ -18,16 +18,14 @@ canvasClick = function(event) {
         width: tempW,
         height: tempH
     };
-    var deleted = false;
     for (var key in unpairedCardList) {
-        if (testCollisionEntity(ent, unpairedCardList[key])) {
-            delete unpairedCardList[key];
+        if (testCollisionEntity(ent, unpairedCardList[key])) {          
+            //delete unpairedCardList[key];
             unpairedCards -= 1;
             pairedCards += 1;
             if (pairedCards >= 1){
                 timeBonus += 1;
             }
-            deleted = true;        
         } 
         ctx.fillRect(
             ent.x - tempW / 2,
@@ -37,9 +35,6 @@ canvasClick = function(event) {
         );
     }
     delete ent;
-    if (!deleted) {
-            timeBonus -= 1;
-    }
 };
 
 canvas.addEventListener("click", canvasClick);
@@ -69,21 +64,53 @@ var imgPaths = [
 
 var imgList = [];
 
+function shuffle(array) {
+  var currentCard = array.length, temp, randomCard;
+  while (currentCard > 0) {
+    randomCard = Math.floor(Math.random() * currentCard);
+    currentCard -= 1;
+    temp = array[currentCard]; 
+    array[currentCard] = array[randomCard]; 
+    array[randomCard] = temp; 
+  }
+  return array;
+}
+var cardeSelected = 0;
+var pairs = [];
+for (var i = 1; i < imgPaths.length; i++){
+  pairs.push(imgPaths[i], imgPaths[i]);
+  cardeSelected += 1;
+}
+shuffle(pairs);
+console.log(pairs);
+
 for (var i = 0; i < 5; i++){
   var img = new Image();
-  img.src = imgPaths[i];
+  img.src = pairs[i];
   imgList.push(img);
 }
 
 Image = function(id, imgId) {
   var img = new Image();
-  img.src = imgPaths[imgId];
+  img.src = pairs[imgId];
 
   imgList[id] = img;
 };
 
+// var pairs = [];
+// for (var a = 1; a < imgPaths.length; a++){
+//   var selectedCard = imgPaths[a];
+//   for (var b = 1; b < imgPaths.length; b++){
+//     if (selectedCard == imgPaths[b]){
+//       var cardPair = selectedCard + imgPaths[b];
+//       pairs.push(cardPair);
+//     }
+//   }
+// }
+// console.log(pairs);
+
 CardObject = function(id, x, y, width, height, imgId) {
-  var tree = {
+  var card = {
       x: x,
       y: y,
       id: id,
@@ -91,7 +118,7 @@ CardObject = function(id, x, y, width, height, imgId) {
       height: height,
       imgId: imgId
   };
-  cardList[id] = card;
+  unpairedCardList[id] = card;
 };
 
 function getRandomInt(min, max) {
@@ -103,10 +130,11 @@ function getRandomInt(min, max) {
 generateCard = function(posX, posY) {
   var x = posX;
   var y = posY;
-  var width = canvas.width / 7.05
-  var height = canvas.height / 5;
-  var id = cardID++;
-  var imgId = getRandomInt(0, 5);
+  var width = canvas.width / 9
+  var height = canvas.height / 4.5;
+  var id = unpairedCardID++;
+
+  var imgId = cardeSelected;
   CardObject(id, x, y, width, height, imgId);
 };
 
@@ -201,7 +229,7 @@ update = function() {
           "There was " + unpairedCards/2 + " pair(s) left<br/><br/>" +
           "You had " + timeLeft + " seconds remaining<br/><br/>" + 
           "Final Score: " + score.toFixed(0);
-      highScore();
+      //highScore();
   }
 
   document.getElementById("stats").style.display = "block";
@@ -223,31 +251,25 @@ startNewGame = function() {
   pairedCards = 0;
   totalCards = 0;
   unpairedCardList = {};
-  var numRows = 4;
-  var numColumns = 5;
+  var numRows = 2;
+  var numColumns = 4;
 
   for (
-      var posX = canvas.width * 0.01;
-      posX < canvas.width * 0.99;
+      var posX = canvas.width * 0.1;
+      posX < canvas.width * 0.9;
       posX += canvas.width * (1 / numColumns)
   ) {
       for (
-          var posY = canvas.height * 0.45;
-          posY < canvas.height * 0.99;
+          var posY = canvas.height * 0.08;
+          posY < canvas.height * 0.8;
           posY += canvas.height * (1 / numRows)
       ) {
           generateCard(
-              posX +
-                  getRandomInt(
-                      -canvas.width * 0.01,
-                      canvas.width * 0.01
-                  ),
-              posY +
-                  getRandomInt(
-                      -canvas.height * 0.02,
-                      canvas.height * 0.15
-                  )
+              posX + canvas.width * 0.005,
+              posY + canvas.height * 0.15
           );
+          unpairedCards += 1;
+          totalCards = unpairedCards;
       }
   }
   myVar = setInterval(update, 40);
