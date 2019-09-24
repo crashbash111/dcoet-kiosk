@@ -74,7 +74,7 @@ export default class MainContent extends React.Component {
             }
             else {
 
-                if (this.props.activeCategory == 999) {
+                if (this.props.activeCategory == -2) {
                     var gamesList = this.state.games.map(item => {
                         console.log(item.img);
                         return (

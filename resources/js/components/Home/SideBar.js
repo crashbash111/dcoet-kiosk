@@ -5,7 +5,9 @@ import SideBarEntry from "./SideBar/SideBarEntry";
 export default class SideBar extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            loading: true,
+        };
         //console.log(props);
     }
 
@@ -18,13 +20,10 @@ export default class SideBar extends React.Component {
         }
         );
 
-
-
-
-        let gameId = 999;
+        let gameId = -2;
 
         sideBarEntries.push(<SideBarEntry key={gameId} id={gameId} isActive={this.props.activeCategory == gameId} name="Games" description="Fun interactive activites." handleChange={this.props.handleChange} />);
-
+        
         return (
             <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateRows: "repeat(6, 75px)", overflowY: "scroll", overflowX: "hidden" }}>
                 {sideBarEntries}

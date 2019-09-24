@@ -11,8 +11,7 @@ export default class Loader extends React.Component{
         return(
             <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
                 { props => (
-                    <div style={props}>
-                        <h1>Loading</h1>
+                    <div className="loader" style={props}> 
                     </div>
                 )}
                 
