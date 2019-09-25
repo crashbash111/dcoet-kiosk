@@ -9,11 +9,6 @@
     <meta id="csrf-meta" name="csrf-token" content="{{ csrf_token() }}" />
     <script>window.Laravel = { csrfToken: {{csrf_token()}} }</script>
 
-    <script>
-    console.log( document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
-    console.log( window.Laravel.csrfToken );
-    </script>
-
     <style>
         body {
             font-family: Helvetica;
@@ -298,6 +293,33 @@
         document.getElementById("end").style.display = "none";
     };
 
+    var highscores = [{"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},{"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},{"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},{"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},{"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"}];
+
+    getHighScores = function() {
+    // Creating the XMLHttpRequest object
+    var request = new XMLHttpRequest();
+
+    // Instantiating the request object
+    request.open( "GET", "/dcoet-kiosk/public/highscores" );
+
+    request.setRequestHeader( 'X-CSRF-Token', document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
+    request.setRequestHeader('Content-type', 'application/json');
+
+    // Defining event listener for readystatechange event
+    request.onreadystatechange = function() {
+        // Check if the request is compete and was successful
+        if(this.readyState === 4 && this.status === 200) {
+            // Inserting the response from server into an HTML element
+            highscores = this.response;
+            console.log( highscores );
+        }
+    };
+
+    // Sending the request to the server
+    request.send();
+    }
+    //getHighScores();
+
     highScore = function () {
         var http = new XMLHttpRequest();
         var url = '/dcoet-kiosk/public/findingGamePost';
@@ -351,8 +373,12 @@
                 "You found " + foundObjects + " animal(s)<br/><br/>" +
                 "There was " + hiddenObjects + " animal(s) left<br/><br/>" +
                 "You had " + timeLeft + " seconds remaining<br/><br/>" +
-                "Final Score: " + score.toFixed(0);
-            highScore();
+                "Final Score: " + score.toFixed(0) + " points<br/><br/>" +
+                "Highest score on record: " + highscores[ 0 ].score + " points<br/><br/>";
+
+            //getHighScores();
+
+            //highScore();
         }
 
         document.getElementById("stats").style.display = "block";
