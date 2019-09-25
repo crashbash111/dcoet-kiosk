@@ -10689,6 +10689,10 @@ a.text-dark:focus {
 body {
   color: white;
   background-color: #1e1e1e;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 ul {
@@ -11004,5 +11008,45 @@ video {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   transform-style: preserve-3d;
+}
+
+.loader {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 4em);
+  width: 6em;
+  height: 6em;
+  border: 1.1em solid rgba(0, 0, 0, 0.2);
+  border-left: 1.1em solid #00455c;
+  border-radius: 50%;
+  -webkit-animation: load8 1.1s infinite linear;
+          animation: load8 1.1s infinite linear;
+  transition: opacity 0.3s;
+}
+
+.loader h1 {
+  -webkit-animation: "";
+          animation: "";
+  transform: "";
+}
+
+@-webkit-keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 

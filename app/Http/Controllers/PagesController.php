@@ -70,7 +70,7 @@ class PagesController extends Controller
         $this->validate($request, [
             "heading" => "required",
             "text" => "required",
-            "photos" => "required|max:10000",
+            "photos" => "required|max:1000000",
         ]);
 
         $page = new Page;
@@ -80,21 +80,11 @@ class PagesController extends Controller
 
         $page->save();
 
-        //return $request->all();
-
-        //return $request->all();
-
         $allowedFileExtension = ['jpg', 'jpeg', 'png'];
-        //$files = $request->all()[ "photos" ];
 
         $files = $request->file("photos");
 
-        //return $request->file( "image_1" );
-
-        //return $files;
-
         foreach ($files as $file) {
-            //return "there";
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
@@ -104,8 +94,6 @@ class PagesController extends Controller
             $check = in_array($extension, $allowedFileExtension);
 
             if ($check) {
-                //return $file;
-
                 $img = new Image;
                 //filename to store
                 $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -114,6 +102,7 @@ class PagesController extends Controller
                 $img->alt = "";
                 $img->image_name = $fileNameToStore;
                 $img->page_id = $page->id;
+                $img->copyright = "JonoThen Kerr";
 
                 $img->save();
             }
@@ -140,13 +129,8 @@ class PagesController extends Controller
 
         $files = $request->file("audios");
 
-        //return $request->file( "image_1" );
-
-        //return $files;
-
         if (is_array($files)) {
             foreach ($files as $file) {
-                //return "there";
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
@@ -156,7 +140,6 @@ class PagesController extends Controller
                 $check = in_array($extension, $allowedFileExtension);
 
                 if ($check) {
-                    //return $file;
 
                     $a = new Audio;
                     //filename to store
@@ -217,7 +200,15 @@ class PagesController extends Controller
 
         //remove old images
 
+        foreach( $request->input( "copyright_ids" ) as $copy )
+        {
+            $im = Image::find( $copy );
+            $im->copyright = $request->input( "copyright_texts" )[ array_search( $copy, $request->input( "copyright_ids" ) ) ];
+            $im->save();
+        }
+
         if ($request->hasFile("photos")) {
+            $x = 0;
             foreach ($files as $file) //add new images
             {
                 //return "there";
@@ -240,6 +231,7 @@ class PagesController extends Controller
                     $img->alt = "";
                     $img->image_name = $fileNameToStore;
                     $img->page_id = $page->id;
+                    $img->copyright = "";
 
                     $img->save();
                 }

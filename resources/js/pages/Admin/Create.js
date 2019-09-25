@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 
 import { Redirect } from "react-router-dom";
+import { runInThisContext } from "vm";
 
 export default class Create extends React.Component {
     constructor(props) {
@@ -38,8 +39,14 @@ export default class Create extends React.Component {
         this.handleImageDelete = this.handleImageDelete.bind(this);
         this.handleImageDeleteUndo = this.handleImageDeleteUndo.bind(this);
 
-        this.handleAudioDelete = this.handleAudioDelete.bind( this );
-        this.handleAudioDeleteUndo = this.handleAudioDeleteUndo.bind( this );
+        this.handleAudioDelete = this.handleAudioDelete.bind(this);
+        this.handleAudioDeleteUndo = this.handleAudioDeleteUndo.bind(this);
+
+        this.addCopyright = this.addCopyright.bind( this );
+        this.addCopyrightNew = this.addCopyrightNew.bind( this );
+
+        this.handleCopyrightChange = this.handleCopyrightChange.bind( this );
+        this.handleCopyrightChangeNew = this.handleCopyrightChangeNew.bind( this );
 
         this.photos = React.createRef();
         this.audios = React.createRef();
@@ -53,13 +60,74 @@ export default class Create extends React.Component {
         const { name, value, type, files } = event.target;
 
         if (name == "audios") {
-            
+
         }
         else if (name == "photos") {
             //this.setState( { page: { ...this.state.page, image: event.target.files } } );
+
+            let temp = [];
+
+            for( var i = 0; i < this.photos.current.files.length; ++i )
+            {
+                temp.push( { id: i, text: "" } );
+            }
+
+            this.setState(
+                {
+                    page: {
+                        ...this.state.page,
+                        copyrightNew: temp,
+                    }
+                }
+            );
         }
 
         this.forceUpdate();
+
+        console.log(this.state);
+    }
+
+    addCopyright = idx => event => {
+        event.preventDefault();
+        this.setState(
+            {
+                page: { ...this.state.page, copyright: this.state.page.copyright.concat([{ id: idx, text: "" }]) }
+            }
+        );
+    }
+
+    addCopyrightNew = idx => event => {
+        event.preventDefault();
+        this.setState(
+            {
+                page: { ...this.state.page, copyrightNew: this.state.page.copyrightNew.concat([{ id: idx, text: "" }]) }
+            }
+        );
+    }
+
+    handleCopyrightChange = idx => event => {
+        let newCopyright = this.state.page.copyright.map((copy, sidx) => {
+
+            if (idx !== sidx) return copy;
+            return { ...copy, text: event.target.value };
+
+        });
+
+        this.setState({ page: { ...this.state.page, copyright: newCopyright } });
+
+        console.log(this.state);
+    }
+
+    handleCopyrightChangeNew = idx => event => {
+        console.log( "Here " + idx );
+        let newCopyright = this.state.page.copyrightNew.map((copy, sidx) => {
+
+            if (idx !== sidx) return copy;
+            return { ...copy, text: event.target.value };
+
+        });
+
+        this.setState({ page: { ...this.state.page, copyrightNew: newCopyright } });
 
         console.log(this.state);
     }
@@ -224,11 +292,12 @@ export default class Create extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        if( this.state.page.heading.length < 3 || this.state.page.text.length < 3 || this.state.page.category_id == -1 || !this.state.editMode && this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length < 1 )
-        {
-            this.setState( { error: true } );
+        if (this.state.page.heading.length < 3 || this.state.page.text.length < 3 || this.state.page.category_id == -1 || !this.state.editMode && this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length < 1) {
+            this.setState({ error: true });
             return;
         }
+
+        var copyright = null;
 
         let formData = new FormData();
         if (this.state.editMode) {
@@ -240,7 +309,9 @@ export default class Create extends React.Component {
 
             this.state.imagesToDelete.map(item => {
                 formData.append("imagesToDelete[]", item);
-            })
+            });
+
+            copyright = this.state.page.copyright;
         }
         formData.append("heading", this.state.page.heading);
         formData.append("text", this.state.page.text);
@@ -274,26 +345,36 @@ export default class Create extends React.Component {
 
         var audios = Array();
 
-        if( this.audios.current != null )
-        {
+        if (this.audios.current != null) {
             audios = this.audios.current.files;
         }
 
-        for( var i = 0; i < audios.length; ++i )
-        {
-            var audio = audios[ i ];
+        for (var i = 0; i < audios.length; ++i) {
+            var audio = audios[i];
 
-            console.log( audio );
+            console.log(audio);
 
             if (!audio.type.match("audio.*")) {
                 continue;
             }
-            if( this.state.audiosToDelete.includes( audio.id ) ){
+            if (this.state.audiosToDelete.includes(audio.id)) {
                 continue;
             }
 
-            formData.append( "audios[]", audio, audio.name );
+            formData.append("audios[]", audio, audio.name);
         }
+
+        if( copyright != null )
+        {
+            for( var i = 0; i < copyright.length; ++i )
+            {
+                formData.append( "copyright_ids[]", copyright[ i ].id );
+                formData.append( "copyright_texts[]", copyright[ i ].text );
+            }
+        }
+
+        //console.log( formData );
+        //return;
 
         //formData.append( "photos[]", Array.from( this.photos.current.files ) );
         //console.log(this.photos.current.files);
@@ -323,10 +404,18 @@ export default class Create extends React.Component {
 
             fetch("./pages/" + this.props.match.params.id)
                 .then(response => response.json())
-                .then(data => { this.setState({ page: data }); console.log(data); });
+                .then(data => {
+                    let copyright = [];
+                    for( var i = 0; i < data.images.length; ++i )
+                    {
+                        copyright.push( { id: data.images[ i ].id, text: data.images[ i ].copyright } );
+                    }
+                    this.setState( { page: { ...data, copyright: copyright } } );
+                    console.log(data);
+                });
         }
         else {
-            this.setState({ page: { heading: "", text: "", image: [], category_id: -1, stats: [], audios: [] }, loading: false });
+            this.setState({ page: { heading: "", text: "", images: [], category_id: -1, stats: [], audios: [], copyright: [], copyrightNew: [], }, loading: false });
         }
 
     }
@@ -361,10 +450,10 @@ export default class Create extends React.Component {
             )
         });
 
-        let itemsNew = this.state.categories.map( item => {
+        let itemsNew = this.state.categories.map(item => {
             return (
-                <option key={ item.id } value={ item.id }>
-                    { item.name }
+                <option key={item.id} value={item.id}>
+                    {item.name}
                 </option>
             )
         })
@@ -378,7 +467,7 @@ export default class Create extends React.Component {
             let softDeleted = this.state.statsToDelete.includes(item.id);
 
             return (
-                <div key={ item.id } style={softDeleted ? { opacity: "0.4" } : null}>
+                <div key={item.id} style={softDeleted ? { opacity: "0.4" } : null}>
                     {count > 1 ? <hr /> : null}
                     <div style={{ display: "grid", gridTemplateColumns: "auto 50px" }}>
                         <div>
@@ -399,7 +488,7 @@ export default class Create extends React.Component {
 
         let statTableItems = this.state.page.stats.map(item => {
             return (
-                <div key={ item.id }>
+                <div key={item.id}>
                     <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                     <p style={{ textAlign: "center" }}>{item.value}</p>
                 </div>
@@ -417,18 +506,22 @@ export default class Create extends React.Component {
             for (var y = 0; y < x; ++y) {
                 let imgPath = URL.createObjectURL(this.photos.current.files[y]);
 
-                currentImages.push(<div key={ y }>
+                currentImages.push(<div key={y}>
                     <img src={imgPath} style={{ height: "100px" }} />
-
+                    <input type="text" name="copyright" placeholder="Copyright information here" onChange={this.handleCopyrightChangeNew(y)} value={this.state.page.copyrightNew[y].text} />
                 </div>);
             }
         }
 
         let oldImages = null;
 
-        if (this.state.page.image != null && this.state.page.image.length > 0) {
+        if (this.state.page.images != null && this.state.page.images.length > 0) {
 
-            oldImages = this.state.page.image.map((item, idx) => {
+            console.log( "here" );
+
+            oldImages = this.state.page.images.map((item, idx) => {
+
+                //this.addCopyright( idx );
 
                 let imgPath = "./storage/kiosk_images/" + item.image_name;
 
@@ -437,8 +530,9 @@ export default class Create extends React.Component {
                 let deletedStyle = { opacity: "0.4" };
 
                 return (
-                    <div key={ item.id } style={softDeleted ? deletedStyle : null}>
+                    <div key={item.id} style={softDeleted ? deletedStyle : null}>
                         <img src={imgPath} style={{ width: "100px" }} />
+                        <input type="text" name="copyright" value={ this.state.page.copyright[ idx ].text } onChange={this.handleCopyrightChange(idx)} placeholder="Copyright information here..." />
                         <button onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
                     </div>
                 );
@@ -456,7 +550,7 @@ export default class Create extends React.Component {
             for (var y = 0; y < x; ++y) {
                 let audioPath = URL.createObjectURL(this.audios.current.files[y]);
 
-                currentAudios.push(<div key={ y }>
+                currentAudios.push(<div key={y}>
                     <embed src={audioPath} />
                 </div>);
             }
@@ -474,9 +568,9 @@ export default class Create extends React.Component {
                 let deletedStyle = { opacity: "0.4" };
 
                 return (
-                    <div key={ item.id } style={ softDeleted ? deletedStyle : null }>
+                    <div key={item.id} style={softDeleted ? deletedStyle : null}>
                         <embed src={audioPath} />
-                        <button onClick={ softDeleted ? this.handleAudioDeleteUndo( idx ) : this.handleAudioDelete( idx ) }>Delete</button>
+                        <button onClick={softDeleted ? this.handleAudioDeleteUndo(idx) : this.handleAudioDelete(idx)}>Delete</button>
                     </div>
                 );
             });
@@ -504,7 +598,7 @@ export default class Create extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <h3>Category</h3>
-                                    <select className="form-control" name="category_id" value={ this.state.page.category_id } onChange={ this.handleChange }>
+                                    <select className="form-control" name="category_id" value={this.state.page.category_id} onChange={this.handleChange}>
                                         <option disabled hidden value="-1">--Select a category--</option>
                                         {itemsNew}
                                     </select>
@@ -524,7 +618,7 @@ export default class Create extends React.Component {
                                     <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
                                 </div>
                                 {
-                                    this.state.page.image != null ?
+                                    this.state.page.images != null ?
                                         <div>
                                             <div>
                                                 Current Images
@@ -574,7 +668,7 @@ export default class Create extends React.Component {
                                         :
                                         null
                                 }
-                                { this.state.error ? 
+                                {this.state.error ?
                                     <div>Make sure to fulfill all validation rules and try again.</div>
                                     :
                                     null
