@@ -187,6 +187,8 @@ export default class KioskPage extends React.Component {
                                                     margin: "0px 0px 10px 0px",
                                                 }}
                                                 role="button">Toggle Sidebar</button>
+                                            {
+                                                this.state.page.images[this.state.index].copyright != null ?
                                             <p style={{
                                                 color: "white",
                                                 margin: "0px",
@@ -194,8 +196,9 @@ export default class KioskPage extends React.Component {
                                                 opacity: "50%",
                                                 padding: "10px",
                                                 }}>
-                                                &copy; Sample Copyright Information 2019 - All rights reserved
-                                            </p>
+                                                &copy; {this.state.page.images[this.state.index].copyright}
+                                            </p>:
+                                        null}
                                         </div>
                                     </div>
                                 )}

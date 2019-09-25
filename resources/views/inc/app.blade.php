@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 100%; width: 100%">
+@section( 'head' )
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script>window.Laravel = { csrfToken: '{{csrf_token()}}' }</script>
 </head>
+@show
 <body style="height: 100%; width: 100%">
     @yield( 'content' )
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

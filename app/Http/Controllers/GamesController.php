@@ -8,6 +8,11 @@ use App\FindingGameScores;
 
 class GamesController extends Controller
 {
+    public function findingGame()
+    {
+        return view( "pages.Game.finding" );
+    }
+
     public function findingGamePost( Request $request )
     {
         $this->validate( $request, [
@@ -24,6 +29,6 @@ class GamesController extends Controller
 
         $highscore->save();
 
-        return $highscore;
+        return response()->json( json_encode( $highscore ) );
     }
 }

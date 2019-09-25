@@ -84389,7 +84389,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -94870,6 +94870,14 @@ function (_React$Component) {
           formData.append("copyright_ids[]", copyright[i].id);
           formData.append("copyright_texts[]", copyright[i].text);
         }
+      }
+
+      var copyrightNew = this.state.page.copyrightNew;
+
+      if (copyrightNew != null) {
+        for (var i = 0; i < copyrightNew.length; ++i) {
+          formData.append("copyright_new[]", copyrightNew[i].text);
+        }
       } //console.log( formData );
       //return;
       //formData.append( "photos[]", Array.from( this.photos.current.files ) );
@@ -97032,7 +97040,7 @@ function (_React$Component) {
                   margin: "0px 0px 10px 0px"
                 },
                 role: "button"
-              }, "Toggle Sidebar"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+              }, "Toggle Sidebar"), _this4.state.page.images[_this4.state.index].copyright != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
                 style: {
                   color: "white",
                   margin: "0px",
@@ -97040,7 +97048,7 @@ function (_React$Component) {
                   opacity: "50%",
                   padding: "10px"
                 }
-              }, "\xA9 Sample Copyright Information 2019 - All rights reserved")))
+              }, "\xA9 ", _this4.state.page.images[_this4.state.index].copyright) : null))
             );
           }));
         });

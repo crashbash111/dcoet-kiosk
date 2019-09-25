@@ -42,11 +42,11 @@ export default class Create extends React.Component {
         this.handleAudioDelete = this.handleAudioDelete.bind(this);
         this.handleAudioDeleteUndo = this.handleAudioDeleteUndo.bind(this);
 
-        this.addCopyright = this.addCopyright.bind( this );
-        this.addCopyrightNew = this.addCopyrightNew.bind( this );
+        this.addCopyright = this.addCopyright.bind(this);
+        this.addCopyrightNew = this.addCopyrightNew.bind(this);
 
-        this.handleCopyrightChange = this.handleCopyrightChange.bind( this );
-        this.handleCopyrightChangeNew = this.handleCopyrightChangeNew.bind( this );
+        this.handleCopyrightChange = this.handleCopyrightChange.bind(this);
+        this.handleCopyrightChangeNew = this.handleCopyrightChangeNew.bind(this);
 
         this.photos = React.createRef();
         this.audios = React.createRef();
@@ -67,9 +67,8 @@ export default class Create extends React.Component {
 
             let temp = [];
 
-            for( var i = 0; i < this.photos.current.files.length; ++i )
-            {
-                temp.push( { id: i, text: "" } );
+            for (var i = 0; i < this.photos.current.files.length; ++i) {
+                temp.push({ id: i, text: "" });
             }
 
             this.setState(
@@ -119,7 +118,7 @@ export default class Create extends React.Component {
     }
 
     handleCopyrightChangeNew = idx => event => {
-        console.log( "Here " + idx );
+        console.log("Here " + idx);
         let newCopyright = this.state.page.copyrightNew.map((copy, sidx) => {
 
             if (idx !== sidx) return copy;
@@ -364,12 +363,19 @@ export default class Create extends React.Component {
             formData.append("audios[]", audio, audio.name);
         }
 
-        if( copyright != null )
+        if (copyright != null) {
+            for (var i = 0; i < copyright.length; ++i) {
+                formData.append("copyright_ids[]", copyright[i].id);
+                formData.append("copyright_texts[]", copyright[i].text);
+            }
+        }
+
+        let copyrightNew = this.state.page.copyrightNew;
+        if (copyrightNew != null)
         {
-            for( var i = 0; i < copyright.length; ++i )
+            for (var i = 0; i < copyrightNew.length; ++i)
             {
-                formData.append( "copyright_ids[]", copyright[ i ].id );
-                formData.append( "copyright_texts[]", copyright[ i ].text );
+                formData.append("copyright_new[]", copyrightNew[i].text);
             }
         }
 
@@ -406,11 +412,10 @@ export default class Create extends React.Component {
                 .then(response => response.json())
                 .then(data => {
                     let copyright = [];
-                    for( var i = 0; i < data.images.length; ++i )
-                    {
-                        copyright.push( { id: data.images[ i ].id, text: data.images[ i ].copyright } );
+                    for (var i = 0; i < data.images.length; ++i) {
+                        copyright.push({ id: data.images[i].id, text: data.images[i].copyright });
                     }
-                    this.setState( { page: { ...data, copyright: copyright } } );
+                    this.setState({ page: { ...data, copyright: copyright } });
                     console.log(data);
                 });
         }
@@ -517,7 +522,7 @@ export default class Create extends React.Component {
 
         if (this.state.page.images != null && this.state.page.images.length > 0) {
 
-            console.log( "here" );
+            console.log("here");
 
             oldImages = this.state.page.images.map((item, idx) => {
 
@@ -532,7 +537,7 @@ export default class Create extends React.Component {
                 return (
                     <div key={item.id} style={softDeleted ? deletedStyle : null}>
                         <img src={imgPath} style={{ width: "100px" }} />
-                        <input type="text" name="copyright" value={ this.state.page.copyright[ idx ].text } onChange={this.handleCopyrightChange(idx)} placeholder="Copyright information here..." />
+                        <input type="text" name="copyright" value={this.state.page.copyright[idx].text} onChange={this.handleCopyrightChange(idx)} placeholder="Copyright information here..." />
                         <button onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
                     </div>
                 );

@@ -200,11 +200,14 @@ class PagesController extends Controller
 
         //remove old images
 
-        foreach( $request->input( "copyright_ids" ) as $copy )
+        if (is_array($request->input("copyright_ids")))
         {
-            $im = Image::find( $copy );
-            $im->copyright = $request->input( "copyright_texts" )[ array_search( $copy, $request->input( "copyright_ids" ) ) ];
-            $im->save();
+            foreach ($request->input("copyright_ids") as $copy)
+            {
+                $im = Image::find($copy);
+                $im->copyright = $request->input("copyright_texts")[array_search($copy, $request->input("copyright_ids"))];
+                $im->save();
+            }
         }
 
         if ($request->hasFile("photos")) {
@@ -231,7 +234,7 @@ class PagesController extends Controller
                     $img->alt = "";
                     $img->image_name = $fileNameToStore;
                     $img->page_id = $page->id;
-                    $img->copyright = "";
+                    $img->copyright = $request->input("copyright_new")[$x++];
 
                     $img->save();
                 }
