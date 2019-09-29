@@ -1,12 +1,12 @@
-* {
+/* * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
+} */
 
 body {
-  height: 100vh;
-  display: flex;
+  /* height: 100vh;
+  display: flex; */
   /* background: lightgreen; */
   font-family: Helvetica;
   height: 100%;
@@ -45,7 +45,7 @@ html {
   }
 }
 
-.memory-game {
+/* .memory-game {
   width: 640px;
   height: 640px;
   margin: auto;
@@ -87,4 +87,4 @@ html {
 
 .front-face {
   transform: rotateY(180deg);
-}
+} */

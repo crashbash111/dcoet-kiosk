@@ -25,6 +25,44 @@
                 -o-background-size: cover;
                 background-size: cover;
             }
+            .btn-up {
+                background: url( './assets/images/button_up.png' );
+                background-size: 40% 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .btn-down {
+                background: url( './assets/images/button_down.png' );
+                background-size: 40% 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                grid-gap: 3.5vmin;
+            }
+            .grid-container > div{
+                text-align: center;
+            }
+            .grid-container-score {
+                display: grid;
+                grid-template-columns: auto auto auto;
+            }
+
+            .grid-new {
+                display: grid;
+                grid-template-rows: 4vmin 8vmin 4vmin;
+            }
+
+            .grid-new > div {
+                border: 1px solid black;
+                font-size: 3vmin;
+            }
+
+            .grid-new > .big {
+                font-size: 6vmin;
+            }
             @keyframes menuAnim {
                 from {
                     top: -500px;
@@ -49,12 +87,19 @@
             <p id="instructionText" style="font-size:3.5vmin"></p>
             <button
                 id="startBtn"
-                style="font-size:4.5vmin;"
+                style="font-size:3.5vmin;"
                 onclick="startNewGame()"
             >
                 Start Game
             </button>
-            <button style="font-size:4.5vmin;" onclick="window.close()">
+            <button
+                id="leaderBtn"
+                style="font-size:3.5vmin;"
+                onclick="leaderboard()"
+            >
+                Leaderboard
+            </button>
+            <button style="font-size:3.5vmin;" onclick="window.close()">
                 Close
             </button>
         </div>
@@ -77,17 +122,87 @@
             <p id="endText" style="font-size:3.5vmin"></p>
             <button
                 id="newBtn"
-                style="font-size:4.5vmin;"
+                style="font-size:3.5vmin;"
                 onclick="startNewGame()"
             >
                 New Game
             </button>
             <button
+                id="leaderBtn"
+                style="font-size:3.5vmin;"
+                onclick="leaderboard()"
+            >
+                Leaderboard
+            </button>
+            <button
+                id="entryBtn"
+                style="font-size:3.5vmin;"
+                onclick="scoreEntry()"
+            >
+                Submit Score
+            </button>
+            <button
                 id="mainBtn"
-                style="font-size:4.5vmin;"
+                style="font-size:3.5vmin;"
                 onclick="mainMenu()"
             >
                 Main Menu
+            </button>
+        </div>
+        <div
+            id="leaderboard"
+            style="position:absolute; top:10%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">HIGHSCORES</h1>
+            <p id="leaderText" style="font-size:2.5vmin"></p>
+            <p id="highscoreText" style="font-size:2.5vmin"></p>
+            <button
+                id="startBtn"
+                style="font-size:3.5vmin;"
+                onclick="startNewGame()"
+            >
+                Start Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:3.5vmin;"
+                onclick="mainMenu()"
+            >
+                Main Menu
+            </button>
+        </div>
+        <div
+            id="newScore"
+            style="position:absolute; top:10%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">NEW HIGHSCORE</h1>
+            <div class="grid-container-score">
+                <div class="grid-new">
+                    <div id="btn0" class="btn-up"></div>
+                    <div id="letter1" class="big"></div>
+                    <div id="btn1" class="btn-down"></div>
+                </div>
+                <div class="grid-new">
+                    <div id="btn2" class="btn-up"></div>
+                    <div id="letter2" class="big"></div>
+                    <div id="btn3" class="btn-down"></div>
+                </div>  
+                <div class="grid-new">
+                    <div id="btn4" class="btn-up"></div>
+                    <div id="letter3" class="big"></div>
+                    <div id="btn5" class="btn-down"></div>
+                </div>
+              </div>
+            <button
+                id="submitBtn"
+                style="font-size:3.5vmin;"
+                onclick="scoreSubmit()"
+            >
+                Submit
             </button>
         </div>
     </body>
@@ -126,11 +241,18 @@
             }
             delete ent;
             if (!deleted) {
-                    timeBonus -= 1;
+                timeBonus -= 1;
+            }
+            for (var key in letters){
+                if (testCollisionEntity(ent, letters[key])){
+                    console.log(letters[key]);
+                }
             }
         };
 
         canvas.addEventListener("click", canvasClick);
+
+        var submitLetters = [0, 0, 0];
 
         var timeWhenGameStarted = Date.now();
         var timeOut = 2;
@@ -165,7 +287,28 @@
             "./assets/images/tree5.png"
         ];
 
+        var letters = [];
+        for (var i = 65; i <= 90; i++){
+            letters.push(String.fromCharCode(i));
+        }
+        console.log(letters);
+
         var imgList = [];
+
+        var highscores = [
+            {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
+            {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+        ];
+
+        highscores[ 0 ].score
 
         for (var i = 0; i < 11; i++){
             var img = new Image();
@@ -173,7 +316,6 @@
             imgList.push(img);
         }
         
-
         Image = function(id, imgId) {
             var img = new Image();
             img.src = imgPaths[imgId];
@@ -205,6 +347,30 @@
             hiddenObjectList[id] = object;
         };
 
+        LettersSet = function(){
+            for (var i = 0; i < 3; i++){
+                document.getElementById('letter' + (i+1)).innerHTML = String.fromCharCode(65 + submitLetters[i]);
+            }
+        }
+
+        LettersIterate = function(event, id, dir){
+            if (submitLetters[id] + dir <= -1){
+                submitLetters[id] = 26;
+            }
+            submitLetters[id] = (submitLetters[id] + dir) % 26;
+            LettersSet();
+            console.log(submitLetters[id]);
+        };
+
+        for (var i = 0; i < 6; i++){
+            document.getElementById("btn"+i).addEventListener('click', (function(passedInElement, passedInElement2) {
+                return function(e) {
+                    LettersIterate(e, passedInElement, passedInElement2); 
+                };
+            }) 
+            (Math.floor(i/2), Math.pow(-1, i)), false);
+        }
+        
         function getRandomInt(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
@@ -279,6 +445,19 @@
             );
         };
 
+        showMenu = function(id){
+            var elementName = [
+                "instructions",
+                "stats",
+                "end",
+                "leaderboard",
+                "newScore"
+            ]
+            for (var i = 0; i < elementName.length; i++){
+                document.getElementById(elementName[i]).style.display = elementName[i] == id ? "block" : "none";
+            }  
+        };
+
         document.getElementById("instructions").style.display = "block";
         document.getElementById("instructionText").innerHTML =
             "There are 5 animals hidden in the scene<br/><br/>" +
@@ -286,14 +465,41 @@
             "Try to find all of them before time runs out!";
 
         mainMenu = function() {
-            document.getElementById("instructions").style.display = "block";
+            showMenu("instructions");
             document.getElementById("instructionText").innerHTML =
                 "There are 5 animals hidden in the scene<br/><br/>" +
                 "Tap them when you find them<br/><br/>" +
                 "Try to find all of them before time runs out!";
-            document.getElementById("stats").style.display = "none";
-            document.getElementById("end").style.display = "none";
         };
+
+        scoreEntry = function(){
+            showMenu("newScore");
+            LettersSet();
+        };
+
+        scoreSubmit = function() {
+            leaderboard();
+            //add submit functionality XDXDXDXDXD
+        };
+
+        leaderboard = function(){
+            showMenu("leaderboard");
+            document.getElementById("highscoreText").innerHTML = "";
+            var rankColumn = "<div><h3>RANK</h3>";
+            var nameColumn = "<div><h3>NAME</h3>";
+            var scoreColumn = "<div><h3>SCORE</h3>";
+            var b = "<br/><br/>";
+            for (var i = 0; i < highscores.length; i++){
+                rankColumn = rankColumn + (i+1) + b;
+                nameColumn = nameColumn + highscores[i].initials + b;
+                scoreColumn = scoreColumn + highscores[i].score + b;
+            }
+            rankColumn = rankColumn + "</div>";
+            nameColumn = nameColumn + "</div>";
+            scoreColumn = scoreColumn + "</div>";
+            document.getElementById("highscoreText").innerHTML = "<div class='grid-container'>"
+            + rankColumn + nameColumn + scoreColumn + "</div>";
+        }
 
         highScore = function(){
             var http = new XMLHttpRequest();
@@ -359,8 +565,7 @@
         startNewGame = function() {
             ctx.canvas.width = innerWidth;
             ctx.canvas.height = innerHeight;
-            document.getElementById("end").style.display = "none";
-            document.getElementById("instructions").style.display = "none";
+            showMenu("");
             timeWhenGameStarted = Date.now();
             timeBonus = 0;
             frameCount = 0;

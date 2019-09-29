@@ -8,6 +8,11 @@ var canvas = document.getElementById("ctx");
 var ctx = canvas.getContext("2d");
 ctx.font = "30px Helvetica";
 
+var firstKey = -1;
+var cardIndex = -1;
+
+var pairs = [];
+
 canvasClick = function(event) {
     var tempW = 50;
     var tempH = 50;
@@ -18,14 +23,47 @@ canvasClick = function(event) {
         width: tempW,
         height: tempH
     };
+    console.log( unpairedCardList );
     for (var key in unpairedCardList) {
         if (testCollisionEntity(ent, unpairedCardList[key])) {          
             //delete unpairedCardList[key];
-            unpairedCards -= 1;
-            pairedCards += 1;
-            if (pairedCards >= 1){
-                timeBonus += 1;
+            console.log( key );
+            //console.log( unpairedCardList[key].imgId );
+            // for (var i = 0; i < 9; i++){
+            //   unpairedCardList[key].width -= (canvas.width/90);
+            //   setTimeout(function(){},5000);
+            // }
+
+            console.log(unpairedCardList[key].width);
+            if (key == cardIndex){
+              console.log("sdfg");
+              break;
             }
+
+            console.log( pairs );
+
+            //firstKey = pairs[key];
+            console.log(pairs[key]);
+
+            if( firstKey == -1 )
+            {
+               firstKey = pairs[key];
+               cardIndex = key;
+            }
+            else
+            {
+              if( firstKey == pairs[key] )
+              {
+                unpairedCards -= 1;
+                pairedCards += 1;
+                console.log( "match" );
+              }
+              firstKey = -1;
+              cardIndex = -1;
+            }
+            // if (pairedCards >= 1){
+            //     timeBonus += 1;
+            // }
         } 
         ctx.fillRect(
             ent.x - tempW / 2,
@@ -75,39 +113,15 @@ function shuffle(array) {
   }
   return array;
 }
-var cardeSelected = 0;
-var pairs = [];
-for (var i = 1; i < imgPaths.length; i++){
-  pairs.push(imgPaths[i], imgPaths[i]);
-  cardeSelected += 1;
-}
-shuffle(pairs);
-console.log(pairs);
 
-for (var i = 0; i < 5; i++){
-  var img = new Image();
-  img.src = pairs[i];
-  imgList.push(img);
-}
 
-Image = function(id, imgId) {
-  var img = new Image();
-  img.src = pairs[imgId];
 
-  imgList[id] = img;
-};
+// Image = function(id, imgId) {
+//   var img = new Image();
+//   img.src = pairs[imgId];
 
-// var pairs = [];
-// for (var a = 1; a < imgPaths.length; a++){
-//   var selectedCard = imgPaths[a];
-//   for (var b = 1; b < imgPaths.length; b++){
-//     if (selectedCard == imgPaths[b]){
-//       var cardPair = selectedCard + imgPaths[b];
-//       pairs.push(cardPair);
-//     }
-//   }
-// }
-// console.log(pairs);
+//   imgList[id] = img;
+// };
 
 CardObject = function(id, x, y, width, height, imgId) {
   var card = {
@@ -121,20 +135,13 @@ CardObject = function(id, x, y, width, height, imgId) {
   unpairedCardList[id] = card;
 };
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-generateCard = function(posX, posY) {
+generateCard = function(posX, posY, count) {
   var x = posX;
   var y = posY;
   var width = canvas.width / 9
   var height = canvas.height / 4.5;
   var id = unpairedCardID++;
-
-  var imgId = cardeSelected;
+  var imgId = count;
   CardObject(id, x, y, width, height, imgId);
 };
 
@@ -251,8 +258,25 @@ startNewGame = function() {
   pairedCards = 0;
   totalCards = 0;
   unpairedCardList = {};
+  firstKey = -1;
+  cardIndex = -1;
   var numRows = 2;
   var numColumns = 4;
+  var count = 0;
+  unpairedCardID = 0;
+  imgList = [];
+  pairs = [];
+  for (var i = 1; i < imgPaths.length; i++){
+    pairs.push(imgPaths[i], imgPaths[i]);
+  }
+  shuffle(pairs);
+  console.log(pairs);
+  
+  for (var i = 0; i < pairs.length; i++){
+    var img = new Image(); 
+    img.src = pairs[i];
+    imgList.push(img);
+  }
 
   for (
       var posX = canvas.width * 0.1;
@@ -260,16 +284,19 @@ startNewGame = function() {
       posX += canvas.width * (1 / numColumns)
   ) {
       for (
-          var posY = canvas.height * 0.08;
+          var posY = canvas.height * 0.1;
           posY < canvas.height * 0.8;
           posY += canvas.height * (1 / numRows)
       ) {
           generateCard(
               posX + canvas.width * 0.005,
-              posY + canvas.height * 0.15
+              posY + canvas.height * 0.15,
+              imgId = count
+              //imgId = Math.floor(count/2)
           );
           unpairedCards += 1;
           totalCards = unpairedCards;
+          count++
       }
   }
   myVar = setInterval(update, 40);
