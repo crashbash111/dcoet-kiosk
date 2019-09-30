@@ -14,7 +14,7 @@ Route::get( "/", "PagesController@index" );
 
 Route::get( "/findingGame", [ "uses" => "GamesController@findingGame" ] );
 Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
-Route::get( "/highscores", [ "uses" => "GamesController@highscores" ] );
+Route::get( "/findinghighscores", [ "uses" => "GamesController@findinghighscores" ] );
 
 //Route::get( "/video", [ "uses" => "PagesController@video" ] );
 

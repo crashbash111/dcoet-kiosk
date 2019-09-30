@@ -32,8 +32,8 @@ class GamesController extends Controller
         return response()->json( json_encode( $highscore ) );
     }
 
-    public function highscores()
+    public function findinghighscores()
     {
-        return json_encode( FindingGameScores::orderBy( "score", "DESC" )->get() );
+        return json_encode( FindingGameScores::orderBy( "score", "DESC" )->orderBy( "initials", "ASC" )->orderBy( "created_at", "DESC" )->take(10)->get() );
     }
 }
