@@ -148,8 +148,8 @@ export default class KioskPage extends React.Component {
                                                     {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
                                                     {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
                                                     <p style={{
-                                                        fontSize: "22px",
-                                                        textAlign: "justify",
+                                                        fontSize: "28px",
+                                                        textAlign: "left",
                                                         paddingBottom: "50px",
                                                         //width: this.state.sideSize - 3 + "vw",
                                                        // overflowX: "hidden",
@@ -187,18 +187,16 @@ export default class KioskPage extends React.Component {
                                                     margin: "0px 0px 10px 0px",
                                                 }}
                                                 role="button">Toggle Sidebar</button>
-                                            {
-                                                this.state.page.images[this.state.index].copyright != null ?
                                             <p style={{
                                                 color: "white",
                                                 margin: "0px",
                                                 backgroundColor: "rgba(0,0,0,.4)",
-                                                opacity: "50%",
+                                                opacity: this.state.page.images[this.state.index].copyright == null || this.state.page.images[this.state.index].copyright == "" ? "0" : "1",
                                                 padding: "10px",
+                                                transition: "opacity " + this.state.transitionTime,
                                                 }}>
                                                 &copy; {this.state.page.images[this.state.index].copyright}
-                                            </p>:
-                                        null}
+                                            </p>
                                         </div>
                                     </div>
                                 )}
