@@ -10,6 +10,7 @@ import CategoryIndex from "./pages/CategoryIndex";
 import Create from "./pages/Admin/Create";
 import CreateCategory from "./pages/Admin/CreateCategory";
 import CreatePowerpoint from "./pages/Admin/CreatePowerpoint";
+import CreateVideo from "./pages/Admin/CreateVideo";
 import EditPage from "./pages/Admin/EditPage";
 import Home from "./pages/Home";
 import KioskPage from "./pages/KioskPage";
@@ -38,6 +39,7 @@ ReactDOM.render(
             <Route exact path="/powerpoint/:id" component={PowerpointPage} />
             <Route exact path="/powerpoints" component={Powerpoints} />
             <Route exact path="/video" component={VideoPage} />
+            <Route exact path="/admin/createVideo/:id?" component={CreateVideo} />
         </Layout>
     </HashRouter>,
 app );

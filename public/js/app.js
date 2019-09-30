@@ -84389,7 +84389,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92942,14 +92942,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Admin/Create */ "./resources/js/pages/Admin/Create.js");
 /* harmony import */ var _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Admin/CreateCategory */ "./resources/js/pages/Admin/CreateCategory.js");
 /* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
-/* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
-/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
-/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
-/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
-/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
-/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
-/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
-/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
+/* harmony import */ var _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/CreateVideo */ "./resources/js/pages/Admin/CreateVideo.js");
+/* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
+/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
+/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
+/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
+/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
+/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
+/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
+/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
 
  //import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
@@ -92969,15 +92970,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var app = document.getElementById('app');
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Layout__WEBPACK_IMPORTED_MODULE_13__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Layout__WEBPACK_IMPORTED_MODULE_14__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/",
-  component: _pages_Home__WEBPACK_IMPORTED_MODULE_11__["default"]
+  component: _pages_Home__WEBPACK_IMPORTED_MODULE_12__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/splash",
-  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_17__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk",
@@ -92989,7 +92991,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk/:c/:id",
-  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_13__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   path: "/birds/:id",
   component: _pages_Birds__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -93012,15 +93014,19 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoint/:id",
-  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_14__["default"]
+  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_15__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoints",
-  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_15__["default"]
+  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_16__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/video",
-  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_18__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/admin/createVideo/:id?",
+  component: _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_10__["default"]
 }))), app);
 
 /***/ }),
@@ -93468,10 +93474,14 @@ function (_React$Component) {
       loading: false,
       pages: [],
       games: [],
+      videos: [],
       redirectId: -1,
-      redirect: false
+      redirect: false,
+      redirectType: -1 //0 for page, 1 for game, 2 for video
+
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleVideoClick = _this.handleVideoClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -93494,7 +93504,14 @@ function (_React$Component) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
-          games: data,
+          games: data
+        });
+      });
+      fetch("./videos").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this2.setState({
+          videos: data,
           loading: false
         });
       });
@@ -93507,6 +93524,16 @@ function (_React$Component) {
     key: "handleClick",
     value: function handleClick(i) {
       this.setState({
+        redirectType: 0,
+        redirectId: i,
+        redirect: true
+      });
+    }
+  }, {
+    key: "handleVideoClick",
+    value: function handleVideoClick(i) {
+      this.setState({
+        redirectType: 2,
         redirectId: i,
         redirect: true
       });
@@ -93567,6 +93594,25 @@ function (_React$Component) {
                 overflowY: "scroll"
               }
             }, gamesList);
+          }
+
+          if (this.props.activeCategory == -3) {
+            var videoList = this.state.videos.map(function (item) {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                key: item.id,
+                item: item,
+                handleClick: _this3.handleVideoClick
+              });
+            });
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              style: {
+                height: "100%",
+                display: "grid",
+                gridTemplateColumns: "auto auto auto",
+                gridRowGap: "15px",
+                overflowY: "scroll"
+              }
+            }, videoList);
           } //renders each individual tile
 
 
@@ -95751,6 +95797,221 @@ function (_React$Component) {
   }]);
 
   return CreatePowerpoint;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin/CreateVideo.js":
+/*!*************************************************!*\
+  !*** ./resources/js/pages/Admin/CreateVideo.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CreateVideo; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var CreateVideo =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CreateVideo, _React$Component);
+
+  function CreateVideo(props) {
+    var _this;
+
+    _classCallCheck(this, CreateVideo);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CreateVideo).call(this, props));
+    _this.state = {
+      title: "",
+      description: "",
+      video: null,
+      copyright: "",
+      length: -1
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.postData = _this.postData.bind(_assertThisInitialized(_this));
+    _this.loadMetaData = _this.loadMetaData.bind(_assertThisInitialized(_this));
+    _this.submit = _this.submit.bind(_assertThisInitialized(_this));
+    _this.video = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
+  }
+
+  _createClass(CreateVideo, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value,
+          files = _event$target.files;
+
+      if (name != "video") {
+        this.setState(_defineProperty({}, name, value));
+      } else {
+        this.setState(_defineProperty({}, name, files[0]));
+      }
+
+      console.log(this.state);
+    }
+  }, {
+    key: "postData",
+    value: function postData(duration) {
+      var _this2 = this;
+
+      var formData = new FormData();
+
+      if (this.state.title.length < 3 || this.state.description.length < 3 || this.video == null || this.video.current == null || this.video.current.files == null || this.video.current.files.length < 1) {
+        return;
+      }
+
+      formData.append("title", this.state.title);
+      formData.append("description", this.state.description);
+      formData.append("copyright", this.state.copyright);
+      formData.append("length", duration);
+      formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        url: "./videos",
+        //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: formData
+      }).then(function (response) {
+        console.log("from form submit ", response);
+
+        _this2.setState({
+          redirect: true
+        });
+      })["catch"](function (err) {
+        return console.log(err.response.data);
+      });
+    }
+  }, {
+    key: "loadMetaData",
+    value: function loadMetaData(video) {
+      window.URL.revokeObjectURL(video.src);
+      var duration = video.duration;
+      duration = Math.round(duration);
+      console.log(duration);
+      return;
+      this.postData(duration);
+    }
+  }, {
+    key: "submit",
+    value: function submit(video) {
+      console.log(video);
+      return;
+      window.URL.revokeObjectURL(video.src);
+      var duration = video.duration; //this.setState( { length: duration } );F
+
+      this.postData(duration);
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(event) {
+      event.preventDefault();
+      var video = document.createElement('video');
+      video.preload = 'metadata'; //video.onloadedmetadata = this.loadMetaData( video );
+
+      video.onloadedmetadata = this.submit(video);
+      video.src = URL.createObjectURL(this.video.current.files[0]);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        encType: "multipart/form-data"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "title",
+        onChange: this.handleChange,
+        value: this.state.title,
+        placeholder: "Enter title here..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.title.length > 2 ? "none" : "block"
+        }
+      }, "Title requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "description",
+        onChange: this.handleChange,
+        value: this.state.description,
+        placeholder: "Enter description here..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.description.length > 2 ? "none" : "block"
+        }
+      }, "Description requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Video File"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "file",
+        name: "video",
+        accept: "video/*",
+        onChange: this.handleChange,
+        value: this.state.file,
+        ref: this.video
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.video != null ? "none" : "block"
+        }
+      }, "Video file is required"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Copyright Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "copyright",
+        onChange: this.handleChange,
+        value: this.state.copyright,
+        placeholder: "Enter copyright information here..."
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary"
+      }, "Submit")));
+    }
+  }]);
+
+  return CreateVideo;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
