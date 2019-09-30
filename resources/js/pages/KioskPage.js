@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { Spring } from 'react-spring/renderprops';
+import { useSpring, animated, interpolate } from 'react-spring';
 import { Palette } from 'react-palette';
+import { useGesture } from 'react-with-gesture';
 import { blockStatement, whileStatement } from "@babel/types";
 
 export default class KioskPage extends React.Component {
@@ -18,10 +20,12 @@ export default class KioskPage extends React.Component {
             imgPath: "",
             sideOpen: true,
             sideSize: "25",
+            sidebarColor: "",
         };
 
         this.fade = this.fade.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.slider = this.slider.bind(this);
     }
 
     componentDidMount() {
@@ -58,6 +62,32 @@ export default class KioskPage extends React.Component {
                 { opacity: prevState.opacity - 0.04 }
             );
         });
+    }
+
+    slider(bg,{ children }) {
+        const [bind, { delta, down }] = useGesture()
+        const { x } = useSpring({
+            x: down ? delta[0] : 0,
+            immediate: name => down && name === 'x'
+        })
+        //const avSize = x.interpolate({ map: Math.abs, range: [50, 300], output: ['scale(0.5)', 'scale(1)'], extrapolate: 'clamp' })
+        return (
+            <animated.div {...bind()} class="item" onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
+                position: "absolute",
+                //backgroundColor: bg,
+                top: "calc(50% - 60px)",
+                borderRadius: "0px 15px 15px 0px",
+                width: "45px",
+                height: "120px",
+                opacity: "0.8",
+                //transition: this.state.transitionTime,
+                left: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
+                transform: interpolate([x], (x) => `translateX(${x}px)`),
+            }}>
+                {children}
+
+            </animated.div>
+        )
     }
 
     render() {
@@ -105,7 +135,6 @@ export default class KioskPage extends React.Component {
                         <div className="hideScroll fixTransitions" style={props}>
                             <Palette src={imgPath}>
                                 {(palette) => (
-                                    //<div>
                                     <div>
                                         <div onClick={this.handleClick}
                                             scr={imgPath}
@@ -122,7 +151,7 @@ export default class KioskPage extends React.Component {
                                             <div className="hideScroll"
                                                 style={{
                                                     //styling for the side panel
-                                                    filter: "color blur(18px)",
+                                                    //filter: "color blur(60px)",
                                                     height: "100vh",
                                                     width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
                                                     display: "flex",
@@ -152,7 +181,7 @@ export default class KioskPage extends React.Component {
                                                         textAlign: "left",
                                                         paddingBottom: "50px",
                                                         //width: this.state.sideSize - 3 + "vw",
-                                                       // overflowX: "hidden",
+                                                        // overflowX: "hidden",
                                                     }}>{this.state.page.text}
                                                     </p>
                                                 </div>
@@ -172,13 +201,26 @@ export default class KioskPage extends React.Component {
                                             </div>
 
                                         </div>
+
+                                        <this.slider >
+                                            <div style={{
+                                                backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
+                                                color: !palette.loading ? palette.data.darkMuted : "white",
+                                            }}>
+                                                <h1 style={{
+                                                    textAlign: "center",
+                                                    padding: "50% 0px 50% 0px",
+                                                }}>&lt;</h1>
+                                            </div>
+                                        </this.slider>
+
                                         <div style={{
                                             position: "absolute",
                                             right: "10px",
                                             bottom: "10px",
                                             textAlign: "right",
                                         }}>
-                                            <button onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} className="btn btn-lg btn-light"
+                                            {/*<button onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} className="btn btn-lg btn-light"
                                                 style={{
                                                     transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime,
                                                     backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted,
@@ -186,15 +228,15 @@ export default class KioskPage extends React.Component {
                                                     width: "160px",
                                                     margin: "0px 0px 10px 0px",
                                                 }}
-                                                role="button">Toggle Sidebar</button>
+                                            role="button">Toggle Sidebar</button>*/}
                                             <p style={{
                                                 color: "white",
                                                 margin: "0px",
-                                                backgroundColor: "rgba(0,0,0,.4)",
-                                                opacity: this.state.page.images[this.state.index].copyright == null || this.state.page.images[this.state.index].copyright == "" ? "0" : "1",
+                                                backgroundColor: "rgba(0,0,0,.6)",
+                                                opacity: this.state.page.images[this.state.index].copyright == null || this.state.page.images[this.state.index].copyright == "" || this.state.page.images[this.state.index].copyright == "null" ? "0" : "1",
                                                 padding: "10px",
                                                 transition: "opacity " + this.state.transitionTime,
-                                                }}>
+                                            }}>
                                                 &copy; {this.state.page.images[this.state.index].copyright}
                                             </p>
                                         </div>
