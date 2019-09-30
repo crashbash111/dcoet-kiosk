@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Storage;
 use App\Page;
 use App\Category;
@@ -12,6 +14,30 @@ use App\Stat;
 
 class PagesController extends Controller
 {
+    public function video()
+    {
+        $file_location = public_path( 'storage/videos/september.mp4' );
+
+        $extension = pathinfo( $file_location, PATHINFO_EXTENSION );
+
+        $mimetypes = new \Illuminate\Http\Testing\MimeType;
+
+        $mime = $mimetypes->get( $extension );
+        
+        $filesize = File::size( $file_location );
+
+        $headers = [
+            "Content-type" => $mime,
+            "Content-length" => $filesize,
+            "Content-disposition" => 'attachment; filename="' . basename( $file_location ) . '"',
+        ];
+
+        return Response::stream(function () use ($file_location) {
+            $stream = fopen($file_location, 'r');
+            fpassthru($stream);
+         }, 200, $headers);
+    }
+
     public function index()
     {
         return view("pages.index");

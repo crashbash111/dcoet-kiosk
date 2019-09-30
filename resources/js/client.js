@@ -17,6 +17,7 @@ import Layout from "./pages/Layout";
 import PowerpointPage from "./pages/PowerpointPage";
 import Powerpoints from "./pages/Admin/Powerpoints";
 import Splash from "./pages/Splash";
+import VideoPage from "./pages/VideoPage";
 
 const app = document.getElementById( 'app' );
 
@@ -36,6 +37,7 @@ ReactDOM.render(
             <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
             <Route exact path="/powerpoint/:id" component={PowerpointPage} />
             <Route exact path="/powerpoints" component={Powerpoints} />
+            <Route exact path="/video" component={VideoPage} />
         </Layout>
     </HashRouter>,
 app );
