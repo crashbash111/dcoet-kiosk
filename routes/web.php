@@ -35,6 +35,8 @@ Route::resource( "categories", "CategoryController" );
 Route::resource( "videos", "VideoController" );
 Route::get( "/videos/{id}/showStream", [ "uses" => "VideoController@showStream" ] );
 
+Route::resource( "bannedwords", "BannedWordController" );
+
 Route::get( "/test1", "PagesController@test1" );
 Route::get( "/test2", "PagesController@test2" );
 Route::get( "/data1", "PagesController@data1" );

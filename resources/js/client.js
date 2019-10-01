@@ -4,10 +4,12 @@ import ReactDOM from "react-dom";
 import { Router, Route, HashRouter } from "react-router-dom";
 
 import Admin from "./pages/Admin";
+import BannedWordsIndex from "./pages/Admin/BannedWords/BannedWordsIndex";
 import Birds from "./pages/Birds";
 import Category from "./pages/Category";
 import CategoryIndex from "./pages/CategoryIndex";
 import Create from "./pages/Admin/Create";
+import CreateBannedWord from "./pages/Admin/BannedWords/CreateBannedWord";
 import CreateCategory from "./pages/Admin/CreateCategory";
 import CreatePowerpoint from "./pages/Admin/CreatePowerpoint";
 import CreateVideo from "./pages/Admin/CreateVideo";
@@ -40,6 +42,8 @@ ReactDOM.render(
             <Route exact path="/powerpoints" component={Powerpoints} />
             <Route exact path="/video/:id" component={VideoPage} />
             <Route exact path="/admin/createVideo/:id?" component={CreateVideo} />
+            <Route exact path="/admin/bannedWords" component={BannedWordsIndex} />
+            <Route exact path="/admin/createBannedWord/:id?" component={CreateBannedWord} />
         </Layout>
     </HashRouter>,
 app );

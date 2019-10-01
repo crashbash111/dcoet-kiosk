@@ -84389,7 +84389,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95257,21 +95257,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Admin */ "./resources/js/pages/Admin.js");
-/* harmony import */ var _pages_Birds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Birds */ "./resources/js/pages/Birds.js");
-/* harmony import */ var _pages_Category__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Category */ "./resources/js/pages/Category.js");
-/* harmony import */ var _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/CategoryIndex */ "./resources/js/pages/CategoryIndex.js");
-/* harmony import */ var _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Admin/Create */ "./resources/js/pages/Admin/Create.js");
-/* harmony import */ var _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Admin/CreateCategory */ "./resources/js/pages/Admin/CreateCategory.js");
-/* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
-/* harmony import */ var _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/CreateVideo */ "./resources/js/pages/Admin/CreateVideo.js");
-/* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
-/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
-/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
-/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
-/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
-/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
-/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
-/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
+/* harmony import */ var _pages_Admin_BannedWords_BannedWordsIndex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Admin/BannedWords/BannedWordsIndex */ "./resources/js/pages/Admin/BannedWords/BannedWordsIndex.js");
+/* harmony import */ var _pages_Birds__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Birds */ "./resources/js/pages/Birds.js");
+/* harmony import */ var _pages_Category__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Category */ "./resources/js/pages/Category.js");
+/* harmony import */ var _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/CategoryIndex */ "./resources/js/pages/CategoryIndex.js");
+/* harmony import */ var _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Admin/Create */ "./resources/js/pages/Admin/Create.js");
+/* harmony import */ var _pages_Admin_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Admin/BannedWords/CreateBannedWord */ "./resources/js/pages/Admin/BannedWords/CreateBannedWord.js");
+/* harmony import */ var _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/CreateCategory */ "./resources/js/pages/Admin/CreateCategory.js");
+/* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
+/* harmony import */ var _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Admin/CreateVideo */ "./resources/js/pages/Admin/CreateVideo.js");
+/* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
+/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
+/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
+/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
+/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
+/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
+/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
+/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
 
  //import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
@@ -95292,30 +95294,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var app = document.getElementById('app');
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Layout__WEBPACK_IMPORTED_MODULE_14__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Layout__WEBPACK_IMPORTED_MODULE_16__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/",
-  component: _pages_Home__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _pages_Home__WEBPACK_IMPORTED_MODULE_14__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/splash",
-  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_19__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk",
-  component: _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_6__["default"]
+  component: _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_7__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk/:id",
-  component: _pages_Category__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _pages_Category__WEBPACK_IMPORTED_MODULE_6__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk/:c/:id",
-  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_13__["default"]
+  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_15__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   path: "/birds/:id",
-  component: _pages_Birds__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _pages_Birds__WEBPACK_IMPORTED_MODULE_5__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin",
@@ -95323,31 +95327,39 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/create/:id?",
-  component: _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__["default"]
+  component: _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_8__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createCategory/:id?",
-  component: _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_10__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createPowerpoint",
-  component: _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_9__["default"]
+  component: _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_11__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoint/:id",
-  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_15__["default"]
+  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_17__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoints",
-  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/video/:id",
-  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createVideo/:id?",
-  component: _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_12__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/admin/bannedWords",
+  component: _pages_Admin_BannedWords_BannedWordsIndex__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/admin/createBannedWord/:id?",
+  component: _pages_Admin_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_9__["default"]
 }))), app);
 
 /***/ }),
@@ -95443,6 +95455,10 @@ function (_React$Component) {
       }, "Slideshows"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "./#"
       }, "Games"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: function onClick(event) {
+          return _this2.props.handleTabClick(4);
+        }
+      }, "Banned Words"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "returns",
         href: "./#"
       }, "\u2190 Kiosk View"))));
@@ -96550,8 +96566,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AdminTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AdminTable */ "./resources/js/components/AdminTable.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Admin/CategoryTable */ "./resources/js/components/Admin/CategoryTable.js");
-/* harmony import */ var _components_MyPagination__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/MyPagination */ "./resources/js/components/MyPagination.js");
+/* harmony import */ var _Admin_BannedWords_BannedWordsIndex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Admin/BannedWords/BannedWordsIndex */ "./resources/js/pages/Admin/BannedWords/BannedWordsIndex.js");
+/* harmony import */ var _components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Admin/CategoryTable */ "./resources/js/components/Admin/CategoryTable.js");
+/* harmony import */ var _components_MyPagination__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/MyPagination */ "./resources/js/components/MyPagination.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -96571,6 +96588,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -96742,7 +96760,7 @@ function (_React$Component) {
         activePage: this.state.activePage,
         postsPerPage: this.state.postsPerPage,
         handleDelete: this.handleDelete
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyPagination__WEBPACK_IMPORTED_MODULE_8__["default"], {
         postsPerPage: this.state.postsPerPage,
         totalPosts: filteredPages.length,
         paginate: this.paginate
@@ -96751,12 +96769,15 @@ function (_React$Component) {
         to: "./admin/createCategory"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
-      }, "Create New")), !this.state.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, "Create New")), !this.state.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_7__["default"], {
         categories: this.state.categories,
         shownCategory: this.state.shownCategory,
         categoryClick: this.categoryClick
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading..."));
-      var children = [c1, c2];
+      var c3, c4;
+      c3 = c4 = null;
+      var c5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Admin_BannedWords_BannedWordsIndex__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+      var children = [c1, c2, c3, c4, c5];
       var child = children[this.state.tabIndex];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "xadmin"
@@ -96770,6 +96791,459 @@ function (_React$Component) {
   }]);
 
   return Admin;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin/BannedWords/BannedWordsIndex.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/pages/Admin/BannedWords/BannedWordsIndex.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BannedWordsIndex; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var BannedWordsIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BannedWordsIndex, _React$Component);
+
+  function BannedWordsIndex(props) {
+    var _this;
+
+    _classCallCheck(this, BannedWordsIndex);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BannedWordsIndex).call(this, props));
+    _this.state = {
+      bannedWords: [],
+      redirectId: -1,
+      redirect: false,
+      profaneView: false,
+      added: false,
+      word: "",
+      editMode: false,
+      id: -1
+    };
+    _this.handleEditClick = _this.handleEditClick.bind(_assertThisInitialized(_this));
+    _this.handleDeleteClick = _this.handleDeleteClick.bind(_assertThisInitialized(_this));
+    _this.toggleProfane = _this.toggleProfane.bind(_assertThisInitialized(_this));
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(BannedWordsIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch("./bannedwords").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          bannedWords: data
+        });
+
+        console.log(data);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: "handleEditClick",
+    value: function handleEditClick(i, word) {
+      this.setState({
+        id: i,
+        editMode: true,
+        word: word
+      });
+    }
+  }, {
+    key: "handleDeleteClick",
+    value: function handleDeleteClick(id) {
+      var result = confirm("Are you sure you want to delete this item?");
+
+      if (result) {
+        var notId = function notId(t) {
+          return t.id !== id;
+        };
+
+        var updatedList = this.state.bannedWords.filter(notId);
+        this.setState({
+          bannedWords: updatedList
+        });
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("./bannedwords/" + id);
+      }
+    }
+  }, {
+    key: "toggleProfane",
+    value: function toggleProfane(event) {
+      this.setState(function (prevState) {
+        return {
+          profaneView: !prevState.profaneView
+        };
+      });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(event) {
+      var _this3 = this;
+
+      event.preventDefault();
+
+      if (this.state.word.length != 3) {
+        return;
+      }
+
+      var formData = new FormData();
+
+      if (this.state.editMode) {
+        formData.append("_method", "PUT");
+      }
+
+      formData.append("word", this.state.word);
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        url: "./bannedwords" + (this.state.editMode ? "/" + this.state.id : ""),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: formData
+      }).then(function (response) {
+        console.log("from form submit ", response);
+
+        _this3.setState({
+          added: true
+        });
+
+        if (!_this3.editMode) {
+          _this3.setState({
+            bannedWords: [].concat(_toConsumableArray(_this3.state.bannedWords), [{
+              id: response.data.id,
+              word: response.data.word
+            }])
+          });
+        } else {
+          _this3.setState({
+            bannedWords: _this3.state.bannedWords.map(function (item) {
+              if (item.id == _this3.state.id) {
+                return {
+                  id: item.id,
+                  word: _this3.state.word
+                };
+              } else {
+                return item;
+              }
+            })
+          });
+        }
+
+        _this3.setState({
+          editMode: false,
+          id: -1,
+          word: ""
+        });
+
+        setTimeout(function () {
+          _this3.setState({
+            added: false
+          });
+        }, 1000); //this.setState({ redirect: r });
+      })["catch"](function (err) {
+        return console.log(err.response.data);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      if (this.state.redirect) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+          to: "./createBannedWord/".concat(this.state.redirectId)
+        });
+      }
+
+      var words = this.state.bannedWords.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this4.state.profaneView ? item.word : "".concat(item.word[0], "*").concat(item.word[2])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick(event) {
+            return _this4.handleEditClick(item.id, item.word);
+          },
+          className: "btn btn-success"
+        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick(event) {
+            return _this4.handleDeleteClick(item.id);
+          },
+          className: "btn btn-danger"
+        }, "Delete"));
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Banned Words"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Word"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "word",
+        value: this.state.word,
+        onChange: this.handleChange,
+        placeholder: "Word here..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.word.length != 3 ? "block" : "none"
+        }
+      }, "Word must be exactly 3 characters"))), this.state.added ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Item ", this.state.editMode ? "updated" : "added", " successfully.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.state.editMode ? "btn btn-success" : "btn btn-primary"
+      }, this.state.editMode ? "Update" : "Add"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.state.profaneView ? "btn btn-success" : "btn btn-warning",
+        onClick: this.toggleProfane
+      }, "Turn profane view ", this.state.profaneView ? "on" : "off"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), words));
+    }
+  }]);
+
+  return BannedWordsIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin/BannedWords/CreateBannedWord.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/pages/Admin/BannedWords/CreateBannedWord.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CreateBannedWord; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var CreateBannedWord =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CreateBannedWord, _React$Component);
+
+  function CreateBannedWord(props) {
+    var _this;
+
+    _classCallCheck(this, CreateBannedWord);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CreateBannedWord).call(this, props));
+    _this.state = {
+      editMode: _this.props.match != null && _this.props.match.params != null && _this.props.match.params.id != null,
+      id: -1,
+      word: "",
+      redirect: false,
+      redirectId: -1 //-1 unassigned, -2 submit+new
+
+    };
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.onSubmitNew = _this.onSubmitNew.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CreateBannedWord, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (this.state.editMode) {
+        fetch("./bannedwords/" + this.props.match.params.id).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          return _this2.setState({
+            id: data.id,
+            word: data.word
+          });
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(event) {
+      var _this3 = this;
+
+      var r = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      event.preventDefault();
+
+      if (this.state.word.length != 3) {
+        return;
+      }
+
+      var formData = new FormData();
+
+      if (this.state.editMode) {
+        formData.append("_method", "PUT");
+      }
+
+      formData.append("word", this.state.word);
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        url: "./bannedwords" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: formData
+      }).then(function (response) {
+        console.log("from form submit ", response);
+
+        _this3.setState({
+          redirect: r
+        });
+      })["catch"](function (err) {
+        return console.log(err.response.data);
+      });
+    }
+  }, {
+    key: "onSubmitNew",
+    value: function onSubmitNew(event) {
+      var _this4 = this;
+
+      this.setState({
+        word: "",
+        redirectId: -2
+      });
+      setTimeout(function () {
+        return _this4.setState({
+          redirectId: -1
+        });
+      }, 1000);
+      this.onSubmit(event, false);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.redirect) {
+        if (this.state.redirectId == -2) {//window.location.reload();
+          // return(
+          //     <Redirect to="./createBannedWord" />
+          // );
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+            to: "./bannedwords"
+          });
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: null
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Word"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "word",
+        value: this.state.word,
+        onChange: this.handleChange,
+        placeholder: "Word here..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          color: "red",
+          display: this.state.word.length != 3 ? "block" : "none"
+        }
+      }, "Word must be exactly 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.onSubmit,
+        className: "btn btn-primary"
+      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.onSubmitNew,
+        className: "btn btn-outline-primary"
+      }, "Submit + Add"), this.state.redirectId == -2 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Item added successfully") : null));
+    }
+  }]);
+
+  return CreateBannedWord;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 

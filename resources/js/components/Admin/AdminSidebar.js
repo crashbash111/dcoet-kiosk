@@ -34,6 +34,7 @@ export default class AdminSidebar extends React.Component {
                         <a onClick={ () => this.props.handleTabClick( 1 ) }>Categories</a>
                         <a href="./#/powerpoints">Slideshows</a>
                         <a href="./#">Games</a>
+                        <a onClick={ (event) => this.props.handleTabClick(4)}>Banned Words</a>
                         <a className="returns" href="./#">&#8592; Kiosk View</a>
 
                     </div>

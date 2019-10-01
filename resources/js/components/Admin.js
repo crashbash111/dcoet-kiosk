@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 export default class Admin extends React.Component
 {
@@ -56,9 +55,4 @@ export default class Admin extends React.Component
             </div>
         );
     }
-}
-
-if( document.getElementById( "admin") )
-{
-    ReactDOM.render( <Admin />, document.getElementById( "admin" ) );
 }

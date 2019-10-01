@@ -5,6 +5,7 @@ import ItemRow from "../components/Admin/ItemRow";
 import AdminSidebar from "../components/Admin/AdminSidebar";
 import AdminTable from "../components/AdminTable";
 import Axios from "axios";
+import BannedWordsIndex from "./Admin/BannedWords/BannedWordsIndex";
 import CategoryTable from "../components/Admin/CategoryTable";
 import MyPagination from "../components/MyPagination";
 
@@ -114,8 +115,13 @@ export default class Admin extends React.Component {
             }
         </div>
         );
+        
+        var c3, c4;
+        c3 = c4 = null;
 
-        var children = [c1, c2];
+        var c5 = (<BannedWordsIndex />);
+
+        var children = [c1, c2, c3, c4, c5];
 
         var child = children[this.state.tabIndex];
 
