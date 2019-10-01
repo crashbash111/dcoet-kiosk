@@ -38,7 +38,7 @@ ReactDOM.render(
             <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
             <Route exact path="/powerpoint/:id" component={PowerpointPage} />
             <Route exact path="/powerpoints" component={Powerpoints} />
-            <Route exact path="/video" component={VideoPage} />
+            <Route exact path="/video/:id" component={VideoPage} />
             <Route exact path="/admin/createVideo/:id?" component={CreateVideo} />
         </Layout>
     </HashRouter>,

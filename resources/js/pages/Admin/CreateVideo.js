@@ -11,13 +11,15 @@ export default class CreateVideo extends React.Component {
             video: null,
             copyright: "",
             length: -1,
+            progressValue: 0,
+            error: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.postData = this.postData.bind(this);
-        this.loadMetaData = this.loadMetaData.bind(this);
-        this.submit = this.submit.bind( this );
+        this.submit = this.submit.bind(this);
+        this.updateProgressBarValue = this.updateProgressBarValue.bind( this );
 
         this.video = React.createRef();
     }
@@ -35,10 +37,11 @@ export default class CreateVideo extends React.Component {
         console.log(this.state);
     }
 
-    postData( duration ) {
+    postData(duration) {
         let formData = new FormData();
 
         if (this.state.title.length < 3 || this.state.description.length < 3 || this.video == null || this.video.current == null || this.video.current.files == null || this.video.current.files.length < 1) {
+            Console.log( "Please fill out all fields" );
             return;
         }
 
@@ -50,6 +53,14 @@ export default class CreateVideo extends React.Component {
         formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
 
         Axios({
+            onUploadProgress: (progressEvent) => {
+                const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+                console.log("onUploadProgress", totalLength);
+                if (totalLength !== null) {
+                    this.updateProgressBarValue(Math.round((progressEvent.loaded * 100) / totalLength));
+                }
+
+            },
             url: "./videos", //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
             method: "POST",
             headers: {
@@ -61,40 +72,42 @@ export default class CreateVideo extends React.Component {
                 console.log("from form submit ", response);
                 this.setState({ redirect: true });
             })
-            .catch(err => console.log(err.response.data));
+            .catch(err => {
+                console.log(err.response.data);
+                this.setState( { error: true } );
+            });
     }
 
-    loadMetaData(video) {
-
-        window.URL.revokeObjectURL(video.src);
-        var duration = video.duration;
-        duration = Math.round(duration);
-
-        console.log(duration);
-        return;
-
-        this.postData(duration);
+    updateProgressBarValue( x )
+    {
+        this.setState( { progressValue: x } );
     }
 
     submit(video) {
-        console.log( video );
-        return;
         window.URL.revokeObjectURL(video.src);
         var duration = video.duration;
-        //this.setState( { length: duration } );F
+        duration = Math.round(duration);
         this.postData(duration);
     }
 
     onSubmit(event) {
         event.preventDefault();
 
-        var video = document.createElement('video');
-        video.preload = 'metadata';
+        try {
+            var video = document.createElement('video');
+            video.preload = 'metadata';
 
-        //video.onloadedmetadata = this.loadMetaData( video );
-        video.onloadedmetadata = this.submit(video);
+            video.onloadedmetadata = function () {
+                this.submit(video);
+            }.bind(this);
 
-        video.src = URL.createObjectURL(this.video.current.files[0]);
+            video.src = URL.createObjectURL(this.video.current.files[0]);
+        }
+        catch (e) {
+            video = null;
+            console.log(e);
+        }
+
     }
 
     render() {
@@ -125,6 +138,12 @@ export default class CreateVideo extends React.Component {
                         </label>
                     </div>
                     <button className="btn btn-primary">Submit</button>
+                    <div style={{ width: "300px", backgroundColor: "green", backgroundPosition: `${100 - this.state.progressValue}% 0` }}></div>
+                    
+                    
+                    <div className="progress" style={{ width: "500px" }}>
+                        <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
+                    </div>
                 </form>
             </div>
         );

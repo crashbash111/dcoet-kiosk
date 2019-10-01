@@ -33,6 +33,7 @@ Route::resource( "powerpoints", "PowerpointController" );
 
 Route::resource( "categories", "CategoryController" );
 Route::resource( "videos", "VideoController" );
+Route::get( "/videos/{id}/showStream", [ "uses" => "VideoController@showStream" ] );
 
 Route::get( "/test1", "PagesController@test1" );
 Route::get( "/test2", "PagesController@test2" );

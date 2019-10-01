@@ -84389,7 +84389,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95342,7 +95342,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
   component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_16__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
-  path: "/video",
+  path: "/video/:id",
   component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_18__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
@@ -98177,13 +98177,15 @@ function (_React$Component) {
       description: "",
       video: null,
       copyright: "",
-      length: -1
+      length: -1,
+      progressValue: 0,
+      error: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
     _this.postData = _this.postData.bind(_assertThisInitialized(_this));
-    _this.loadMetaData = _this.loadMetaData.bind(_assertThisInitialized(_this));
     _this.submit = _this.submit.bind(_assertThisInitialized(_this));
+    _this.updateProgressBarValue = _this.updateProgressBarValue.bind(_assertThisInitialized(_this));
     _this.video = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
@@ -98212,6 +98214,7 @@ function (_React$Component) {
       var formData = new FormData();
 
       if (this.state.title.length < 3 || this.state.description.length < 3 || this.video == null || this.video.current == null || this.video.current.files == null || this.video.current.files.length < 1) {
+        Console.log("Please fill out all fields");
         return;
       }
 
@@ -98221,6 +98224,14 @@ function (_React$Component) {
       formData.append("length", duration);
       formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        onUploadProgress: function onUploadProgress(progressEvent) {
+          var totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+          console.log("onUploadProgress", totalLength);
+
+          if (totalLength !== null) {
+            _this2.updateProgressBarValue(Math.round(progressEvent.loaded * 100 / totalLength));
+          }
+        },
         url: "./videos",
         //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
         method: "POST",
@@ -98235,38 +98246,46 @@ function (_React$Component) {
           redirect: true
         });
       })["catch"](function (err) {
-        return console.log(err.response.data);
+        console.log(err.response.data);
+
+        _this2.setState({
+          error: true
+        });
       });
     }
   }, {
-    key: "loadMetaData",
-    value: function loadMetaData(video) {
-      window.URL.revokeObjectURL(video.src);
-      var duration = video.duration;
-      duration = Math.round(duration);
-      console.log(duration);
-      return;
-      this.postData(duration);
+    key: "updateProgressBarValue",
+    value: function updateProgressBarValue(x) {
+      this.setState({
+        progressValue: x
+      });
     }
   }, {
     key: "submit",
     value: function submit(video) {
-      console.log(video);
-      return;
       window.URL.revokeObjectURL(video.src);
-      var duration = video.duration; //this.setState( { length: duration } );F
-
+      var duration = video.duration;
+      duration = Math.round(duration);
       this.postData(duration);
     }
   }, {
     key: "onSubmit",
     value: function onSubmit(event) {
       event.preventDefault();
-      var video = document.createElement('video');
-      video.preload = 'metadata'; //video.onloadedmetadata = this.loadMetaData( video );
 
-      video.onloadedmetadata = this.submit(video);
-      video.src = URL.createObjectURL(this.video.current.files[0]);
+      try {
+        var video = document.createElement('video');
+        video.preload = 'metadata';
+
+        video.onloadedmetadata = function () {
+          this.submit(video);
+        }.bind(this);
+
+        video.src = URL.createObjectURL(this.video.current.files[0]);
+      } catch (e) {
+        video = null;
+        console.log(e);
+      }
     }
   }, {
     key: "render",
@@ -98328,7 +98347,26 @@ function (_React$Component) {
         placeholder: "Enter copyright information here..."
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
-      }, "Submit")));
+      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          width: "300px",
+          backgroundColor: "green",
+          backgroundPosition: "".concat(100 - this.state.progressValue, "% 0")
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "progress",
+        style: {
+          width: "500px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "progress-bar",
+        role: "progressbar",
+        style: {
+          color: "black",
+          backgroundColor: this.state.error ? "red" : "green",
+          width: "".concat(this.state.progressValue, "%")
+        }
+      }, this.state.progressValue, "%"))));
     }
   }]);
 
@@ -100126,7 +100164,10 @@ function (_React$Component) {
     _classCallCheck(this, VideoPage);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VideoPage).call(this, props));
-    _this.state = {};
+    _this.state = {
+      videoId: _this.props.match.params.id,
+      video: null
+    };
     _this.video = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
@@ -100137,7 +100178,14 @@ function (_React$Component) {
       var _this2 = this;
 
       console.log(this.video);
-      fetch("./video").then(function (stream) {
+      fetch("./videos/" + this.state.videoId).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          video: data
+        });
+      });
+      fetch("./videos/" + this.state.videoId + "/showStream").then(function (stream) {
         try {
           _this2.video.srcObject = stream;
         } catch (err) {
@@ -100150,13 +100198,13 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+      return this.state.video == null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
         style: {
           width: "100px"
         },
         ref: this.video,
         controls: true
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.video.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Running time: approx: ", this.state.video.length, " seconds")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Copyright: ", this.state.video.copyright));
     }
   }]);
 
@@ -100185,8 +100233,8 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
