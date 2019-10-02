@@ -45,4 +45,6 @@ Route::get( "/dataPests", "PagesController@dataPests" );
 Route::get( "/admin", "PagesController@admin" );
 Route::get( "/allBirds", [ "uses" => "PagesController@allBirds" ] );
 
+Auth::routes();
+
 //Route::get( "/{id}", ["uses" => "PagesController@page" ] );

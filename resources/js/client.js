@@ -17,6 +17,7 @@ import EditPage from "./pages/Admin/EditPage";
 import Home from "./pages/Home";
 import KioskPage from "./pages/KioskPage";
 import Layout from "./pages/Layout";
+import Login from "./pages/Login";
 import PowerpointPage from "./pages/PowerpointPage";
 import Powerpoints from "./pages/Admin/Powerpoints";
 import Splash from "./pages/Splash";
@@ -44,6 +45,7 @@ ReactDOM.render(
             <Route exact path="/admin/createVideo/:id?" component={CreateVideo} />
             <Route exact path="/admin/bannedWords" component={BannedWordsIndex} />
             <Route exact path="/admin/createBannedWord/:id?" component={CreateBannedWord} />
+            <Route exact path="/login" component={Login} />
         </Layout>
     </HashRouter>,
 app );
