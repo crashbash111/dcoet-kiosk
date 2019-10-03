@@ -10,41 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get( "/", "PagesController@index" );
+
+Route::get( "/", "DefaultController@index" );
+
+
 
 Route::get( "/findingGame", [ "uses" => "GamesController@findingGame" ] );
 Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
 Route::get( "/findinghighscores", [ "uses" => "GamesController@findinghighscores" ] );
 
-//Route::get( "/video", [ "uses" => "PagesController@video" ] );
-
-Route::get( "/pages/all", "PagesController@all" );
-Route::get( "/pages/allCategories", "PagesController@allCategories" );
 Route::get( "/allGames", "PagesController@allGames" );
 
 Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
 
 Route::get( "/category/{id}/pages", [ "uses" => "PagesController@categoryPages" ] );
 
-Route::resource( "pages", "PagesController" );
-
-Route::get( "/powerpoints/all", "PowerpointController@all" );
-Route::resource( "powerpoints", "PowerpointController" );
-
-Route::resource( "categories", "CategoryController" );
-Route::resource( "videos", "VideoController" );
-Route::get( "/videos/{id}/showStream", [ "uses" => "VideoController@showStream" ] );
+//Route::get( "/powerpoints/all", "PowerpointController@all" );
 
 Route::resource( "bannedwords", "BannedWordController" );
 
-Route::get( "/test1", "PagesController@test1" );
-Route::get( "/test2", "PagesController@test2" );
-Route::get( "/data1", "PagesController@data1" );
-Route::get( "/data2/{id}", ["uses" => "PagesController@data2" ] );
-Route::get( "/dataPests", "PagesController@dataPests" );
-Route::get( "/admin", "PagesController@admin" );
-Route::get( "/allBirds", [ "uses" => "PagesController@allBirds" ] );
-
 Auth::routes();
 
-//Route::get( "/{id}", ["uses" => "PagesController@page" ] );

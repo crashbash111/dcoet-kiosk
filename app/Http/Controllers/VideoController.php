@@ -15,9 +15,6 @@ class VideoController extends Controller
         return Video::all();
     }
 
-    public function create()
-    { }
-
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -61,7 +58,7 @@ class VideoController extends Controller
         return json_encode($video);
     }
 
-    public function showStream($id)
+    public function stream($id)
     {
         $video = Video::find( $id );
 
@@ -90,9 +87,6 @@ class VideoController extends Controller
             fpassthru($stream);
         }, 200, $headers);
     }
-
-    public function edit($id)
-    { }
 
     public function update(Request $request, $id)
     { }

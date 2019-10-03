@@ -31,11 +31,6 @@ class PowerpointController extends Controller
         return json_encode( $all );
     }
 
-    public function create()
-    {
-
-    }
-
     public function store( Request $request )
     {
         $this->validate( $request, [
@@ -79,11 +74,6 @@ class PowerpointController extends Controller
         }
 
         return $request;
-    }
-
-    public function edit( $id )
-    {
-
     }
 
     public function update( Request $request, $id )

@@ -14,6 +14,11 @@ use App\Stat;
 
 class PagesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( "auth:users", [ "except" => [ "index", "show" ] ] );
+    }
+
     public function video()
     {
         $file_location = public_path( 'storage/videos/september.mp4' );
@@ -40,24 +45,8 @@ class PagesController extends Controller
 
     public function index()
     {
-        return view("pages.index");
-    }
-
-    public function all()
-    {
         $pages = Page::all();
-        foreach ($pages as $page) {
-            $page->categoryName = $page->category->name;
-            $page->images = Image::where("page_id", $page->id)->get();
-            $page->stats = Stat::where("page_id", $page->id)->get();
-        }
-        return json_encode($pages);
-    }
-
-    public function allCategories()
-    {
-        $categories = Category::all();
-        return json_encode($categories);
+        return json_encode( $pages );
     }
 
     public function allGames()
@@ -72,12 +61,6 @@ class PagesController extends Controller
         return json_encode($games);
     }
 
-    public function category($id)
-    {
-        $category = Category::where('id', $id)->first();
-        return json_encode($category);
-    }
-
     public function categoryPages($id)
     {
         $pages = Page::where('category_id', $id)->get();
@@ -86,9 +69,6 @@ class PagesController extends Controller
         }
         return json_encode($pages);
     }
-
-    public function create()
-    { }
 
     public function store(Request $request)
     {
@@ -180,7 +160,10 @@ class PagesController extends Controller
             }
         }
 
-        return $page;
+        return response()->json([
+            "success" => true,
+            "message" => "Page saved successfully.",
+        ]);
     }
 
     public function show($id)
@@ -192,9 +175,6 @@ class PagesController extends Controller
         $page->audios = Audio::where("page_id", $id)->get();
         return json_encode($page);
     }
-
-    public function edit($id)
-    { }
 
     public function update(Request $request, $id)
     {
@@ -388,99 +368,5 @@ class PagesController extends Controller
     public function destroy($id)
     {
         Page::findOrFail($id)->delete();
-    }
-
-    public function test1()
-    {
-        return view("pages.test1");
-    }
-
-    public function test2()
-    {
-        return view("pages.test2");
-    }
-
-    public function data1()
-    {
-        $obj['heading'] = "Kiwi";
-        $obj['text'] = "Kiwis are indigenous to New Zealand. They are small, flightless birds that roam the forest floor. Critically endangered, they require special care.";
-        $obj['imgUrl'] = "https://www.doc.govt.nz/thumbs/hero/contentassets/a450e32f0b824531858d566404c21884/southern-brown-kiwi-tokoeka-stewart-island-photo-credit-alina-thiebes1920.jpg";
-
-        $json = json_encode($obj);
-
-        return $json;
-    }
-
-    public function allBirds()
-    {
-        $obj["id"] = "1";
-        $obj["heading"] = "Kiwi";
-        $obj["text"] = "Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.";
-        $obj["img"] = [
-            "https://www.doc.govt.nz/thumbs/hero/contentassets/a450e32f0b824531858d566404c21884/southern-brown-kiwi-tokoeka-stewart-island-photo-credit-alina-thiebes1920.jpg",
-            "https://www.hakaimagazine.com/wp-content/uploads/header-gulf-birds.jpg"
-        ];
-        $obj["category"] = "Birds";
-
-        $obj1["id"] = "2";
-        $obj1["heading"] = "Kakapo";
-        $obj1["text"] = "Kakapo are useless birds.";
-        $obj1["img"] = [
-            "https://www.doc.govt.nz/thumbs/hero/contentassets/22c4c0407c1142ffbd70ef6ff029d722/stella-the-kakapo-codfish-1600.jpg",
-            "https://www.doc.govt.nz/thumbs/hero/contentassets/3165d836813b40b897f7c7cf3551f798/kakapo-chick-dianne-mason-hero.jpg",
-            "http://nzbirdsonline.org.nz/sites/all/files/Kakapo_DvW2007.jpg"
-        ];
-        $obj1["category"] = "Birds";
-
-        $ob = [$obj, $obj1];
-
-        return json_encode($ob);
-    }
-
-    public function data2($id)
-    {
-
-        $obj["id"] = "0";
-        $obj["heading"] = "Kiwi";
-        $obj["text"] = "Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.Kiwis are small flightless birds that are native to New Zealand. They have long beaks.";
-        $obj["img"] = [
-            "https://www.doc.govt.nz/thumbs/hero/contentassets/a450e32f0b824531858d566404c21884/southern-brown-kiwi-tokoeka-stewart-island-photo-credit-alina-thiebes1920.jpg",
-            "https://www.hakaimagazine.com/wp-content/uploads/header-gulf-birds.jpg"
-        ];
-
-        $obj1["id"] = "1";
-        $obj1["heading"] = "Kakapo";
-        $obj1["text"] = "Kakapo are useless birds.";
-        $obj1["img"] = [
-            "https://www.doc.govt.nz/thumbs/hero/contentassets/22c4c0407c1142ffbd70ef6ff029d722/stella-the-kakapo-codfish-1600.jpg",
-            "https://www.doc.govt.nz/thumbs/hero/contentassets/3165d836813b40b897f7c7cf3551f798/kakapo-chick-dianne-mason-hero.jpg",
-            "http://nzbirdsonline.org.nz/sites/all/files/Kakapo_DvW2007.jpg"
-        ];
-
-        $ob = [$obj, $obj1];
-
-        return json_encode($ob[$id]);
-    }
-
-    public function dataPests()
-    {
-        $o2["id"] = "2";
-        $o2["heading"] = "Stoat";
-        $o2["text"] = "Stoats are small weasel creatures that ravage the nests of native endangered species.";
-        $o2["img"] = "https://www.rnz.co.nz/assets/news/146558/eight_col_stoat.jpg?1522350517";
-
-        $ob = [$o2];
-
-        return json_encode($ob);
-    }
-
-    public function admin()
-    {
-        return view('pages.admin');
-    }
-
-    public function page($id)
-    {
-        return $id;
     }
 }
