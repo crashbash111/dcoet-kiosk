@@ -93,7 +93,7 @@ export default class MainContent extends React.Component {
                 if (this.props.activeCategory == -2) {
                     var gamesList = this.state.games.map(item => {
                         return (
-                            <Tile key={ item.id } item={ item } handleClick={ this.handleGameClick } imgOverride={ item.image_path } flag="game" />
+                            <Tile key={ item.id + 10000 } item={ item } handleClick={ this.handleGameClick } imgOverride={ item.image_path } flag="game" />
 
                             // <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover={ item.image_path } data-size="large" style={{ backgroundColor: "black" }}>
                             //     <h3 style={{ textShadow: "2px 2px #111111" }}>{item.name}</h3>
@@ -112,7 +112,7 @@ export default class MainContent extends React.Component {
                 {
                     var videoList = this.state.videos.map( item => {
                         return (
-                            <Tile key={ item.id } item={ item } handleClick={ this.handleVideoClick } imgOverride={ "./storage/video_thumbnails/nothumb.png" } flag="video" />
+                            <Tile key={ item.id + 100000 } item={ item } handleClick={ this.handleVideoClick } imgOverride={ "./storage/video_thumbnails/nothumb.png" } flag="video" />
                         );
                     });
 

@@ -1,24 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Keyboard from "react-simple-keyboard";
+//import Keyboard from "react-simple-keyboard";
 import Logo from "../components/Home/Logo";
 import MainContent from "../components/Home/MainContent";
 import SearchBar from "../components/Home/SearchBar";
 import SideBar from "../components/Home/SideBar";
+
+import KeyboardedInput from 'react-touch-screen-keyboard';
+//import 'react-touch-screen-keyboard/lib/Keyboard.css'; // if you just want css
+import 'react-touch-screen-keyboard/lib/Keyboard.scss';
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            activeCategory: ( this.props.match != null && this.props.match.params != null && this.props.match.params.category != null ) ? this.props.match.params.category : -1,
+            activeCategory: (this.props.match != null && this.props.match.params != null && this.props.match.params.category != null) ? this.props.match.params.category : -1,
             categories: [],
             searchTerm: "",
             oldCategory: -1,
             swtiched: false,
             showKeyboard: false,
             keyboardLayout: "default",
+            value: "",
         }
 
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -29,6 +34,8 @@ export default class Home extends React.Component {
         this.onBlur = this.onBlur.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
+
+        this.handleValueChange = this.handleValueChange.bind(this);
     }
 
     handleChange(event) {
@@ -56,7 +63,7 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        fetch( "./api/categories" )
+        fetch("./api/categories")
             .then(response => response.json())
             .then(data => this.setState({ categories: data }));
     }
@@ -100,10 +107,14 @@ export default class Home extends React.Component {
         }
     }
 
+    handleValueChange(val) {
+        this.setState({ searchTerm: val });
+    }
+
     render() {
         let categoryList = this.state.categories.map(item => {
             return (
-                <div key={ item.id } data-role="tile" data-size="medium" style={{ backgroundColor: "lightblue" }}>
+                <div key={item.id} data-role="tile" data-size="medium" style={{ backgroundColor: "lightblue" }}>
                     <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                     <p>{item.description}</p>
                 </div>
@@ -126,13 +137,17 @@ export default class Home extends React.Component {
                         </div>
                         <div style={{ display: "grid", gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 85vh", transition: "grid-template-rows 2s" }}>
                             <div className="grid-item searchspace">
-                                <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} onFocus={this.onFocus} />
-                                {this.state.showKeyboard ? <div style={{ color: "black", zIndex: "10" }}><Keyboard
-                                    keyboardRef={r => this.keyboard = r}
-                                    layoutName={this.state.layoutName}
-                                    onChange={input => this.onChange(input)}
-                                    onKeyPress={button => this.onKeyPress(button)}
-                                /></div>
+                                {/* <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} onFocus={this.onFocus} /> */}
+                                <KeyboardedInput
+                                    enabled
+                                    onChange={this.handleValueChange}
+                                    value={this.state.searchTerm}
+                                    placeholder={"Search..."}
+                                    defaultKeyboard="us"
+                                    isDraggable={false} // optional, default is `true`
+                                />
+                                {this.state.showKeyboard ? <div style={{ color: "black", zIndex: "10" }}>
+                                </div>
                                     :
                                     null}
                             </div>
@@ -143,6 +158,13 @@ export default class Home extends React.Component {
                     </div>
                 </div>
             </div>
+
+            /* <Keyboard
+            keyboardRef={r => this.keyboard = r}
+            layoutName={this.state.layoutName}
+            onChange={input => this.onChange(input)}
+            onKeyPress={button => this.onKeyPress(button)}
+            /> */
         );
     }
 }
