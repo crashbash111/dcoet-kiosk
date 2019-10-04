@@ -38,12 +38,14 @@ export default class CreateVideo extends React.Component {
     }
 
     postData(duration) {
-        let formData = new FormData();
-
         if (this.state.title.length < 3 || this.state.description.length < 3 || this.video == null || this.video.current == null || this.video.current.files == null || this.video.current.files.length < 1) {
             Console.log( "Please fill out all fields" );
             return;
         }
+
+        let formData = new FormData();
+
+        formData.append( "token", localStorage.getItem( "id_token" ) );
 
         formData.append("title", this.state.title);
         formData.append("description", this.state.description);
@@ -61,7 +63,7 @@ export default class CreateVideo extends React.Component {
                 }
 
             },
-            url: "./videos", //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
+            url: "./api/videos", //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

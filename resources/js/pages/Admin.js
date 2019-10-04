@@ -53,10 +53,10 @@ class Admin extends React.Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        fetch("./pages/allCategories")
+        fetch("./api/categories")
             .then(response => response.json())
             .then(data => this.setState({ categories: data }));
-        fetch("./pages/all")
+        fetch("./api/pages")
             .then(response => response.json())
             .then(data => this.setState({ pages: data, loading: false }));
     }
@@ -148,32 +148,32 @@ class Admin extends React.Component {
             {
                 id: 1,
                 text: "Kiosk Pages",
-                component: <KioskPages />
+                component: <KioskPages key={1} />
             },
             {
                 id: 2,
                 text: "Kiosk Categories",
-                component: <KioskCategories />
+                component: <KioskCategories key={2} />
             },
             {
                 id: 3,
                 text: "Powerpoints",
-                component: <Powerpoints />
+                component: <Powerpoints key={3} />
             },
             {
                 id: 4,
                 text: "Games",
-                component: <Games />
+                component: <Games key={4} />
             },
             {
                 id: 5,
                 text: "Banned Words",
-                component: <BannedWords />
+                component: <BannedWords key={5} />
             },
             {
                 id: 6,
                 text: "Videos",
-                component: <Videos />
+                component: <Videos key={6} />
             }
         ];
 
