@@ -98993,6 +98993,7 @@ var AdminSidebarEntry = function AdminSidebarEntry(_ref) {
   var item = _ref.item,
       handleClick = _ref.handleClick;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    key: item.id,
     onClick: function onClick(event) {
       return handleClick(item.id);
     }
@@ -100840,14 +100841,14 @@ function (_React$Component) {
       this.setState({
         loading: true
       });
-      fetch("./pages/allCategories").then(function (response) {
+      fetch("./api/categories").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
           categories: data
         });
       });
-      fetch("./pages/all").then(function (response) {
+      fetch("./api/pages").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
@@ -100945,27 +100946,39 @@ function (_React$Component) {
       }, {
         id: 1,
         text: "Kiosk Pages",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_KioskPages__WEBPACK_IMPORTED_MODULE_14__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_KioskPages__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          key: 1
+        })
       }, {
         id: 2,
         text: "Kiosk Categories",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_KioskCategories__WEBPACK_IMPORTED_MODULE_13__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_KioskCategories__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          key: 2
+        })
       }, {
         id: 3,
         text: "Powerpoints",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_15__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_15__["default"], {
+          key: 3
+        })
       }, {
         id: 4,
         text: "Games",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Games__WEBPACK_IMPORTED_MODULE_12__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Games__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          key: 4
+        })
       }, {
         id: 5,
         text: "Banned Words",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_BannedWords__WEBPACK_IMPORTED_MODULE_11__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_BannedWords__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          key: 5
+        })
       }, {
         id: 6,
         text: "Videos",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Videos__WEBPACK_IMPORTED_MODULE_16__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Videos__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          key: 6
+        })
       }]; //default component should go here when nothing selected
 
       var child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Please select a category"); //find the right component to render
@@ -101468,6 +101481,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vm */ "./node_modules/vm-browserify/index.js");
 /* harmony import */ var vm__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vm__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_withAuth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/withAuth */ "./resources/js/components/withAuth.js");
+/* harmony import */ var _components_AuthService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/AuthService */ "./resources/js/components/AuthService.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
@@ -101491,6 +101505,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -101745,6 +101760,7 @@ function (_React$Component) {
       editMode: _this.props.match != null && _this.props.match.params != null && _this.props.match.params.id != null,
       error: false
     };
+    _this.AuthService = new _components_AuthService__WEBPACK_IMPORTED_MODULE_5__["default"]();
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleChangeNew = _this.handleChangeNew.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -101855,6 +101871,7 @@ function (_React$Component) {
 
       var copyright = null;
       var formData = new FormData();
+      formData.append("token", localStorage.getItem("id_token"));
 
       if (this.state.editMode) {
         formData.append("_method", "PUT");
@@ -101934,7 +101951,7 @@ function (_React$Component) {
 
 
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        url: "./pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
+        url: "./api/pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -101958,7 +101975,7 @@ function (_React$Component) {
       this.setState({
         loading: true
       });
-      fetch("./pages/allCategories").then(function (response) {
+      fetch("./api/categories").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this3.setState({
@@ -101967,7 +101984,7 @@ function (_React$Component) {
       });
 
       if (this.state.editMode) {
-        fetch("./pages/" + this.props.match.params.id).then(function (response) {
+        fetch("./api/pages/" + this.props.match.params.id).then(function (response) {
           return response.json();
         }).then(function (data) {
           var copyright = [];
@@ -102778,13 +102795,13 @@ function (_React$Component) {
     value: function postData(duration) {
       var _this2 = this;
 
-      var formData = new FormData();
-
       if (this.state.title.length < 3 || this.state.description.length < 3 || this.video == null || this.video.current == null || this.video.current.files == null || this.video.current.files.length < 1) {
         Console.log("Please fill out all fields");
         return;
       }
 
+      var formData = new FormData();
+      formData.append("token", localStorage.getItem("id_token"));
       formData.append("title", this.state.title);
       formData.append("description", this.state.description);
       formData.append("copyright", this.state.copyright);
@@ -102799,7 +102816,7 @@ function (_React$Component) {
             _this2.updateProgressBarValue(Math.round(progressEvent.loaded * 100 / totalLength));
           }
         },
-        url: "./videos",
+        url: "./api/videos",
         //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
         method: "POST",
         headers: {

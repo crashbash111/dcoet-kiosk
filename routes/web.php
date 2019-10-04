@@ -19,7 +19,7 @@ Route::get( "/findingGame", [ "uses" => "GamesController@findingGame" ] );
 Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
 Route::get( "/findinghighscores", [ "uses" => "GamesController@findinghighscores" ] );
 
-Route::get( "/allGames", "PagesController@allGames" );
+//Route::get( "/allGames", "PagesController@allGames" );
 
 Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
 

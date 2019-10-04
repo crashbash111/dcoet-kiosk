@@ -11,36 +11,13 @@ use App\Category;
 use App\Image;
 use App\Audio;
 use App\Stat;
+use InterventionImage;
 
 class PagesController extends Controller
 {
     public function __construct()
     {
         $this->middleware( "auth:users", [ "except" => [ "index", "show" ] ] );
-    }
-
-    public function video()
-    {
-        $file_location = public_path( 'storage/videos/september.mp4' );
-
-        $extension = pathinfo( $file_location, PATHINFO_EXTENSION );
-
-        $mimetypes = new \Illuminate\Http\Testing\MimeType;
-
-        $mime = $mimetypes->get( $extension );
-        
-        $filesize = File::size( $file_location );
-
-        $headers = [
-            "Content-type" => $mime,
-            "Content-length" => $filesize,
-            "Content-disposition" => 'attachment; filename="' . basename( $file_location ) . '"',
-        ];
-
-        return Response::stream(function () use ($file_location) {
-            $stream = fopen($file_location, 'r');
-            fpassthru($stream);
-         }, 200, $headers);
     }
 
     public function index()
@@ -61,27 +38,6 @@ class PagesController extends Controller
         $page->stats = Stat::where("page_id", $id)->get();
         $page->audios = Audio::where("page_id", $id)->get();
         return json_encode($page);
-    }
-
-    public function allGames()
-    {
-        $game1["Name"] = "Litter Rush";
-        $game1["Description"] = "A game about raising awareness about conservation";
-        $game1["link"] = "litter-rush.html";
-        $game1["img"] = "https://upload.wikimedia.org/wikipedia/commons/5/5d/Restless_flycatcher04.jpg";
-
-        $games = [$game1];
-
-        return json_encode($games);
-    }
-
-    public function categoryPages($id)
-    {
-        $pages = Page::where('category_id', $id)->get();
-        foreach ($pages as $page) {
-            $page->images;
-        }
-        return json_encode($pages);
     }
 
     public function store(Request $request)
@@ -117,12 +73,31 @@ class PagesController extends Controller
                 $img = new Image;
                 //filename to store
                 $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                $smallThumb = $fileName . "_small_" . time() . "." . $extension;
+                $mediumThumb = $fileName . "_medium_" . time() . "." . $extension;
+                $largeThumb = $fileName . "_large_" . time() . "." . $extension;
                 //upload image
                 $path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+                $path_s = $file->storeAs( '/public/kiosk_images', $smallThumb );
+                $path_m = $file->storeAs( '/public/kiosk_images', $mediumThumb );
+                $path_l = $file->storeAs( '/public/kiosk_images', $largeThumb );
+
+                $smallPath = public_path( 'storage/kiosk_images/' . $smallThumb );
+                $this->createThumbnail( $smallPath, 150, 93 );
+
+                $mediumPath = public_path( 'storage/kiosk_images/' . $mediumThumb );
+                $this->createThumbnail( $mediumPath, 300, 185 );
+
+                $largePath = public_path( 'storage/kiosk_images/' . $largeThumb );
+                $this->createThumbnail( $largePath, 550, 340 );
+
                 $img->alt = "";
                 $img->image_name = $fileNameToStore;
                 $img->page_id = $page->id;
-                $img->copyright = "JonoThen Kerr";
+                $img->copyright = "Glenda Rees";
+                $img->thumbnail_small = $smallThumb;
+                $img->thumbnail_medium = $mediumThumb;
+                $img->thumbnail_large = $largeThumb;
 
                 $img->save();
             }

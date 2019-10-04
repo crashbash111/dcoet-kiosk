@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 import { runInThisContext } from "vm";
 import withAuth from "../../components/withAuth";
 
+import AuthService from "../../components/AuthService";
+
 class Create extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +24,8 @@ class Create extends React.Component {
             editMode: (this.props.match != null && this.props.match.params != null && this.props.match.params.id != null),
             error: false,
         }
+
+        this.AuthService = new AuthService();
 
         this.handleChange = this.handleChange.bind(this);
 
@@ -300,6 +304,9 @@ class Create extends React.Component {
         var copyright = null;
 
         let formData = new FormData();
+
+        formData.append( "token", localStorage.getItem( "id_token" ) );
+
         if (this.state.editMode) {
             formData.append("_method", "PUT");
 
@@ -386,7 +393,7 @@ class Create extends React.Component {
         //formData.append( "photos[]", Array.from( this.photos.current.files ) );
         //console.log(this.photos.current.files);
         Axios({
-            url: "./pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
+            url: "./api/pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -403,13 +410,13 @@ class Create extends React.Component {
     componentDidMount() {
         this.setState({ loading: true });
 
-        fetch("./pages/allCategories")
+        fetch("./api/categories")
             .then(response => response.json())
             .then(data => this.setState({ categories: data }));
 
         if (this.state.editMode) {
 
-            fetch("./pages/" + this.props.match.params.id)
+            fetch("./api/pages/" + this.props.match.params.id)
                 .then(response => response.json())
                 .then(data => {
                     let copyright = [];
