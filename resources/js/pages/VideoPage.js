@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 export default class VideoPage extends React.Component {
-    constructor( props )
-    {
-        super( props );
+    constructor(props) {
+        super(props);
 
         this.state = {
             videoId: this.props.match.params.id,
@@ -13,42 +14,45 @@ export default class VideoPage extends React.Component {
         this.video = React.createRef();
     }
 
-    componentDidMount()
-    {
-        console.log( this.video );
+    componentDidMount() {
+        console.log(this.video);
 
-        fetch( "./api/videos/" + this.state.videoId )
-        .then( response => response.json() )
-        .then( data => { this.setState( { video: data } ) } );
+        fetch("./api/videos/" + this.state.videoId)
+            .then(response => response.json())
+            .then(data => { this.setState({ video: data }) });
 
-        fetch( "./api/videos/" + this.state.videoId + "/stream" )
-        .then( stream => {
-            try
-            {
-                this.video.srcObject = stream;
-            }
-            catch( err )
-            {
-                this.video.current.src = stream.url;
-            }
-        })
-        .catch( err => {
-            throw new Error( `Unable to fetch stream ${err}` );
-        });
+        fetch("./api/videos/" + this.state.videoId + "/stream")
+            .then(stream => {
+                try {
+                    this.video.srcObject = stream;
+                }
+                catch (err) {
+                    this.video.current.src = stream.url;
+                }
+            })
+            .catch(err => {
+                throw new Error(`Unable to fetch stream ${err}`);
+            });
     }
 
-    render()
-    {
-        return (this.state.video == null ? <div>
-            Loading...
-        </div>
-        : <div>
-            <h1>{ this.state.video.title }</h1>
-            <video style={{ width: "100px" }} ref={ this.video } controls></video>
-            <p>{ this.state.video.description }</p>
-            <p><i>Running time: approx: {this.state.video.length } seconds</i></p>
-            <p>Copyright: {this.state.video.copyright }</p>
-        </div>
+    render() {
+        return (this.state.video == null ? <Loader/>
+            : <div>
+                <Link to={`/`} className="returns"
+                    style={{
+                        //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                        padding: "8px 8px 8px 8px",
+                        width: "100px",
+                        display: "inline",
+                        textDecoration: "none",
+                        fontSize: "25px",
+                    }} >&#8592; Back to Home</Link>
+                <h1 style={{display: "inline", paddingLeft: "40px"}}>{this.state.video.title}</h1>
+                <video style={{ width: "100px" }} ref={this.video} controls></video>
+                <p>{this.state.video.description}</p>
+                <p><i>Running time: approx: {this.state.video.length} seconds</i></p>
+                <p>Copyright: {this.state.video.copyright}</p>
+            </div>
         );
     }
 }
