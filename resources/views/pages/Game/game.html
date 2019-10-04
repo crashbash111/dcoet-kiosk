@@ -178,6 +178,8 @@
 
         canvas.addEventListener("click", canvasClick);
 
+        var TILESIZE = 64;
+
         var mode = 0;
 
         var timeWhenGameStarted = Date.now();
@@ -218,35 +220,38 @@
             "./assets/images/background3.png",
             "./assets/images/background4.png",
             "./assets/images/background5.png",
-            "./assets/images/rubbish1.png",
-            "./assets/images/rubbish2.png",
-            "./assets/images/rubbish3.png",
-            "./assets/images/rubbish1F.png",
-            "./assets/images/rubbish2F.png",
-            "./assets/images/rubbish3F.png",
-            "./assets/images/animal1.png",
-            "./assets/images/animal2.png",
-            "./assets/images/animal3.png",
-            "./assets/images/animal1F.png",
-            "./assets/images/animal2F.png",
-            "./assets/images/animal3F.png",
-            "./assets/images/wateranimal1.png",
-            "./assets/images/wateranimal2.png",
-            "./assets/images/wateranimal3.png",
-            "./assets/images/wateranimal1F.png",
-            "./assets/images/wateranimal2F.png",
-            "./assets/images/wateranimal3F.png",
-            "./assets/images/pest1.png",
-            "./assets/images/pest2.png",
-            "./assets/images/pest3.png",
-            "./assets/images/pest1F.png",
-            "./assets/images/pest2F.png",
-            "./assets/images/pest3F.png"
+            "./assets/images/tuatara.png",
+            "./assets/images/duck.png",
         ];
+
+        // "./assets/images/rubbish1.png",
+        //     "./assets/images/rubbish2.png",
+        //     "./assets/images/rubbish3.png",
+        //     "./assets/images/rubbish1F.png",
+        //     "./assets/images/rubbish2F.png",
+        //     "./assets/images/rubbish3F.png",
+        //     "./assets/images/animal1.png",
+        //     "./assets/images/animal2.png",
+        //     "./assets/images/animal3.png",
+        //     "./assets/images/animal1F.png",
+        //     "./assets/images/animal2F.png",
+        //     "./assets/images/animal3F.png",
+        //     "./assets/images/wateranimal1.png",
+        //     "./assets/images/wateranimal2.png",
+        //     "./assets/images/wateranimal3.png",
+        //     "./assets/images/wateranimal1F.png",
+        //     "./assets/images/wateranimal2F.png",
+        //     "./assets/images/wateranimal3F.png",
+        //     "./assets/images/pest1.png",
+        //     "./assets/images/pest2.png",
+        //     "./assets/images/pest3.png",
+        //     "./assets/images/pest1F.png",
+        //     "./assets/images/pest2F.png",
+        //     "./assets/images/pest3F.png",
 
         var imgList = [];
 
-        for (var i = 0; i < 29; i++){
+        for (var i = 0; i < imgPaths.length; i++){
             var img = new Image();
             img.src = imgPaths[i];
             imgList.push(img);
@@ -291,7 +296,8 @@
                 width: width,
                 height: height,
                 imgId: imgId,
-                side: side
+                side: side,
+                animFrame: 0
             };
             animalList[id] = animal;
         };
@@ -358,9 +364,10 @@
                 var height = canvas.height / 7.5;
                 var width = canvas.width / 10;
                 var id = animalID++;
-                var spdX = 1 + Math.random() * 20 * (side == 0 ? 1 : -1);
+                var spdX = getRandomInt(1, 6) * (side == 0 ? 1 : -1);
                 if (mode == 1){
-                    var imgId = getRandomInt(11, 14);
+                    // var imgId = getRandomInt(11, 14);
+                    var imgId = getRandomInt(5,7);
                 }
                 else if (mode == 2){
                     var imgId = getRandomInt(17, 20);
@@ -492,15 +499,36 @@
         drawEntity = function(something) {
             ctx.save();
 
-            ctx.drawImage(
-                imgList[something.imgId + something.side * 3],
-                something.x - something.width / 2,
-                something.y - something.height / 2,
-                something.width,
-                something.height
-            );
+            // ctx.drawImage(
+            //     imgList[something.imgId + something.side * 3],
+            //     something.x - something.width / 2,
+            //     something.y - something.height / 2,
+            //     something.width,
+            //     something.height
+            // ); 
+            ctx.drawImage(imgList[something.imgId],
+             TILESIZE * something.animFrame,
+             TILESIZE * something.side,
+             TILESIZE, TILESIZE,
+             something.x - something.width / 2,
+             something.y - something.height / 2,
+             something.width,
+             something.height)// x, y, w, h
             ctx.restore();
+            if ((frameCount * 100 * something.spdX) % 300 == 0){
+                something.animFrame = (something.animFrame + 1) % 4;
+            }
         };
+
+        drawBackground = function(something) {
+            ctx.save();
+            var index = 0;
+            if (health <= 50){
+                index = 1;
+            }
+            ctx.drawImage(imgList[index])
+            ctx.restore();
+        }
 
         testCollisionEntity = function(entity1, entity2) {
             var rect1 = {
@@ -527,6 +555,21 @@
                 rect1.y <= rect2.y + rect2.height &&
                 rect2.y <= rect1.y + rect1.height
             );
+        };
+
+        showMenu = function(id){
+            var elementName = [
+                "timedInstructions",
+                "survivalInstructions",
+                "stats",
+                "end",
+                "levelSelect",
+                "leaderboard",
+                "newScore"
+            ]
+            for (var i = 0; i < elementName.length; i++){
+                document.getElementById(elementName[i]).style.display = elementName[i] == id ? "block" : "none";
+            }  
         };
 
         document.getElementById("levelSelect").style.display = "block";
@@ -560,15 +603,7 @@
         }  
 
         mainMenu = function(){
-            document.getElementById("levelSelect").style.display = "block";
-            document.getElementById("selectText").innerHTML =
-            "Choose which mode you want to play:<br/><br/>" + 
-            "Survival mode keeps going until your health reaches 0<br/><br/>" +
-            "Timed mode is about getting the highest score possible in a set amount of time";
-            document.getElementById("survivalInstructions").style.display = "none";
-            document.getElementById("timedInstructions").style.display = "none";
-            document.getElementById("stats").style.display = "none";
-            document.getElementById("end").style.display = "none";
+            showMenu("levelSelect");
             document.getElementById("rootObject").style = 
                 "background: url(./assets/images/background5.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
             mode = 0;
@@ -584,9 +619,9 @@
             var roundTime = timeOut - t;
             var timeLeft = roundTime.toFixed(1);
 
-            if (frameCount % 30 == 0) {
-                randomlyGenerateRubbish();
-            }
+            // if (frameCount % 30 == 0) {
+            //     randomlyGenerateRubbish();
+            // }
 
             if (mode == 1){
                 if (frameCount % 45 == 0) {
@@ -599,11 +634,11 @@
                 }
             }
 
-            if (mode == 1){
-                if (frameCount % 50 == 0) {
-                    randomlyGeneratePest();
-                }
-            }   
+            // if (mode == 1){
+            //     if (frameCount % 50 == 0) {
+            //         randomlyGeneratePest();
+            //     }
+            // }   
 
             if (mode == 1){
                 if (health <= 50) {
@@ -717,9 +752,6 @@
             rubbishList = {};
             animalList = {};
             pestList = {};
-            randomlyGenerateRubbish();
-            randomlyGenerateAnimal();
-            randomlyGeneratePest();
             myVar = setInterval(update, 40);
         };
 

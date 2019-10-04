@@ -6,8 +6,10 @@ export default class VideoPage extends React.Component {
         super( props );
 
         this.state = {
-
+            videoId: this.props.match.params.id,
+            video: null,
         };
+
         this.video = React.createRef();
     }
 
@@ -15,7 +17,11 @@ export default class VideoPage extends React.Component {
     {
         console.log( this.video );
 
-        fetch( "./video" )
+        fetch( "./videos/" + this.state.videoId )
+        .then( response => response.json() )
+        .then( data => { this.setState( { video: data } ) } );
+
+        fetch( "./videos/" + this.state.videoId + "/showStream" )
         .then( stream => {
             try
             {
@@ -33,8 +39,16 @@ export default class VideoPage extends React.Component {
 
     render()
     {
-        return <div>
-            <video style={{ width: "100px" }} ref={ this.video } controls></video>
+        return (this.state.video == null ? <div>
+            Loading...
         </div>
+        : <div>
+            <h1>{ this.state.video.title }</h1>
+            <video style={{ width: "100px" }} ref={ this.video } controls></video>
+            <p>{ this.state.video.description }</p>
+            <p><i>Running time: approx: {this.state.video.length } seconds</i></p>
+            <p>Copyright: {this.state.video.copyright }</p>
+        </div>
+        );
     }
 }

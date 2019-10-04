@@ -10,12 +10,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return json_encode( Category::all() );
-    }
-
-    public function create()
-    {
-
+        $categories = Category::all();
+        return json_encode( $categories );
     }
 
     public function store( Request $request )
@@ -38,11 +34,6 @@ class CategoryController extends Controller
     {
         $category = Category::find( $id );
         return json_encode( $category );
-    }
-
-    public function edit( $id )
-    {
-
     }
 
     public function update( Request $request, $id )

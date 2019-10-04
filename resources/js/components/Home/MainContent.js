@@ -12,13 +12,14 @@ export default class MainContent extends React.Component {
             loading: false,
             pages: [],
             games: [],
+            videos: [],
             redirectId: -1,
             redirect: false,
+            redirectType: -1 //0 for page, 1 for game, 2 for video
         };
 
-
-
-        this.handleClick = this.handleClick.bind(this);
+        this.handleClick = this.handleClick.bind( this );
+        this.handleVideoClick = this.handleVideoClick.bind( this );
     }
 
     componentDidMount() {
@@ -29,7 +30,11 @@ export default class MainContent extends React.Component {
 
         fetch("./allGames")
             .then(response => response.json())
-            .then(data => this.setState({ games: data, loading: false }));
+            .then(data => this.setState({ games: data }));
+
+        fetch( "./videos" )
+        .then( response => response.json() )
+        .then( data => this.setState( { videos: data, loading: false } ) );
 
         console.log(this.state.games);
     }
@@ -39,10 +44,12 @@ export default class MainContent extends React.Component {
     }
 
     handleClick(i) {
-        this.setState({ redirectId: i, redirect: true });
+        this.setState({ redirectType: 0, redirectId: i, redirect: true });
     }
 
-
+    handleVideoClick( i ) {
+        this.setState({ redirectType: 2, redirectId: i, redirect: true });
+    }
 
     render() {
 
@@ -86,11 +93,23 @@ export default class MainContent extends React.Component {
 
                     return (
                         <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
-
                             {gamesList}
-
                         </div>
+                    );
+                }
 
+                if( this.props.activeCategory == -3 )
+                {
+                    var videoList = this.state.videos.map( item => {
+                        return (
+                            <Tile key={ item.id } item={ item } handleClick={ this.handleVideoClick } />
+                        );
+                    });
+
+                    return (
+                        <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                            { videoList }
+                        </div>
                     );
                 }
 

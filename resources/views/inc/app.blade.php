@@ -8,7 +8,7 @@
     <title>Deep Cove</title>
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
     <link rel="stylesheet" href="{{asset( 'css/app.css' )}}" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta id="csrf-meta" name="csrf-token" content="{{ csrf_token() }}" />
     <script>window.Laravel = { csrfToken: '{{csrf_token()}}' }</script>
 </head>
 @show
