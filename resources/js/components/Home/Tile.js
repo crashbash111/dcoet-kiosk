@@ -32,7 +32,8 @@ export default class Tile extends React.Component {
             }
         }
         else{
-            path = this.state.baseImagePath + this.props.imgOverride;
+            //path = this.state.baseImagePath + this.props.imgOverride;
+            path = this.props.imgOverride;
         }
         //returns random back colour (in event images do not load)
         let backgroundColourIndex = this.getRandomInt(0, this.state.defaultBackColour.length - 1);
@@ -45,7 +46,7 @@ export default class Tile extends React.Component {
                             opacity: paramx.opacity, transform: paramx.transform, transition: this.state.fadeTime,
                             backgroundColor: this.state.defaultBackColour[backgroundColourIndex]
                         }}>
-                        <h3 style={{ textShadow: "2px 2px #111111" }}>{this.props.item.heading}</h3>
+                        <h3 style={{ textShadow: "2px 2px #111111" }}>{ this.props.flag == "video" ? this.props.item.title : this.props.item.heading}</h3>
                     </div>
                 )}
             </Spring>

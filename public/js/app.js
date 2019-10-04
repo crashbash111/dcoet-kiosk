@@ -95389,26 +95389,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Admin */ "./resources/js/pages/Admin.js");
 /* harmony import */ var _pages_Admin_BannedWords_BannedWordsIndex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Admin/BannedWords/BannedWordsIndex */ "./resources/js/pages/Admin/BannedWords/BannedWordsIndex.js");
-/* harmony import */ var _pages_Birds__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Birds */ "./resources/js/pages/Birds.js");
-/* harmony import */ var _pages_Category__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Category */ "./resources/js/pages/Category.js");
-/* harmony import */ var _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/CategoryIndex */ "./resources/js/pages/CategoryIndex.js");
-/* harmony import */ var _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Admin/Create */ "./resources/js/pages/Admin/Create.js");
-/* harmony import */ var _pages_Admin_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Admin/BannedWords/CreateBannedWord */ "./resources/js/pages/Admin/BannedWords/CreateBannedWord.js");
-/* harmony import */ var _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/CreateCategory */ "./resources/js/pages/Admin/CreateCategory.js");
-/* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
-/* harmony import */ var _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Admin/CreateVideo */ "./resources/js/pages/Admin/CreateVideo.js");
-/* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
-/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
-/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
-/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
-/* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.js");
-/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
-/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
-/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
-/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
+/* harmony import */ var _pages_Category__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Category */ "./resources/js/pages/Category.js");
+/* harmony import */ var _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/CategoryIndex */ "./resources/js/pages/CategoryIndex.js");
+/* harmony import */ var _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Admin/Create */ "./resources/js/pages/Admin/Create.js");
+/* harmony import */ var _pages_Admin_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Admin/BannedWords/CreateBannedWord */ "./resources/js/pages/Admin/BannedWords/CreateBannedWord.js");
+/* harmony import */ var _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Admin/CreateCategory */ "./resources/js/pages/Admin/CreateCategory.js");
+/* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
+/* harmony import */ var _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Admin/CreateVideo */ "./resources/js/pages/Admin/CreateVideo.js");
+/* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
+/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
+/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
+/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
+/* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.js");
+/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
+/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
+/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
+/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
 
  //import { Router, Route, IndexRoute, hashHistory } from "react-router";
-
 
 
 
@@ -95432,27 +95430,12 @@ __webpack_require__.r(__webpack_exports__);
 var app = document.getElementById('app');
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
-  path: "/",
-  component: _pages_Home__WEBPACK_IMPORTED_MODULE_14__["default"]
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-  exact: true,
   path: "/splash",
-  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_20__["default"]
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-  exact: true,
-  path: "/kiosk",
-  component: _pages_CategoryIndex__WEBPACK_IMPORTED_MODULE_7__["default"]
+  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_19__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk/:id",
-  component: _pages_Category__WEBPACK_IMPORTED_MODULE_6__["default"]
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-  exact: true,
-  path: "/kiosk/:c/:id",
-  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_15__["default"]
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-  path: "/birds/:id",
-  component: _pages_Birds__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_14__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin",
@@ -95460,31 +95443,31 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/create/:id?",
-  component: _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _pages_Admin_Create__WEBPACK_IMPORTED_MODULE_7__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createCategory/:id?",
-  component: _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _pages_Admin_CreateCategory__WEBPACK_IMPORTED_MODULE_9__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createPowerpoint",
-  component: _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_11__["default"]
+  component: _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_10__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoint/:id",
-  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_17__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoints",
-  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
-  path: "/video/:id",
-  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_21__["default"]
+  path: "/videos/:id",
+  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createVideo/:id?",
-  component: _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_11__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/bannedWords",
@@ -95492,11 +95475,15 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createBannedWord/:id?",
-  component: _pages_Admin_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_9__["default"]
+  component: _pages_Admin_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_8__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/login",
-  component: _pages_Login__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_Login__WEBPACK_IMPORTED_MODULE_16__["default"]
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  exact: true,
+  path: "/:category?",
+  component: _pages_Home__WEBPACK_IMPORTED_MODULE_13__["default"]
 })))), app);
 
 /***/ }),
@@ -96500,21 +96487,21 @@ function (_React$Component) {
       this.setState({
         loading: true
       });
-      fetch("./pages/all").then(function (response) {
+      fetch("./api/pages").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
           pages: data
         });
       });
-      fetch("./allGames").then(function (response) {
+      fetch("./api/games").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
           games: data
         });
       });
-      fetch("./videos").then(function (response) {
+      fetch("./api/videos").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
@@ -96522,7 +96509,6 @@ function (_React$Component) {
           loading: false
         });
       });
-      console.log(this.state.games);
     }
   }, {
     key: "fetchData",
@@ -96535,6 +96521,11 @@ function (_React$Component) {
         redirectId: i,
         redirect: true
       });
+    }
+  }, {
+    key: "handleGameClick",
+    value: function handleGameClick(i) {
+      window.open("../Resources/Game/index.html", "_blank");
     }
   }, {
     key: "handleVideoClick",
@@ -96551,7 +96542,14 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.state.redirect) {
-        var target = "/kiosk/1/" + this.state.redirectId;
+        var target;
+
+        if (this.state.redirectType == 2) {
+          target = "/videos/" + this.state.redirectId;
+        } else {
+          target = "/kiosk/" + this.state.redirectId;
+        }
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
           to: target
         });
@@ -96574,23 +96572,16 @@ function (_React$Component) {
         } else {
           if (this.props.activeCategory == -2) {
             var gamesList = this.state.games.map(function (item) {
-              console.log(item.img);
-              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 key: item.id,
-                onClick: function onClick() {
-                  return window.open("../Resources/Game/index.html", "_blank");
-                },
-                "data-role": "tile",
-                "data-cover": "./Game/assets/images/background.png",
-                "data-size": "large",
-                style: {
-                  backgroundColor: "black"
-                }
-              }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-                style: {
-                  textShadow: "2px 2px #111111"
-                }
-              }, item.Name));
+                item: item,
+                handleClick: _this3.handleGameClick,
+                imgOverride: item.image_path,
+                flag: "game"
+              }) // <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover={ item.image_path } data-size="large" style={{ backgroundColor: "black" }}>
+              //     <h3 style={{ textShadow: "2px 2px #111111" }}>{item.name}</h3>
+              // </div>
+              ;
             });
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               style: {
@@ -96608,7 +96599,9 @@ function (_React$Component) {
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 key: item.id,
                 item: item,
-                handleClick: _this3.handleVideoClick
+                handleClick: _this3.handleVideoClick,
+                imgOverride: "./storage/video_thumbnails/nothumb.png",
+                flag: "video"
               });
             });
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96805,12 +96798,21 @@ function (_React$Component) {
         });
       });
       var gameId = -2;
+      var videoId = -3;
       sideBarEntries.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideBar_SideBarEntry__WEBPACK_IMPORTED_MODULE_1__["default"], {
         key: gameId,
         id: gameId,
         isActive: this.props.activeCategory == gameId,
         name: "Games",
         description: "Fun interactive activites.",
+        handleChange: this.props.handleChange
+      }));
+      sideBarEntries.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideBar_SideBarEntry__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        key: videoId,
+        id: videoId,
+        isActive: this.props.activeCategory == videoId,
+        name: "Videos",
+        description: "Educational and entertaining videos.",
         handleChange: this.props.handleChange
       }));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96978,7 +96980,8 @@ function (_React$Component) {
           path = this.state.baseImagePath + this.props.item.images[x].image_name;
         }
       } else {
-        path = this.state.baseImagePath + this.props.imgOverride;
+        //path = this.state.baseImagePath + this.props.imgOverride;
+        path = this.props.imgOverride;
       } //returns random back colour (in event images do not load)
 
 
@@ -97012,7 +97015,7 @@ function (_React$Component) {
           style: {
             textShadow: "2px 2px #111111"
           }
-        }, _this2.props.item.heading));
+        }, _this2.props.flag == "video" ? _this2.props.item.title : _this2.props.item.heading));
       });
     }
   }]);
@@ -99954,161 +99957,6 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/Birds.js":
-/*!*************************************!*\
-  !*** ./resources/js/pages/Birds.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Birds; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var Birds =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Birds, _React$Component);
-
-  function Birds(props) {
-    var _this;
-
-    _classCallCheck(this, Birds);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Birds).call(this, props));
-    console.log(_this.props);
-    _this.state = {
-      bird: {},
-      loading: true,
-      index: 0,
-      opacity: 1
-    };
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.fade = _this.fade.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Birds, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      console.log(this.props.match.params.id);
-      this.setState({
-        loading: true
-      });
-      fetch("./pages/" + this.props.match.params.id).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        return _this2.setState({
-          bird: data,
-          loading: false
-        });
-      });
-    }
-  }, {
-    key: "fade",
-    value: function fade() {
-      this.setState(function (prevState) {
-        return {
-          opacity: prevState.opacity - 0.04
-        };
-      });
-    }
-  }, {
-    key: "handleClick",
-    value: function handleClick(event) {
-      var _this3 = this;
-
-      var t = setInterval(this.fade, 10);
-      setTimeout(function () {
-        clearInterval(t);
-
-        _this3.setState({
-          opacity: 1
-        });
-
-        _this3.setState(function (prevState) {
-          return {
-            index: (_this3.state.index + 1) % _this3.state.bird.images.length
-          };
-        });
-      }, 250);
-      console.log("e");
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var params = this.props.match.params;
-      var id = params.id;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row",
-        style: {
-          height: "900px"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-4",
-        style: {
-          position: "relative"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "kiosk-panel no-scrollbar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.loading ? "Loading..." : this.state.bird.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.loading ? "Loading..." : this.state.bird.text)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          position: "absolute",
-          left: "0",
-          bottom: "0",
-          height: "200px",
-          width: "100%",
-          backgroundImage: "linear-gradient( rgba( 0, 0, 0, 0 ), rgba( 0, 0, 0, 0.9 ), rgba( 0, 0, 0, 1 ) )"
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: this.handleClick,
-        className: "col-8 kiosk-image-div",
-        style: {
-          opacity: this.state.opacity,
-          backgroundImage: "url('./storage/kiosk_images/" + (this.state.loading ? "./images/loading.gif" : this.state.bird.images[this.state.index].image_name) + "')",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          width: "700px",
-          height: "900px"
-        }
-      }))));
-    }
-  }]);
-
-  return Birds;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-
-
-/***/ }),
-
 /***/ "./resources/js/pages/Category.js":
 /*!****************************************!*\
   !*** ./resources/js/pages/Category.js ***!
@@ -100373,7 +100221,7 @@ function (_React$Component) {
     });
 
     _this.state = {
-      activeCategory: -1,
+      activeCategory: _this.props.match != null && _this.props.match.params != null && _this.props.match.params.category != null ? _this.props.match.params.category : -1,
       categories: [],
       searchTerm: "",
       oldCategory: -1,
@@ -100422,7 +100270,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this3 = this;
 
-      fetch("./pages/allCategories").then(function (response) {
+      fetch("./api/categories").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this3.setState({
@@ -100663,7 +100511,7 @@ function (_React$Component) {
         loading: true
       });
       var id = this.props.match.params.id;
-      fetch("./pages/" + id).then(function (response) {
+      fetch("./api/pages/" + id).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
@@ -100728,7 +100576,7 @@ function (_React$Component) {
 
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_spring__WEBPACK_IMPORTED_MODULE_4__["animated"].div, _extends({}, bind(), {
-        "class": "item",
+        className: "item",
         onClick: function onClick() {
           _this4.setState({
             sideOpen: !_this4.state.sideOpen
@@ -100868,7 +100716,7 @@ function (_React$Component) {
 
               }
             }, _this5.state.page.text)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-              to: "/",
+              to: "/".concat(_this5.state.page.category_id),
               className: "returns",
               style: {
                 //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
@@ -101146,7 +100994,7 @@ function (_React$Component) {
 
       event.preventDefault();
       this.Auth.login(this.state.username, this.state.password).then(function (res) {
-        _this3.props.history.replace('/');
+        _this3.props.history.replace('/admin');
       })["catch"](function (error) {
         alert(error);
       });
@@ -101155,7 +101003,7 @@ function (_React$Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       if (this.Auth.loggedIn()) {
-        this.props.history.replace('/');
+        this.props.history.replace('/admin');
       }
     }
   }, {
@@ -101498,14 +101346,14 @@ function (_React$Component) {
       var _this2 = this;
 
       console.log(this.video);
-      fetch("./videos/" + this.state.videoId).then(function (response) {
+      fetch("./api/videos/" + this.state.videoId).then(function (response) {
         return response.json();
       }).then(function (data) {
         _this2.setState({
           video: data
         });
       });
-      fetch("./videos/" + this.state.videoId + "/showStream").then(function (stream) {
+      fetch("./api/videos/" + this.state.videoId + "/stream").then(function (stream) {
         try {
           _this2.video.srcObject = stream;
         } catch (err) {

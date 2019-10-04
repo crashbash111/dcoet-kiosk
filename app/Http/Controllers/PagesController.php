@@ -46,7 +46,21 @@ class PagesController extends Controller
     public function index()
     {
         $pages = Page::all();
+        foreach( $pages as $page )
+        {
+            $page->images = Image::where( "page_id", $page->id )->get();
+        }
         return json_encode( $pages );
+    }
+
+    public function show($id)
+    {
+        $page = Page::find($id);
+        // $page->categoryName = $page->category->name;
+        $page->images = Image::where("page_id", $id)->get();
+        $page->stats = Stat::where("page_id", $id)->get();
+        $page->audios = Audio::where("page_id", $id)->get();
+        return json_encode($page);
     }
 
     public function allGames()
@@ -164,16 +178,6 @@ class PagesController extends Controller
             "success" => true,
             "message" => "Page saved successfully.",
         ]);
-    }
-
-    public function show($id)
-    {
-        $page = Page::find($id);
-        $page->categoryName = $page->category->name;
-        $page->images = Image::where("page_id", $id)->get();
-        $page->stats = Stat::where("page_id", $id)->get();
-        $page->audios = Audio::where("page_id", $id)->get();
-        return json_encode($page);
     }
 
     public function update(Request $request, $id)

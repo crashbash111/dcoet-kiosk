@@ -33,7 +33,7 @@ export default class KioskPage extends React.Component {
 
         let { id } = this.props.match.params;
 
-        fetch("./pages/" + id)
+        fetch("./api/pages/" + id)
             .then(response => response.json())
             .then(data => this.setState({ page: data, loading: false }));
     }
@@ -72,7 +72,7 @@ export default class KioskPage extends React.Component {
         })
         //const avSize = x.interpolate({ map: Math.abs, range: [50, 300], output: ['scale(0.5)', 'scale(1)'], extrapolate: 'clamp' })
         return (
-            <animated.div {...bind()} class="item" onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
+            <animated.div {...bind()} className="item" onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
                 position: "absolute",
                 //backgroundColor: bg,
                 top: "calc(50% - 60px)",
@@ -185,7 +185,7 @@ export default class KioskPage extends React.Component {
                                                     }}>{this.state.page.text}
                                                     </p>
                                                 </div>
-                                                <Link to="/" className="returns"
+                                                <Link to= { `/${this.state.page.category_id}` } className="returns"
                                                     style={{
                                                         //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
                                                         color: palette.loading ? "white" : palette.data.lightVibrant,

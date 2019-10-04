@@ -48,7 +48,7 @@ export default class Login extends React.Component {
 
         this.Auth.login( this.state.username, this.state.password )
         .then( res => {
-            this.props.history.replace( '/' );
+            this.props.history.replace( '/admin' );
         })
         .catch( error => {
             alert( error );
@@ -59,7 +59,7 @@ export default class Login extends React.Component {
     {
         if( this.Auth.loggedIn() )
         {
-            this.props.history.replace( '/' );
+            this.props.history.replace( '/admin' );
         }
     }
 

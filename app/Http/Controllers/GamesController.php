@@ -8,6 +8,19 @@ use App\FindingGameScores;
 
 class GamesController extends Controller
 {
+    public function index()
+    {
+        $file_path = "./storage/game_cover_images/";
+
+        $games = Array(
+            (object)array( "id" => 1, "heading" => "Litter Rush", "image_path" => $file_path . "litter.png" ),
+            (object)array( "id" => 2, "heading" => "Finding", "image_path" => $file_path . "finding.png" ),
+            (object)array( "id" => 3, "heading" => "Memory", "image_path" => $file_path . "memory.png" )
+        );
+
+        return json_encode( $games );
+    }
+
     public function findingGame()
     {
         return view( "pages.Game.finding" );

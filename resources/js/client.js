@@ -5,7 +5,6 @@ import { Router, Route, Switch, BrowserRouter, HashRouter } from "react-router-d
 
 import Admin from "./pages/Admin";
 import BannedWordsIndex from "./pages/Admin/BannedWords/BannedWordsIndex";
-import Birds from "./pages/Birds";
 import Category from "./pages/Category";
 import CategoryIndex from "./pages/CategoryIndex";
 import Create from "./pages/Admin/Create";
@@ -29,12 +28,10 @@ ReactDOM.render(
     <HashRouter>
         <div>
             <Switch>
-                <Route exact path="/" component={Home} />
                 <Route exact path="/splash" component={Splash} />
-                <Route exact path="/kiosk" component={CategoryIndex} />
-                <Route exact path="/kiosk/:id" component={Category} />
-                <Route exact path="/kiosk/:c/:id" component={KioskPage} />
-                <Route path="/birds/:id" component={Birds} />
+                {/* <Route exact path="/kiosk" component={CategoryIndex} /> */}
+                {/* <Route exact path="/kiosk/:id" component={Category} /> */}
+                <Route exact path="/kiosk/:id" component={KioskPage} />
                 <Route exact path="/admin" component={Admin} />
                 <Route exact path="/admin/create/:id?" component={Create} />
                 {/* <Route exact path="/admin/:id/edit" component={EditPage} /> */}
@@ -42,11 +39,12 @@ ReactDOM.render(
                 <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
                 <Route exact path="/powerpoint/:id" component={PowerpointPage} />
                 <Route exact path="/powerpoints" component={Powerpoints} />
-                <Route exact path="/video/:id" component={VideoPage} />
+                <Route exact path="/videos/:id" component={VideoPage} />
                 <Route exact path="/admin/createVideo/:id?" component={CreateVideo} />
                 <Route exact path="/admin/bannedWords" component={BannedWordsIndex} />
                 <Route exact path="/admin/createBannedWord/:id?" component={CreateBannedWord} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/:category?" component={Home} />
             </Switch>
         </div>
     </HashRouter>,

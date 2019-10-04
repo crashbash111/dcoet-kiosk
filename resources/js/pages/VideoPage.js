@@ -17,11 +17,11 @@ export default class VideoPage extends React.Component {
     {
         console.log( this.video );
 
-        fetch( "./videos/" + this.state.videoId )
+        fetch( "./api/videos/" + this.state.videoId )
         .then( response => response.json() )
         .then( data => { this.setState( { video: data } ) } );
 
-        fetch( "./videos/" + this.state.videoId + "/showStream" )
+        fetch( "./api/videos/" + this.state.videoId + "/stream" )
         .then( stream => {
             try
             {

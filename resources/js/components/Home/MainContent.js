@@ -24,19 +24,15 @@ export default class MainContent extends React.Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        fetch("./pages/all")
+        fetch( "./api/pages" )
             .then(response => response.json())
             .then(data => this.setState({ pages: data }));
-
-        fetch("./allGames")
+        fetch("./api/games")
             .then(response => response.json())
             .then(data => this.setState({ games: data }));
-
-        fetch( "./videos" )
+        fetch( "./api/videos" )
         .then( response => response.json() )
         .then( data => this.setState( { videos: data, loading: false } ) );
-
-        console.log(this.state.games);
     }
 
     fetchData() {
@@ -47,6 +43,10 @@ export default class MainContent extends React.Component {
         this.setState({ redirectType: 0, redirectId: i, redirect: true });
     }
 
+    handleGameClick( i ) {
+        window.open("../Resources/Game/index.html", "_blank" );
+    }
+
     handleVideoClick( i ) {
         this.setState({ redirectType: 2, redirectId: i, redirect: true });
     }
@@ -54,7 +54,16 @@ export default class MainContent extends React.Component {
     render() {
 
         if (this.state.redirect) {
-            let target = "/kiosk/1/" + this.state.redirectId;
+            let target;
+            if( this.state.redirectType == 2 )
+            {
+                target = "/videos/" + this.state.redirectId;
+            }
+            else
+            {
+                target = "/kiosk/" + this.state.redirectId;
+            }
+            
             return <Redirect to={target} />
         }
 
@@ -83,11 +92,12 @@ export default class MainContent extends React.Component {
 
                 if (this.props.activeCategory == -2) {
                     var gamesList = this.state.games.map(item => {
-                        console.log(item.img);
                         return (
-                            <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover="./Game/assets/images/background.png" data-size="large" style={{ backgroundColor: "black" }}>
-                                <h3 style={{ textShadow: "2px 2px #111111" }}>{item.Name}</h3>
-                            </div>
+                            <Tile key={ item.id } item={ item } handleClick={ this.handleGameClick } imgOverride={ item.image_path } flag="game" />
+
+                            // <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover={ item.image_path } data-size="large" style={{ backgroundColor: "black" }}>
+                            //     <h3 style={{ textShadow: "2px 2px #111111" }}>{item.name}</h3>
+                            // </div>
                         );
                     });
 
@@ -102,7 +112,7 @@ export default class MainContent extends React.Component {
                 {
                     var videoList = this.state.videos.map( item => {
                         return (
-                            <Tile key={ item.id } item={ item } handleClick={ this.handleVideoClick } />
+                            <Tile key={ item.id } item={ item } handleClick={ this.handleVideoClick } imgOverride={ "./storage/video_thumbnails/nothumb.png" } flag="video" />
                         );
                     });
 

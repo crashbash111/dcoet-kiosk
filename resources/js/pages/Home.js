@@ -12,7 +12,7 @@ export default class Home extends React.Component {
         super(props);
 
         this.state = {
-            activeCategory: -1,
+            activeCategory: ( this.props.match != null && this.props.match.params != null && this.props.match.params.category != null ) ? this.props.match.params.category : -1,
             categories: [],
             searchTerm: "",
             oldCategory: -1,
@@ -56,7 +56,7 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        fetch("./pages/allCategories")
+        fetch( "./api/categories" )
             .then(response => response.json())
             .then(data => this.setState({ categories: data }));
     }
