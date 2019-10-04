@@ -64,7 +64,7 @@ export default class KioskPage extends React.Component {
         });
     }
 
-    slider(bg,{ children }) {
+    slider(bg, { children }) {
         const [bind, { delta, down }] = useGesture()
         const { x } = useSpring({
             x: down ? delta[0] : 0,
@@ -148,7 +148,7 @@ export default class KioskPage extends React.Component {
                                                 backgroundSize: "cover",
                                                 transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
                                             }} >
-                                            <div className="hideScroll"
+                                            <div className="hideScroll" onclick={() => { null }}
                                                 style={{
                                                     //styling for the side panel
                                                     //filter: "color blur(60px)",
@@ -179,13 +179,17 @@ export default class KioskPage extends React.Component {
                                                     <p style={{
                                                         fontSize: "28px",
                                                         textAlign: "left",
+                                                        paddingBottom: "5px",
+                                                    }}>{this.state.page.shortdesc}
+                                                    </p>
+                                                    <p style={{
+                                                        fontSize: "18px",
+                                                        textAlign: "justify",
                                                         paddingBottom: "50px",
-                                                        //width: this.state.sideSize - 3 + "vw",
-                                                        // overflowX: "hidden",
-                                                    }}>{this.state.page.text}
+                                                    }}>{this.state.page.longdesc}
                                                     </p>
                                                 </div>
-                                                <Link to= { `/${this.state.page.category_id}` } className="returns"
+                                                <Link to={`/${this.state.page.category_id}`} className="returns"
                                                     style={{
                                                         //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
                                                         color: palette.loading ? "white" : palette.data.lightVibrant,
@@ -201,18 +205,25 @@ export default class KioskPage extends React.Component {
                                             </div>
 
                                         </div>
-
-                                        <this.slider >
-                                            <div style={{
-                                                backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
-                                                color: !palette.loading ? palette.data.darkMuted : "white",
-                                            }}>
-                                                <h1 style={{
-                                                    textAlign: "center",
-                                                    padding: "50% 0px 50% 0px",
-                                                }}>&lt;</h1>
-                                            </div>
-                                        </this.slider>
+                                        <div onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
+                                            backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
+                                            color: !palette.loading ? palette.data.darkMuted : "white",
+                                            position: "absolute",
+                                            //backgroundColor: bg,
+                                            top: "calc(50% - 60px)",
+                                            borderRadius: "0px 15px 15px 0px",
+                                            width: "45px",
+                                            height: "120px",
+                                            opacity: "0.8",
+                                            transition: this.state.transitionTime,
+                                            left: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
+                                        }}>
+                                            <h1 style={{
+                                                textAlign: "center",
+                                                padding: "50% 0px 50% 0px",
+                                                //fontSize: "12px",
+                                            }}>&lt;</h1>
+                                        </div>
 
                                         <div style={{
                                             position: "absolute",
