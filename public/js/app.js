@@ -106023,6 +106023,9 @@ function (_React$Component) {
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "hideScroll",
+              onclick: function onclick() {
+                null;
+              },
               style: {
                 //styling for the side panel
                 //filter: "color blur(60px)",
@@ -106063,11 +106066,15 @@ function (_React$Component) {
               style: {
                 fontSize: "28px",
                 textAlign: "left",
-                paddingBottom: "50px" //width: this.state.sideSize - 3 + "vw",
-                // overflowX: "hidden",
-
+                paddingBottom: "5px"
               }
-            }, _this5.state.page.text)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            }, _this5.state.page.shortdesc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+              style: {
+                fontSize: "18px",
+                textAlign: "justify",
+                paddingBottom: "50px"
+              }
+            }, _this5.state.page.longdesc)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
               to: "/".concat(_this5.state.page.category_id),
               className: "returns",
               style: {
@@ -106082,18 +106089,33 @@ function (_React$Component) {
                 fontSize: "25px",
                 transition: _this5.state.transitionTime
               }
-            }, "\u2190 Back to Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_this5.slider, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            }, "\u2190 Back to Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              onClick: function onClick() {
+                _this5.setState({
+                  sideOpen: !_this5.state.sideOpen
+                });
+              },
               style: {
                 backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
                 //"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
-                color: !palette.loading ? palette.data.darkMuted : "white"
+                color: !palette.loading ? palette.data.darkMuted : "white",
+                position: "absolute",
+                //backgroundColor: bg,
+                top: "calc(50% - 60px)",
+                borderRadius: "0px 15px 15px 0px",
+                width: "45px",
+                height: "120px",
+                opacity: "0.8",
+                transition: _this5.state.transitionTime,
+                left: _this5.state.sideOpen ? _this5.state.sideSize + "vw" : "0px"
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
               style: {
                 textAlign: "center",
-                padding: "50% 0px 50% 0px"
+                padding: "50% 0px 50% 0px" //fontSize: "12px",
+
               }
-            }, "<"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            }, "<")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               style: {
                 position: "absolute",
                 right: "10px",
@@ -106653,6 +106675,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VideoPage; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Loader */ "./resources/js/components/Loader.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -106670,6 +106694,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -106718,7 +106744,23 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return this.state.video == null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+      return this.state.video == null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/",
+        className: "returns",
+        style: {
+          //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+          padding: "8px 8px 8px 8px",
+          width: "100px",
+          display: "inline",
+          textDecoration: "none",
+          fontSize: "25px"
+        }
+      }, "\u2190 Back to Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        style: {
+          display: "inline",
+          paddingLeft: "40px"
+        }
+      }, this.state.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
         style: {
           width: "100px"
         },
