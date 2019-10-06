@@ -26,7 +26,7 @@ export default class BannedWordsIndex extends React.Component {
     }
 
     componentDidMount() {
-        fetch("./bannedwords")
+        fetch( "./api/bannedwords" )
             .then(response => response.json())
             .then(data => { this.setState({ bannedWords: data }); console.log(data) })
             .catch(err => console.log(err));
@@ -67,14 +67,15 @@ export default class BannedWordsIndex extends React.Component {
         }
 
         let formData = new FormData();
-        if (this.state.editMode) {
-            formData.append("_method", "PUT");
+        if ( this.state.editMode )
+        {
+            formData.append( "_method", "PUT" );
         }
 
-        formData.append("word", this.state.word);
+        formData.append( "word", this.state.word );
 
         Axios({
-            url: "./bannedwords" + (this.state.editMode ? "/" + this.state.id : ""),
+            url: "./api/bannedwords" + ( this.state.editMode ? "/" + this.state.id : "" ),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

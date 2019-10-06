@@ -33,6 +33,8 @@ export default class KioskPage extends React.Component {
 
         let { id } = this.props.match.params;
 
+        console.log( id );
+
         fetch("./api/pages/" + id)
             .then(response => response.json())
             .then(data => this.setState({ page: data, loading: false }));

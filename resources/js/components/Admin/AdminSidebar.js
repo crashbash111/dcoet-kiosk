@@ -22,7 +22,7 @@ export default class AdminSidebar extends React.Component {
 
     render() {
         let entries = this.props.items.map(item => {
-            return <AdminSidebarEntry key={item.id} item={item} handleClick={ this.props.handleTabClick } />
+            return <AdminSidebarEntry key={item.id} item={item} handleClick={ this.props.handleTabClick } isActive={ item.id == this.props.activeTab } />
         });
 
         return (

@@ -1,20 +1,49 @@
 import React from "react";
 
-export default class Videos extends React.Component
-{
-    constructor( props )
-    {
-        super( props );
+import CreateVideo from "./Videos/CreateVideo";
+import VideoIndex from "./Videos/VideoIndex";
+
+export default class Videos extends React.Component {
+    constructor(props) {
+        super(props);
 
         this.state = {
-
+            loading: false,
+            mode: 0,
         };
+
+        this.handleClick = this.handleClick.bind( this );
     }
 
-    render()
-    {
+    handleClick(i) {
+        this.setState({ mode: i });
+        console.log( this.state.mode );
+    }
+
+    render() {
+        if (this.state.loading) {
+            return <Loader />
+        }
+
+        let child = <div>Videos</div>;
+
+        switch (this.state.mode) {
+            case 0:
+                child = <VideoIndex />
+                break;
+            case 1:
+                child = <CreateVideo />
+                break;
+            }
+
         return <div>
-            Videos
+            <div style={{ display: "inline-block" }}>
+                <button className={ this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(0)}>View</button>
+            </div>
+            <div style={{ display: "inline-block" }}>
+                <button className={ this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(1)}>Create New</button>
+            </div>
+            {child}
         </div>
     }
 }

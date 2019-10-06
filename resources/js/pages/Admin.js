@@ -14,6 +14,7 @@ import CategoryTable from "../components/Admin/CategoryTable";
 import MyPagination from "../components/MyPagination";
 
 import BannedWords from "../components/Admin/BannedWords";
+import Dashboard from "../components/Admin/Dashboard";
 import Games from "../components/Admin/Games";
 import KioskCategories from "../components/Admin/KioskCategories";
 import KioskPages from "../components/Admin/KioskPages";
@@ -143,7 +144,7 @@ class Admin extends React.Component {
             {
                 id: 0,
                 text: "Dashboard",
-                component: <div>Dashboard</div>
+                component: <Dashboard />
             },
             {
                 id: 1,
@@ -181,21 +182,43 @@ class Admin extends React.Component {
         var child = <div>Please select a category</div>
 
         //find the right component to render
-        child = items.map( item => {
-            if( item.id == this.state.tabIndex )
-            {
+        child = items.map(item => {
+            if (item.id == this.state.tabIndex) {
                 return item.component;
             }
         });
 
+        console.log(this.props.user);
+
+        let verticalCenter = {
+            margin: "0",
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            msTransform: "translateY(-50%)"
+        };
+
         return (
             <div className="xadmin">
-                <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={ items } />
-                <div className={isMobile ? 'fullarea' : 'rightarea'}>
-                    <h2>Welcome {this.props.user.username}</h2>
-                    <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
-                    <h2>Admin</h2>
-                    <br />
+                <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={ this.state.tabIndex } />
+                <div style={{ height: "100vh" }} className={isMobile ? 'fullarea' : 'rightarea'}>
+                    <div style={{ height: "50px", width: "100%" }}>
+
+                        <div style={{ float: "right" }}>
+                            <div style={{ display: "inline-block" }}>
+                                <h2>Welcome Admin</h2>
+                            </div>
+                            <div style={{ width: "20px", display: "inline-block" }}></div>
+                            <div style={{ display: "inline-block" }}>
+                                <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>
+                                    Logout
+                            </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
                     {child}
                 </div>
             </div>

@@ -321,7 +321,7 @@ class Create extends React.Component {
             copyright = this.state.page.copyright;
         }
         formData.append("heading", this.state.page.heading);
-        formData.append("text", this.state.page.text);
+        formData.append("shortdesc", this.state.page.text);
         formData.append("category", this.state.page.category_id);
 
         var files = this.photos.current.files;

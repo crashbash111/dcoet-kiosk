@@ -11,33 +11,68 @@ use App\Category;
 use App\Image;
 use App\Audio;
 use App\Stat;
-use InterventionImage;
+use Intervention\Image\Facades\Image as InterventionImage;
 
 class PagesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( "auth:users", [ "except" => [ "index", "show" ] ] );
+        $this->middleware("auth:users", ["except" => ["index", "show", "mostViewed", "leastViewed"]]);
     }
 
     public function index()
     {
         $pages = Page::all();
-        foreach( $pages as $page )
-        {
-            $page->images = Image::where( "page_id", $page->id )->get();
+        foreach ($pages as $page) {
+            $page->images = Image::where("page_id", $page->id)->get();
         }
-        return json_encode( $pages );
+        return json_encode($pages);
+    }
+
+    public function mostViewed()
+    {
+        $pages = Page::orderBy("times_viewed", "desc")->take(10)->get();
+
+        foreach ($pages as $page) {
+            $page->categoryname = Category::find($page->category_id)->name;
+        }
+
+        return json_encode($pages);
+    }
+
+    public function leastViewed()
+    {
+        $pages = Page::orderBy("times_viewed", "asc")->take(10)->get();
+
+        foreach ($pages as $page) {
+            $page->categoryname = Category::find($page->category_id)->name;
+        }
+
+        return json_encode($pages);
     }
 
     public function show($id)
     {
         $page = Page::find($id);
+
+        $page->times_viewed = $page->times_viewed + 1;
+
+        $page->save();
+
         // $page->categoryName = $page->category->name;
         $page->images = Image::where("page_id", $id)->get();
         $page->stats = Stat::where("page_id", $id)->get();
         $page->audios = Audio::where("page_id", $id)->get();
+
         return json_encode($page);
+    }
+
+    public function createThumbnail($path, $width, $height)
+    {
+        $img = InterventionImage::make($path)->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save($path);
     }
 
     public function store(Request $request)
@@ -45,13 +80,13 @@ class PagesController extends Controller
 
         $this->validate($request, [
             "heading" => "required",
-            "text" => "required",
+            "shortdesc" => "required",
             "photos" => "required|max:1000000",
         ]);
 
         $page = new Page;
         $page->heading = $request->input('heading');
-        $page->text = $request->input('text');
+        $page->shortdesc = $request->input('shortdesc');
         $page->category_id = $request->input('category');
 
         $page->save();
@@ -78,18 +113,18 @@ class PagesController extends Controller
                 $largeThumb = $fileName . "_large_" . time() . "." . $extension;
                 //upload image
                 $path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
-                $path_s = $file->storeAs( '/public/kiosk_images', $smallThumb );
-                $path_m = $file->storeAs( '/public/kiosk_images', $mediumThumb );
-                $path_l = $file->storeAs( '/public/kiosk_images', $largeThumb );
+                $path_s = $file->storeAs('/public/kiosk_images', $smallThumb);
+                $path_m = $file->storeAs('/public/kiosk_images', $mediumThumb);
+                $path_l = $file->storeAs('/public/kiosk_images', $largeThumb);
 
-                $smallPath = public_path( 'storage/kiosk_images/' . $smallThumb );
-                $this->createThumbnail( $smallPath, 150, 93 );
+                $smallPath = public_path('storage/kiosk_images/' . $smallThumb);
+                $this->createThumbnail($smallPath, 150, 93);
 
-                $mediumPath = public_path( 'storage/kiosk_images/' . $mediumThumb );
-                $this->createThumbnail( $mediumPath, 300, 185 );
+                $mediumPath = public_path('storage/kiosk_images/' . $mediumThumb);
+                $this->createThumbnail($mediumPath, 300, 185);
 
-                $largePath = public_path( 'storage/kiosk_images/' . $largeThumb );
-                $this->createThumbnail( $largePath, 550, 340 );
+                $largePath = public_path('storage/kiosk_images/' . $largeThumb);
+                $this->createThumbnail($largePath, 550, 340);
 
                 $img->alt = "";
                 $img->image_name = $fileNameToStore;
@@ -185,10 +220,8 @@ class PagesController extends Controller
 
         //remove old images
 
-        if (is_array($request->input("copyright_ids")))
-        {
-            foreach ($request->input("copyright_ids") as $copy)
-            {
+        if (is_array($request->input("copyright_ids"))) {
+            foreach ($request->input("copyright_ids") as $copy) {
                 $im = Image::find($copy);
                 $im->copyright = $request->input("copyright_texts")[array_search($copy, $request->input("copyright_ids"))];
                 $im->save();

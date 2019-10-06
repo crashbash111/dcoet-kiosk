@@ -17,13 +17,16 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['web'] ], function () {
 
+    Route::get( "pages/mostviewed", "PagesController@mostViewed" );
+    Route::get( "pages/leastviewed", "PagesController@leastViewed" );
     Route::resource( "pages", "PagesController", [ "except" => [ "edit", "create" ] ] );
     Route::resource( "powerpoints", "PowerpointController", [ "except" => [ "edit", "create" ] ] );
     Route::resource( "categories", "CategoryController", [ "except" => [ "edit", "create" ] ] );
     Route::resource( "videos", "VideoController", [ "except" => [ "edit", "create" ] ] );
     Route::get( "videos/{id}/stream", [ "uses" => "VideoController@stream" ] );
     Route::resource( "bannedwords", "BannedWordController", [ "except" => [ "edit", "create" ] ] );
-    Route::resource( "games", "GamesController", [ "only" => "index" ] );
+    Route::get( "games/{id}/highscores", "GamesController@highscores" );
+    Route::resource( "games", "GamesController", [ "only" => [ "index", "update" ] ] );
 
     Route::post('login','User\AuthController@login');
     Route::post('register', 'User\AuthController@register' )->middleware( "cors" );
