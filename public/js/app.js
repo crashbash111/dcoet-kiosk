@@ -101861,7 +101861,7 @@ function (_React$Component) {
                 key: item.id + 10000,
                 item: item,
                 handleClick: _this3.handleGameClick,
-                imgOverride: item.image_path,
+                imgOverride: "./storage/game_cover_images/" + item.image_path,
                 flag: "game"
               }) // <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover={ item.image_path } data-size="large" style={{ backgroundColor: "black" }}>
               //     <h3 style={{ textShadow: "2px 2px #111111" }}>{item.name}</h3>
@@ -102300,7 +102300,7 @@ function (_React$Component) {
           style: {
             textShadow: "2px 2px #111111"
           }
-        }, _this2.props.flag == "video" ? _this2.props.item.title : _this2.props.item.heading));
+        }, _this2.props.flag == "game" ? _this2.props.item.name : _this2.props.flag == "video" ? _this2.props.item.title : _this2.props.item.heading));
       });
     }
   }]);
@@ -102621,7 +102621,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Admin_CategoryTable__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Admin/CategoryTable */ "./resources/js/components/Admin/CategoryTable.js");
 /* harmony import */ var _components_MyPagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/MyPagination */ "./resources/js/components/MyPagination.js");
 /* harmony import */ var _components_Admin_BannedWords__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Admin/BannedWords */ "./resources/js/components/Admin/BannedWords.js");
-/* harmony import */ var _components_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Admin/Dashboard */ "./resources/js/components/Admin/Dashboard.js");
+/* harmony import */ var _components_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Admin/Dashboard */ "./resources/js/components/Admin/Dashboard.js");
 /* harmony import */ var _components_Admin_Games__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Admin/Games */ "./resources/js/components/Admin/Games.js");
 /* harmony import */ var _components_Admin_KioskCategories__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Admin/KioskCategories */ "./resources/js/components/Admin/KioskCategories.js");
 /* harmony import */ var _components_Admin_KioskPages__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Admin/KioskPages */ "./resources/js/components/Admin/KioskPages.js");
@@ -102843,7 +102843,7 @@ function (_React$Component) {
       var items = [{
         id: 0,
         text: "Dashboard",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_18__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_12__["default"], null)
       }, {
         id: 1,
         text: "Kiosk Pages",

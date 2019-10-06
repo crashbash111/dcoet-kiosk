@@ -46,7 +46,7 @@ export default class Tile extends React.Component {
                             opacity: paramx.opacity, transform: paramx.transform, transition: this.state.fadeTime,
                             backgroundColor: this.state.defaultBackColour[backgroundColourIndex]
                         }}>
-                        <h3 style={{ textShadow: "2px 2px #111111" }}>{ this.props.flag == "video" ? this.props.item.title : this.props.item.heading}</h3>
+                        <h3 style={{ textShadow: "2px 2px #111111" }}>{ this.props.flag == "game" ? this.props.item.name : this.props.flag == "video" ? this.props.item.title : this.props.item.heading}</h3>
                     </div>
                 )}
             </Spring>
