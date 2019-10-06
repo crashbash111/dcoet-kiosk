@@ -47,6 +47,8 @@ export default class CreateVideo extends React.Component {
 
         formData.append( "token", localStorage.getItem( "id_token" ) );
 
+        
+
         formData.append("title", this.state.title);
         formData.append("description", this.state.description);
         formData.append("copyright", this.state.copyright);
