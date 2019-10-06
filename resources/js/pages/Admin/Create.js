@@ -322,6 +322,7 @@ class Create extends React.Component {
         }
         formData.append("heading", this.state.page.heading);
         formData.append("shortdesc", this.state.page.text);
+        formData.append( "longdesc", this.state.longdesc );
         formData.append("category", this.state.page.category_id);
 
         var files = this.photos.current.files;
@@ -387,11 +388,6 @@ class Create extends React.Component {
             }
         }
 
-        //console.log( formData );
-        //return;
-
-        //formData.append( "photos[]", Array.from( this.photos.current.files ) );
-        //console.log(this.photos.current.files);
         Axios({
             url: "./api/pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
             method: "POST",
@@ -428,7 +424,7 @@ class Create extends React.Component {
                 });
         }
         else {
-            this.setState({ page: { heading: "", text: "", images: [], category_id: -1, stats: [], audios: [], copyright: [], copyrightNew: [], }, loading: false });
+            this.setState({ page: { heading: "", text: "", longdesc: "", images: [], category_id: -1, stats: [], audios: [], copyright: [], copyrightNew: [], }, loading: false });
         }
 
     }
@@ -604,9 +600,15 @@ class Create extends React.Component {
                                     </label>
                                 </div>
                                 <div className="form-group">
-                                    <label><h3>Text Body</h3>
-                                        <textarea rows="10" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter text here..." />
-                                        <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Text requires at least 3 characters</p>
+                                    <label><h3>Short Description</h3>
+                                        <textarea rows="10" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
+                                        <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
+                                    </label>
+                                </div>
+                                <div className="form-group">
+                                    <label><h3>Long Description</h3>
+                                        <textarea rows="15" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="(OPTIONAL) Enter long description here..." />
+                                        {/* <p style={{ color: "red", display: this.state.page.longdesc.length > 2 ? "none" : "block" }}>Long description requires at least 3 characters</p> */}
                                     </label>
                                 </div>
                                 <div className="form-group">

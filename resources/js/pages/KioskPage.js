@@ -28,16 +28,22 @@ export default class KioskPage extends React.Component {
         this.slider = this.slider.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({ loading: true });
 
         let { id } = this.props.match.params;
 
-        console.log( id );
+        console.log(id);
 
         fetch("./api/pages/" + id)
             .then(response => response.json())
-            .then(data => this.setState({ page: data, loading: false }));
+            .then(data => {
+                this.setState({ page: data, loading: false });
+                this.state.page.images.forEach((picture) => {
+                    new Image().src = "./storage/kiosk_images/" + picture.image_name;
+                    console.log( "preloaded!" );
+                });
+            });
     }
 
     handleClick(event) {
@@ -103,7 +109,8 @@ export default class KioskPage extends React.Component {
             let imgPath;
             try //try
             {
-                imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
+                imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+                console.log(imgPath);
             }
             catch (e) //catch
             {

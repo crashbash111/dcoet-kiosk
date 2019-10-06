@@ -103821,6 +103821,7 @@ function (_React$Component) {
 
       formData.append("heading", this.state.page.heading);
       formData.append("shortdesc", this.state.page.text);
+      formData.append("longdesc", this.state.longdesc);
       formData.append("category", this.state.page.category_id);
       var files = this.photos.current.files;
 
@@ -103879,11 +103880,7 @@ function (_React$Component) {
         for (var i = 0; i < copyrightNew.length; ++i) {
           formData.append("copyright_new[]", copyrightNew[i].text);
         }
-      } //console.log( formData );
-      //return;
-      //formData.append( "photos[]", Array.from( this.photos.current.files ) );
-      //console.log(this.photos.current.files);
-
+      }
 
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         url: "./api/pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
@@ -103944,6 +103941,7 @@ function (_React$Component) {
           page: {
             heading: "",
             text: "",
+            longdesc: "",
             images: [],
             category_id: -1,
             stats: [],
@@ -104184,19 +104182,28 @@ function (_React$Component) {
         }
       }, "Heading requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Text Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Short Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         rows: "10",
         className: "form-control",
         name: "text",
         value: this.state.page.text,
         onChange: this.handleChange,
-        placeholder: "Enter text here..."
+        placeholder: "Enter short description here..."
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: {
           color: "red",
           display: this.state.page.text.length > 2 ? "none" : "block"
         }
-      }, "Text requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Short description requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Long Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        rows: "15",
+        className: "form-control",
+        name: "longdesc",
+        value: this.state.page.longdesc,
+        onChange: this.handleChange,
+        placeholder: "(OPTIONAL) Enter long description here..."
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "form-control",
@@ -105854,8 +105861,8 @@ function (_React$Component) {
   }
 
   _createClass(KioskPage, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
+    key: "componentWillMount",
+    value: function componentWillMount() {
       var _this2 = this;
 
       this.setState({
@@ -105866,9 +105873,14 @@ function (_React$Component) {
       fetch("./api/pages/" + id).then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this2.setState({
+        _this2.setState({
           page: data,
           loading: false
+        });
+
+        _this2.state.page.images.forEach(function (picture) {
+          new Image().src = "./storage/kiosk_images/" + picture.image_name;
+          console.log("preloaded!");
         });
       });
     }
@@ -105962,7 +105974,8 @@ function (_React$Component) {
 
         try //try
         {
-          imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
+          imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+          console.log(imgPath);
         } catch (e) //catch
         {
           console.error(e.message); //console log error
