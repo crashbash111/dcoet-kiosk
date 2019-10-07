@@ -93,8 +93,6 @@ textarea {
 
 //admin
 
-
-
 .xadmin {
   display: grid;
   //grid-gap: 10px;
@@ -127,11 +125,11 @@ textarea {
   grid-row: 1 / span 2;
 }
 
-.xadmin body{
+.xadmin body {
   text-align: center;
 }
 
-.xadmin .sidebartoggle{
+.xadmin .sidebartoggle {
   font-size: 30px;
   cursor: pointer;
   transition: 0.3s;
@@ -140,44 +138,53 @@ textarea {
   grid-row: 1;
 }
 
-.xadmin .sidebartoggle:hover{
+.xadmin .sidebartoggle:hover {
   color: lightgray;
 }
 
-.xadmin .leftarea .sidebaropened{
+.xadmin .leftarea .sidebaropened {
   width: 300px;
 }
 
-.xadmin .fullarea .sidebaropened{
+.xadmin .fullarea .sidebaropened {
   width: 100%;
 }
 
-.xadmin .sidebarclosed{
+.xadmin .sidebarclosed {
   width: 0px;
 }
 
-.xadmin .sidebar{
+.xadmin .sidebar {
   //width: 0px; //300px
   height: 100%;
-  background: #01283D;
+  background: #01283d;
   transition: 0.5s;
   white-space: pre;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
   overflow-x: hidden;
-  //display: block;
+  //display: float;
 }
 
-.xadmin .sidebar img{
+.xadmin .sidebar .scrollable{
+  overflow-y: scroll;
+  flex: 1;
+}
+
+.xadmin .sidebar img {
   width: 100%;
   max-width: 280px;
   display: block;
   padding: 30px 10px 30px 10px;
 }
 
-.xadmin .sidebar a{
+.xadmin .sidebar a {
   background: #013856;
-  color: #0296E6;
+  color: #0296e6;
   width: 100%;
-  
+
   //height: 30px;
   font-size: 26px;
   display: block;
@@ -188,9 +195,9 @@ textarea {
 
 .xadmin .sidebar .active {
   background: #013856;
-  color: #FCFCFC;
+  color: #fcfcfc;
   width: 100%;
-  
+
   //height: 30px;
   font-size: 26px;
   display: block;
@@ -199,21 +206,22 @@ textarea {
   transition: 0.3s;
 }
 
-.xadmin .sidebar .returns{
+.xadmin .sidebar .returns {
   position: absolute;
   bottom: 0;
-  background: #0B1114;
-  color: #697D87;
+  left: 0;
+  background: #0b1114;
+  color: #697d87;
   padding: 8px 8px 8px 32px;
 }
 
-.xadmin .sidebar a:hover{
-  color: #03A7FF;
+.xadmin .sidebar a:hover {
+  color: #03a7ff;
   font-size: 32px;
 }
 
-.xadmin .sidebar .active:hover{
-  color: #FFFFFF;
+.xadmin .sidebar .active:hover {
+  color: #ffffff;
   font-size: 32px;
 }
 
@@ -318,25 +326,23 @@ h1 {
   padding: 24px 24px 24px 24px;
 }
 
-.leftcategories h1:hover{
+.leftcategories h1:hover {
   font-size-adjust: inherit;
   font-size: 40px;
   cursor: pointer;
 }
 
-.leftcategories .sideentry{
+.leftcategories .sideentry {
   left: 5px;
   color: gray;
   transition: 0.5s;
 }
 
-
-.leftcategories .sideentryselected{
+.leftcategories .sideentryselected {
   color: white;
   left: 25px;
   transition: 0.5s;
 }
-
 
 //main content tiles - main homepage
 .rightcontent {
@@ -345,12 +351,12 @@ h1 {
   //padding: 24px 24px 24px 24px;
 }
 
-.sidebar div {
-  height: 200px;
+//.sidebar div {
+//  height: 200px;
   //width: 20%;
-  background-color: red;
-  overflow-y: scroll;
-}
+//  background-color: red;
+ // overflow-y: scroll;
+//}
 
 .sidebarlist ul {
   padding: 25px;
@@ -364,31 +370,31 @@ h1 {
   text-align: right;
 }
 
-.homeslideshow{
+.homeslideshow {
   overflow: hidden;
 }
 
-video{
+video {
   min-width: 100%;
   max-height: 83vh;
   overflow-y: hidden;
 }
 .leftcategories::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 .rightcontent::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 .hideScroll::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
-.fixTransitions{
+.fixTransitions {
   backface-visibility: hidden;
   transform-style: preserve-3d;
 }
@@ -406,7 +412,7 @@ video{
   transition: opacity 0.3s;
 }
 
-.loader h1{
+.loader h1 {
   animation: "";
   transform: "";
 }
@@ -423,16 +429,16 @@ video{
 .admin-table-new th h1 {
   font-weight: bold;
   font-size: 1em;
-text-align: left;
-color: #185875;
+  text-align: left;
+  color: #185875;
 }
 
 .admin-table-new td {
   font-weight: normal;
   font-size: 1em;
--webkit-box-shadow: 0 2px 2px -2px #0E1119;
-   -moz-box-shadow: 0 2px 2px -2px #0E1119;
-        box-shadow: 0 2px 2px -2px #0E1119;
+  -webkit-box-shadow: 0 2px 2px -2px #0e1119;
+  -moz-box-shadow: 0 2px 2px -2px #0e1119;
+  box-shadow: 0 2px 2px -2px #0e1119;
 }
 
 .admin-table-new {
@@ -440,60 +446,64 @@ color: #185875;
   overflow: hidden;
   width: 80%;
   margin: 0 auto;
-display: table;
-padding: 0 0 8em 0;
+  display: table;
+  padding: 0 0 8em 0;
 }
 
-.admin-table-new td, .admin-table-new th {
+.admin-table-new td,
+.admin-table-new th {
   padding-bottom: 2%;
   padding-top: 2%;
-padding-left:2%;  
+  padding-left: 2%;
 }
 
 /* Background-color of the odd rows */
 .admin-table-new tr:nth-child(odd) {
-  background-color: #323C50;
+  background-color: #323c50;
 }
 
 /* Background-color of the even rows */
 .admin-table-new tr:nth-child(even) {
-  background-color: #2C3446;
+  background-color: #2c3446;
 }
 
 .admin-table-new th {
-  background-color: #1F2739;
+  background-color: #1f2739;
 }
 
-.admin-table-new td:first-child { color: #FB667A; }
+.admin-table-new td:first-child {
+  color: #fb667a;
+}
 
 .admin-table-new tr:hover {
- background-color: #464A52;
--webkit-box-shadow: 0 6px 6px -6px #0E1119;
-   -moz-box-shadow: 0 6px 6px -6px #0E1119;
-        box-shadow: 0 6px 6px -6px #0E1119;
+  background-color: #464a52;
+  -webkit-box-shadow: 0 6px 6px -6px #0e1119;
+  -moz-box-shadow: 0 6px 6px -6px #0e1119;
+  box-shadow: 0 6px 6px -6px #0e1119;
 }
 
 .admin-table-new td:hover {
-background-color: #FFF842;
-color: #403E10;
-font-weight: bold;
+  background-color: #fff842;
+  color: #403e10;
+  font-weight: bold;
 
-box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
-transform: translate3d(6px, -6px, 0);
+  box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px, #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
 
-transition-delay: 0s;
+  transition-delay: 0s;
   transition-duration: 0.4s;
   transition-property: all;
-transition-timing-function: line;
+  transition-timing-function: line;
 }
 
 @media (max-width: 800px) {
   .admin-table-new td:nth-child(4),
-  .admin-table-new th:nth-child(4) { display: none; }
+  .admin-table-new th:nth-child(4) {
+    display: none;
+  }
 }
 
-.fade-gradient
-{
+.fade-gradient {
   -webkit-transition: background-image 0.2s ease-in-out;
   transition: background-image 0.2s ease-in-out;
 }

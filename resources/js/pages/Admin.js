@@ -20,6 +20,7 @@ import KioskCategories from "../components/Admin/KioskCategories";
 import KioskPages from "../components/Admin/KioskPages";
 import Powerpoints from "../components/Admin/Powerpoints";
 import Videos from "../components/Admin/Videos";
+import ErrorCatch from "../components/ErrorCatch";
 
 class Admin extends React.Component {
     constructor() {
@@ -38,6 +39,8 @@ class Admin extends React.Component {
             shownCategory: -1,
         };
 
+        this._sidebarRef = React.createRef();
+
         this.handleDelete = this.handleDelete.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
         this.paginate = this.paginate.bind(this);
@@ -45,6 +48,8 @@ class Admin extends React.Component {
         this.changeActivePage = this.changeActivePage.bind(this);
         this.handleTabClick = this.handleTabClick.bind(this);
         this.categoryClick = this.categoryClick.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
+
     }
 
     handleLogout() {
@@ -69,6 +74,10 @@ class Admin extends React.Component {
     //handles page resizing for dynamic layouts
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleWindowResize);
+    }
+
+    componentDidCatch(error, info) {
+        this.setState({ hasError: true });
     }
 
     handleWindowResize() {
@@ -99,7 +108,12 @@ class Admin extends React.Component {
 
     categoryClick = num => this.setState({ shownCategory: num });
 
+    toggleSidebar() {
+        this._sidebarRef.current.toggleSidebar();
+    }
+
     render() {
+
         //variables for page sizing (dynamic rendering)
         const { width } = this.state;
         const isMobile = width <= 900;
@@ -199,29 +213,31 @@ class Admin extends React.Component {
         };
 
         return (
-            <div className="xadmin">
-                <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={ this.state.tabIndex } />
-                <div style={{ height: "100vh" }} className={isMobile ? 'fullarea' : 'rightarea'}>
-                    <div style={{ height: "50px", width: "100%" }}>
-
-                        <div style={{ float: "right" }}>
-                            <div style={{ display: "inline-block" }}>
-                                <h2>Welcome Admin</h2>
-                            </div>
-                            <div style={{ width: "20px", display: "inline-block" }}></div>
-                            <div style={{ display: "inline-block" }}>
-                                <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>
-                                    Logout
+            <ErrorCatch>
+                <div className="xadmin">
+                    <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={this.state.tabIndex} ref={this._sidebarRef} />
+                    <div style={{ height: "100vh" }} className={isMobile ? 'fullarea' : 'rightarea'}>
+                        <div style={{ height: "50px", width: "100%" }}>
+                            {isMobile ? <span className="sidebartoggle" style={{ float: "left" }} onClick={this.toggleSidebar}>&#9776; Open</span> : null}
+                            <div style={{ float: "right" }}>
+                                <div style={{ display: "inline-block" }}>
+                                    <h2>Welcome Admin</h2>
+                                </div>
+                                <div style={{ width: "20px", display: "inline-block" }}></div>
+                                <div style={{ display: "inline-block" }}>
+                                    <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>
+                                        Logout
                             </button>
+                                </div>
                             </div>
+
+
                         </div>
 
-
+                        {child}
                     </div>
-
-                    {child}
                 </div>
-            </div>
+            </ErrorCatch>
         );
     }
 }
