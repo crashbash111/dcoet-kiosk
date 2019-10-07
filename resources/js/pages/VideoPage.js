@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Loader from "../components/Loader";
 
-export default class VideoPage extends React.Component {
+class VideoPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -56,3 +56,5 @@ export default class VideoPage extends React.Component {
         );
     }
 }
+
+export default withRouter( VideoPage );

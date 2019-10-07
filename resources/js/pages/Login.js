@@ -63,28 +63,28 @@ export default class Login extends React.Component {
         }
 
         return (
-            <div>
-                <div style={{
-                    //position: "relative",
-                    backgroundImage: "url('./images/loginbackground.jpg')",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundColor: "red",
-                }}>
-                    <div className="loginpanel">
-                        <img style={{ height: "100px", paddingBottom: "20px" }} src="./images/logo.png" />
-                        <form onSubmit={this.handleFormSubmit}>
-                            <label>Username
+            <div style={{
+                //position: "relative",
+                backgroundImage: "url('./images/loginbackground.jpg')",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundColor: "red",
+                width: "100%",
+                height: "100%",
+            }}>
+                <div className="loginpanel">
+                    <img style={{ height: "100px", paddingBottom: "20px" }} src="./images/logo.png" />
+                    <form onSubmit={this.handleFormSubmit}>
+                        <label>Username
                                 <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-                            </label>
-                            <br />
-                            <label>Password
+                        </label>
+                        <br />
+                        <label>Password
                                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                            </label>
-                            <br />
-                            <button className="btn btn-primary" style={{ textAlign: "center" }}>Login</button>
-                        </form>
-                    </div>
+                        </label>
+                        <br />
+                        <button className="btn btn-primary" style={{ textAlign: "center" }}>Login</button>
+                    </form>
                 </div>
             </div>
         );

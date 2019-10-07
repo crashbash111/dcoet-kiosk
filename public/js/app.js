@@ -99541,8 +99541,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
 /* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
 /* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./history */ "./resources/js/history.js");
 
  //import { Router, Route, IndexRoute, hashHistory } from "react-router";
+
 
 
 
@@ -100320,8 +100322,13 @@ var ViewBannedWords = function ViewBannedWords(_ref) {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      loading = _useState4[0],
-      setLoading = _useState4[1];
+      profaneView = _useState4[0],
+      setProfaneView = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var fetchBannedWords =
@@ -100369,12 +100376,19 @@ var ViewBannedWords = function ViewBannedWords(_ref) {
       "float": "left",
       width: "100vh"
     }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: profaneView ? "btn btn-success" : "btn btn-warning",
+    onClick: profaneView ? function () {
+      setProfaneView(false);
+    } : function () {
+      setProfaneView(true);
+    }
+  }, "Turn profane view ", profaneView ? "on" : "off"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Word"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, bannedWords.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.word), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, profaneView ? item.word : item.word[0] + "*" + item.word[2]), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-success"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-danger"
@@ -100681,7 +100695,9 @@ var LeastViewed = function LeastViewed() {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Least Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "big-shadow"
+  }, "Least Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, leastViewed.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
@@ -100809,7 +100825,9 @@ var MostViewed = function MostViewed() {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Most Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "big-shadow"
+  }, "Most Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, mostViewed.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
@@ -101064,7 +101082,9 @@ function (_React$Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+        className: "big-shadow"
+      }, "Games"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
         className: "admin-table-new"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.games.map(function (item) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
@@ -102168,7 +102188,9 @@ function (_React$Component) {
         }
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Create Powerpoint", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "big-shadow"
+      }, "Create Powerpoint"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "create-form",
         onSubmit: this.handleSubmit,
         encType: "multipart/form-data"
@@ -102508,6 +102530,7 @@ function (_React$Component) {
     _this.submit = _this.submit.bind(_assertThisInitialized(_this));
     _this.updateProgressBarValue = _this.updateProgressBarValue.bind(_assertThisInitialized(_this));
     _this.video = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.thumbnail = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
@@ -102519,7 +102542,7 @@ function (_React$Component) {
           value = _event$target.value,
           files = _event$target.files;
 
-      if (name != "video") {
+      if (name != "video" || name != "thumbnail") {
         this.setState(_defineProperty({}, name, value));
       } else {
         this.setState(_defineProperty({}, name, files[0]));
@@ -102544,6 +102567,11 @@ function (_React$Component) {
       formData.append("copyright", this.state.copyright);
       formData.append("length", duration);
       formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
+
+      if (this.thumbnail.current != null) {
+        formData.append("thumbnail", this.thumbnail.current.files[0], this.thumbnail.current.files[0].name);
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         onUploadProgress: function onUploadProgress(progressEvent) {
           var totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
@@ -102664,6 +102692,16 @@ function (_React$Component) {
         }
       }, "Video file is required"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Thumbnail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Optionally, choose a thumbnail to show on the kiosk page."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "file",
+        name: "thumbnail",
+        accept: "image/*",
+        onChange: this.handleChange,
+        value: this.state.file,
+        ref: this.thumbnail
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Copyright Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         type: "text",
@@ -102692,7 +102730,7 @@ function (_React$Component) {
           backgroundColor: this.state.error ? "red" : "green",
           width: "".concat(this.state.progressValue, "%")
         }
-      }, this.state.progressValue, "%"))));
+      }, this.state.progressValue, "%")), this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Something went wrong. Please contact an administrator.") : null));
     }
   }]);
 
@@ -102719,6 +102757,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Loader */ "./resources/js/components/Loader.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -102737,7 +102776,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var VideoIndex = function VideoIndex() {
+
+var VideoIndex = function VideoIndex(_ref) {
+  var history = _ref.history;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       loading = _useState2[0],
@@ -102752,7 +102794,7 @@ var VideoIndex = function VideoIndex() {
     var fetchVideos =
     /*#__PURE__*/
     function () {
-      var _ref = _asyncToGenerator(
+      var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var res;
@@ -102778,7 +102820,7 @@ var VideoIndex = function VideoIndex() {
       }));
 
       return function fetchVideos() {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }();
 
@@ -102790,12 +102832,17 @@ var VideoIndex = function VideoIndex() {
   }
 
   console.log(videos);
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "big-shadow"
+  }, "Videos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Copyright"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, videos.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.id), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.description.length > 30 ? item.description.substring(0, 27) + "..." : item.description.length), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.copyright), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        history.push("/videos/".concat(item.id));
+      },
       className: "btn btn-dark"
     }, "View"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-success"
@@ -102805,7 +102852,7 @@ var VideoIndex = function VideoIndex() {
   }))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (VideoIndex);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(VideoIndex));
 
 /***/ }),
 
@@ -103191,7 +103238,6 @@ function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MainContent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
@@ -103239,6 +103285,7 @@ function (_React$Component) {
       pages: [],
       games: [],
       videos: [],
+      ppts: [],
       redirectId: -1,
       redirect: false,
       redirectType: -1 //0 for page, 1 for game, 2 for video
@@ -103275,7 +103322,14 @@ function (_React$Component) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
-          videos: data,
+          videos: data
+        });
+      });
+      fetch("./api/powerpoints").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this2.setState({
+          ppts: data,
           loading: false
         });
       });
@@ -103286,11 +103340,8 @@ function (_React$Component) {
   }, {
     key: "handleClick",
     value: function handleClick(i) {
-      this.setState({
-        redirectType: 0,
-        redirectId: i,
-        redirect: true
-      });
+      //this.setState({ redirectType: 0, redirectId: i, redirect: true });
+      this.props.history.push("/kiosk/".concat(i));
     }
   }, {
     key: "handleGameClick",
@@ -103306,11 +103357,8 @@ function (_React$Component) {
   }, {
     key: "handleVideoClick",
     value: function handleVideoClick(i) {
-      this.setState({
-        redirectType: 2,
-        redirectId: i,
-        redirect: true
-      });
+      //this.setState({ redirectType: 2, redirectId: i, redirect: true });
+      this.props.history.push("/videos/".concat(i));
     }
   }, {
     key: "render",
@@ -103376,7 +103424,7 @@ function (_React$Component) {
                 key: item.id + 100000,
                 item: item,
                 handleClick: _this3.handleVideoClick,
-                imgOverride: "./storage/video_thumbnails/nothumb.png",
+                imgOverride: item.thumbnail_path == null || item.thumbnail_path == "" ? "./storage/video_thumbnails/nothumb.png" : "./storage/video_thumbnails/".concat(item.thumbnail_path),
                 flag: "video"
               });
             });
@@ -103389,6 +103437,27 @@ function (_React$Component) {
                 overflowY: "scroll"
               }
             }, videoList);
+          }
+
+          if (this.props.activeCategory == -4) {
+            var pptList = this.state.ppts.map(function (item) {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                key: item.id + 10000000,
+                item: item,
+                handleClick: null,
+                imgOverride: "./storage/ppt_images/".concat(item.ppt_images[0].filepath),
+                flag: "ppt"
+              });
+            });
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              style: {
+                height: "100%",
+                display: "grid",
+                gridTemplateColumns: "auto auto auto",
+                gridRowGap: "15px",
+                overflowY: "scroll"
+              }
+            }, pptList);
           } //renders each individual tile
 
 
@@ -103429,7 +103498,7 @@ function (_React$Component) {
   return MainContent;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(MainContent));
 
 /***/ }),
 
@@ -103576,6 +103645,7 @@ function (_React$Component) {
       });
       var gameId = -2;
       var videoId = -3;
+      var pptId = -4;
       sideBarEntries.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideBar_SideBarEntry__WEBPACK_IMPORTED_MODULE_1__["default"], {
         ref: this.props.activeCategory == gameId ? this.props.r : null,
         key: gameId,
@@ -103592,6 +103662,15 @@ function (_React$Component) {
         isActive: this.props.activeCategory == videoId,
         name: "Videos",
         description: "Educational and entertaining videos.",
+        handleChange: this.props.handleChange
+      }));
+      sideBarEntries.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideBar_SideBarEntry__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        ref: this.props.activeCategory == pptId ? this.props.r : null,
+        key: pptId,
+        id: pptId,
+        isActive: this.props.activeCategory == pptId,
+        name: "Powerpoints",
+        description: "Powerpoint slides.",
         handleChange: this.props.handleChange
       }));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103790,7 +103869,11 @@ function (_React$Component) {
             transition: _this2.state.fadeTime,
             backgroundColor: _this2.state.defaultBackColour[backgroundColourIndex]
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        }, _this2.props.flag == "ppt" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+          style: {
+            textShadow: "2px 2px #111111"
+          }
+        }, _this2.props.item.title) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           style: {
             textShadow: "2px 2px #111111"
           }
@@ -104089,6 +104172,21 @@ function withAuth(AuthComponent) {
     }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component)
   );
 }
+
+/***/ }),
+
+/***/ "./resources/js/history.js":
+/*!*********************************!*\
+  !*** ./resources/js/history.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var history__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! history */ "./node_modules/history/esm/history.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(history__WEBPACK_IMPORTED_MODULE_0__["createBrowserHistory"])());
 
 /***/ }),
 
@@ -104408,7 +104506,11 @@ function (_React$Component) {
         msTransform: "translateY(-50%)"
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ErrorCatch__WEBPACK_IMPORTED_MODULE_18__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "xadmin"
+        className: "xadmin",
+        style: {
+          backgroundImage: "url( \"./images/background_main.jpg\" )",
+          backgroundSize: "cover"
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_5__["default"], {
         isMobile: isMobile,
         handleTabClick: this.handleTabClick,
@@ -104419,7 +104521,7 @@ function (_React$Component) {
         style: {
           height: "100vh"
         },
-        className: isMobile ? 'fullarea' : 'rightarea'
+        className: isMobile ? 'fullarea enshadow' : 'rightarea enshadow'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: "50px",
@@ -104439,7 +104541,11 @@ function (_React$Component) {
         style: {
           display: "inline-block"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome Admin")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        style: {
+          textShadow: "3px 3px #0c0c0c"
+        }
+      }, "Welcome Admin")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           width: "20px",
           display: "inline-block"
@@ -104450,7 +104556,7 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "form-submit",
+        className: "btn btn-dark",
         onClick: this.handleLogout.bind(this)
       }, "Logout")))), child)));
     }
@@ -107059,7 +107165,6 @@ function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Home; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
@@ -107341,7 +107446,7 @@ function (_React$Component) {
   return Home;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Home));
 
 /***/ }),
 
@@ -107917,13 +108022,15 @@ function (_React$Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           //position: "relative",
           backgroundImage: "url('./images/loginbackground.jpg')",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          backgroundColor: "red"
+          backgroundColor: "red",
+          width: "100%",
+          height: "100%"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loginpanel"
@@ -107950,7 +108057,7 @@ function (_React$Component) {
         style: {
           textAlign: "center"
         }
-      }, "Login")))));
+      }, "Login"))));
     }
   }]);
 
@@ -108219,7 +108326,6 @@ function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VideoPage; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
@@ -108320,7 +108426,7 @@ function (_React$Component) {
   return VideoPage;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(VideoPage));
 
 /***/ }),
 
@@ -108370,8 +108476,8 @@ function PostData(type, userData) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

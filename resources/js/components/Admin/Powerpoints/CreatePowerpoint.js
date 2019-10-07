@@ -86,7 +86,7 @@ export default class CreatePowerpoint extends React.Component {
 
         return (
             <div>
-                Create Powerpoint
+                <h2 className="big-shadow">Create Powerpoint</h2>
 
                 <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
                     <div className="form-group">

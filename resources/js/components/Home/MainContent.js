@@ -1,10 +1,10 @@
 import React from "react";
 import Loader from "../Loader";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { Spring } from 'react-spring/renderprops';
 import Tile from './Tile';
 
-export default class MainContent extends React.Component {
+class MainContent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -13,6 +13,7 @@ export default class MainContent extends React.Component {
             pages: [],
             games: [],
             videos: [],
+            ppts: [],
             redirectId: -1,
             redirect: false,
             redirectType: -1 //0 for page, 1 for game, 2 for video
@@ -32,7 +33,10 @@ export default class MainContent extends React.Component {
             .then(data => this.setState({ games: data }));
         fetch( "./api/videos" )
         .then( response => response.json() )
-        .then( data => this.setState( { videos: data, loading: false } ) );
+        .then( data => this.setState( { videos: data } ) );
+        fetch( "./api/powerpoints" )
+        .then( response => response.json() )
+        .then( data => this.setState( { ppts: data, loading: false } ) );
     }
 
     fetchData() {
@@ -40,7 +44,8 @@ export default class MainContent extends React.Component {
     }
 
     handleClick(i) {
-        this.setState({ redirectType: 0, redirectId: i, redirect: true });
+        //this.setState({ redirectType: 0, redirectId: i, redirect: true });
+        this.props.history.push( `/kiosk/${i}` );
     }
 
     handleGameClick( i ) {
@@ -55,7 +60,8 @@ export default class MainContent extends React.Component {
     }
 
     handleVideoClick( i ) {
-        this.setState({ redirectType: 2, redirectId: i, redirect: true });
+        //this.setState({ redirectType: 2, redirectId: i, redirect: true });
+        this.props.history.push( `/videos/${i}` );
     }
 
     render() {
@@ -119,13 +125,28 @@ export default class MainContent extends React.Component {
                 {
                     var videoList = this.state.videos.map( item => {
                         return (
-                            <Tile key={ item.id + 100000 } item={ item } handleClick={ this.handleVideoClick } imgOverride={ "./storage/video_thumbnails/nothumb.png" } flag="video" />
+                            <Tile key={ item.id + 100000 } item={ item } handleClick={ this.handleVideoClick } imgOverride={ ( (item.thumbnail_path == null || item.thumbnail_path == "" ) ? "./storage/video_thumbnails/nothumb.png" : `./storage/video_thumbnails/${item.thumbnail_path}` ) } flag="video" />
                         );
                     });
 
                     return (
                         <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
                             { videoList }
+                        </div>
+                    );
+                }
+
+                if( this.props.activeCategory == -4 )
+                {
+                    var pptList = this.state.ppts.map( item => {
+                        return (
+                            <Tile key={ item.id + 10000000 } item={ item } handleClick={ null } imgOverride={ `./storage/ppt_images/${item.ppt_images[0].filepath}` } flag="ppt" />
+                        );
+                    });
+
+                    return (
+                        <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                            { pptList }
                         </div>
                     );
                 }
@@ -158,3 +179,5 @@ export default class MainContent extends React.Component {
         }
     }
 }
+
+export default withRouter( MainContent );

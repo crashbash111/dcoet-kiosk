@@ -3,7 +3,9 @@ import Axios from "axios";
 
 import Loader from "../../Loader";
 
-const VideoIndex = () => {
+import {withRouter} from "react-router-dom";
+
+const VideoIndex = ({history}) => {
     const [loading, setLoading] = useState(false);
     const [videos, setVideos] = useState([]);
 
@@ -25,6 +27,7 @@ const VideoIndex = () => {
 
     return (
         <div>
+            <h2 className="big-shadow">Videos</h2>
             <table className="admin-table-new">
                 <thead>
                     <tr>
@@ -62,7 +65,7 @@ const VideoIndex = () => {
                                     {item.copyright}
                                 </td>
                                 <td>
-                                    <button className="btn btn-dark">View</button>
+                                    <button onClick={ () => { history.push( `/videos/${item.id}` ) } } className="btn btn-dark">View</button>
                                     <button className="btn btn-success">Edit</button>
                                     <button className="btn btn-danger">Delete</button>
                                 </td>
@@ -76,4 +79,4 @@ const VideoIndex = () => {
     )
 };
 
-export default VideoIndex;
+export default withRouter(VideoIndex);

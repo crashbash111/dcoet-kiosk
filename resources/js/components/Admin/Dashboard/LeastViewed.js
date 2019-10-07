@@ -24,7 +24,7 @@ const LeastViewed = () => {
 
     return (
         <div>
-            <h3>Least Viewed</h3>
+            <h2 className="big-shadow">Least Viewed</h2>
             <table className="admin-table-new">
                 <thead>
                     <tr>

@@ -22,12 +22,13 @@ export default class CreateVideo extends React.Component {
         this.updateProgressBarValue = this.updateProgressBarValue.bind( this );
 
         this.video = React.createRef();
+        this.thumbnail = React.createRef();
     }
 
     handleChange(event) {
         let { name, value, files } = event.target;
 
-        if (name != "video") {
+        if (name != "video" || name != "thumbnail" ) {
             this.setState({ [name]: value });
         }
         else {
@@ -53,6 +54,11 @@ export default class CreateVideo extends React.Component {
         formData.append("length", duration);
 
         formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
+
+        if( this.thumbnail.current != null )
+        {
+            formData.append( "thumbnail", this.thumbnail.current.files[0], this.thumbnail.current.files[0].name );
+        }
 
         Axios({
             onUploadProgress: (progressEvent) => {
@@ -135,6 +141,12 @@ export default class CreateVideo extends React.Component {
                         </label>
                     </div>
                     <div className="form-group">
+                        <label><h3>Thumbnail</h3>
+                        <p>Optionally, choose a thumbnail to show on the kiosk page.</p>
+                            <input className="form-control" type="file" name="thumbnail" accept="image/*" onChange={this.handleChange} value={this.state.file} ref={this.thumbnail} />
+                        </label>
+                    </div>
+                    <div className="form-group">
                         <label><h3>Copyright Information</h3>
                             <input className="form-control" type="text" name="copyright" onChange={this.handleChange} value={this.state.copyright} placeholder="Enter copyright information here..." />
                         </label>
@@ -146,6 +158,12 @@ export default class CreateVideo extends React.Component {
                     <div className="progress" style={{ width: "500px" }}>
                         <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
                     </div>
+                    {
+                        this.state.error ? 
+                        <p>Something went wrong. Please contact an administrator.</p>
+                        :
+                        null
+                    }
                 </form>
             </div>
         );

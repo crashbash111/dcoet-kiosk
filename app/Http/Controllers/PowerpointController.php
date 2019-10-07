@@ -17,10 +17,7 @@ class PowerpointController extends Controller
 
         foreach( $all as $a )
         {
-            if( $a->ppt_images != null )
-            {
-                $a->ppt_images;
-            }
+            $a->ppt_images = PPT_Image::where( "powerpoint_id", $a->id )->get();
         }
 
         return json_encode( $all );
@@ -48,6 +45,8 @@ class PowerpointController extends Controller
             $fileNameWithExt = $file->getClientOriginalName();
 
             $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME );
+
+            $fileName = strtr($fileName, [' ' => '']);
 
             $extension = $file->getClientOriginalExtension();
             $check = in_array( $extension, $allowedExtensions );

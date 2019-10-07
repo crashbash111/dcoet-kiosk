@@ -54,7 +54,7 @@ const MostViewed = () => {
 
     return (
         <div>
-            <h3>Most Viewed</h3>
+            <h2 className="big-shadow">Most Viewed</h2>
             <table className="admin-table-new">
                 <thead>
                     <tr>

@@ -85,6 +85,7 @@ export default class Games extends React.Component {
         }
 
         return <div>
+            <h2 className="big-shadow">Games</h2>
             <table className="admin-table-new">
                 <thead>
                     <tr>

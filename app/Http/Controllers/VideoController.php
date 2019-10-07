@@ -47,6 +47,24 @@ class VideoController extends Controller
 
         $video->file_path = $fileNameToStore;
 
+        if ($request->hasFile(("thumbnail"))) {
+            $thumb = $request->file("thumbnail");
+
+            $fileNameWithExt = $thumb->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileName = strtr($fileName, [' ' => '']);
+            $extension = $thumb->getClientOriginalExtension();
+
+            $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+
+            //upload image
+            Storage::putFileAs('public/video_thumbnails', $thumb, $fileNameToStore);
+            //$path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+
+            $video->thumbnail_path = $fileNameToStore;
+        }
+
+        //save video
         $video->save();
 
         return $video;
@@ -60,11 +78,11 @@ class VideoController extends Controller
 
     public function stream($id)
     {
-        $video = Video::find( $id );
+        $video = Video::find($id);
 
         $path = 'storage/videos/' . $video->file_path;
 
-        $file_location = public_path( $path );
+        $file_location = public_path($path);
 
         //return $file_location;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import ReactDOM from "react-dom";
 
@@ -13,7 +13,7 @@ import KeyboardedInput from 'react-touch-screen-keyboard';
 //import 'react-touch-screen-keyboard/lib/Keyboard.css'; // if you just want css
 import 'react-touch-screen-keyboard/lib/Keyboard.scss';
 
-export default class Home extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
 
@@ -183,3 +183,5 @@ export default class Home extends React.Component {
         );
     }
 }
+
+export default withRouter( Home );

@@ -22,6 +22,8 @@ import Powerpoints from "./pages/Admin/Powerpoints";
 import Splash from "./pages/Splash";
 import VideoPage from "./pages/VideoPage";
 
+import history from "./history";
+
 const app = document.getElementById('app');
 
 ReactDOM.render(

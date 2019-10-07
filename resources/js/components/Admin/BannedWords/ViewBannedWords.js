@@ -3,15 +3,16 @@ import Axios from "axios";
 
 import Loader from "../../Loader";
 
-const ViewBannedWords = ({}) => {
+const ViewBannedWords = ({ }) => {
 
     const [bannedWords, setBannedWords] = useState([]);
+    const [profaneView, setProfaneView] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchBannedWords = async () => {
             setLoading(true);
-            const res = await Axios.get("./api/bannedwords/" );
+            const res = await Axios.get("./api/bannedwords/");
             setBannedWords(res.data);
             setLoading(false);
         }
@@ -29,6 +30,7 @@ const ViewBannedWords = ({}) => {
                 <button onClick={handleBackClick} className="btn btn-danger">Back</button>
             </div> */}
             <div style={{ float: "left", width: "100vh" }}>
+                <button className={profaneView ? "btn btn-success" : "btn btn-warning"} onClick={ profaneView ? () => { setProfaneView( false ) } : () => { setProfaneView( true ) } }>Turn profane view {profaneView ? "on" : "off"}</button>
                 <table className="admin-table-new">
                     <thead>
                         <tr>
@@ -39,7 +41,7 @@ const ViewBannedWords = ({}) => {
                         {
                             bannedWords.map(item => (
                                 <tr key={item.id}>
-                                    <td>{item.word}</td>
+                                    <td>{profaneView ? item.word : item.word[0] + "*" + item.word[2]}</td>
                                     <td>
                                         <button className="btn btn-success">Edit</button>
                                         <button className="btn btn-danger">Delete</button>
