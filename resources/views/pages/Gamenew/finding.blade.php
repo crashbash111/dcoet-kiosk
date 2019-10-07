@@ -744,7 +744,7 @@
 
             pos = 10;
 
-            for( var i = 9; i >= 0; --i )
+            for( var i = highscores.length - 1; i >= 0; --i )
             {
                 if( highscores[ i ].score < score )
                 {

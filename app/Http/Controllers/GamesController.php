@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\FindingGameScores;
+use App\GameGameScore;
 use App\Game;
+use App\GameTimedScore;
 use Validator;
 
 class GamesController extends Controller
@@ -29,7 +31,7 @@ class GamesController extends Controller
     {
         if( $id == 1 ) //litter rush
         {
-
+            return $this->gamehighscores();
         }
         if( $id == 2 ) //finding
         {
@@ -39,6 +41,11 @@ class GamesController extends Controller
         {
 
         }
+    }
+
+    public function timedHighScores()
+    {
+        return json_encode( GameTimedScore::orderBy( "score", "DESC" )->orderBy( "initials", "ASC" )->orderBy( "created_at", "DESC" )->take(10)->get() );
     }
 
     public function update( Request $request, $id )
@@ -99,8 +106,56 @@ class GamesController extends Controller
         return response()->json( json_encode( $highscore ) );
     }
 
+    public function gameGamePost( Request $request )
+    {
+        $this->validate( $request, [
+            "name" => "required",
+            "score" => "required"
+        ] );
+
+        $initials = $request->input( "name" );
+        $score = $request->input( "score" );
+
+        $highscore = new GameGameScore();
+        $highscore->initials = $initials;
+        $highscore->score = $score;
+
+        $highscore->save();
+
+        return response()->json( json_encode( $highscore ) );
+    }
+
+    public function gameTimedPost( Request $request )
+    {
+        $this->validate( $request, [
+            "name" => "required",
+            "score" => "required"
+        ] );
+
+        $initials = $request->input( "name" );
+        $score = $request->input( "score" );
+
+        $highscore = new GameTimedScore();
+        $highscore->initials = $initials;
+        $highscore->score = $score;
+
+        $highscore->save();
+
+        return response()->json( json_encode( $highscore ) );
+    }
+
     public function findinghighscores()
     {
         return json_encode( FindingGameScores::orderBy( "score", "DESC" )->orderBy( "initials", "ASC" )->orderBy( "created_at", "DESC" )->take(10)->get() );
+    }
+
+    public function gamehighscores()
+    {
+        return json_encode( GameGameScore::orderBy( "score", "DESC" )->orderBy( "initials", "ASC" )->orderBy( "created_at", "DESC" )->take(10)->get() );
+    }
+
+    public function gametimedhighscores()
+    {
+        return json_encode( GameTimedScore::orderBy( "score", "DESC" )->orderBy( "initials", "ASC" )->orderBy( "created_at", "DESC" )->take(10)->get() );
     }
 }

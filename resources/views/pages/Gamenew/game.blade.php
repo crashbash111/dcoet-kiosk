@@ -122,7 +122,7 @@
             <button
                 id="leaderBtn" 
                 style="font-size:3.5vmin;"
-                onclick="leaderboard()"
+                onclick="leaderboardNormal()"
             >
                 Leaderboard
             </button>
@@ -152,7 +152,7 @@
             <button
                 id="leaderBtn"
                 style="font-size:3.5vmin;"
-                onclick="leaderboard()"
+                onclick="leaderboardTimed()"
             >
                 Leaderboard
             </button>
@@ -211,13 +211,36 @@
             </button>
         </div>
         <div
-            id="leaderboard"
+            id="leaderboardNormal"
             style="position:absolute; top:10%; left:32.5%; width:35%; height:width; 
             border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
             animation-name: menuAnim; animation-duration: 0.3s"
         >
-            <h1 style="font-size:4vmin">HIGHSCORES</h1>
-            <p id="highscoreText" style="font-size:2.5vmin"></p>
+            <h1 style="font-size:4vmin">SURVIVAL HIGHSCORES</h1>
+            <p id="highscoreTextNormal" style="font-size:2.5vmin"></p>
+            <button
+                id="startBtn"
+                style="font-size:3.5vmin;"
+                onclick="startNewGame()"
+            >
+                Start Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:3.5vmin;"
+                onclick="mainMenu()"
+            >
+                Main Menu
+            </button>
+        </div>
+        <div
+            id="leaderboardTimed"
+            style="position:absolute; top:10%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">TIMED HIGHSCORES</h1>
+            <p id="highscoreTextTimed" style="font-size:2.5vmin"></p>
             <button
                 id="startBtn"
                 style="font-size:3.5vmin;"
@@ -309,6 +332,8 @@
         canvas.addEventListener("click", canvasClick);
 
         var TILESIZE = 64;
+
+        var pos = 10;
 
         var submitLetters = [0, 0, 0];
 
@@ -556,7 +581,7 @@
             letters.push(String.fromCharCode(i));
         }
 
-        var highscores = [
+        var highscoresNormal = [
             {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
             {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
             {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
@@ -569,7 +594,20 @@
             {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
         ];
 
-        highscores[ 0 ].score
+        var highscoresTimed = [
+            {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
+            {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+        ];
+
+        //highscores[ 0 ].score
 
         Rubbish = function(id, x, y, spdX, spdY, width, height, imgId, side) {
             var rubbish = {
@@ -903,7 +941,8 @@
                 "stats",
                 "end",
                 "levelSelect",
-                "leaderboard",
+                "leaderboardNormal",
+                "leaderboardTimed",
                 "newScore"
                 
             ]
@@ -940,58 +979,181 @@
             mode = 2;
         }  
 
-        mainMenu = function(){
+        mainMenu = function()
+        {
             showMenu("levelSelect");
             document.getElementById("rootObject").style = 
                 "background: url(./assets/images/background5.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
             mode = 0;
         }
 
-        lettersTranslate = function(){
+        lettersTranslate = function()
+        {
             return letters[submitLetters[0]] + letters[submitLetters[1]] + letters[submitLetters[2]];
         }
 
-        scoreEntry = function(){
+        scoreEntry = function()
+        {
             showMenu("newScore");
             LettersSet();
         };
 
-        scoreSubmit = function() {
-            leaderboard();
-            //add submit functionality
-        };
-
-        leaderboard = function(){
-            showMenu("leaderboard");
-            document.getElementById("highscoreText").innerHTML = "";
-            var rankColumn = "<div><h3>RANK</h3>";
-            var nameColumn = "<div><h3>NAME</h3>";
-            var scoreColumn = "<div><h3>SCORE</h3>";
-            var b = "<br/><br/>";
-            for (var i = 0; i < highscores.length; i++){
-                rankColumn = rankColumn + (i+1) + b;
-                nameColumn = nameColumn + highscores[i].initials + b;
-                scoreColumn = scoreColumn + highscores[i].score + b;
+        scoreSubmit = function()
+        {
+            if( mode == 1 )
+            {
+                leaderboardNormal();
+                highScoreNormal();
+                getHighScoresNormal();
             }
-            rankColumn = rankColumn + "</div>";
-            nameColumn = nameColumn + "</div>";
-            scoreColumn = scoreColumn + "</div>";
-            document.getElementById("highscoreText").innerHTML = "<div class='grid-container'>"
-            + rankColumn + nameColumn + scoreColumn + "</div>";
+            else if( mode == 2)
+            {
+                leaderboardTimed();
+                highScoreTimed();
+                getHighScoresTimed();
+            }
         }
 
-        highScore = function(){
+        // scoreSubmitNormal = function()
+        // {
+        //     leaderboardNormal();
+        //     highScoreNormal();
+        //     getHighScoresNormal();
+        // };
+
+        // scoreSubmitTimed = function()
+        // {
+        //     leaderboardTimed();
+        //     highScoreTimed();
+        //     getHighScoresTimed();
+        // };
+
+        updateLeaderboardTextNormal = function()
+        {
+            document.getElementById("highscoreTextNormal").innerHTML = "<table style='width: 100%'><thead><tr><th>RANK</th><th>NAME</th><th>SCORE</th></tr></thead>";
+            var rankColumn = "<tbody>";
+            // var nameColumn = "<tr><td>";
+            // var scoreColumn = "<tr><td>";
+            var b = "<br/><br/>";
+            for (var i = 0; i < highscoresNormal.length; i++){
+                rankColumn = rankColumn + "<tr><td style='width: 33.33%" + ( i == pos ? "; color: red'>" : "'>" ) + (i+1) + "</td>";
+                rankColumn =  rankColumn + "<td style='width: 33.33%" + ( i == pos ? "; color: red'>" : "'>" ) + highscoresNormal[ i ].initials + "</td>";
+                rankColumn =  rankColumn +"<td style='width: 33.33%" + ( i == pos ? "; color: red'>" : "'>" ) + highscoresNormal[ i ].score + "</td></tr>";
+            }
+            rankColumn = rankColumn + "</tbody></table>";
+            document.getElementById( "highscoreTextNormal" ).innerHTML = "<div style='width: 40vh; margin-left: auto; margin-right: auto'><table style='width: 100%'><thead><tr><th>RANK</th><th>NAME</th><th>SCORE</th></tr></thead>"
+            + rankColumn + "</table></div>";
+        };
+
+        updateLeaderboardTextTimed = function()
+        {
+            document.getElementById("highscoreTextTimed").innerHTML = "<table style='width: 100%'><thead><tr><th>RANK</th><th>NAME</th><th>SCORE</th></tr></thead>";
+            var rankColumn = "<tbody>";
+            for (var i = 0; i < highscoresTimed.length; i++){
+                rankColumn = rankColumn + "<tr><td style='width: 33.33%" + ( i == pos ? "; color: red'>" : "'>" ) + (i+1) + "</td>";
+                rankColumn =  rankColumn + "<td style='width: 33.33%" + ( i == pos ? "; color: red'>" : "'>" ) + highscoresTimed[ i ].initials + "</td>";
+                rankColumn =  rankColumn +"<td style='width: 33.33%" + ( i == pos ? "; color: red'>" : "'>" ) + highscoresTimed[ i ].score + "</td></tr>";
+            }
+            rankColumn = rankColumn + "</tbody></table>";
+            document.getElementById( "highscoreTextTimed" ).innerHTML = "<div style='width: 40vh; margin-left: auto; margin-right: auto'><table style='width: 100%'><thead><tr><th>RANK</th><th>NAME</th><th>SCORE</th></tr></thead>"
+            + rankColumn + "</table></div>";
+        };
+
+        leaderboardNormal = function(){
+            showMenu("leaderboardNormal");
+        };
+
+        leaderboardTimed = function() {
+            showMenu( "leaderboardTimed" );
+        }
+
+        getHighScoresNormal = function() {
+            document.getElementById("highscoreTextNormal").innerHTML = "Loading...";
+            fetch( "./gamehighscores" )
+            .then( response => response.json() )
+            .then( data => { highscoresNormal = data; updateLeaderboardTextNormal() } );
+        }
+
+        getHighScoresTimed = function() {
+            document.getElementById("highscoreTextTimed").innerHTML = "Loading...";
+            fetch( "./gametimedhighscores" )
+            .then( response => response.json() )
+            .then( data => { highscoresTimed = data; updateLeaderboardTextTimed() } );
+        }
+
+        highScoreNormal = function(){
             var http = new XMLHttpRequest();
-            var url = 'http://101.100.138.143/dcoet-kiosk/public/findingGamePost';
-            var initials = 'ASS';
+            var url = './gameGamePost';
+            var initials = lettersTranslate();
             var params = 'name=' + initials + '&score=' + score;
+
+            pos = 10;
+
+            for( var i = highscoresNormal.length - 1; i >= 0; --i )
+            {
+                if( highscoresNormal[ i ].score < score )
+                {
+                    console.log( i );
+                    pos = i;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            console.log( pos );
+
             http.open('POST', url, true);
 
+            console.log( document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
+
+            http.setRequestHeader( 'X-CSRF-Token', document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
             http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
             http.onreadystatechange = function(){
                 if(http.readyState == 4 && http.status == 200){
-                    alert(http.responseText);
+                    //console.log("posted");
+                    getHighScoresNormal();
+                }
+            }
+            http.send(params);
+        }
+
+        highScoreTimed = function(){
+            var http = new XMLHttpRequest();
+            var url = './gameTimedPost';
+            var initials = lettersTranslate();
+            var params = 'name=' + initials + '&score=' + score;
+
+            pos = 10;
+
+            for( var i = highscoresTimed.length - 1; i >= 0; --i )
+            {
+                if( highscoresTimed[ i ].score < score )
+                {
+                    console.log( i );
+                    pos = i;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            console.log( pos );
+
+            http.open('POST', url, true);
+
+            console.log( document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
+
+            http.setRequestHeader( 'X-CSRF-Token', document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            http.onreadystatechange = function(){
+                if(http.readyState == 4 && http.status == 200){
+                    //console.log("posted");
+                    getHighScoresTimed();
                 }
             }
             http.send(params);
@@ -1102,6 +1264,10 @@
                     tappedPests + " pest animal(s)<br/><br/>" +
                     tappedAnimals + " non-pest animal(s)<br/><br/>" +
                     "You Survived for: " + t + " seconds";
+                    document.getElementById("leaderBtn").onclick = "leaderboardNormal()";
+
+                    ///////THE GOOD LIFE
+
                     document.getElementById("rootObject").style = 
                     "background: url(./assets/images/background1.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
                 }
@@ -1113,6 +1279,7 @@
                     "You got rid of:<br/><br/>" +
                     tappedRubbish + " piece(s) of rubbish<br/><br/>" +
                     tappedAnimals + " non-pest animal(s)<br/><br/>";
+                    document.getElementById("leaderBtn").onclick = "leaderboardTimed()";
                     document.getElementById("rootObject").style = 
                     "background: url(./assets/images/background3.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
                 }
@@ -1126,6 +1293,9 @@
         };
 
         var myVar;
+
+        getHighScoresNormal();
+        getHighScoresTimed();
 
         startNewGame = function() {
             ctx.canvas.width = innerWidth;
