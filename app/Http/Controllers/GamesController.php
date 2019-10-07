@@ -64,7 +64,20 @@ class GamesController extends Controller
 
     public function findingGame()
     {
-        return view( "pages.Game.finding" );
+        if( Game::find( 2 )->enabled == 0 )
+        {
+            return view( "pages.disallowed" );
+        }
+        return view( "pages.Gamenew.finding" );
+    }
+
+    public function gameGame()
+    {
+        if( Game::find( 1 )->enabled == 0 )
+        {
+            return view( "pages.disallowed" );
+        }
+        return view( "pages.Gamenew.game" );
     }
 
     public function findingGamePost( Request $request )

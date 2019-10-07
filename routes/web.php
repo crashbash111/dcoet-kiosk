@@ -11,11 +11,11 @@
 |
 */
 
+Route::get( "/findingGame", [ "uses" => "GamesController@findingGame" ] );
+Route::get( "/gameGame", [ "uses" => "GamesController@gameGame" ] );
+
 Route::get( "/", "DefaultController@index" );
 
-
-
-Route::get( "/findingGame", [ "uses" => "GamesController@findingGame" ] );
 Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
 Route::get( "/findinghighscores", [ "uses" => "GamesController@findinghighscores" ] );
 

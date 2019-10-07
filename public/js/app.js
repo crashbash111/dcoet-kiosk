@@ -102153,7 +102153,9 @@ function (_React$Component) {
   }, {
     key: "handleGameClick",
     value: function handleGameClick(i) {
-      window.open("../Resources/Game/index.html", "_blank");
+      if (i == 2) {
+        window.location = "./findingGame";
+      }
     }
   }, {
     key: "handleVideoClick",
@@ -103794,6 +103796,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Create =
 /*#__PURE__*/
 function (_React$Component) {
@@ -104595,37 +104598,71 @@ function (_React$Component) {
       }))), this.state.page.audios != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Current audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldAudios)) : null, this.audios.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Currently selected audio files", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to fulfill all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
       }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hideScroll",
+        onclick: function onclick() {
+          null;
+        },
         style: {
-          height: "100%"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
+          //styling for the side panel
+          //filter: "color blur(60px)",
           height: "100vh",
-          display: "grid",
-          gridTemplateColumns: "40vh auto",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundImage: "url('" + (this.state.photos != null ? URL.createObjectURL(this.photos.current.files[0]) : "") + "')"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "no-scrollbar",
-        style: {
-          overflowY: "scroll",
-          height: "100vh",
-          width: "45vh",
-          padding: "10px",
+          width: "400px",
+          display: "flex",
+          flexDirection: "column",
+          overflowY: "hidden",
           overflowX: "hidden",
           opacity: "0.8",
-          backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )"
+          backgroundColor: "#01283D",
+          color: "white"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.page.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "btn btn-primary"
-      }, "Back to home"), this.state.page.stats.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        style: {
+          textAlign: "center",
+          fontSize: "4em",
+          display: "block",
+          width: "100%"
+        }
+      }, this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hideScroll",
+        style: {
+          overflowY: "scroll",
+          width: "100%",
+          flex: "1",
+          padding: "10px 20px 30px 20px",
+          background: "linear-gradient(0deg, #141414 40px, transparent 100px)"
+        }
+      }, this.state.page.stats.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           display: "grid",
           gridTemplateColumns: "auto auto"
         }
-      }, statTableItems) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.page.text))))));
+      }, statTableItems) : null, this.state.page.audios.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, audioItems)) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: "28px",
+          textAlign: "left",
+          paddingBottom: "5px"
+        }
+      }, this.state.page.text == "" ? "This is a sample short description." : this.state.page.text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: "18px",
+          textAlign: "justify",
+          paddingBottom: "50px"
+        }
+      }, this.state.page.longdesc)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "returns",
+        style: {
+          //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+          color: "white",
+          padding: "8px 8px 8px 32px",
+          width: this.state.sideSize + "vw",
+          display: "block",
+          bottom: "0px",
+          position: "absolute",
+          textDecoration: "none",
+          fontSize: "25px",
+          transition: this.state.transitionTime
+        }
+      }, "\u2190 Back to Home"))));
     }
   }]);
 
@@ -106062,8 +106099,7 @@ function (_React$Component) {
             textAlign: "center"
           }
         }, item.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.description));
-      }); //
-
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: "100%",

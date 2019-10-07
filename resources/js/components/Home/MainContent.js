@@ -44,7 +44,10 @@ export default class MainContent extends React.Component {
     }
 
     handleGameClick( i ) {
-        window.open("../Resources/Game/index.html", "_blank" );
+        if( i == 2 )
+        {
+            window.location = "./findingGame";
+        }
     }
 
     handleVideoClick( i ) {

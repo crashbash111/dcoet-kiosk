@@ -138,10 +138,6 @@ export default class Home extends React.Component {
             );
         });
 
-        //
-
-        
-
         return (
             <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
                 <div style={{ backgroundColor: `rgba( 25, 25, 25, ${ ( true || this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "0" : "0.8" } )` }}>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%; width: 100%">
+<html lang="en" style="height: 100%; width: 100%" id="rootObject">
 @section( 'head' )
 <head>
     <meta charset="UTF-8">
