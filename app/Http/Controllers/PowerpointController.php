@@ -13,11 +13,6 @@ class PowerpointController extends Controller
 
     public function index()
     {
-        return "Hello";
-    }
-
-    public function all()
-    {
         $all = Powerpoint::all();
 
         foreach( $all as $a )

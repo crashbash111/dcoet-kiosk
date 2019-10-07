@@ -3,19 +3,19 @@ import Axios from "axios";
 
 import Loader from "../../Loader";
 
-const ViewCategories = ({}) => {
+const ViewPowerpoints = ({}) => {
 
-    const [categories, setCategories] = useState([]);
+    const [powerpoints, setPowerpoints] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchPowerpoints = async () => {
             setLoading(true);
-            const res = await Axios.get("./api/categories/" );
-            setCategories(res.data);
+            const res = await Axios.get("./api/powerpoints/" );
+            setPowerpoints(res.data);
             setLoading(false);
         }
-        fetchCategories();
+        fetchPowerpoints();
     }, []);
 
     if (loading) {
@@ -24,7 +24,7 @@ const ViewCategories = ({}) => {
 
     return (
         <div>
-            <h2>Categories</h2>
+            <h2>Powerpoints</h2>
             {/* <div style={{ float: "right" }}>
                 <button onClick={handleBackClick} className="btn btn-danger">Back</button>
             </div> */}
@@ -32,16 +32,15 @@ const ViewCategories = ({}) => {
                 <table className="admin-table-new">
                     <thead>
                         <tr>
-                            <th>Name</th><th>Description</th><th>Number of Pages</th><th>Actions</th>
+                            <th>Title</th><th>Length</th><th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            categories.map(item => (
+                            powerpoints.map(item => (
                                 <tr key={item.id}>
-                                    <td>{item.name}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.numPages}</td>
+                                    <td>{item.title}</td>
+                                    <td>{item.ppt_images.length}</td>
                                     <td>
                                         <button className="btn btn-dark">View</button>
                                         <button className="btn btn-success">Edit</button>
@@ -57,4 +56,4 @@ const ViewCategories = ({}) => {
     );
 };
 
-export default ViewCategories;
+export default ViewPowerpoints;
