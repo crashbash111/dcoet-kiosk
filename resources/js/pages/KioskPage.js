@@ -25,38 +25,24 @@ export default class KioskPage extends React.Component {
 
         this.fade = this.fade.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.slider = this.slider.bind(this);
     }
 
     componentWillMount() {
         this.setState({ loading: true });
-
         let { id } = this.props.match.params;
-
-        console.log(id);
-
+        //console.log(id);
         fetch("./api/pages/" + id)
             .then(response => response.json())
             .then(data => {
                 this.setState({ page: data, loading: false });
                 this.state.page.images.forEach((picture) => {
                     new Image().src = "./storage/kiosk_images/" + picture.image_name;
-                    console.log( "preloaded!" );
+                    //console.log("preloaded!");
                 });
             });
     }
 
     handleClick(event) {
-        {/*var t = setInterval(this.fade, 10);
-        setTimeout(() => {
-            clearInterval(t);
-            this.setState({ opacity: 1 });
-            this.setState(prevState => {
-                return (
-                    { index: (this.state.index + 1) % this.state.page.images.length }
-                );
-            });
-        }, 250);*/}
         this.setState(prevState => {
             return (
                 { index: (this.state.index + 1) % this.state.page.images.length }
@@ -72,31 +58,7 @@ export default class KioskPage extends React.Component {
         });
     }
 
-    slider(bg, { children }) {
-        const [bind, { delta, down }] = useGesture()
-        const { x } = useSpring({
-            x: down ? delta[0] : 0,
-            immediate: name => down && name === 'x'
-        })
-        //const avSize = x.interpolate({ map: Math.abs, range: [50, 300], output: ['scale(0.5)', 'scale(1)'], extrapolate: 'clamp' })
-        return (
-            <animated.div {...bind()} className="item" onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
-                position: "absolute",
-                //backgroundColor: bg,
-                top: "calc(50% - 60px)",
-                borderRadius: "0px 15px 15px 0px",
-                width: "45px",
-                height: "120px",
-                opacity: "0.8",
-                //transition: this.state.transitionTime,
-                left: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
-                transform: interpolate([x], (x) => `translateX(${x}px)`),
-            }}>
-                {children}
-
-            </animated.div>
-        )
-    }
+    
 
     render() {
 
@@ -107,9 +69,21 @@ export default class KioskPage extends React.Component {
         }
         else {
             let imgPath;
+            let dotimgnav = null;
             try //try
             {
                 imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+                let i = -1;
+                dotimgnav = this.state.page.images.map(item => {
+                    i++;
+                    return (
+                        <span index={i} className="dotimagenav" style={{
+                            backgroundColor: i == this.state.index ? "white" : "darkgray",
+                            transition: this.state.transitionTime,
+                            opacity: i == this.state.index ? "1" : "0.8",
+                        }}></span>
+                    );
+                })
                 console.log(imgPath);
             }
             catch (e) //catch
@@ -157,10 +131,9 @@ export default class KioskPage extends React.Component {
                                                 backgroundSize: "cover",
                                                 transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
                                             }} >
-                                            <div className="hideScroll" onClick={() => { null }}
+                                            <div className="hideScroll"
                                                 style={{
                                                     //styling for the side panel
-                                                    //filter: "color blur(60px)",
                                                     height: "100vh",
                                                     width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
                                                     display: "flex",
@@ -200,7 +173,6 @@ export default class KioskPage extends React.Component {
                                                 </div>
                                                 <Link to={`/${this.state.page.category_id}`} className="returns"
                                                     style={{
-                                                        //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
                                                         color: palette.loading ? "white" : palette.data.lightVibrant,
                                                         padding: "8px 8px 8px 32px",
                                                         width: this.state.sideSize + "vw",
@@ -218,7 +190,6 @@ export default class KioskPage extends React.Component {
                                             backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
                                             color: !palette.loading ? palette.data.darkMuted : "white",
                                             position: "absolute",
-                                            //backgroundColor: bg,
                                             top: "calc(50% - 60px)",
                                             borderRadius: "0px 15px 15px 0px",
                                             width: "45px",
@@ -230,32 +201,33 @@ export default class KioskPage extends React.Component {
                                             <h1 style={{
                                                 textAlign: "center",
                                                 padding: "50% 0px 50% 0px",
-                                                //fontSize: "12px",
                                             }}>&lt;</h1>
                                         </div>
 
+                                        {/* Image dot navigation */}
+                                        <div style={{
+                                            position: "absolute",
+                                            bottom: "10px",
+                                            left: "50%",
+                                        }}>
+                                            {dotimgnav}
+                                        </div>
+
+                                        {/* Copyright Information */}
                                         <div style={{
                                             position: "absolute",
                                             right: "10px",
                                             bottom: "10px",
                                             textAlign: "right",
                                         }}>
-                                            {/*<button onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} className="btn btn-lg btn-light"
-                                                style={{
-                                                    transition: "background-color " + this.state.transitionTime + ", color " + this.state.transitionTime,
-                                                    backgroundColor: palette.loading ? "lightgray" : palette.data.darkMuted,
-                                                    color: palette.loading ? "black" : palette.data.lightVibrant,
-                                                    width: "160px",
-                                                    margin: "0px 0px 10px 0px",
-                                                }}
-                                            role="button">Toggle Sidebar</button>*/}
                                             <p style={{
                                                 color: "white",
                                                 margin: "0px",
                                                 backgroundColor: "rgba(0,0,0,.6)",
                                                 opacity: this.state.page.images[this.state.index].copyright == null || this.state.page.images[this.state.index].copyright == "" || this.state.page.images[this.state.index].copyright == "null" ? "0" : "1",
                                                 padding: "10px",
-                                                transition: "opacity " + this.state.transitionTime,
+                                                //transition: "opacity 0.2s",
+                                                fontSize: "18px",
                                             }}>
                                                 &copy; {this.state.page.images[this.state.index].copyright}
                                             </p>

@@ -1,7 +1,7 @@
 import React from "react";
 
-import {Redirect} from "react-router-dom";
-import {PostData} from "../services/PostData";
+import { Redirect } from "react-router-dom";
+import { PostData } from "../services/PostData";
 
 import AuthService from "../components/AuthService";
 
@@ -15,71 +15,78 @@ export default class Login extends React.Component {
             redirectToReferrer: false,
         }
 
-        this.login = this.login.bind( this );
-        this.handleChange = this.handleChange.bind( this );
-        this.handleFormSubmit = this.handleFormSubmit.bind( this );
+        this.login = this.login.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
         this.Auth = new AuthService();
     }
 
-    login()
-    {
-        if( this.state.username && this.state.password )
-        {
-            PostData( 'login', this.state ).then( (result) => {
+    login() {
+        if (this.state.username && this.state.password) {
+            PostData('login', this.state).then((result) => {
                 let responseJson = result;
-                if( responseJson.userData ) {
-                    sessionStorage.setItem( 'userData', JSON.stringify( responseJson ) );
-                    this.setState( { redirectToReferrer: true } );
+                if (responseJson.userData) {
+                    sessionStorage.setItem('userData', JSON.stringify(responseJson));
+                    this.setState({ redirectToReferrer: true });
                 }
             });
         }
     }
 
-    handleChange( event )
-    {
+    handleChange(event) {
         let { name, value } = event.target;
-        this.setState( { [name]: value } );
+        this.setState({ [name]: value });
     }
 
-    handleFormSubmit( event )
-    {
+    handleFormSubmit(event) {
         event.preventDefault();
 
-        this.Auth.login( this.state.username, this.state.password )
-        .then( res => {
-            this.props.history.replace( '/admin' );
-        })
-        .catch( error => {
-            alert( error );
-        });
+        this.Auth.login(this.state.username, this.state.password)
+            .then(res => {
+                this.props.history.replace('/admin');
+            })
+            .catch(error => {
+                alert(error);
+            });
     }
 
-    componentWillMount()
-    {
-        if( this.Auth.loggedIn() )
-        {
-            this.props.history.replace( '/admin' );
+    componentWillMount() {
+        if (this.Auth.loggedIn()) {
+            this.props.history.replace('/admin');
         }
     }
 
     render() {
-        if( this.state.redirectToReferrer || sessionStorage.getItem( 'userData' ) )
-        {
+        if (this.state.redirectToReferrer || sessionStorage.getItem('userData')) {
             <Redirect to="/admin" />
         }
 
         return (
-            <form onSubmit={ this.handleFormSubmit }>
-                <label>Username
-                    <input type="text" name="username" value={ this.state.username } onChange={ this.handleChange } />
-                </label>
-                <br />
-                <label>password
-                    <input type="password" name="password" value={ this.state.password } onChange={ this.handleChange } />
-                </label>
-                <button className="btn btn-primary">Submit</button>
-            </form>
+            <div>
+                <div style={{
+                    //position: "relative",
+                    backgroundImage: "url('./images/loginbackground.jpg')",
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundColor: "red",
+                }}>
+                    <div className="loginpanel">
+                        <img style={{ height: "100px", paddingBottom: "20px" }} src="./images/logo.png" />
+                        <form onSubmit={this.handleFormSubmit}>
+                            <label>Username
+                                <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+                            </label>
+                            <br />
+                            <label>Password
+                                <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                            </label>
+                            <br />
+                            <button className="btn btn-primary" style={{ textAlign: "center" }}>Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
