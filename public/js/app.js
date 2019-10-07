@@ -86825,7 +86825,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100842,10 +100842,12 @@ var Highscores = function Highscores(_ref) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Initials"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Score"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Timestamp"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, highscores.map(function (item) {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Initials"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Score"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Timestamp"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, highscores.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.initials), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.score), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.created_at));
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.initials), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.score), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.created_at), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      className: "btn btn-danger"
+    }, "Delete")));
   })))));
 };
 

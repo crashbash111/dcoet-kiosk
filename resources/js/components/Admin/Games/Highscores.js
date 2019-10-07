@@ -32,7 +32,7 @@ const Highscores = ({ game, handleBackClick }) => {
                 <table className="admin-table-new">
                     <thead>
                         <tr>
-                            <th>Initials</th><th>Score</th><th>Timestamp</th>
+                            <th>Initials</th><th>Score</th><th>Timestamp</th><th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +42,9 @@ const Highscores = ({ game, handleBackClick }) => {
                                     <td>{item.initials}</td>
                                     <td>{item.score}</td>
                                     <td>{item.created_at}</td>
+                                    <td>
+                                        <button className="btn btn-danger">Delete</button>
+                                    </td>
                                 </tr>
                             ))
                         }
