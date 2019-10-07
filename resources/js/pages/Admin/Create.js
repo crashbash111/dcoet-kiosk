@@ -6,6 +6,7 @@ import { runInThisContext } from "vm";
 import withAuth from "../../components/withAuth";
 
 import AuthService from "../../components/AuthService";
+import { Link } from "react-router-dom";
 
 class Create extends React.Component {
     constructor(props) {
@@ -305,7 +306,7 @@ class Create extends React.Component {
 
         let formData = new FormData();
 
-        formData.append( "token", localStorage.getItem( "id_token" ) );
+        formData.append("token", localStorage.getItem("id_token"));
 
         if (this.state.editMode) {
             formData.append("_method", "PUT");
@@ -322,7 +323,7 @@ class Create extends React.Component {
         }
         formData.append("heading", this.state.page.heading);
         formData.append("shortdesc", this.state.page.text);
-        formData.append( "longdesc", this.state.longdesc );
+        formData.append("longdesc", this.state.longdesc);
         formData.append("category", this.state.page.category_id);
 
         var files = this.photos.current.files;
@@ -380,10 +381,8 @@ class Create extends React.Component {
         }
 
         let copyrightNew = this.state.page.copyrightNew;
-        if (copyrightNew != null)
-        {
-            for (var i = 0; i < copyrightNew.length; ++i)
-            {
+        if (copyrightNew != null) {
+            for (var i = 0; i < copyrightNew.length; ++i) {
                 formData.append("copyright_new[]", copyrightNew[i].text);
             }
         }
@@ -692,15 +691,59 @@ class Create extends React.Component {
                             </form>
                         </div>
                     </div>
-                    <div style={{ height: "100%" }}>
-                        <div style={{ height: "100vh", display: "grid", gridTemplateColumns: "40vh auto", backgroundSize: "cover", backgroundPosition: "center", backgroundImage: "url('" + (this.state.photos != null ? URL.createObjectURL(this.photos.current.files[0]) : "") + "')" }}>
-                            <div className="no-scrollbar" style={{ overflowY: "scroll", height: "100vh", width: "45vh", padding: "10px", overflowX: "hidden", opacity: "0.8", backgroundImage: "linear-gradient( rgb( 49, 0, 84 ), rgb( 71, 0, 122 ) )" }}>
-                                <h1>{this.state.page.heading}</h1>
-                                <p className="btn btn-primary">Back to home</p>
-                                {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                <p>{this.state.page.text}</p>
-                            </div>
+                    <div className="hideScroll" onclick={() => { null }}
+                        style={{
+                            //styling for the side panel
+                            //filter: "color blur(60px)",
+                            height: "100vh",
+                            width: "400px",
+                            display: "flex",
+                            flexDirection: "column",
+                            overflowY: "hidden",
+                            overflowX: "hidden",
+                            opacity: "0.8",
+                            backgroundColor: "#01283D",
+                            color: "white",
+                        }}>
+
+                        <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
+
+
+                        <div className="hideScroll" style={{
+                            overflowY: "scroll",
+                            width: "100%",
+                            flex: "1",
+                            padding: "10px 20px 30px 20px",
+                            background: "linear-gradient(0deg, #141414 40px, transparent 100px)",
+                        }}>
+                            {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                            {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                            <p style={{
+                                fontSize: "28px",
+                                textAlign: "left",
+                                paddingBottom: "5px",
+                            }}>{this.state.page.text}
+                            </p>
+                            <p style={{
+                                fontSize: "18px",
+                                textAlign: "justify",
+                                paddingBottom: "50px",
+                            }}>{this.state.page.longdesc}
+                            </p>
                         </div>
+                        <p className="returns"
+                            style={{
+                                //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                                color: "black",
+                                padding: "8px 8px 8px 32px",
+                                width: this.state.sideSize + "vw",
+                                display: "block",
+                                bottom: "0px",
+                                position: "absolute",
+                                textDecoration: "none",
+                                fontSize: "25px",
+                                transition: this.state.transitionTime,
+                            }} >&#8592; Back to Home</p>
                     </div>
 
                 </div>
@@ -709,4 +752,4 @@ class Create extends React.Component {
     }
 }
 
-export default withAuth( Create );
+export default withAuth(Create);
