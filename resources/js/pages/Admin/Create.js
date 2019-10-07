@@ -706,7 +706,7 @@ class Create extends React.Component {
                             color: "white",
                         }}>
 
-                        <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
+                        <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
 
 
                         <div className="hideScroll" style={{
@@ -722,7 +722,7 @@ class Create extends React.Component {
                                 fontSize: "28px",
                                 textAlign: "left",
                                 paddingBottom: "5px",
-                            }}>{this.state.page.text}
+                            }}>{this.state.page.text == "" ? "This is a sample short description." : this.state.page.text}
                             </p>
                             <p style={{
                                 fontSize: "18px",
@@ -734,7 +734,7 @@ class Create extends React.Component {
                         <p className="returns"
                             style={{
                                 //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
-                                color: "black",
+                                color: "white",
                                 padding: "8px 8px 8px 32px",
                                 width: this.state.sideSize + "vw",
                                 display: "block",
