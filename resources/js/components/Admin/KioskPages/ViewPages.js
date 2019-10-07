@@ -3,19 +3,19 @@ import Axios from "axios";
 
 import Loader from "../../Loader";
 
-const Highscores = ({ game, handleBackClick }) => {
+const ViewPages = ({}) => {
 
-    const [highscores, setHighscores] = useState([]);
+    const [pages, setPages] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchHighscores = async () => {
+        const fetchPages = async () => {
             setLoading(true);
-            const res = await Axios.get("./api/games/" + game.id + "/highscores");
-            setHighscores(res.data);
+            const res = await Axios.get("./api/pages/" );
+            setPages(res.data);
             setLoading(false);
         }
-        fetchHighscores();
+        fetchPages();
     }, []);
 
     if (loading) {
@@ -24,25 +24,28 @@ const Highscores = ({ game, handleBackClick }) => {
 
     return (
         <div>
-            <h2>Highscores - {game.name}</h2>
-            <div style={{ float: "right" }}>
+            <h2>Pages</h2>
+            {/* <div style={{ float: "right" }}>
                 <button onClick={handleBackClick} className="btn btn-danger">Back</button>
-            </div>
+            </div> */}
             <div style={{ float: "left", width: "100vh" }}>
                 <table className="admin-table-new">
                     <thead>
                         <tr>
-                            <th>Initials</th><th>Score</th><th>Timestamp</th><th>Actions</th>
+                            <th>Heading</th><th>Short Description</th><th>Long Description</th><th>Times Visited</th><th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            highscores.map(item => (
+                            pages.map(item => (
                                 <tr key={item.id}>
-                                    <td>{item.initials}</td>
-                                    <td>{item.score}</td>
-                                    <td>{item.created_at}</td>
+                                    <td>{item.heading}</td>
+                                    <td>{item.shortdesc}</td>
+                                    <td>{ item.longdesc }</td>
+                                    <td>{item.numPages}</td>
                                     <td>
+                                        <button className="btn btn-dark">View</button>
+                                        <button className="btn btn-success">Edit</button>
                                         <button className="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -55,4 +58,4 @@ const Highscores = ({ game, handleBackClick }) => {
     );
 };
 
-export default Highscores;
+export default ViewPages;

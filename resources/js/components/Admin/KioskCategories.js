@@ -25,23 +25,23 @@ export default class KioskCategories extends React.Component {
             return <Loader />
         }
 
-        let child = <div>Videos</div>;
+        let child = <div>Categories</div>;
 
         switch (this.state.mode) {
             case 0:
-                child = <CreateCategory />
+                child = <ViewCategories />
                 break;
             case 1:
-                child = <ViewCategories />
+                child = <CreateCategory />
                 break;
         }
 
         return <div>
             <div style={{ display: "inline-block" }}>
-                <button className={this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark"} onClick={(event) => this.handleClick(0)}>Create New</button>
+                <button className={this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark"} onClick={(event) => this.handleClick(0)}>View</button>
             </div>
             <div style={{ display: "inline-block" }}>
-                <button className={this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark"} onClick={(event) => this.handleClick(1)}>View</button>
+                <button className={this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark"} onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
             {child}
         </div>

@@ -17,7 +17,11 @@ Route::get( "/gameGame", [ "uses" => "GamesController@gameGame" ] );
 Route::get( "/", "DefaultController@index" );
 
 Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
+Route::post( "/gameGamePost", [ "middleware" => "cors", "uses" => "GamesController@gameGamePost" ] );
+Route::post( "/gameTimedPost", [ "middleware" => "cors", "uses" => "GamesController@gameTimedPost" ] );
 Route::get( "/findinghighscores", [ "uses" => "GamesController@findinghighscores" ] );
+Route::get( "/gamehighscores", [ "uses" => "GamesController@gamehighscores" ] );
+Route::get( "/gametimedhighscores", [ "uses" => "GamesController@gametimedhighscores" ] );
 
 //Route::get( "/allGames", "PagesController@allGames" );
 

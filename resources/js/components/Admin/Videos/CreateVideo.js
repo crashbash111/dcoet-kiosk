@@ -124,7 +124,7 @@ export default class CreateVideo extends React.Component {
                     </div>
                     <div className="form-group">
                         <label><h3>Description</h3>
-                            <input className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter description here..." />
+                            <textarea rows="5" cols="20" style={{ resize: "none" }} className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter description here..." />
                             <p style={{ color: "red", display: this.state.description.length > 2 ? "none" : "block" }}>Description requires at least 3 characters</p>
                         </label>
                     </div>

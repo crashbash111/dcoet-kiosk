@@ -2,6 +2,7 @@ import React from "react";
 
 import Create from "../../pages/Admin/Create";
 import Loader from "../Loader";
+import ViewPages from "./KioskPages/ViewPages";
 
 export default class KioskPages extends React.Component
 {
@@ -26,23 +27,23 @@ export default class KioskPages extends React.Component
             return <Loader />
         }
 
-        let child = <div>Videos</div>;
+        let child = <div>Pages</div>;
 
         switch (this.state.mode) {
             case 0:
-                child = <Create />
+                child = <ViewPages />
                 break;
             case 1:
-                child = <Loader />
+                child = <Create />
                 break;
             }
 
         return <div>
             <div style={{ display: "inline-block" }}>
-                <button className={ this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(0)}>Create New</button>
+                <button className={ this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(0)}>View</button>
             </div>
             <div style={{ display: "inline-block" }}>
-                <button className={ this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(1)}>View</button>
+                <button className={ this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
             {child}
         </div>

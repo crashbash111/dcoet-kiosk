@@ -44,6 +44,10 @@ export default class MainContent extends React.Component {
     }
 
     handleGameClick( i ) {
+        if( i == 1 )
+        {
+            window.location = "./gameGame";
+        }
         if( i == 2 )
         {
             window.location = "./findingGame";

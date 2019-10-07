@@ -32,7 +32,7 @@ const ViewCategories = ({}) => {
                 <table className="admin-table-new">
                     <thead>
                         <tr>
-                            <th>Name</th><th>Description</th><th>Number of Pages</th>
+                            <th>Name</th><th>Description</th><th>Number of Pages</th><th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +42,11 @@ const ViewCategories = ({}) => {
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>{item.numPages}</td>
+                                    <td>
+                                        <button className="btn btn-dark">View</button>
+                                        <button className="btn btn-success">Edit</button>
+                                        <button className="btn btn-danger">Delete</button>
+                                    </td>
                                 </tr>
                             ))
                         }
