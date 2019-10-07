@@ -103,6 +103,14 @@
             >
                 Timed
             </button>
+            <br />
+            <button
+                id="closeBtn"
+                style="font-size:3.5vmin;"
+                onclick="closeGame()";
+            >
+                Close
+            </button>
         </div>
         <div
             id="survivalInstructions"
@@ -292,6 +300,10 @@
         var canvas = document.getElementById("ctx");
         var ctx = canvas.getContext("2d");
         ctx.font = "30px Helvetica";
+
+        closeGame = function( event ) {
+            window.location = "./";
+        }
 
         canvasClick = function(event) {
             var tempW = 50;

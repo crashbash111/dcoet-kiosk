@@ -1,71 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import LeastViewed from "./Dashboard/LeastViewed";
-import Loader from "../Loader";
-import MostViewed from "./Dashboard/MostViewed";
+import Loader from "../../Loader";
 
-const Dashboard = () => {
-    // const [mostViewed, setMostViewed] = useState([]);
-    const [mode, setMode] = useState(0);
-    const [leastViewed, setLeastViewed] = useState([]);
+const LeastViewed = () => {
+
     const [loading, setLoading] = useState(false);
+    const [leastViewed, setLeastViewed] = useState([]);
 
     useEffect(() => {
-        // const fetchMostViewed = async () => {
-        //     setLoading(true);
-        //     const res = await Axios.get("./api/pages/mostviewed");
-        //     setMostViewed(res.data);
-        //     //setLoading(false);
-        // }
-
         const fetchLeastViewed = async () => {
             setLoading(true);
             const res = await Axios.get("./api/pages/leastviewed");
             setLeastViewed(res.data);
             setLoading(false);
         }
-        // fetchMostViewed();
         fetchLeastViewed();
     }, []);
 
     if (loading) {
-        return <div>
-            <h2>Dashboard</h2>
-            <br />
-            <Loader />
-        </div>
+        return <Loader />;
     }
 
-    var child = <div>Dashboard</div>;
-
-    switch (mode) {
-        case 0:
-            child = <MostViewed />
-            break;
-        case 1:
-            child = <LeastViewed />
-            break;
-        }
-
-    return <div>
-        <div style={{ display: "inline-block" }}>
-            <button className={ mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => setMode(0)}>Most Viewed</button>
-        </div>
-        <div style={{ display: "inline-block" }}>
-            <button className={ mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => setMode(1)}>Least Viewed</button>
-        </div>
-        {child}
-    </div>
-
     return (
-        
-
         <div>
-            <h2>Dashboard</h2>
-            <br />
-            <MostViewed />
-            <br />
             <h3>Least Viewed</h3>
             <table className="admin-table-new">
                 <thead>
@@ -92,7 +50,7 @@ const Dashboard = () => {
                 </tbody>
             </table>
         </div>
-    )
+    );
 };
 
-export default Dashboard;
+export default LeastViewed;

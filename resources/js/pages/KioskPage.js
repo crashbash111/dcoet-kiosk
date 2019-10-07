@@ -157,7 +157,7 @@ export default class KioskPage extends React.Component {
                                                 backgroundSize: "cover",
                                                 transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
                                             }} >
-                                            <div className="hideScroll" onclick={() => { null }}
+                                            <div className="hideScroll" onClick={() => { null }}
                                                 style={{
                                                     //styling for the side panel
                                                     //filter: "color blur(60px)",

@@ -113,7 +113,7 @@
             </button>
             <button 
                 style="font-size:3.5vmin;" 
-                onclick="window.close()" 
+                onclick="window.location = './'" 
             >
                 Close
             </button>
