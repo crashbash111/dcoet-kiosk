@@ -31,6 +31,47 @@
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .btn-up {
+                background: url( './assets/images/button_up.png' );
+                background-size: 40% 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .btn-down {
+                background: url( './assets/images/button_down.png' );
+                background-size: 40% 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                grid-gap: 3.5vmin;
+            }
+            .grid-container > div{
+                text-align: center;
+            }
+            .grid-container-score {
+                display: grid;
+                grid-template-columns: auto auto auto;
+            }
+            .grid-new {
+                display: grid;
+                grid-template-rows: 4vmin 8vmin 4vmin;
+            }
+            .grid-new > div {
+                border: 1px solid black;
+                font-size: 3vmin;
+            }
+            .grid-new > .big {
+                font-size: 6vmin;
             }
             .btn-up {
                 background: url( './assets/images/button_up.png' );
@@ -71,14 +112,8 @@
                 font-size: 6vmin;
             }
             @keyframes menuAnim {
-                from {
-                    top: -500px;
-                    opacity: 0;
-                }
-                to {
-                    top: 1;
-                    opacity: 1;
-                }
+                from {top: -500px; opacity:0;}
+                to {top: 1; opacity:1;}
             }
         </style>
     </head>
@@ -100,6 +135,13 @@
             >
                 Start Game
             </button>
+            <!-- <button
+                id="startBtn"
+                style="font-size:3.5vmin;"
+                onclick="gameInfoMenu()"
+            >
+                zzzzz
+            </button> -->
             <button
                 id="leaderBtn"
                 style="font-size:3.5vmin;"
@@ -107,14 +149,17 @@
             >
                 Leaderboard
             </button>
-            <button style="font-size:3.5vmin;" onclick="window.close()">
+            <button 
+                style="font-size:3.5vmin;" 
+                onclick="window.close()" 
+            >
                 Close
             </button>
         </div>
         <div
             id="stats"
             style="position:absolute; 
-            top: 1.5%; left: 1%; width: 10%; height: width; 
+            top: 1.5%; left: 1%; width: 13%; height: width; 
             border-left: 1px solid black; border:  1px solid black; 
             background-image: url( './assets/images/stats.png' ); text-align: left; display: none;"
         >
@@ -164,7 +209,6 @@
             animation-name: menuAnim; animation-duration: 0.3s"
         >
             <h1 style="font-size:4vmin">HIGHSCORES</h1>
-            <p id="leaderText" style="font-size:2.5vmin"></p>
             <p id="highscoreText" style="font-size:2.5vmin"></p>
             <button
                 id="startBtn"
@@ -213,6 +257,30 @@
                 Submit
             </button>
         </div>
+        <!-- <div
+            id="gameInfo"
+            style="position:absolute; top:10%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+        <div id="gameInfoBody" style="display: grid; grid-template-columns: auto auto auto; font-size:2.5vmin">
+        </div>
+            <button
+                id="startBtn"
+                style="font-size:3.5vmin;"
+                onclick="startNewGame()"
+            >
+                Start Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:3.5vmin;"
+                onclick="mainMenu()"
+            >
+                Main Menu
+            </button>
+        </div> -->
+    </body>
     <script>
         var canvas = document.getElementById("ctx");
         var ctx = canvas.getContext("2d");
@@ -239,25 +307,27 @@
                     }
                     deleted = true;        
                 } 
-                ctx.fillRect(
-                    ent.x - tempW / 2,
-                    ent.y - tempH / 2,
-                    ent.width,
-                    ent.height
-                );
+                // ctx.fillRect(
+                //     ent.x - tempW / 2,
+                //     ent.y - tempH / 2,
+                //     ent.width,
+                //     ent.height
+                // );
             }
             delete ent;
             if (!deleted) {
                 timeBonus -= 1;
             }
-            for (var key in letters){
-                if (testCollisionEntity(ent, letters[key])){
-                    console.log(letters[key]);
-                }
-            }
+            // for (var key in letters){
+            //     if (testCollisionEntity(ent, letters[key])){
+            //         console.log(letters[key]);
+            //     }
+            // }
         };
 
         canvas.addEventListener("click", canvasClick);
+
+        var TILESIZE = 64;
 
         var submitLetters = [0, 0, 0];
 
@@ -280,18 +350,68 @@
 
         var totalObjects = 0;
 
-        var imgPaths = [
-            "./assets/images/animal1.png",
-            "./assets/images/animal2.png",
-            "./assets/images/animal3.png",
-            "./assets/images/animal1f.png",
-            "./assets/images/animal2f.png",
-            "./assets/images/animal3f.png",
-            "./assets/images/tree1.png",
-            "./assets/images/tree2.png",
-            "./assets/images/tree3.png",
-            "./assets/images/tree4.png",
-            "./assets/images/tree5.png"
+        var imgInfo = [
+            {
+                "id": 0,
+                "name": "background0",
+                "type": "background",
+                "path": "./assets/images/hidden_Background.png",
+                "hasFlipped": false,
+            },
+            {
+                "id": 1,
+                "name": "tuatara",
+                "type": "animal",
+                "path": "./assets/images/tuatara.png",
+                "numFrames": 4,
+                "hasFlipped": true,
+            },
+            {
+                "id": 2,
+                "name": "duck",
+                "type": "animal",
+                "path": "./assets/images/duck.png",
+                "numFrames": 4,
+                "hasFlipped": true,
+            },
+            {
+                "id": 3,
+                "name": "kiwi",
+                "type": "animal",
+                "path": "./assets/images/kiwi.png",
+                "numFrames": 4,
+                "hasFlipped": true,
+            },
+            {
+                "id": 4,
+                "name": "tree1",
+                "type": "tree",
+                "path": "./assets/images/tree1.png",
+            },
+            {
+                "id": 5,
+                "name": "tree2",
+                "type": "tree",
+                "path": "./assets/images/tree2.png",
+            },
+            {
+                "id": 6,
+                "name": "tree3",
+                "type": "tree",
+                "path": "./assets/images/tree3.png",
+            },
+            {
+                "id": 7,
+                "name": "tree4",
+                "type": "tree",
+                "path": "./assets/images/tree4.png",
+            },
+            {
+                "id": 8,
+                "name": "tree5",
+                "type": "tree",
+                "path": "./assets/images/tree5.png",
+            },
         ];
 
         var letters = [];
@@ -302,33 +422,91 @@
 
         var imgList = [];
 
-        var highscores = [
+        for ( var i = 0; i < imgInfo.length; i++ )
+        {
+            var img = {};
 
-        ];
+            img.image = new Image();
+            img.image.src = imgInfo[ i ].path;
 
-        // {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-        //     {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-        //     {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-        //     {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-        //     {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
-        //     {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-        //     {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-        //     {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-        //     {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-        //     {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+            img.name = imgInfo[ i ].name;
+            img.type = imgInfo[ i ].type;
 
-        for (var i = 0; i < 11; i++){
-            var img = new Image();
-            img.src = imgPaths[i];
-            imgList.push(img);
+            if( imgInfo[ i ].type != "background" )
+            {
+                img.numFrames = imgInfo[i].numFrames;
+                img.hasFlipped = imgInfo[i].hasFlipped;
+            }
+
+            imgList.push( img );
         }
-        
+
         Image = function(id, imgId) {
             var img = new Image();
             img.src = imgPaths[imgId];
 
             imgList[id] = img;
         };
+
+        var bannedWords = [
+            {"id":2,"word":"FUT","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
+            {"id":3,"word":"SUK","created_at":"2019-10-01 03:02:57","updated_at":"2019-10-01 04:29:27"},
+            {"id":4,"word":"CUC","created_at":"2019-10-01 03:03:28","updated_at":"2019-10-01 03:03:28"},
+            {"id":5,"word":"ASS","created_at":"2019-10-01 03:39:03","updated_at":"2019-10-01 04:23:25"},
+            {"id":6,"word":"HOE","created_at":"2019-10-01 03:39:38","updated_at":"2019-10-01 03:39:38"},
+            {"id":7,"word":"JIZ","created_at":"2019-10-01 03:46:41","updated_at":"2019-10-01 03:46:41"},
+            {"id":8,"word":"CUM","created_at":"2019-10-01 03:47:22","updated_at":"2019-10-01 03:47:22"},
+            {"id":9,"word":"KUK","created_at":"2019-10-01 03:58:28","updated_at":"2019-10-01 03:58:28"},
+            {"id":10,"word":"FAG","created_at":"2019-10-01 03:58:40","updated_at":"2019-10-01 03:58:40"},
+            {"id":11,"word":"GAY","created_at":"2019-10-01 04:15:59","updated_at":"2019-10-01 04:15:59"},
+            {"id":12,"word":"FGT","created_at":"2019-10-01 04:21:40","updated_at":"2019-10-01 04:21:40"},
+            {"id":13,"word":"FUC","created_at":"2019-10-01 04:22:07","updated_at":"2019-10-01 04:22:07"},
+            {"id":14,"word":"FAT","created_at":"2019-10-01 04:22:44","updated_at":"2019-10-01 04:22:44"},
+            {"id":15,"word":"CNT","created_at":"2019-10-01 04:23:10","updated_at":"2019-10-01 04:23:10"},
+            {"id":16,"word":"SLT","created_at":"2019-10-01 04:28:22","updated_at":"2019-10-01 04:28:22"},
+            {"id":17,"word":"POO","created_at":"2019-10-01 04:28:39","updated_at":"2019-10-01 04:28:39"},
+            {"id":18,"word":"JZZ","created_at":"2019-10-01 04:29:18","updated_at":"2019-10-01 04:29:18"}
+        ];
+
+        // var imgPaths = [
+        //     "./assets/images/animal1.png",
+        //     "./assets/images/animal2.png",
+        //     "./assets/images/animal3.png",
+        //     "./assets/images/animal1f.png",
+        //     "./assets/images/animal2f.png",
+        //     "./assets/images/animal3f.png",
+        //     "./assets/images/tree1.png",
+        //     "./assets/images/tree2.png",
+        //     "./assets/images/tree3.png",
+        //     "./assets/images/tree4.png",
+        //     "./assets/images/tree5.png"
+        // ];
+
+        var letters = [];
+        for (var i = 65; i <= 90; i++){
+            letters.push(String.fromCharCode(i));
+        }
+
+        var highscores = [
+            {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
+            {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+        ];
+
+        highscores[ 0 ].score
+
+        // for (var i = 0; i < 11; i++){
+        //     var img = new Image();
+        //     img.src = imgPaths[i];
+        //     imgList.push(img);
+        // }       
 
         TreeObject = function(id, x, y, width, height, imgId) {
             var tree = {
@@ -342,14 +520,16 @@
             treeList[id] = tree;
         };
 
-        HiddenObject = function(id, x, y, width, height, imgId) {
+        HiddenObject = function(id, x, y, width, height, side, imgId) {
             var object = {
                 x: x,
                 y: y,
                 id: id,
                 width: width,
                 height: height,
-                imgId: imgId
+                side: side,
+                imgId: imgId,
+                animFrame: 0
             };
             hiddenObjectList[id] = object;
         };
@@ -364,9 +544,16 @@
             if (submitLetters[id] + dir <= -1){
                 submitLetters[id] = 26;
             }
+            var disabled = false;
             submitLetters[id] = (submitLetters[id] + dir) % 26;
+            for (var i = 0; i < bannedWords.length; i++){
+                if (lettersTranslate() == bannedWords[i].word){
+                    disabled = true;
+                    break;
+                }        
+            }
+            document.getElementById("submitBtn").disabled = disabled;
             LettersSet();
-            console.log(submitLetters[id]);
         };
 
         for (var i = 0; i < 6; i++){
@@ -389,9 +576,11 @@
             var y = getRandomInt(canvas.height * 0.5, canvas.height * 0.9);
             var width = canvas.width / 10;
             var height = canvas.height / 7;
+            var side = getRandomInt(0, 2);
             var id = hiddenObjectID++;
-            var imgId = getRandomInt(1, 6);
-            HiddenObject(id, x, y, width, height, imgId);
+            var imgs = imgInfo.filter( m => m.type == "animal" );
+            var imgId = imgs[ getRandomInt( 0, imgs.length ) ].id;
+            HiddenObject(id, x, y, width, height, side, imgId);
         };
 
         randomlyGenerateTree = function(posX, posY) {
@@ -400,7 +589,8 @@
             var width = canvas.width / getRandomInt(12, 14);
             var height = canvas.height / getRandomInt(4, 6);
             var id = treeID++;
-            var imgId = getRandomInt(6, 11);
+            var imgs = imgInfo.filter( m => m.type == "tree" );
+            var imgId = imgs[ getRandomInt( 0, imgs.length ) ].id;
             TreeObject(id, x, y, width, height, imgId);
         };
 
@@ -415,14 +605,36 @@
         drawEntity = function(something) {
             ctx.save();
 
-            ctx.drawImage(
-                imgList[something.imgId],
-                something.x - something.width / 2,
-                something.y - something.height / 2,
-                something.width,
-                something.height
-            );
+            // ctx.drawImage(
+            //     imgList[something.imgId],
+            //     something.x - something.width / 2,
+            //     something.y - something.height / 2,
+            //     something.width,
+            //     something.height
+            // );
+            // ctx.restore();
+            var img = imgList[ something.imgId ];
+
+            if (img.type == "animal"){
+                ctx.drawImage(img.image,
+             0, TILESIZE * something.side,
+             TILESIZE, TILESIZE,
+             something.x - something.width / 2,
+             something.y - something.height / 2,
+             something.width,
+             something.height)
+            }
+            else {
+                ctx.drawImage(img.image,
+             something.x - something.width / 2,
+             something.y - something.height / 2,
+             something.width,
+             something.height)
+            }
             ctx.restore();
+            if ((frameCount * 100 * something.spdX) % 300 == 0){
+                something.animFrame = (something.animFrame + 1) % img.numFrames;
+            }
         };
 
         testCollisionEntity = function(entity1, entity2) {
@@ -439,7 +651,6 @@
                 width: entity2.width,
                 height: entity2.height
             };
-
             return testCollisionRectRect(rect1, rect2);
         };
 
@@ -458,26 +669,44 @@
                 "stats",
                 "end",
                 "leaderboard",
-                "newScore"
+                "newScore",
+                //"gameInfo"
             ]
             for (var i = 0; i < elementName.length; i++){
                 document.getElementById(elementName[i]).style.display = elementName[i] == id ? "block" : "none";
             }  
         };
 
-        document.getElementById("instructions").style.display = "block";
+        showMenu("instructions");
         document.getElementById("instructionText").innerHTML =
-            "There are 5 animals hidden in the scene<br/><br/>" +
+            "There are animals hidden in the scene<br/><br/>" +
             "Tap them when you find them<br/><br/>" +
             "Try to find all of them before time runs out!";
 
         mainMenu = function() {
             showMenu("instructions");
             document.getElementById("instructionText").innerHTML =
-                "There are 5 animals hidden in the scene<br/><br/>" +
+                "There are animals hidden in the scene<br/><br/>" +
                 "Tap them when you find them<br/><br/>" +
                 "Try to find all of them before time runs out!";
         };
+
+        // gameInfoMenu = function(){
+        //     showMenu("gameInfo");
+        //     document.getElementById("gameInfoBody").innerHTML = "";
+        //     for (var i = 0; i < imgInfo.length; i++){
+        //         var anim = imgInfo[i];
+        //         if (anim.type != "animal"){
+        //             continue;
+        //         }
+        //         var root = "<div><div><img style='clip: rect(0, 0, " + TILESIZE + "," + TILESIZE + ")' src='" + anim.path + "'/></div><div>" + anim.text + "</div></div>";
+        //         document.getElementById("gameInfoBody").innerHTML = root;
+        //     }
+        // }
+
+        lettersTranslate = function(){
+            return letters[submitLetters[0]] + letters[submitLetters[1]] + letters[submitLetters[2]];
+        }
 
         scoreEntry = function(){
             showMenu("newScore");
@@ -486,12 +715,11 @@
 
         scoreSubmit = function() {
             leaderboard();
-            highScore();
-            getHighScores();
+            //add submit functionality
         };
 
-        updateLeaderboardText = function()
-        {
+        leaderboard = function(){
+            showMenu("leaderboard");
             document.getElementById("highscoreText").innerHTML = "";
             var rankColumn = "<div><h3>RANK</h3>";
             var nameColumn = "<div><h3>NAME</h3>";
@@ -507,35 +735,6 @@
             scoreColumn = scoreColumn + "</div>";
             document.getElementById("highscoreText").innerHTML = "<div class='grid-container'>"
             + rankColumn + nameColumn + scoreColumn + "</div>";
-        };
-
-        leaderboard = function(){
-            showMenu("leaderboard");
-            
-        };
-
-        getHighScores = function() {
-            // var http = new XMLHttpRequest();
-            // var url = './findinghighscores';
-            // http.open('GET', url, true);
-
-            // console.log( document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
-
-            // http.setRequestHeader( 'X-CSRF-Token', document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
-            // http.setRequestHeader('Content-type', 'application/json');
-
-            // http.onreadystatechange = function(){
-            //     if(http.readyState == 4 && http.status == 200){
-            //         //highscores = http.responseText;
-
-            //     }
-            // }
-            // http.send();
-
-            document.getElementById("highscoreText").innerHTML = "Loading...";
-            fetch( "./findinghighscores" )
-            .then( response => response.json() )
-            .then( data => { highscores = data; updateLeaderboardText() } );
         }
 
         highScore = function(){
@@ -568,7 +767,7 @@
             var roundTime = (timeOut - t) + timeBonus;
             var timeLeft = roundTime.toFixed(1);
 
-            score = (foundObjects * 10) - (hiddenObjects * 15) - (t * 5) + (timeLeft * 15);
+            score = (foundObjects * 10) - (hiddenObjects * 15) - (t * 15) + (timeLeft * 15);
 
             for (var key in hiddenObjectList) {
                 updateHiddenEntity(hiddenObjectList[key]);
@@ -578,7 +777,7 @@
                 updateTreeEntity(treeList[key]);
             }
 
-            if (foundObjects == totalObjects) {
+            if (foundObjects == totalObjects || timeLeft <= 0) {
                 myStopFunction();
 
                 for (var key in hiddenObjectList) {
