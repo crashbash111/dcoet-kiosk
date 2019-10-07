@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Memory Game</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+      <canvas id="ctx"></canvas>
+        <div
+            id="instructions"
+            style="position:absolute; top:25%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none; 
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">INSTRUCTIONS</h1>
+            <p id="instructionText" style="font-size:3.5vmin"></p>
+            <button
+                id="startBtn"
+                style="font-size:4.5vmin;"
+                onclick="startNewGame()"
+            >
+                Start Game
+            </button>
+            <button style="font-size:4.5vmin;" onclick="window.close()">
+                Close
+            </button>
+        </div>
+        <div
+            id="stats"
+            style="position:absolute; 
+            top: 1.5%; left: 1%; width: 10%; height: width; 
+            border-left: 1px solid black; border:  1px solid black; 
+            background-image: url( './img/stats.png' ); text-align: left; display: none;"
+        >
+            <h3 id="statText" style="font-size:3vmin"></h3>
+        </div>
+        <div
+            id="end"
+            style="position:absolute; top:22.5%; left:32.5%; width:35%; height:width; 
+            border: 3px solid black; background:blanchedalmond; text-align: center; display: none;
+            animation-name: menuAnim; animation-duration: 0.3s"
+        >
+            <h1 style="font-size:4vmin">Game Over</h1>
+            <p id="endText" style="font-size:3.5vmin"></p>
+            <button
+                id="newBtn"
+                style="font-size:4.5vmin;"
+                onclick="startNewGame()"
+            >
+                New Game
+            </button>
+            <button
+                id="mainBtn"
+                style="font-size:4.5vmin;"
+                onclick="mainMenu()"
+            >
+                Main Menu
+            </button>
+        </div>
+
+
+    <!-- <section class="memory-game">
+      <div class="memory-card" data-framework="kiwi">
+        <img class="front-face" src="img/Card_Kiwi.png" alt="Kiwi" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+      <div class="memory-card" data-framework="kiwi">
+        <img class="front-face" src="img/Card_Kiwi_Word.png" alt="Kiwi" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+
+      <div class="memory-card" data-framework="kakapo">
+        <img class="front-face" src="img/Card_Kakapo.png" alt="Kakapo" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+      <div class="memory-card" data-framework="kakapo">
+        <img class="front-face" src="img/Card_Kakapo_Word.png" alt="Kakapo" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+
+      <div class="memory-card" data-framework="kiwi">
+        <img class="front-face" src="img/Card_Kiwi.png" alt="Kiwi" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+      <div class="memory-card" data-framework="kiwi">
+        <img class="front-face" src="img/Card_Kiwi_Word.png" alt="Kiwi" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+
+      <div class="memory-card" data-framework="kakapo">
+        <img class="front-face" src="img/Card_Kakapo.png" alt="Kakapo" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+      <div class="memory-card" data-framework="kakapo">
+        <img class="front-face" src="img/Card_Kakapo_Word.png" alt="Kakapo" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+
+      <div class="memory-card" data-framework="kiwi">
+        <img class="front-face" src="img/Card_Kiwi.png" alt="Kiwi" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+      <div class="memory-card" data-framework="kiwi">
+        <img class="front-face" src="img/Card_Kiwi_Word.png" alt="Kiwi" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+
+      <div class="memory-card" data-framework="kakapo">
+        <img class="front-face" src="img/Card_Kakapo.png" alt="Kakapo" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+      <div class="memory-card" data-framework="kakapo">
+        <img class="front-face" src="img/Card_Kakapo_Word.png" alt="Kakapo" />
+        <img class="back-face" src="img/Card_Back.png" alt="Card Back" />
+      </div>
+    </section> -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
