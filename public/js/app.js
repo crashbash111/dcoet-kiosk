@@ -86825,7 +86825,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -107007,16 +107007,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -107065,7 +107055,6 @@ function (_React$Component) {
     };
     _this.fade = _this.fade.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.slider = _this.slider.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -107077,8 +107066,8 @@ function (_React$Component) {
       this.setState({
         loading: true
       });
-      var id = this.props.match.params.id;
-      console.log(id);
+      var id = this.props.match.params.id; //console.log(id);
+
       fetch("./api/pages/" + id).then(function (response) {
         return response.json();
       }).then(function (data) {
@@ -107088,8 +107077,7 @@ function (_React$Component) {
         });
 
         _this2.state.page.images.forEach(function (picture) {
-          new Image().src = "./storage/kiosk_images/" + picture.image_name;
-          console.log("preloaded!");
+          new Image().src = "./storage/kiosk_images/" + picture.image_name; //console.log("preloaded!");
         });
       });
     }
@@ -107098,18 +107086,6 @@ function (_React$Component) {
     value: function handleClick(event) {
       var _this3 = this;
 
-      {
-        /*var t = setInterval(this.fade, 10);
-        setTimeout(() => {
-           clearInterval(t);
-           this.setState({ opacity: 1 });
-           this.setState(prevState => {
-               return (
-                   { index: (this.state.index + 1) % this.state.page.images.length }
-               );
-           });
-        }, 250);*/
-      }
       this.setState(function (prevState) {
         return {
           index: (_this3.state.index + 1) % _this3.state.page.images.length
@@ -107126,64 +107102,32 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "slider",
-    value: function slider(bg, _ref) {
-      var _this4 = this;
-
-      var children = _ref.children;
-
-      var _useGesture = Object(react_with_gesture__WEBPACK_IMPORTED_MODULE_6__["useGesture"])(),
-          _useGesture2 = _slicedToArray(_useGesture, 2),
-          bind = _useGesture2[0],
-          _useGesture2$ = _useGesture2[1],
-          delta = _useGesture2$.delta,
-          down = _useGesture2$.down;
-
-      var _useSpring = Object(react_spring__WEBPACK_IMPORTED_MODULE_4__["useSpring"])({
-        x: down ? delta[0] : 0,
-        immediate: function immediate(name) {
-          return down && name === 'x';
-        }
-      }),
-          x = _useSpring.x; //const avSize = x.interpolate({ map: Math.abs, range: [50, 300], output: ['scale(0.5)', 'scale(1)'], extrapolate: 'clamp' })
-
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_spring__WEBPACK_IMPORTED_MODULE_4__["animated"].div, _extends({}, bind(), {
-        className: "item",
-        onClick: function onClick() {
-          _this4.setState({
-            sideOpen: !_this4.state.sideOpen
-          });
-        },
-        style: {
-          position: "absolute",
-          //backgroundColor: bg,
-          top: "calc(50% - 60px)",
-          borderRadius: "0px 15px 15px 0px",
-          width: "45px",
-          height: "120px",
-          opacity: "0.8",
-          //transition: this.state.transitionTime,
-          left: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
-          transform: Object(react_spring__WEBPACK_IMPORTED_MODULE_4__["interpolate"])([x], function (x) {
-            return "translateX(".concat(x, "px)");
-          })
-        }
-      }), children);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this4 = this;
 
       if (this.state.loading) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null);
       } else {
         var imgPath;
+        var dotimgnav = null;
 
         try //try
         {
           imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+          var i = -1;
+          dotimgnav = this.state.page.images.map(function (item) {
+            i++;
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              index: i,
+              className: "dotimagenav",
+              style: {
+                backgroundColor: i == _this4.state.index ? "white" : "darkgray",
+                transition: _this4.state.transitionTime,
+                opacity: i == _this4.state.index ? "1" : "0.8"
+              }
+            });
+          });
           console.log(imgPath);
         } catch (e) //catch
         {
@@ -107226,10 +107170,10 @@ function (_React$Component) {
             src: imgPath
           }, function (palette) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              onClick: _this5.handleClick,
+              onClick: _this4.handleClick,
               scr: imgPath,
               onError: function onError() {
-                return _this5.div.style = {
+                return _this4.div.style = {
                   backgroundImage: "url(' ./storage/ui/err.png ')"
                 };
               },
@@ -107237,28 +107181,24 @@ function (_React$Component) {
                 //styling for the background
                 backgroundImage: "url(' " + imgPath + "')",
                 backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
-                opacity: _this5.state.opacity,
+                opacity: _this4.state.opacity,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
-                transition: _this5.state.transitionTime //"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
+                transition: _this4.state.transitionTime //"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
 
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "hideScroll",
-              onClick: function onClick() {
-                null;
-              },
               style: {
                 //styling for the side panel
-                //filter: "color blur(60px)",
                 height: "100vh",
-                width: _this5.state.sideOpen ? _this5.state.sideSize + "vw" : "0px",
+                width: _this4.state.sideOpen ? _this4.state.sideSize + "vw" : "0px",
                 display: "flex",
                 flexDirection: "column",
                 overflowY: "hidden",
                 overflowX: "hidden",
                 opacity: "0.8",
-                transition: _this5.state.transitionTime,
+                transition: _this4.state.transitionTime,
                 //"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
                 backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
                 color: !palette.loading ? palette.data.darkMuted : "white"
@@ -107270,51 +107210,50 @@ function (_React$Component) {
                 display: "block",
                 width: "100%"
               }
-            }, _this5.state.page.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            }, _this4.state.page.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "hideScroll",
               style: {
                 overflowY: "scroll",
                 width: "100%",
                 flex: "1",
-                padding: _this5.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
+                padding: _this4.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
                 background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)"
               }
-            }, _this5.state.page.stats.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            }, _this4.state.page.stats.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               style: {
                 display: "grid",
                 gridTemplateColumns: "auto auto"
               }
-            }, statTableItems) : null, _this5.state.page.audios.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, audioItems)) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            }, statTableItems) : null, _this4.state.page.audios.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, audioItems)) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
               style: {
                 fontSize: "28px",
                 textAlign: "left",
                 paddingBottom: "5px"
               }
-            }, _this5.state.page.shortdesc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            }, _this4.state.page.shortdesc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
               style: {
                 fontSize: "18px",
                 textAlign: "justify",
                 paddingBottom: "50px"
               }
-            }, _this5.state.page.longdesc)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-              to: "/".concat(_this5.state.page.category_id),
+            }, _this4.state.page.longdesc)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              to: "/".concat(_this4.state.page.category_id),
               className: "returns",
               style: {
-                //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
                 color: palette.loading ? "white" : palette.data.lightVibrant,
                 padding: "8px 8px 8px 32px",
-                width: _this5.state.sideSize + "vw",
+                width: _this4.state.sideSize + "vw",
                 display: "block",
                 bottom: "0px",
                 position: "absolute",
                 textDecoration: "none",
                 fontSize: "25px",
-                transition: _this5.state.transitionTime
+                transition: _this4.state.transitionTime
               }
             }, "\u2190 Back to Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               onClick: function onClick() {
-                _this5.setState({
-                  sideOpen: !_this5.state.sideOpen
+                _this4.setState({
+                  sideOpen: !_this4.state.sideOpen
                 });
               },
               style: {
@@ -107322,22 +107261,26 @@ function (_React$Component) {
                 //"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
                 color: !palette.loading ? palette.data.darkMuted : "white",
                 position: "absolute",
-                //backgroundColor: bg,
                 top: "calc(50% - 60px)",
                 borderRadius: "0px 15px 15px 0px",
                 width: "45px",
                 height: "120px",
                 opacity: "0.8",
-                transition: _this5.state.transitionTime,
-                left: _this5.state.sideOpen ? _this5.state.sideSize + "vw" : "0px"
+                transition: _this4.state.transitionTime,
+                left: _this4.state.sideOpen ? _this4.state.sideSize + "vw" : "0px"
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
               style: {
                 textAlign: "center",
-                padding: "50% 0px 50% 0px" //fontSize: "12px",
-
+                padding: "50% 0px 50% 0px"
               }
             }, "<")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              style: {
+                position: "absolute",
+                bottom: "10px",
+                left: "50%"
+              }
+            }, dotimgnav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               style: {
                 position: "absolute",
                 right: "10px",
@@ -107349,11 +107292,12 @@ function (_React$Component) {
                 color: "white",
                 margin: "0px",
                 backgroundColor: "rgba(0,0,0,.6)",
-                opacity: _this5.state.page.images[_this5.state.index].copyright == null || _this5.state.page.images[_this5.state.index].copyright == "" || _this5.state.page.images[_this5.state.index].copyright == "null" ? "0" : "1",
+                opacity: _this4.state.page.images[_this4.state.index].copyright == null || _this4.state.page.images[_this4.state.index].copyright == "" || _this4.state.page.images[_this4.state.index].copyright == "null" ? "0" : "1",
                 padding: "10px",
-                transition: "opacity " + _this5.state.transitionTime
+                //transition: "opacity 0.2s",
+                fontSize: "18px"
               }
-            }, "\xA9 ", _this5.state.page.images[_this5.state.index].copyright)));
+            }, "\xA9 ", _this4.state.page.images[_this4.state.index].copyright)));
           }));
         });
       }
@@ -107611,21 +107555,40 @@ function (_React$Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          //position: "relative",
+          backgroundImage: "url('./images/loginbackground.jpg')",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundColor: "red"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loginpanel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        style: {
+          height: "100px",
+          paddingBottom: "20px"
+        },
+        src: "./images/logo.png"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleFormSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Username", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "username",
         value: this.state.username,
         onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "password", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         name: "password",
         value: this.state.password,
         onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary"
-      }, "Submit"));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary",
+        style: {
+          textAlign: "center"
+        }
+      }, "Login")))));
     }
   }]);
 
@@ -108045,8 +108008,8 @@ function PostData(type, userData) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Joshua\GitHub\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

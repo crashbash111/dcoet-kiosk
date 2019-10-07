@@ -422,6 +422,14 @@ video {
   transition: opacity 0.3s;
 }
 
+.loginpanel {
+  position: absolute;
+  top: 25vh;
+  left: calc(50% - 7em);
+  //margin-left: -50px;
+  //margin-top: -50px;
+}
+
 .loader h1 {
   animation: "";
   transform: "";
