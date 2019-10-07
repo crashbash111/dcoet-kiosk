@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import ReactDOM from "react-dom";
+
 //import Keyboard from "react-simple-keyboard";
 import Logo from "../components/Home/Logo";
 import MainContent from "../components/Home/MainContent";
@@ -24,6 +26,7 @@ export default class Home extends React.Component {
             showKeyboard: false,
             keyboardLayout: "default",
             value: "",
+            top: -1,
         }
 
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -36,6 +39,8 @@ export default class Home extends React.Component {
         this.onKeyPress = this.onKeyPress.bind(this);
 
         this.handleValueChange = this.handleValueChange.bind(this);
+
+        this.currentItem = React.createRef();
     }
 
     handleChange(event) {
@@ -111,6 +116,18 @@ export default class Home extends React.Component {
         this.setState({ searchTerm: val });
     }
 
+    componentDidUpdate()
+    {
+        if( this.currentItem.current != null )
+        {
+            if( ReactDOM.findDOMNode( this. currentItem.current ).getBoundingClientRect().top + 50 != this.state.top )
+            {
+                console.log( ReactDOM.findDOMNode( this. currentItem.current ).getBoundingClientRect().top );
+                this.setState( { top: ReactDOM.findDOMNode( this. currentItem.current ).getBoundingClientRect().top + 50 }, () => {} );
+            }
+        }
+    }
+
     render() {
         let categoryList = this.state.categories.map(item => {
             return (
@@ -123,16 +140,18 @@ export default class Home extends React.Component {
 
         //
 
+        
+
         return (
             <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
-                <div style={{ backgroundColor: "rgba( 25, 25, 25, 0.8 )" }}>
+                <div style={{ backgroundColor: `rgba( 25, 25, 25, ${ ( true || this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "0" : "0.8" } )` }}>
                     <div style={{ display: "grid", gridTemplateColumns: "300px auto" }}>
-                        <div style={{ display: "grid", gridTemplateRows: "15vh 85vh" }}>
+                        <div className="fade-gradient" style={{ display: "grid", gridTemplateRows: "15vh 85vh", backgroundImage: `radial-gradient(farthest-corner at 0% ${this.state.top}px, rgba(0,0,0,1), rgba(0,0,0,0))` }}>
                             <div className="grid-item logospace">
                                 <Logo />
                             </div>
                             <div className="grid-item leftcategories">
-                                <SideBar activeCategory={this.state.activeCategory} categories={this.state.categories} handleChange={this.handleCategoryChange} />
+                                <SideBar r={ this.currentItem } activeCategory={this.state.activeCategory} categories={this.state.categories} handleChange={this.handleCategoryChange} />
                             </div>
                         </div>
                         <div style={{ display: "grid", gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 85vh", transition: "grid-template-rows 2s" }}>
