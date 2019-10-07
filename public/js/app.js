@@ -86825,7 +86825,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99770,6 +99770,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
+/* harmony import */ var _BannedWords_ViewBannedWords__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BannedWords/ViewBannedWords */ "./resources/js/components/Admin/BannedWords/ViewBannedWords.js");
+/* harmony import */ var _BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BannedWords/CreateBannedWord */ "./resources/js/components/Admin/BannedWords/CreateBannedWord.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -99802,6 +99805,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
 var BannedWords =
 /*#__PURE__*/
 function (_React$Component) {
@@ -99815,20 +99821,23 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BannedWords).call(this, props));
     _this.state = {
       bannedWords: [],
-      loading: true,
+      loading: false,
       redirectId: -1,
       redirect: false,
       profaneView: false,
       added: false,
       word: "",
       editMode: false,
-      id: -1
+      id: -1,
+      mode: 0
     };
     _this.handleEditClick = _this.handleEditClick.bind(_assertThisInitialized(_this));
     _this.handleDeleteClick = _this.handleDeleteClick.bind(_assertThisInitialized(_this));
     _this.toggleProfane = _this.toggleProfane.bind(_assertThisInitialized(_this));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleCancelClick = _this.handleCancelClick.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -99837,11 +99846,15 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      this.setState({
+        loading: true
+      });
       fetch("./api/bannedwords").then(function (response) {
         return response.json();
       }).then(function (data) {
         _this2.setState({
-          bannedWords: data
+          bannedWords: data,
+          loading: false
         });
 
         console.log(data);
@@ -99891,6 +99904,15 @@ function (_React$Component) {
           name = _event$target.name,
           value = _event$target.value;
       this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleCancelClick",
+    value: function handleCancelClick(event) {
+      event.preventDefault();
+      this.setState({
+        word: "",
+        editMode: false
+      });
     }
   }, {
     key: "onSubmit",
@@ -99962,32 +99984,265 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleClick",
+    value: function handleClick(i) {
+      this.setState({
+        mode: i
+      });
+      console.log(this.state.mode);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
-      if (this.state.redirect) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-          to: "./createBannedWord/".concat(this.state.redirectId)
-        });
+      if (this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
       }
 
-      var words = this.state.bannedWords.map(function (item) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          key: item.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this4.state.profaneView ? item.word : "".concat(item.word[0], "*").concat(item.word[2]))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick(event) {
-            return _this4.handleEditClick(item.id, item.word);
-          },
-          className: "btn btn-success"
-        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick(event) {
-            return _this4.handleDeleteClick(item.id);
-          },
-          className: "btn btn-danger"
-        }, "Delete")));
+      var child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Banned Words");
+
+      switch (this.state.mode) {
+        case 0:
+          child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BannedWords_ViewBannedWords__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+          break;
+
+        case 1:
+          child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BannedWords_CreateBannedWord__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+          break;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: "inline-block"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark",
+        onClick: function onClick(event) {
+          return _this4.handleClick(0);
+        }
+      }, "View")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: "inline-block"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark",
+        onClick: function onClick(event) {
+          return _this4.handleClick(1);
+        }
+      }, "Create New")), child); // if (this.state.redirect) {
+      //     return <Redirect to={`./createBannedWord/${this.state.redirectId}`} />
+      // }
+      // let words = this.state.bannedWords.map(item => {
+      //     return (
+      //         <tr key={item.id}>
+      //             <td>
+      //                 <p>{this.state.profaneView ? item.word : `${item.word[0]}*${item.word[2]}`}</p>
+      //             </td>
+      //             <td>
+      //                 <button onClick={(event) => this.handleEditClick(item.id, item.word)} className="btn btn-success">Edit</button>
+      //                 <button onClick={(event) => this.handleDeleteClick(item.id)} className="btn btn-danger">Delete</button>
+      //             </td>
+      //         </tr>
+      //     )
+      // });
+      // return (
+      //     <div>
+      //         <div>
+      //             <h2>Banned Words</h2>
+      //             <br />
+      //             <form onSubmit={this.onSubmit}>
+      //                 <div className="form-group">
+      //                     <label><h3>Word</h3>
+      //                         <input className="form-control" type="text" name="word" value={this.state.word} onChange={this.handleChange} placeholder="Word here..." />
+      //                         <p style={{ color: "red", display: this.state.word.length != 3 ? "block" : "none" }}>Word must be exactly 3 characters</p>
+      //                     </label>
+      //                 </div>
+      //                 {this.state.added ?
+      //                     <div>Item {this.state.editMode ? "updated" : "added"} successfully.</div> :
+      //                     null
+      //                 }
+      //                 <button className={this.state.editMode ? "btn btn-success" : "btn btn-primary"}>{this.state.editMode ? "Update" : "Add"}</button>
+      //                 {
+      //                     this.state.editMode ? <button className="btn btn-danger" onClick={ this.handleCancelClick }>Cancel</button> :
+      //                     null
+      //                 }
+      //             </form>
+      //         </div>
+      //         <div>
+      //             <button className={this.state.profaneView ? "btn btn-success" : "btn btn-warning"} onClick={this.toggleProfane}>Turn profane view {this.state.profaneView ? "on" : "off"}</button>
+      //             <br />
+      //             <table className="admin-table-new" style={{ width: "50vh" }}>
+      //                 <thead>
+      //                     <tr><td>Word</td><td>Actions</td></tr>
+      //                 </thead>
+      //                 <tbody>
+      //                     {words}
+      //                 </tbody>
+      //             </table>
+      //         </div>
+      //     </div>
+      // );
+    }
+  }]);
+
+  return BannedWords;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/BannedWords/CreateBannedWord.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Admin/BannedWords/CreateBannedWord.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CreateBannedWord; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var CreateBannedWord =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CreateBannedWord, _React$Component);
+
+  function CreateBannedWord(props) {
+    var _this;
+
+    _classCallCheck(this, CreateBannedWord);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CreateBannedWord).call(this, props));
+    _this.state = {};
+    _this.handleCancelClick = _this.handleCancelClick.bind(_assertThisInitialized(_this));
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CreateBannedWord, [{
+    key: "handleCancelClick",
+    value: function handleCancelClick(event) {
+      event.preventDefault();
+      this.setState({
+        word: "",
+        editMode: false
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Banned Words"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+
+      if (this.state.word.length != 3) {
+        return;
+      }
+
+      var formData = new FormData();
+
+      if (this.state.editMode) {
+        formData.append("_method", "PUT");
+      }
+
+      formData.append("word", this.state.word);
+      Axios({
+        url: "./api/bannedwords" + (this.state.editMode ? "/" + this.state.id : ""),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: formData
+      }).then(function (response) {
+        console.log("from form submit ", response);
+
+        _this2.setState({
+          added: true
+        });
+
+        if (!_this2.editMode) {
+          _this2.setState({
+            bannedWords: [].concat(_toConsumableArray(_this2.state.bannedWords), [{
+              id: response.data.id,
+              word: response.data.word
+            }])
+          });
+        } else {
+          _this2.setState({
+            bannedWords: _this2.state.bannedWords.map(function (item) {
+              if (item.id == _this2.state.id) {
+                return {
+                  id: item.id,
+                  word: _this2.state.word
+                };
+              } else {
+                return item;
+              }
+            })
+          });
+        }
+
+        _this2.setState({
+          editMode: false,
+          id: -1,
+          word: ""
+        });
+
+        setTimeout(function () {
+          _this2.setState({
+            added: false
+          });
+        }, 1000); //this.setState({ redirect: r });
+      })["catch"](function (err) {
+        return console.log(err.response.data);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.onSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -100005,22 +100260,129 @@ function (_React$Component) {
         }
       }, "Word must be exactly 3 characters"))), this.state.added ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Item ", this.state.editMode ? "updated" : "added", " successfully.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: this.state.editMode ? "btn btn-success" : "btn btn-primary"
-      }, this.state.editMode ? "Update" : "Add"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.profaneView ? "btn btn-success" : "btn btn-warning",
-        onClick: this.toggleProfane
-      }, "Turn profane view ", this.state.profaneView ? "on" : "off"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "admin-table-new",
-        style: {
-          width: "50vh"
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Word"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, words))));
+      }, this.state.editMode ? "Update" : "Add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-danger",
+        onClick: this.handleCancelClick
+      }, "Cancel"));
     }
   }]);
 
-  return BannedWords;
+  return CreateBannedWord;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/BannedWords/ViewBannedWords.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Admin/BannedWords/ViewBannedWords.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Loader */ "./resources/js/components/Loader.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
+
+
+
+var ViewBannedWords = function ViewBannedWords(_ref) {
+  _objectDestructuringEmpty(_ref);
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      bannedWords = _useState2[0],
+      setBannedWords = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loading = _useState4[0],
+      setLoading = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var fetchBannedWords =
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                setLoading(true);
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("./api/bannedwords/");
+
+              case 3:
+                res = _context.sent;
+                setBannedWords(res.data);
+                setLoading(false);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function fetchBannedWords() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
+    fetchBannedWords();
+  }, []);
+
+  if (loading) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Banned Words"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      "float": "left",
+      width: "100vh"
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+    className: "admin-table-new"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Word"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, bannedWords.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+      key: item.id
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.word), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      className: "btn btn-success"
+    }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      className: "btn btn-danger"
+    }, "Delete")));
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ViewBannedWords);
 
 /***/ }),
 

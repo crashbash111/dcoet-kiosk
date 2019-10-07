@@ -3,13 +3,17 @@ import Axios from "axios";
 
 import { Redirect } from "react-router-dom";
 
+import Loader from "../Loader";
+import ViewBannedWords from "./BannedWords/ViewBannedWords";
+import CreateBannedWord from "./BannedWords/CreateBannedWord";
+
 export default class BannedWords extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             bannedWords: [],
-            loading: true,
+            loading: false,
 
             redirectId: -1,
             redirect: false,
@@ -18,6 +22,7 @@ export default class BannedWords extends React.Component {
             word: "",
             editMode: false,
             id: -1,
+            mode: 0,
         };
 
         this.handleEditClick = this.handleEditClick.bind(this);
@@ -25,12 +30,15 @@ export default class BannedWords extends React.Component {
         this.toggleProfane = this.toggleProfane.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleCancelClick = this.handleCancelClick.bind( this );
+        this.handleClick = this.handleClick.bind( this );
     }
 
     componentDidMount() {
+        this.setState( { loading: true } );
         fetch("./api/bannedwords")
             .then(response => response.json())
-            .then(data => { this.setState({ bannedWords: data }); console.log(data) })
+            .then(data => { this.setState({ bannedWords: data, loading: false }); console.log(data) })
             .catch(err => console.log(err));
     }
 
@@ -59,6 +67,13 @@ export default class BannedWords extends React.Component {
     handleChange(event) {
         let { name, value } = event.target;
         this.setState({ [name]: value });
+    }
+
+    handleCancelClick( event )
+    {
+        event.preventDefault();
+
+        this.setState( { word: "", editMode: false } );
     }
 
     onSubmit(event) {
@@ -108,57 +123,91 @@ export default class BannedWords extends React.Component {
             .catch(err => console.log(err.response.data));
     }
 
+    handleClick(i) {
+        this.setState({ mode: i });
+        console.log( this.state.mode );
+    }
+
     render() {
-        if (this.state.redirect) {
-            return <Redirect to={`./createBannedWord/${this.state.redirectId}`} />
+        if (this.state.loading) {
+            return <Loader />
         }
 
-        let words = this.state.bannedWords.map(item => {
-            return (
-                <tr key={item.id}>
-                    <td>
-                        <p>{this.state.profaneView ? item.word : `${item.word[0]}*${item.word[2]}`}</p>
-                    </td>
-                    <td>
-                        <button onClick={(event) => this.handleEditClick(item.id, item.word)} className="btn btn-success">Edit</button>
-                        <button onClick={(event) => this.handleDeleteClick(item.id)} className="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-            )
-        });
+        let child = <div>Banned Words</div>;
 
-        return (
-            <div>
-                <div>
-                    <h1>Banned Words</h1>
-                    <br />
-                    <form onSubmit={this.onSubmit}>
-                        <div className="form-group">
-                            <label><h3>Word</h3>
-                                <input className="form-control" type="text" name="word" value={this.state.word} onChange={this.handleChange} placeholder="Word here..." />
-                                <p style={{ color: "red", display: this.state.word.length != 3 ? "block" : "none" }}>Word must be exactly 3 characters</p>
-                            </label>
-                        </div>
-                        {this.state.added ?
-                            <div>Item {this.state.editMode ? "updated" : "added"} successfully.</div> :
-                            null
-                        }
-                        <button className={this.state.editMode ? "btn btn-success" : "btn btn-primary"}>{this.state.editMode ? "Update" : "Add"}</button>
-                    </form>
-                </div>
-                <div>
-                    <button className={this.state.profaneView ? "btn btn-success" : "btn btn-warning"} onClick={this.toggleProfane}>Turn profane view {this.state.profaneView ? "on" : "off"}</button>
-                    <br />
-                    <table className="admin-table-new" style={{ width: "50vh" }}>
-                        <thead>
-                            <tr><td>Word</td><td>Actions</td></tr>
-                        </thead>
-                        <tbody>
-                            {words}
-                        </tbody>
-                    </table>
-                </div>
+        switch (this.state.mode) {
+            case 0:
+                child = <ViewBannedWords />
+                break;
+            case 1:
+                child = <CreateBannedWord />
+                break;
+            }
+
+        return <div>
+            <div style={{ display: "inline-block" }}>
+                <button className={ this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(0)}>View</button>
             </div>
-        );
+            <div style={{ display: "inline-block" }}>
+                <button className={ this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(1)}>Create New</button>
+            </div>
+            {child}
+        </div>
+
+        // if (this.state.redirect) {
+        //     return <Redirect to={`./createBannedWord/${this.state.redirectId}`} />
+        // }
+
+        // let words = this.state.bannedWords.map(item => {
+        //     return (
+        //         <tr key={item.id}>
+        //             <td>
+        //                 <p>{this.state.profaneView ? item.word : `${item.word[0]}*${item.word[2]}`}</p>
+        //             </td>
+        //             <td>
+        //                 <button onClick={(event) => this.handleEditClick(item.id, item.word)} className="btn btn-success">Edit</button>
+        //                 <button onClick={(event) => this.handleDeleteClick(item.id)} className="btn btn-danger">Delete</button>
+        //             </td>
+        //         </tr>
+        //     )
+        // });
+
+        // return (
+        //     <div>
+        //         <div>
+        //             <h2>Banned Words</h2>
+        //             <br />
+        //             <form onSubmit={this.onSubmit}>
+        //                 <div className="form-group">
+        //                     <label><h3>Word</h3>
+        //                         <input className="form-control" type="text" name="word" value={this.state.word} onChange={this.handleChange} placeholder="Word here..." />
+        //                         <p style={{ color: "red", display: this.state.word.length != 3 ? "block" : "none" }}>Word must be exactly 3 characters</p>
+        //                     </label>
+        //                 </div>
+        //                 {this.state.added ?
+        //                     <div>Item {this.state.editMode ? "updated" : "added"} successfully.</div> :
+        //                     null
+        //                 }
+        //                 <button className={this.state.editMode ? "btn btn-success" : "btn btn-primary"}>{this.state.editMode ? "Update" : "Add"}</button>
+        //                 {
+        //                     this.state.editMode ? <button className="btn btn-danger" onClick={ this.handleCancelClick }>Cancel</button> :
+        //                     null
+        //                 }
+        //             </form>
+        //         </div>
+        //         <div>
+        //             <button className={this.state.profaneView ? "btn btn-success" : "btn btn-warning"} onClick={this.toggleProfane}>Turn profane view {this.state.profaneView ? "on" : "off"}</button>
+        //             <br />
+        //             <table className="admin-table-new" style={{ width: "50vh" }}>
+        //                 <thead>
+        //                     <tr><td>Word</td><td>Actions</td></tr>
+        //                 </thead>
+        //                 <tbody>
+        //                     {words}
+        //                 </tbody>
+        //             </table>
+        //         </div>
+        //     </div>
+        // );
     }
 }
