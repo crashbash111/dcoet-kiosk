@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
+use App\Page;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
+        foreach( $categories as $category )
+        {
+            $category->numPages = Page::where( "category_id", $category->id )->count();
+        }
         return json_encode( $categories );
     }
 
@@ -33,6 +38,7 @@ class CategoryController extends Controller
     public function show( $id )
     {
         $category = Category::find( $id );
+        $category->numPages = Page::where( "category_id", $id )->count();
         return json_encode( $category );
     }
 
