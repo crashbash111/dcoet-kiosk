@@ -40,10 +40,10 @@ export default class KioskPages extends React.Component
 
         return <div>
             <div style={{ display: "inline-block" }}>
-                <button className={ this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(0)}>View</button>
+                <button className={ this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => this.handleClick(0)}>View</button>
             </div>
             <div style={{ display: "inline-block" }}>
-                <button className={ this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => this.handleClick(1)}>Create New</button>
+                <button className={ this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
             {child}
         </div>

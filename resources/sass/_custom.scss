@@ -489,23 +489,23 @@ video {
   background-color: #1f2739;
 }
 
-.admin-table-new td:first-child {
-  color: #fb667a;
-}
+// .admin-table-new td:first-child {
+//   color: #fb667a;
+// }
 
 .admin-table-new tr:hover {
-  background-color: #464a52;
+  background-color: #6c96a8; //#464a52
   -webkit-box-shadow: 0 6px 6px -6px #0e1119;
   -moz-box-shadow: 0 6px 6px -6px #0e1119;
   box-shadow: 0 6px 6px -6px #0e1119;
 }
 
 .admin-table-new td:hover {
-  background-color: #fff842;
-  color: #403e10;
+  background-color: #3f99bf;
+  color: #fefefe; //#2422B3
   font-weight: bold;
 
-  box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px, #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
+  box-shadow: #3682a3 -1px 1px, #3682a3 -2px 2px, #3682a3 -3px 3px, #3682a3 -4px 4px, #3682a3 -5px 5px, #3682a3 -6px 6px;
   transform: translate3d(6px, -6px, 0);
 
   transition-delay: 0s;
@@ -534,4 +534,13 @@ video {
 .big-shadow
 {
   text-shadow: 2px 2px #0c0c0c;
+}
+
+.red-shadow
+{
+  text-shadow: 1px 1px #742222;
+}
+
+.btn.btn-square {
+  border-radius: 0;
 }

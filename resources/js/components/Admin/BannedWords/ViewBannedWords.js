@@ -29,12 +29,12 @@ const ViewBannedWords = ({ }) => {
             {/* <div style={{ float: "right" }}>
                 <button onClick={handleBackClick} className="btn btn-danger">Back</button>
             </div> */}
-            <div style={{ float: "left", width: "100vh" }}>
+            <div style={{ minWidth: "100vh" }}>
                 <button className={profaneView ? "btn btn-success" : "btn btn-warning"} onClick={ profaneView ? () => { setProfaneView( false ) } : () => { setProfaneView( true ) } }>Turn profane view {profaneView ? "on" : "off"}</button>
                 <table className="admin-table-new">
                     <thead>
                         <tr>
-                            <th>Word</th><th>Actions</th>
+                            <th>Word</th><th>Timestamp</th><th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +42,7 @@ const ViewBannedWords = ({ }) => {
                             bannedWords.map(item => (
                                 <tr key={item.id}>
                                     <td>{profaneView ? item.word : item.word[0] + "*" + item.word[2]}</td>
+                                    <td>{item.created_at }</td>
                                     <td>
                                         <button className="btn btn-success">Edit</button>
                                         <button className="btn btn-danger">Delete</button>

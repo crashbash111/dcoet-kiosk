@@ -100019,7 +100019,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this4.handleClick(0);
         }
@@ -100028,7 +100028,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this4.handleClick(1);
         }
@@ -100373,8 +100373,7 @@ var ViewBannedWords = function ViewBannedWords(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Banned Words"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
-      "float": "left",
-      width: "100vh"
+      minWidth: "100vh"
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: profaneView ? "btn btn-success" : "btn btn-warning",
@@ -100385,10 +100384,10 @@ var ViewBannedWords = function ViewBannedWords(_ref) {
     }
   }, "Turn profane view ", profaneView ? "on" : "off"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Word"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, bannedWords.map(function (item) {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Word"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Timestamp"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, bannedWords.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, profaneView ? item.word : item.word[0] + "*" + item.word[2]), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, profaneView ? item.word : item.word[0] + "*" + item.word[2]), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.created_at), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-success"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-danger"
@@ -100557,8 +100556,6 @@ var Dashboard = function Dashboard() {
       };
     }(); // fetchMostViewed();
 
-
-    fetchLeastViewed();
   }, []);
 
   if (loading) {
@@ -100582,7 +100579,7 @@ var Dashboard = function Dashboard() {
       display: "inline-block"
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: mode == 0 ? "btn btn-primary" : "btn btn-dark",
+    className: mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
     onClick: function onClick(event) {
       return setMode(0);
     }
@@ -100591,7 +100588,7 @@ var Dashboard = function Dashboard() {
       display: "inline-block"
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: mode == 1 ? "btn btn-primary" : "btn btn-dark",
+    className: mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
     onClick: function onClick(event) {
       return setMode(1);
     }
@@ -101395,7 +101392,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(0);
         }
@@ -101404,7 +101401,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(1);
         }
@@ -101693,8 +101690,7 @@ var ViewCategories = function ViewCategories(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Categories"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
-      "float": "left",
-      width: "100vh"
+      minWidth: "100vh"
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
@@ -101702,11 +101698,11 @@ var ViewCategories = function ViewCategories(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.description), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.numPages), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-dark"
+      className: "btn btn-dark btn-square"
     }, "View"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-success"
+      className: "btn btn-success btn-square"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger btn-square"
     }, "Delete")));
   })))));
 };
@@ -101805,7 +101801,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(0);
         }
@@ -101814,7 +101810,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(1);
         }
@@ -101845,6 +101841,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Loader */ "./resources/js/components/Loader.js");
+/* harmony import */ var _Pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Pagination */ "./resources/js/components/Pagination.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -101865,6 +101862,7 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 
 
+
 var ViewPages = function ViewPages(_ref) {
   _objectDestructuringEmpty(_ref);
 
@@ -101877,6 +101875,16 @@ var ViewPages = function ViewPages(_ref) {
       _useState4 = _slicedToArray(_useState3, 2),
       loading = _useState4[0],
       setLoading = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(1),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentPage = _useState6[0],
+      setCurrentPage = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(5),
+      _useState8 = _slicedToArray(_useState7, 2),
+      itemsPerPage = _useState8[0],
+      setItemsPerPage = _useState8[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var fetchPages =
@@ -101919,24 +101927,37 @@ var ViewPages = function ViewPages(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Pages"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    style: {
-      "float": "left",
-      width: "100vh"
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  var indexOfLastItem = currentPage * itemsPerPage;
+  var indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  var currentItems = pages.slice(indexOfFirstItem, indexOfLastItem);
+
+  var paginate = function paginate(number) {
+    return setCurrentPage(number);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Pages"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Short Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Long Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Visited"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, pages.map(function (item) {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Short Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Long Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Visited"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, currentItems.map(function (item) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.shortdesc), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.longdesc), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.numPages), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.shortdesc.length > 20 ? item.shortdesc.substring(0, 17) + "..." : item.shortdesc), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.longdesc != null && item.longdesc != "" && item.longdesc.length > 30 ? item.longdesc.substring(0, 27) + "..." : item.longdesc), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.times_viewed), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-dark"
     }, "View"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-success"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       className: "btn btn-danger"
     }, "Delete")));
-  })))));
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      width: "40vh",
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    itemsPerPage: itemsPerPage,
+    totalItems: pages.length,
+    paginate: paginate
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ViewPages);
@@ -102033,7 +102054,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 0 ? "btn btn-primary btn-square btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(0);
         }
@@ -102042,7 +102063,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 1 ? "btn btn-primary btn-square btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(1);
         }
@@ -102332,8 +102353,7 @@ var ViewPowerpoints = function ViewPowerpoints(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Powerpoints"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
-      "float": "left",
-      width: "100vh"
+      minWidth: "100vh"
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "admin-table-new"
@@ -102443,7 +102463,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 0 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(0);
         }
@@ -102452,7 +102472,7 @@ function (_React$Component) {
           display: "inline-block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.mode == 1 ? "btn btn-primary" : "btn btn-dark",
+        className: this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
           return _this2.handleClick(1);
         }
@@ -103396,6 +103416,7 @@ function (_React$Component) {
         } else {
           if (this.props.activeCategory == -2) {
             var gamesList = this.state.games.map(function (item) {
+              if (item.id == 3) return null;
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 key: item.id + 10000,
                 item: item,
@@ -103408,6 +103429,7 @@ function (_React$Component) {
               ;
             });
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "no-scrollbar",
               style: {
                 height: "100%",
                 display: "grid",
@@ -103429,6 +103451,7 @@ function (_React$Component) {
               });
             });
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "no-scrollbar",
               style: {
                 height: "100%",
                 display: "grid",
@@ -103441,6 +103464,7 @@ function (_React$Component) {
 
           if (this.props.activeCategory == -4) {
             var pptList = this.state.ppts.map(function (item) {
+              console.log("./storage/ppt_images/".concat(item.ppt_images[0].filepath));
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 key: item.id + 10000000,
                 item: item,
@@ -103450,6 +103474,7 @@ function (_React$Component) {
               });
             });
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "no-scrollbar",
               style: {
                 height: "100%",
                 display: "grid",
@@ -103835,7 +103860,7 @@ function (_React$Component) {
       if (!this.props.imgOverride) {
         if (this.props.item.images.length > 0) {
           x = this.getRandomInt(0, this.props.item.images.length - 1);
-          path = this.state.baseImagePath + this.props.item.images[x].image_name;
+          path = this.state.baseImagePath + (this.props.item.images[x].thumbnail_large != null ? this.props.item.images[x].thumbnail_large : this.props.item.images[x].image_name);
         }
       } else {
         //path = this.state.baseImagePath + this.props.imgOverride;
@@ -104002,6 +104027,48 @@ var MyPagination = function MyPagination(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MyPagination);
+
+/***/ }),
+
+/***/ "./resources/js/components/Pagination.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Pagination.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Pagination = function Pagination(_ref) {
+  var itemsPerPage = _ref.itemsPerPage,
+      totalItems = _ref.totalItems,
+      paginate = _ref.paginate;
+  var pageNumbers = [];
+
+  for (var i = 1; i <= Math.ceil(totalItems / itemsPerPage); ++i) {
+    pageNumbers.push(i);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "pagination"
+  }, pageNumbers.map(function (number) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: number,
+      className: "page-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      onClick: function onClick(event) {
+        paginate(number);
+      },
+      className: "page-link"
+    }, number));
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Pagination);
 
 /***/ }),
 
@@ -104507,10 +104574,7 @@ function (_React$Component) {
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ErrorCatch__WEBPACK_IMPORTED_MODULE_18__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "xadmin",
-        style: {
-          backgroundImage: "url( \"./images/background_main.jpg\" )",
-          backgroundSize: "cover"
-        }
+        style: {}
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_AdminSidebar__WEBPACK_IMPORTED_MODULE_5__["default"], {
         isMobile: isMobile,
         handleTabClick: this.handleTabClick,
@@ -104519,7 +104583,12 @@ function (_React$Component) {
         ref: this._sidebarRef
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          height: "100vh"
+          minHeight: "105vh",
+          backgroundImage: "url( \"./images/background_main.jpg\" )",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center"
         },
         className: isMobile ? 'fullarea enshadow' : 'rightarea enshadow'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104556,7 +104625,7 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "btn btn-dark",
+        className: "btn btn-dark btn-square",
         onClick: this.handleLogout.bind(this)
       }, "Logout")))), child)));
     }
@@ -105445,7 +105514,7 @@ function (_React$Component) {
 
       formData.append("heading", this.state.page.heading);
       formData.append("shortdesc", this.state.page.text);
-      formData.append("longdesc", this.state.longdesc);
+      formData.append("longdesc", this.state.page.longdesc);
       formData.append("category", this.state.page.category_id);
       var files = this.photos.current.files;
 
@@ -105792,7 +105861,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group",
         id: "heading"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         type: "text",
         name: "heading",
@@ -105800,13 +105871,16 @@ function (_React$Component) {
         onChange: this.handleChange,
         placeholder: "Enter heading here..."
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "red-shadow",
         style: {
           color: "red",
           display: this.state.page.heading.length > 2 ? "none" : "block"
         }
       }, "Heading requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Short Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Short Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         rows: "10",
         className: "form-control",
         name: "text",
@@ -105814,13 +105888,16 @@ function (_React$Component) {
         onChange: this.handleChange,
         placeholder: "Enter short description here..."
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "red-shadow",
         style: {
           color: "red",
           display: this.state.page.text.length > 2 ? "none" : "block"
         }
       }, "Short description requires at least 3 characters"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Long Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Long Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         rows: "15",
         className: "form-control",
         name: "longdesc",
@@ -105829,7 +105906,9 @@ function (_React$Component) {
         placeholder: "(OPTIONAL) Enter long description here..."
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "form-control",
         name: "category_id",
         value: this.state.page.category_id,
@@ -105839,6 +105918,7 @@ function (_React$Component) {
         hidden: true,
         value: "-1"
       }, "--Select a category--"), itemsNew), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "red-shadow",
         style: {
           color: "red",
           display: this.state.page.category_id != -1 ? "none" : "block"
@@ -105847,7 +105927,9 @@ function (_React$Component) {
         onClick: this.addStat
       }, "Add Stat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Stat fields", statFields), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         multiple: true,
         name: "photos",
         className: "form-control",
@@ -105860,9 +105942,19 @@ function (_React$Component) {
           color: "orange",
           display: this.state.file == null ? "none" : "block"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), this.state.page.images != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Current Images", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldImages))) : null, this.photos.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Currently Selected Images", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentImages)) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), this.state.page.images != null && this.photos.current != null && this.photos.current.files != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Current Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldImages))) : null, this.photos.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Currently Selected Images"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentImages)) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audio Files"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Optional field. Add sounds here of the animal."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Audio Files"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          textShadow: "1px 1px #121212"
+        }
+      }, "Optional field. Add sounds here of the animal."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         multiple: true,
         name: "audios",
         className: "form-control",
@@ -105870,27 +105962,33 @@ function (_React$Component) {
         accept: "audio/*",
         ref: this.audios,
         onChange: this.handleChangeNew
-      }))), this.state.page.audios != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Current audios", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldAudios)) : null, this.audios.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Currently selected audio files", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to fulfill all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }))), this.state.page.audios != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Current audios"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldAudios)) : null, this.audios.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "big-shadow"
+      }, "Currently selected audio files"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to fulfill all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"
-      }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
+        style: {
+          position: "fixed"
+        },
         className: "hideScroll",
         onclick: function onclick() {
           null;
-        },
-        style: {
-          //styling for the side panel
-          //filter: "color blur(60px)",
-          height: "100vh",
-          width: "400px",
-          display: "flex",
-          flexDirection: "column",
-          overflowY: "hidden",
-          overflowX: "hidden",
-          opacity: "0.8",
-          backgroundColor: "#01283D",
-          color: "white"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      }, "style", {
+        //styling for the side panel
+        //filter: "color blur(60px)",
+        height: "100vh",
+        width: "400px",
+        display: "flex",
+        flexDirection: "column",
+        overflowY: "hidden",
+        overflowX: "hidden",
+        opacity: "0.8",
+        backgroundColor: "#01283D",
+        color: "white"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         style: {
           textAlign: "center",
           fontSize: "4em",
@@ -107300,6 +107398,7 @@ function (_React$Component) {
       this.setState({
         activeCategory: i
       });
+      console.log(i);
     }
   }, {
     key: "handleFormChange",
@@ -107383,7 +107482,7 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          backgroundColor: "rgba( 25, 25, 25, ".concat( true ? "0" : undefined, " )")
+          backgroundColor: "rgba( 25, 25, 25, ".concat(this.state.activeCategory == -1 && this.state.searchTerm == "" ? "0" : "0.8", " )")
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -107581,7 +107680,8 @@ function (_React$Component) {
 
         try //try
         {
-          imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+          // imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+          imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
           var i = -1;
           dotimgnav = this.state.page.images.map(function (item) {
             i++;
@@ -107764,7 +107864,7 @@ function (_React$Component) {
                 //transition: "opacity 0.2s",
                 fontSize: "18px"
               }
-            }, "\xA9 ", _this4.state.page.images[_this4.state.index].copyright)));
+            }, " ", _this4.state.page.images[_this4.state.index].copyright)));
           }));
         });
       }
@@ -108016,6 +108116,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       if (this.state.redirectToReferrer || sessionStorage.getItem('userData')) {
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
           to: "/admin"
@@ -108057,7 +108159,14 @@ function (_React$Component) {
         style: {
           textAlign: "center"
         }
-      }, "Login"))));
+      }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick(event) {
+          _this4.setState({
+            username: "admin@dcoet.com",
+            password: "password"
+          });
+        }
+      }, "Fill")));
     }
   }]);
 

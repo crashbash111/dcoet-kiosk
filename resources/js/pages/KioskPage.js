@@ -72,7 +72,8 @@ export default class KioskPage extends React.Component {
             let dotimgnav = null;
             try //try
             {
-                imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+                // imgPath = "./storage/kiosk_images/" + (this.state.page.images[this.state.index].thumbnail_large != null ? this.state.page.images[this.state.index].thumbnail_large : this.state.page.images[this.state.index].image_name);
+                imgPath = "./storage/kiosk_images/" + this.state.page.images[this.state.index].image_name;
                 let i = -1;
                 dotimgnav = this.state.page.images.map(item => {
                     i++;
@@ -229,7 +230,7 @@ export default class KioskPage extends React.Component {
                                                 //transition: "opacity 0.2s",
                                                 fontSize: "18px",
                                             }}>
-                                                &copy; {this.state.page.images[this.state.index].copyright}
+                                                {/* &copy;*/} {this.state.page.images[this.state.index].copyright}
                                             </p>
                                         </div>
                                     </div>

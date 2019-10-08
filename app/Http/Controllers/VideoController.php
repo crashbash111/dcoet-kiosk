@@ -36,7 +36,7 @@ class VideoController extends Controller
 
         $fileNameWithExt = $file->getClientOriginalName();
         $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        $fileName = strtr($fileName, [' ' => '']);
+        $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
         $extension = $file->getClientOriginalExtension();
 
         $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -52,7 +52,7 @@ class VideoController extends Controller
 
             $fileNameWithExt = $thumb->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileName = strtr($fileName, [' ' => '']);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
             $extension = $thumb->getClientOriginalExtension();
 
             $fileNameToStore = $fileName . "_" . time() . "." . $extension;

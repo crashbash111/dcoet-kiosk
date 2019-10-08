@@ -78,6 +78,7 @@ class Home extends React.Component {
         this.setState({
             activeCategory: i
         });
+        console.log( i );
     }
 
     handleFormChange(event) {
@@ -140,7 +141,7 @@ class Home extends React.Component {
 
         return (
             <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
-                <div style={{ backgroundColor: `rgba( 25, 25, 25, ${ ( true || this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "0" : "0.8" } )` }}>
+                <div style={{ backgroundColor: `rgba( 25, 25, 25, ${ (this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "0" : "0.8" } )` }}>
                     <div style={{ display: "grid", gridTemplateColumns: "300px auto" }}>
                         <div className="fade-gradient" style={{ display: "grid", gridTemplateRows: "15vh 85vh", backgroundImage: `radial-gradient(farthest-corner at 0% ${this.state.top}px, rgba(0,0,0,1), rgba(0,0,0,0))` }}>
                             <div className="grid-item logospace">

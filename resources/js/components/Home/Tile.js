@@ -28,7 +28,7 @@ export default class Tile extends React.Component {
         if(!this.props.imgOverride){
             if (this.props.item.images.length > 0) {
                 x = this.getRandomInt(0, this.props.item.images.length - 1);
-                path = this.state.baseImagePath + this.props.item.images[x].image_name;
+                path = this.state.baseImagePath + (this.props.item.images[x].thumbnail_large != null ? this.props.item.images[x].thumbnail_large : this.props.item.images[x].image_name );
             }
         }
         else{

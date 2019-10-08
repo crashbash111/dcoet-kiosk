@@ -180,6 +180,7 @@
             background-image: url( './assets/images/stats.png' ); text-align: left; display: none;"
         >
             <h3 id="statText" style="font-size:3vmin"></h3>
+            <button id="killGame" onclick="die()">Die</button>
         </div>
         <div
             id="end"
@@ -300,6 +301,14 @@
         var canvas = document.getElementById("ctx");
         var ctx = canvas.getContext("2d");
         ctx.font = "30px Helvetica";
+
+        var TESTBOOL = false;
+
+        die = function( event )
+        {
+            health = -100;
+            TESTBOOL = true;
+        }
 
         closeGame = function( event ) {
             window.location = "./";
@@ -1186,7 +1195,7 @@
             }
 
             if (mode == 1){
-                if (frameCount % 50 == 0) {
+                if (frameCount % 100 == 0) {
                     randomlyGenerateAnimal();
                 }
             }
@@ -1197,7 +1206,7 @@
             }
 
             if (mode == 1){
-                if (frameCount % 60 == 0) {
+                if (frameCount % 120 == 0) {
                     randomlyGeneratePest();
                 }
             }   
@@ -1238,7 +1247,7 @@
                 }
             }  
 
-            if (mode == 1 && health <= 0 || mode == 2 && time >= 30) {
+            if (mode == 1 && health <= 0 || mode == 2 && time >= 30 || TESTBOOL) {
                 if (mode == 1){
                     myStopFunction();
                     health = 0;
@@ -1310,12 +1319,13 @@
         getHighScoresTimed();
 
         startNewGame = function() {
+            TESTBOOL = false;
             ctx.canvas.width = innerWidth;
             ctx.canvas.height = innerHeight;
             showMenu("");
             timeWhenGameStarted = Date.now();
             frameCount = 0;
-            health = 100;
+            health = 1000000;
             score = 0;
             tappedRubbish = 0;
             tappedAnimals = 0;

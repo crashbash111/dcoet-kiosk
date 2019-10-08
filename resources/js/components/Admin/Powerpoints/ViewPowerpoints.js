@@ -28,7 +28,7 @@ const ViewPowerpoints = ({}) => {
             {/* <div style={{ float: "right" }}>
                 <button onClick={handleBackClick} className="btn btn-danger">Back</button>
             </div> */}
-            <div style={{ float: "left", width: "100vh" }}>
+            <div style={{ minWidth: "100vh" }}>
                 <table className="admin-table-new">
                     <thead>
                         <tr>

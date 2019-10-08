@@ -323,7 +323,7 @@ class Create extends React.Component {
         }
         formData.append("heading", this.state.page.heading);
         formData.append("shortdesc", this.state.page.text);
-        formData.append("longdesc", this.state.longdesc);
+        formData.append("longdesc", this.state.page.longdesc);
         formData.append("category", this.state.page.category_id);
 
         var files = this.photos.current.files;
@@ -593,30 +593,30 @@ class Create extends React.Component {
                         <div style={{ alignContent: "center", justifyContent: "center", textAlign: "center" }}>
                             <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
                                 <div className="form-group" id="heading">
-                                    <label><h3>Heading</h3>
+                                    <label><h3 className="big-shadow">Heading</h3>
                                         <input className="form-control" type="text" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
-                                        <p style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
+                                        <p className="red-shadow" style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
                                     </label>
                                 </div>
                                 <div className="form-group">
-                                    <label><h3>Short Description</h3>
+                                    <label><h3 className="big-shadow">Short Description</h3>
                                         <textarea rows="10" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
-                                        <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
+                                        <p className="red-shadow" style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
                                     </label>
                                 </div>
                                 <div className="form-group">
-                                    <label><h3>Long Description</h3>
+                                    <label><h3 className="big-shadow">Long Description</h3>
                                         <textarea rows="15" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="(OPTIONAL) Enter long description here..." />
                                         {/* <p style={{ color: "red", display: this.state.page.longdesc.length > 2 ? "none" : "block" }}>Long description requires at least 3 characters</p> */}
                                     </label>
                                 </div>
                                 <div className="form-group">
-                                    <h3>Category</h3>
+                                    <h3 className="big-shadow">Category</h3>
                                     <select className="form-control" name="category_id" value={this.state.page.category_id} onChange={this.handleChange}>
                                         <option disabled hidden value="-1">--Select a category--</option>
                                         {itemsNew}
                                     </select>
-                                    <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
+                                    <p className="red-shadow" style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
                                 </div>
                                 <div>
                                     <button onClick={this.addStat}>Add Stat</button>
@@ -626,16 +626,16 @@ class Create extends React.Component {
                                     {statFields}
                                 </div>
                                 <div className="form-group">
-                                    <label><h3>Images</h3>
+                                    <label><h3 className="big-shadow">Images</h3>
                                         <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
                                     </label>
                                     <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
                                 </div>
                                 {
-                                    this.state.page.images != null ?
+                                    ( this.state.page.images != null && this.photos.current != null && this.photos.current.files != null ) ?
                                         <div>
                                             <div>
-                                                Current Images
+                                                <h3 className="big-shadow">Current Images</h3>
                                             <div>
                                                     {oldImages}
                                                 </div>
@@ -646,7 +646,7 @@ class Create extends React.Component {
                                 {
                                     this.photos.current != null ?
                                         <div>
-                                            Currently Selected Images
+                                            <h3 className="big-shadow">Currently Selected Images</h3>
                                             <div>
                                                 {currentImages}
                                             </div>
@@ -655,15 +655,15 @@ class Create extends React.Component {
                                 }
 
                                 <div className="form-group">
-                                    <label><h3>Audio Files</h3>
-                                        <p>Optional field. Add sounds here of the animal.</p>
+                                    <label><h3 className="big-shadow">Audio Files</h3>
+                                        <p style={{ textShadow: "1px 1px #121212" }}>Optional field. Add sounds here of the animal.</p>
                                         <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
                                     </label>
                                 </div>
                                 {
                                     this.state.page.audios != null ?
                                         <div>
-                                            Current audios
+                                            <h3 className="big-shadow">Current audios</h3>
                                             <div>
                                                 {oldAudios}
                                             </div>
@@ -674,7 +674,7 @@ class Create extends React.Component {
                                 {
                                     this.audios.current != null ?
                                         <div>
-                                            Currently selected audio files
+                                            <h3 className="big-shadow">Currently selected audio files</h3>
                                             <div>
                                                 {currentAudios}
                                             </div>
@@ -691,7 +691,7 @@ class Create extends React.Component {
                             </form>
                         </div>
                     </div>
-                    <div className="hideScroll" onclick={() => { null }}
+                    <div style={{ position: "fixed" }} className="hideScroll" onclick={() => { null }}
                         style={{
                             //styling for the side panel
                             //filter: "color blur(60px)",

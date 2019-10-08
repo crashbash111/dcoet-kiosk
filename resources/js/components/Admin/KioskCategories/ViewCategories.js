@@ -28,7 +28,7 @@ const ViewCategories = ({}) => {
             {/* <div style={{ float: "right" }}>
                 <button onClick={handleBackClick} className="btn btn-danger">Back</button>
             </div> */}
-            <div style={{ float: "left", width: "100vh" }}>
+            <div style={{ minWidth: "100vh" }}>
                 <table className="admin-table-new">
                     <thead>
                         <tr>
@@ -43,9 +43,9 @@ const ViewCategories = ({}) => {
                                     <td>{item.description}</td>
                                     <td>{item.numPages}</td>
                                     <td>
-                                        <button className="btn btn-dark">View</button>
-                                        <button className="btn btn-success">Edit</button>
-                                        <button className="btn btn-danger">Delete</button>
+                                        <button className="btn btn-dark btn-square">View</button>
+                                        <button className="btn btn-success btn-square">Edit</button>
+                                        <button className="btn btn-danger btn-square">Delete</button>
                                     </td>
                                 </tr>
                             ))

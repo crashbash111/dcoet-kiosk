@@ -87,6 +87,7 @@ class PagesController extends Controller
         $page = new Page;
         $page->heading = $request->input('heading');
         $page->shortdesc = $request->input('shortdesc');
+        $page->longdesc = $request->input('longdesc');
         $page->category_id = $request->input('category');
 
         $page->save();
@@ -99,7 +100,7 @@ class PagesController extends Controller
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '']);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
 
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedFileExtension);
@@ -129,7 +130,7 @@ class PagesController extends Controller
                 $img->alt = "";
                 $img->image_name = $fileNameToStore;
                 $img->page_id = $page->id;
-                $img->copyright = "Glenda Rees";
+                $img->copyright = "";
                 $img->thumbnail_small = $smallThumb;
                 $img->thumbnail_medium = $mediumThumb;
                 $img->thumbnail_large = $largeThumb;
@@ -156,15 +157,15 @@ class PagesController extends Controller
                 $x++;
             }
         }
+        
+        $filesx = $request->file("audios");
 
-        $files = $request->file("audios");
-
-        if (is_array($files)) {
-            foreach ($files as $file) {
+        if (is_array($filesx)) {
+            foreach ($filesx as $file) {
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '']);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
 
                 $extension = $file->getClientOriginalExtension();
                 $check = in_array($extension, $allowedFileExtension);
@@ -200,7 +201,8 @@ class PagesController extends Controller
 
         $page = Page::find($id);
         $page->heading = $request->input('heading');
-        $page->text = $request->input('text');
+        $page->shortdesc = $request->input('shortdesc');
+        $page->longdesc = $request->input('longdesc');
         $page->category_id = $request->input('category');
 
         $page->save();
@@ -236,7 +238,7 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '']);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
 
                 $extension = $file->getClientOriginalExtension();
                 $check = in_array($extension, $allowedFileExtension);
@@ -293,7 +295,7 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '']);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
 
                 $extension = $file->getClientOriginalExtension();
                 //$check = in_array($extension, $allowedFileExtension);

@@ -26,7 +26,6 @@ const Dashboard = () => {
             setLoading(false);
         }
         // fetchMostViewed();
-        fetchLeastViewed();
     }, []);
 
     if (loading) {
@@ -50,10 +49,10 @@ const Dashboard = () => {
 
     return <div>
         <div style={{ display: "inline-block" }}>
-            <button className={ mode == 0 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => setMode(0)}>Most Viewed</button>
+            <button className={ mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => setMode(0)}>Most Viewed</button>
         </div>
         <div style={{ display: "inline-block" }}>
-            <button className={ mode == 1 ? "btn btn-primary" : "btn btn-dark" } onClick={(event) => setMode(1)}>Least Viewed</button>
+            <button className={ mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => setMode(1)}>Least Viewed</button>
         </div>
         {child}
     </div>

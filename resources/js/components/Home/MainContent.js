@@ -105,6 +105,7 @@ class MainContent extends React.Component {
 
                 if (this.props.activeCategory == -2) {
                     var gamesList = this.state.games.map(item => {
+                        if( item.id == 3 ) return null;
                         return (
                             <Tile key={ item.id + 10000 } item={ item } handleClick={ this.handleGameClick } imgOverride={ "./storage/game_cover_images/" + item.image_path } flag="game" />
 
@@ -115,7 +116,7 @@ class MainContent extends React.Component {
                     });
 
                     return (
-                        <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                        <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
                             {gamesList}
                         </div>
                     );
@@ -130,7 +131,7 @@ class MainContent extends React.Component {
                     });
 
                     return (
-                        <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                        <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
                             { videoList }
                         </div>
                     );
@@ -139,13 +140,14 @@ class MainContent extends React.Component {
                 if( this.props.activeCategory == -4 )
                 {
                     var pptList = this.state.ppts.map( item => {
+                        console.log(`./storage/ppt_images/${item.ppt_images[0].filepath}`);
                         return (
                             <Tile key={ item.id + 10000000 } item={ item } handleClick={ null } imgOverride={ `./storage/ppt_images/${item.ppt_images[0].filepath}` } flag="ppt" />
                         );
                     });
 
                     return (
-                        <div style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                        <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
                             { pptList }
                         </div>
                     );
