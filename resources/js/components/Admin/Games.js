@@ -110,7 +110,7 @@ export default class Games extends React.Component {
                                 {item.description}
                             </td>
                             <td>
-                                <button onClick={(event) => this.handleEnableClick(item.id)} className={item.enabled == 1 ? "btn btn-danger" : "btn btn-success"}>
+                                <button onClick={(event) => this.handleEnableClick(item.id)} className={item.enabled == 1 ? "btn btn-danger btn-square" : "btn btn-success btn-square"}>
                                     {this.state.loadingItem == item.id ? <Loader style={{
                                         position: "relative",
                                         top: "calc(50% - 0.5em)",
@@ -118,8 +118,8 @@ export default class Games extends React.Component {
                                         width: "1em",
                                         height: "1em",
                                     }} /> : item.enabled ? "Disable" : "Enable"}</button>
-                                <button onClick={ (event) => this.handleHighscoreClick( item.id )} className="btn btn-dark">View highscores</button>
-                                <button className="btn btn-warning">Clear highscores</button>
+                                <button onClick={ (event) => this.handleHighscoreClick( item.id )} className="btn btn-dark btn-square">View highscores</button>
+                                <button className="btn btn-warning btn-square">Clear highscores</button>
                             </td>
                         </tr>
                     ))}

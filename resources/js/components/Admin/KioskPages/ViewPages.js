@@ -53,9 +53,9 @@ const ViewPages = ({}) => {
                                     <td>{ (item.longdesc != null && item.longdesc != "" && item.longdesc.length > 30 ) ? item.longdesc.substring(0,27) + "..." : item.longdesc }</td>
                                     <td>{item.times_viewed}</td>
                                     <td>
-                                        <button className="btn btn-dark">View</button>
-                                        <button className="btn btn-success">Edit</button>
-                                        <button className="btn btn-danger">Delete</button>
+                                        <button className="btn btn-dark btn-square">View</button>
+                                        <button className="btn btn-success btn-square">Edit</button>
+                                        <button className="btn btn-danger btn-square">Delete</button>
                                     </td>
                                 </tr>
                             ))

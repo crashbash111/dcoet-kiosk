@@ -44,8 +44,8 @@ const ViewBannedWords = ({ }) => {
                                     <td>{profaneView ? item.word : item.word[0] + "*" + item.word[2]}</td>
                                     <td>{item.created_at }</td>
                                     <td>
-                                        <button className="btn btn-success">Edit</button>
-                                        <button className="btn btn-danger">Delete</button>
+                                        <button className="btn btn-success btn-square">Edit</button>
+                                        <button className="btn btn-danger btn-square">Delete</button>
                                     </td>
                                 </tr>
                             ))

@@ -100388,9 +100388,9 @@ var ViewBannedWords = function ViewBannedWords(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, profaneView ? item.word : item.word[0] + "*" + item.word[2]), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.created_at), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-success"
+      className: "btn btn-success btn-square"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger btn-square"
     }, "Delete")));
   })))));
 };
@@ -101090,7 +101090,7 @@ function (_React$Component) {
           onClick: function onClick(event) {
             return _this4.handleEnableClick(item.id);
           },
-          className: item.enabled == 1 ? "btn btn-danger" : "btn btn-success"
+          className: item.enabled == 1 ? "btn btn-danger btn-square" : "btn btn-success btn-square"
         }, _this4.state.loadingItem == item.id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
           style: {
             position: "relative",
@@ -101103,9 +101103,9 @@ function (_React$Component) {
           onClick: function onClick(event) {
             return _this4.handleHighscoreClick(item.id);
           },
-          className: "btn btn-dark"
+          className: "btn btn-dark btn-square"
         }, "View highscores"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-warning"
+          className: "btn btn-warning btn-square"
         }, "Clear highscores")));
       }))));
     }
@@ -101213,7 +101213,7 @@ var Highscores = function Highscores(_ref) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     onClick: handleBackClick,
-    className: "btn btn-danger"
+    className: "btn btn-danger btn-square"
   }, "Back")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       "float": "left",
@@ -101225,7 +101225,7 @@ var Highscores = function Highscores(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.initials), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.score), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.created_at), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger btn-square"
     }, "Delete")));
   })))));
 };
@@ -101941,11 +101941,11 @@ var ViewPages = function ViewPages(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.shortdesc.length > 20 ? item.shortdesc.substring(0, 17) + "..." : item.shortdesc), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.longdesc != null && item.longdesc != "" && item.longdesc.length > 30 ? item.longdesc.substring(0, 27) + "..." : item.longdesc), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.times_viewed), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-dark"
+      className: "btn btn-dark btn-square"
     }, "View"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-success"
+      className: "btn btn-success btn-square"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger btn-square"
     }, "Delete")));
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
@@ -102361,11 +102361,11 @@ var ViewPowerpoints = function ViewPowerpoints(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.ppt_images.length), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-dark"
+      className: "btn btn-dark btn-square"
     }, "View"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-success"
+      className: "btn btn-success btn-square"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger btn-square"
     }, "Delete")));
   })))));
 };
@@ -102863,11 +102863,11 @@ var VideoIndex = function VideoIndex(_ref) {
       onClick: function onClick() {
         history.push("/videos/".concat(item.id));
       },
-      className: "btn btn-dark"
+      className: "btn btn-dark btn-square"
     }, "View"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-success"
+      className: "btn btn-success btn-square"
     }, "Edit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger btn-square"
     }, "Delete")));
   }))));
 };

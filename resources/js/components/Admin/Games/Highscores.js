@@ -26,7 +26,7 @@ const Highscores = ({ game, handleBackClick }) => {
         <div>
             <h2>Highscores - {game.name}</h2>
             <div style={{ float: "right" }}>
-                <button onClick={handleBackClick} className="btn btn-danger">Back</button>
+                <button onClick={handleBackClick} className="btn btn-danger btn-square">Back</button>
             </div>
             <div style={{ float: "left", width: "100vh" }}>
                 <table className="admin-table-new">
@@ -43,7 +43,7 @@ const Highscores = ({ game, handleBackClick }) => {
                                     <td>{item.score}</td>
                                     <td>{item.created_at}</td>
                                     <td>
-                                        <button className="btn btn-danger">Delete</button>
+                                        <button className="btn btn-danger btn-square">Delete</button>
                                     </td>
                                 </tr>
                             ))

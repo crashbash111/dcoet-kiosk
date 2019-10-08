@@ -42,9 +42,9 @@ const ViewPowerpoints = ({}) => {
                                     <td>{item.title}</td>
                                     <td>{item.ppt_images.length}</td>
                                     <td>
-                                        <button className="btn btn-dark">View</button>
-                                        <button className="btn btn-success">Edit</button>
-                                        <button className="btn btn-danger">Delete</button>
+                                        <button className="btn btn-dark btn-square">View</button>
+                                        <button className="btn btn-success btn-square">Edit</button>
+                                        <button className="btn btn-danger btn-square">Delete</button>
                                     </td>
                                 </tr>
                             ))
