@@ -39,7 +39,7 @@ ReactDOM.render(
                 {/* <Route exact path="/admin/:id/edit" component={EditPage} /> */}
                 <Route exact path="/admin/createCategory/:id?" component={CreateCategory} />
                 <Route exact path="/admin/createPowerpoint" component={CreatePowerpoint} />
-                <Route exact path="/powerpoint/:id" component={PowerpointPage} />
+                <Route exact path="/powerpoints/:id" component={PowerpointPage} />
                 <Route exact path="/powerpoints" component={Powerpoints} />
                 <Route exact path="/videos/:id" component={VideoPage} />
                 <Route exact path="/admin/createVideo/:id?" component={CreateVideo} />

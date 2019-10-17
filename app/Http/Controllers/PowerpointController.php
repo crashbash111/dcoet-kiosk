@@ -18,6 +18,7 @@ class PowerpointController extends Controller
         foreach( $all as $a )
         {
             $a->ppt_images = PPT_Image::where( "powerpoint_id", $a->id )->get();
+            $a->length = sizeof( $a->ppt_images );
         }
 
         return json_encode( $all );

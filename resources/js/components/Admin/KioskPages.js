@@ -11,15 +11,22 @@ export default class KioskPages extends React.Component
         super( props );
 
         this.state = {
-            mode: 0
+            mode: 0,
+            pageId: -1
         };
 
         this.handleClick = this.handleClick.bind( this );
+        this.handleEditClick = this.handleEditClick.bind( this );
     }
 
     handleClick(i) {
         this.setState({ mode: i });
         console.log( this.state.mode );
+    }
+
+    handleEditClick( i )
+    {
+        this.setState( { pageId: i, mode: 1 } );
     }
 
     render() {
@@ -31,10 +38,12 @@ export default class KioskPages extends React.Component
 
         switch (this.state.mode) {
             case 0:
-                child = <ViewPages />
+                child = <ViewPages pages={ this.props.pages } loading={ this.props.loading } handleEditClick={ this.handleEditClick } />
                 break;
             case 1:
-                child = <Create />
+                const page = ( this.state.pageId ) != -1 ? this.props.pages.find( m => ( m.id == this.state.pageId ) ) : null;
+                console.log( page );
+                child = <Create page={ ( this.state.pageId ) != -1 ? this.props.pages.find( m => ( m.id == this.state.pageId ) ) : null } />
                 break;
             }
 

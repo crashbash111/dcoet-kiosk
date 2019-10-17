@@ -31,7 +31,7 @@ export default class KioskPages extends React.Component
 
         switch (this.state.mode) {
             case 0:
-                child = <ViewPowerpoints />
+                child = <ViewPowerpoints powerpoints={ this.props.powerpoints } loading={ this.props.loading } />
                 break;
             case 1:
                 child = <CreatePowerpoint />

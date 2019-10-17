@@ -1,26 +1,41 @@
 import React, { useState, useEffect } from "react";
+import {withRouter} from "react-router-dom";
 import Axios from "axios";
 
+import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const ViewPowerpoints = ({}) => {
+const ViewPowerpoints = ({history, powerpoints, loading }) => {
 
-    const [powerpoints, setPowerpoints] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [powerpoints, setPowerpoints] = useState([]);
+    // const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchPowerpoints = async () => {
-            setLoading(true);
-            const res = await Axios.get("./api/powerpoints/" );
-            setPowerpoints(res.data);
-            setLoading(false);
-        }
-        fetchPowerpoints();
-    }, []);
+    // useEffect(() => {
+    //     const fetchPowerpoints = async () => {
+    //         setLoading(true);
+    //         const res = await Axios.get("./api/powerpoints/" );
+    //         setPowerpoints(res.data);
+    //         setLoading(false);
+    //     }
+    //     fetchPowerpoints();
+    // }, []);
 
     if (loading) {
         return <Loader />;
     }
+
+    const viewClick = ( i ) => history.push( `/powerpoints/${i}` );
+
+    const editClick = ( i ) => history.push( `/kiosk/${i}` );
+
+    const heads = [
+        { name: "id", text: "ID" },
+        { name: "title", text: "Title" },
+        { name: "length", text: "Length" },
+        { name: "actions", text: "Actions" }
+    ];
+
+    return <AdminTable heads={ heads } items={ powerpoints } actions={ [ "View", "Edit", "Delete" ] } viewClick={ viewClick } editClick={ editClick } />
 
     return (
         <div>
@@ -56,4 +71,4 @@ const ViewPowerpoints = ({}) => {
     );
 };
 
-export default ViewPowerpoints;
+export default withRouter( ViewPowerpoints );

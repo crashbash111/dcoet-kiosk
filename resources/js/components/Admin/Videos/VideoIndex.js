@@ -1,29 +1,46 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
+import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
 import {withRouter} from "react-router-dom";
 
-const VideoIndex = ({history}) => {
-    const [loading, setLoading] = useState(false);
-    const [videos, setVideos] = useState([]);
+const VideoIndex = ({history, videos, loading}) => {
+    // const [loading, setLoading] = useState(false);
+    // const [videos, setVideos] = useState([]);
 
-    useEffect(() => {
-        const fetchVideos = async () => {
-            setLoading(true);
-            const res = await Axios.get("./api/videos");
-            setVideos(res.data);
-            setLoading(false);
-        }
-        fetchVideos();
-    }, []);
+    // useEffect(() => {
+    //     const fetchVideos = async () => {
+    //         setLoading(true);
+    //         const res = await Axios.get("./api/videos");
+    //         setVideos(res.data);
+    //         setLoading(false);
+    //     }
+    //     fetchVideos();
+    // }, []);
 
     if (loading) {
         return <Loader />;
     }
 
-    console.log(videos);
+    //console.log(videos);
+
+    const viewClick = ( i ) => history.push( `/videos/${i}` );
+
+    const editClick = ( i ) => history.push( `/kiosk/${i}` );
+
+    const heads = [
+        { name: "id", text: "ID" },
+        { name: "title", text: "Title" },
+        { name: "description", text: "Description" },
+        { name: "copyright", text: "Copyright" },
+        { name: "length", text: "Length" },
+        { name: "size", text: "Size" },
+        { name: "actions", text: "Actions" }
+    ];
+
+    return <AdminTable heads={ heads } items={ videos } actions={ [ "View", "Edit", "Delete" ] } viewClick={ viewClick } editClick={ editClick } />
 
     return (
         <div>

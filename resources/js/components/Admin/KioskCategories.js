@@ -29,7 +29,7 @@ export default class KioskCategories extends React.Component {
 
         switch (this.state.mode) {
             case 0:
-                child = <ViewCategories />
+                child = <ViewCategories categories={ this.props.categories } loading={ this.props.loading } />
                 break;
             case 1:
                 child = <CreateCategory />

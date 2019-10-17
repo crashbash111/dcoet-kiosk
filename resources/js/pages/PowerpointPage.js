@@ -1,5 +1,7 @@
 import React from "react";
 
+import Loader from "../components/Loader";
+
 export default class PowerpointPage extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +21,7 @@ export default class PowerpointPage extends React.Component {
     componentDidMount() {
         this.setState({ loading: true });
 
-        fetch("./powerpoints/" + this.props.match.params.id)
+        fetch("./api/powerpoints/" + this.props.match.params.id)
             .then(response => response.json())
             .then(data => this.setState({
                 title: data.title,
@@ -54,16 +56,15 @@ export default class PowerpointPage extends React.Component {
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.state.loading)
+        {
             return (
-                <div>
-                    Loading...
-                </div>
+                <Loader />
             );
         }
 
         return (
-            <div style={{ display: "grid", gridTemplateColumns: "50vh auto 50vh", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "50vh auto 50vh", width: "200vh", height: "100vh", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
                 <div style={{ backgroundColor: "blue", opacity: "0", height: "100%" }} onClick={this.handleLeftClick}></div>
                 <div style={{ backgroundColor: "white", opacity: "0", height: "100%" }}></div>
                 <div style={{ backgroundColor: "red", opacity: "0", height: "100%" }} onClick={this.handleRightClick} ></div>

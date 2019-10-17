@@ -29,7 +29,7 @@ export default class Videos extends React.Component {
 
         switch (this.state.mode) {
             case 0:
-                child = <VideoIndex />
+                child = <VideoIndex videos={ this.props.videos } loading={ this.props.loading } />
                 break;
             case 1:
                 child = <CreateVideo />

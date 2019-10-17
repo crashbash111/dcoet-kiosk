@@ -500,6 +500,14 @@ video {
   box-shadow: 0 6px 6px -6px #0e1119;
 }
 
+.admin-table-new th:hover {
+  color: #286ede;
+}
+
+.admin-table-new th.active {
+  color: #286ede;
+}
+
 .admin-table-new td:hover {
   background-color: #3f99bf;
   color: #fefefe; //#2422B3
@@ -544,3 +552,31 @@ video {
 .btn.btn-square {
   border-radius: 0;
 }
+
+.error-box
+{
+    position: relative;
+    top: 40vh;
+    //left: calc(50% - 4em);
+    height: 20vh;
+    text-align: center;
+}
+
+// .caret {
+//   width: 0;
+//   height: 0;
+//   display: inline-block;
+//   border: 10px solid transparent;
+// }
+// .caret.down{
+//   border-top-color: black;
+// }
+// .caret.right{
+//   border-left-color: black;
+// }
+// .caret.up{
+//   border-bottom-color: black;
+// }
+// .caret.left{
+//   border-right-color: black;
+// }

@@ -578,23 +578,7 @@
         };
 
         var bannedWords = [
-            {"id":2,"word":"FUT","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
-            {"id":3,"word":"SUK","created_at":"2019-10-01 03:02:57","updated_at":"2019-10-01 04:29:27"},
-            {"id":4,"word":"CUC","created_at":"2019-10-01 03:03:28","updated_at":"2019-10-01 03:03:28"},
-            {"id":5,"word":"ASS","created_at":"2019-10-01 03:39:03","updated_at":"2019-10-01 04:23:25"},
-            {"id":6,"word":"HOE","created_at":"2019-10-01 03:39:38","updated_at":"2019-10-01 03:39:38"},
-            {"id":7,"word":"JIZ","created_at":"2019-10-01 03:46:41","updated_at":"2019-10-01 03:46:41"},
-            {"id":8,"word":"CUM","created_at":"2019-10-01 03:47:22","updated_at":"2019-10-01 03:47:22"},
-            {"id":9,"word":"KUK","created_at":"2019-10-01 03:58:28","updated_at":"2019-10-01 03:58:28"},
-            {"id":10,"word":"FAG","created_at":"2019-10-01 03:58:40","updated_at":"2019-10-01 03:58:40"},
-            {"id":11,"word":"GAY","created_at":"2019-10-01 04:15:59","updated_at":"2019-10-01 04:15:59"},
-            {"id":12,"word":"FGT","created_at":"2019-10-01 04:21:40","updated_at":"2019-10-01 04:21:40"},
-            {"id":13,"word":"FUC","created_at":"2019-10-01 04:22:07","updated_at":"2019-10-01 04:22:07"},
-            {"id":14,"word":"FAT","created_at":"2019-10-01 04:22:44","updated_at":"2019-10-01 04:22:44"},
-            {"id":15,"word":"CNT","created_at":"2019-10-01 04:23:10","updated_at":"2019-10-01 04:23:10"},
-            {"id":16,"word":"SLT","created_at":"2019-10-01 04:28:22","updated_at":"2019-10-01 04:28:22"},
-            {"id":17,"word":"POO","created_at":"2019-10-01 04:28:39","updated_at":"2019-10-01 04:28:39"},
-            {"id":18,"word":"JZZ","created_at":"2019-10-01 04:29:18","updated_at":"2019-10-01 04:29:18"}
+            {"id":2,"word":"ABC","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
         ];
 
         var letters = [];
@@ -603,29 +587,29 @@
         }
 
         var highscoresNormal = [
-            {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-            {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-            {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-            {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-            {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
-            {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-            {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-            {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-            {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-            {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+            {"id":2,"initials":"AAA","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":4,"initials":"AAA","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":3,"initials":"AAA","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":5,"initials":"AAA","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":1,"initials":"AAA","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
+            {"id":6,"initials":"AAA","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":8,"initials":"AAA","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":9,"initials":"AAA","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":7,"initials":"AAA","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":10,"initials":"AAA","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
         ];
 
         var highscoresTimed = [
-            {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-            {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-            {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-            {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-            {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
-            {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-            {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-            {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-            {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-            {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+            {"id":2,"initials":"AAA","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":4,"initials":"AAA","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":3,"initials":"AAA","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":5,"initials":"AAA","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":1,"initials":"AAA","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
+            {"id":6,"initials":"AAA","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":8,"initials":"AAA","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":9,"initials":"AAA","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":7,"initials":"AAA","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":10,"initials":"AAA","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
         ];
 
         //highscores[ 0 ].score

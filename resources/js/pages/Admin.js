@@ -7,7 +7,7 @@ const Auth = new AuthService();
 
 import ItemRow from "../components/Admin/ItemRow";
 import AdminSidebar from "../components/Admin/AdminSidebar";
-import AdminTable from "../components/AdminTable";
+// import AdminTable from "../components/AdminTable";
 import Axios from "axios";
 import BannedWordsIndex from "./Admin/BannedWords/BannedWordsIndex";
 import CategoryTable from "../components/Admin/CategoryTable";
@@ -27,7 +27,15 @@ class Admin extends React.Component {
         super();
         this.state = {
             pages: [],
+            pagesLoading: false,
             categories: [],
+            categoriesLoading: false,
+            powerpoints: [],
+            powerpointsLoading: false,
+            bannedWords: [],
+            bannedWordsLoading: false,
+            videos: [],
+            videosLoading: false,
             loading: true,
             //stores page width
             width: window.innerWidth,
@@ -50,6 +58,11 @@ class Admin extends React.Component {
         this.categoryClick = this.categoryClick.bind(this);
         this.toggleSidebar = this.toggleSidebar.bind(this);
 
+        this.fetchPages = this.fetchPages.bind(this);
+        this.fetchCategories = this.fetchCategories.bind(this);
+        this.fetchPowerpoints = this.fetchPowerpoints.bind( this );
+        this.fetchBannedWords = this.fetchBannedWords.bind( this );
+        this.fetchVideos = this.fetchVideos.bind( this );
     }
 
     handleLogout() {
@@ -59,12 +72,52 @@ class Admin extends React.Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        fetch("./api/categories")
-            .then(response => response.json())
-            .then(data => this.setState({ categories: data }));
+        this.fetchPages();
+        this.fetchCategories();
+        this.fetchPowerpoints();
+        this.fetchBannedWords();
+        this.fetchVideos();
+    }
+
+    fetchPages() {
+        this.setState( { pagesLoading: true } );
         fetch("./api/pages")
             .then(response => response.json())
-            .then(data => this.setState({ pages: data, loading: false }));
+            .then(data => this.setState({ pages: data, pagesLoading: false }))
+            .catch(error => console.log(error));
+    }
+
+    fetchCategories() {
+        this.setState( { categoriesLoading: true } );
+        fetch("./api/categories")
+            .then(response => response.json())
+            .then(data => this.setState({ categories: data, categoriesLoading: false }))
+            .catch(error => console.log(error));
+    }
+
+    fetchPowerpoints() {
+        this.setState( { powerpointsLoading: true } );
+        fetch( "./api/powerpoints" )
+            .then( response => response.json() )
+            .then( data => this.setState( {powerpoints: data, powerpointsLoading: false } ) )
+            .catch( error => console.log( error ) );
+    }
+
+    fetchBannedWords() {
+        this.setState( { bannedWordsLoading: true } );
+        fetch( "./api/bannedwords" )
+            .then( response => response.json() )
+            .then( data => { this.setState( { bannedWords: data, bannedWordsLoading: false } ); console.log( data ) } )
+            .catch( error => console.log( error ) );
+    }
+
+    fetchVideos()
+    {
+        this.setState( { videosLoading: true } );
+        fetch( "./api/videos" )
+            .then( response => response.json() )
+            .then( data => this.setState( { videos: data, videosLoading: false } ) )
+            .catch( error => console.log( error ) );
     }
 
     componentWillMount() {
@@ -124,35 +177,6 @@ class Admin extends React.Component {
         const filteredPages = this.state.pages.filter(m => m.category_id == this.state.activeCategory);
         const currentPages = filteredPages.slice(indexOfFirstPage, indexOfLastPage);
 
-        // var c1 = (<div><h2>Pages</h2>
-        //     <br />
-        //     <Link to="./admin/create"><button className="btn btn-primary">Create New</button></Link>
-        //     <br />
-        //     <AdminTable pages={currentPages} categories={this.state.categories} loading={this.state.loading} changeActiveCategory={this.changeActiveCategory} activeCategory={this.state.activeCategory}
-        //         changeActivePage={this.changeActivePage} activePage={this.state.activePage} postsPerPage={this.state.postsPerPage} handleDelete={this.handleDelete} />
-        //     <MyPagination postsPerPage={this.state.postsPerPage} totalPosts={filteredPages.length} paginate={this.paginate} /></div>
-        // );
-
-        // var c2 = (<div><h2>Categories</h2>
-        //     <br />
-        //     <Link to="./admin/createCategory"><button className="btn btn-primary">Create New</button></Link>
-        //     {!this.state.loading ?
-        //         <CategoryTable categories={this.state.categories} shownCategory={this.state.shownCategory} categoryClick={this.categoryClick} />
-        //         : <div>Loading...</div>
-        //     }
-        // </div>
-        // );
-
-        // var c3, c4;
-        // c3 = c4 = null;
-
-        // var c5 = (<BannedWordsIndex />);
-
-        // var children = [c1, c2, c3, c4, c5];
-
-        //var child = children[this.state.tabIndex];
-
-
         //object array to define the entries on the sidebar and what components they map to
         let items = [
             {
@@ -163,17 +187,17 @@ class Admin extends React.Component {
             {
                 id: 1,
                 text: "Kiosk Pages",
-                component: <KioskPages key={1} />
+                component: <KioskPages key={1} pages={this.state.pages} loading={this.state.pagesLoading} />
             },
             {
                 id: 2,
                 text: "Kiosk Categories",
-                component: <KioskCategories key={2} />
+                component: <KioskCategories key={2} categories={ this.state.categories } loading={ this.state.categoriesLoading } />
             },
             {
                 id: 3,
                 text: "Powerpoints",
-                component: <Powerpoints key={3} />
+                component: <Powerpoints key={3} powerpoints={ this.state.powerpoints } loading={ this.state.powerpointsLoading } />
             },
             {
                 id: 4,
@@ -183,12 +207,12 @@ class Admin extends React.Component {
             {
                 id: 5,
                 text: "Banned Words",
-                component: <BannedWords key={5} />
+                component: <BannedWords key={5} bannedWords={ this.state.bannedWords } loading={ this.state.bannedWordsLoading } />
             },
             {
                 id: 6,
                 text: "Videos",
-                component: <Videos key={6} />
+                component: <Videos key={6} videos={ this.state.videos } loading={ this.state.videosLoading } />
             }
         ];
 
@@ -214,11 +238,11 @@ class Admin extends React.Component {
 
         return (
             <ErrorCatch>
-                <div className="xadmin" style={{  }}>
+                <div className="xadmin" style={{}}>
                     {/* <div style={{ backgroundColor: "rgba( 0,0,0,0.8)", width: "100%", height: "100%" }}> */}
-                    
+
                     <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={this.state.tabIndex} ref={this._sidebarRef} />
-                    <div style={{ minHeight: "105vh", backgroundImage: `url( "./images/background_main_dark.jpg" )`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow' }>
+                    <div style={{ minHeight: "105vh", backgroundImage: `url( "./images/background_main_dark.jpg" )`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow'}>
                         <div style={{ height: "50px", width: "100%" }}>
                             {isMobile ? <span className="sidebartoggle" style={{ float: "left" }} onClick={this.toggleSidebar}>&#9776; Open</span> : null}
                             <div style={{ float: "right" }}>
@@ -235,8 +259,10 @@ class Admin extends React.Component {
 
 
                         </div>
-
-                        {child}
+                        <ErrorCatch>
+                            {child}
+                        </ErrorCatch>
+                        
                     </div>
                     {/* </div> */}
                 </div>

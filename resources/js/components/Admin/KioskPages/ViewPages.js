@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from "react";
+import {withRouter} from "react-router-dom";
 import Axios from "axios";
 
+import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 import Pagination from "../../Pagination";
 
-const ViewPages = ({}) => {
+const ViewPages = ({history, pages, loading, handleEditClick }) => {
 
-    const [pages, setPages] = useState([]);
-    const [loading, setLoading] = useState(false);
+    //const [pages, setPages] = useState([]);
+    //const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
 
-    useEffect(() => {
-        const fetchPages = async () => {
-            setLoading(true);
-            const res = await Axios.get("./api/pages/" );
-            setPages(res.data);
-            setLoading(false);
-        }
-        fetchPages();
-    }, []);
+    // useEffect(() => {
+    //     const fetchPages = async () => {
+    //         setLoading(true);
+    //         const res = await Axios.get("./api/pages/" );
+    //         console.log( res.data );
+    //         setPages(res.data);
+    //         setLoading(false);
+    //     }
+    //     fetchPages();
+    // }, []);
 
     if (loading) {
         return <Loader />;
@@ -30,6 +33,19 @@ const ViewPages = ({}) => {
     const currentItems = pages.slice( indexOfFirstItem, indexOfLastItem );
 
     const paginate = (number) => setCurrentPage(number);
+
+    const viewClick = ( i ) => history.push( `/kiosk/${i}` );
+
+    const heads = [
+        { name: "id", text: "ID" },
+        { name: "heading", text: "Heading" },
+        { name: "shortdesc", text: "Short Description" },
+        { name: "longdesc", text: "Long Description" },
+        { name: "times_viewed", text: "Times Visited" },
+        { name: "actions", text: "Actions" }
+    ];
+
+    return <AdminTable heads={ heads } items={ pages } actions={ [ "View", "Edit", "Delete" ] } viewClick={ viewClick } editClick={ handleEditClick } />
 
     return (
         <div>
@@ -71,4 +87,4 @@ const ViewPages = ({}) => {
     );
 };
 
-export default ViewPages;
+export default withRouter( ViewPages );

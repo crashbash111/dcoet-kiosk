@@ -21,22 +21,48 @@ class VideoPage extends React.Component {
             .then(response => response.json())
             .then(data => { this.setState({ video: data }) });
 
-        fetch("./api/videos/" + this.state.videoId + "/stream")
-            .then(stream => {
-                try {
-                    this.video.srcObject = stream;
-                }
-                catch (err) {
-                    this.video.current.src = stream.url;
-                }
-            })
-            .catch(err => {
-                throw new Error(`Unable to fetch stream ${err}`);
-            });
+        var myVar = setInterval(() => {
+            let error = false;
+            fetch("./api/videos/" + this.state.videoId + "/stream")
+                .then(stream => {
+                    try {
+                        this.video.srcObject = stream;
+                    }
+                    catch (err) {
+                        var my = setInterval(() => {
+                            let e = false;
+
+                            try
+                            {
+                                this.video.current.src = stream.url;
+                            }
+                            catch( ex )
+                            {
+                                e = true;
+                                console.log( ex );
+                            }
+                            if( !e )
+                            {
+                                clearInterval( my );
+                            }
+                        }, 100 );
+
+                    }
+                })
+                .catch(err => {
+                    error = true;
+                    console.log(Error(`Unable to fetch stream ${err}`));
+                });
+            if (!error) {
+                clearInterval(myVar);
+            }
+        }, 100);
+
+
     }
 
     render() {
-        return (this.state.video == null ? <Loader/>
+        return (this.state.video == null ? <Loader />
             : <div>
                 <Link to={`/`} className="returns"
                     style={{
@@ -47,7 +73,7 @@ class VideoPage extends React.Component {
                         textDecoration: "none",
                         fontSize: "25px",
                     }} >&#8592; Back to Home</Link>
-                <h1 style={{display: "inline", paddingLeft: "40px"}}>{this.state.video.title}</h1>
+                <h1 style={{ display: "inline", paddingLeft: "40px" }}>{this.state.video.title}</h1>
                 <video style={{ width: "100px" }} ref={this.video} controls></video>
                 <p>{this.state.video.description}</p>
                 <p><i>Running time: approx: {this.state.video.length} seconds</i></p>
@@ -57,4 +83,4 @@ class VideoPage extends React.Component {
     }
 }
 
-export default withRouter( VideoPage );
+export default withRouter(VideoPage);

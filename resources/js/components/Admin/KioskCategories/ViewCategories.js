@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from "react";
+import {withRouter} from "react-router-dom";
 import Axios from "axios";
 
+import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const ViewCategories = ({}) => {
+const ViewCategories = ({ history, categories, loading }) => {
 
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [categories, setCategories] = useState([]);
+    // const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            setLoading(true);
-            const res = await Axios.get("./api/categories/" );
-            setCategories(res.data);
-            setLoading(false);
-        }
-        fetchCategories();
-    }, []);
+    // useEffect(() => {
+    //     const fetchCategories = async () => {
+    //         setLoading(true);
+    //         const res = await Axios.get("./api/categories/" );
+    //         setCategories(res.data);
+    //         setLoading(false);
+    //     }
+    //     fetchCategories();
+    // }, []);
 
     if (loading) {
         return <Loader />;
     }
+
+    const editClick = ( i ) => history.push( `/kiosk/${i}` );
+
+    const heads = [
+        { name: "id", text: "ID" },
+        { name: "name", text: "Name" },
+        { name: "description", text: "Description" },
+        { name: "numPages", text: "Number of Pages" },
+        { name: "actions", text: "Actions" }
+    ];
+
+    return <AdminTable heads={ heads } items={ categories } actions={ [ "Edit", "Delete" ] } editClick={ editClick } />
 
     return (
         <div>
@@ -57,4 +71,4 @@ const ViewCategories = ({}) => {
     );
 };
 
-export default ViewCategories;
+export default withRouter( ViewCategories );

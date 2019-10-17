@@ -7,6 +7,10 @@ import Loader from "../Loader";
 import ViewBannedWords from "./BannedWords/ViewBannedWords";
 import CreateBannedWord from "./BannedWords/CreateBannedWord";
 
+import ErrorCatch from "../ErrorCatch";
+
+import { Spring } from 'react-spring/renderprops';
+
 export default class BannedWords extends React.Component {
     constructor(props) {
         super(props);
@@ -23,6 +27,7 @@ export default class BannedWords extends React.Component {
             editMode: false,
             id: -1,
             mode: 0,
+            addedSuccessfully: false
         };
 
         this.handleEditClick = this.handleEditClick.bind(this);
@@ -30,12 +35,13 @@ export default class BannedWords extends React.Component {
         this.toggleProfane = this.toggleProfane.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleCancelClick = this.handleCancelClick.bind( this );
-        this.handleClick = this.handleClick.bind( this );
+        this.handleCancelClick = this.handleCancelClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.addClick = this.addClick.bind(this);
     }
 
     componentDidMount() {
-        this.setState( { loading: true } );
+        this.setState({ loading: true });
         fetch("./api/bannedwords")
             .then(response => response.json())
             .then(data => { this.setState({ bannedWords: data, loading: false }); console.log(data) })
@@ -69,11 +75,10 @@ export default class BannedWords extends React.Component {
         this.setState({ [name]: value });
     }
 
-    handleCancelClick( event )
-    {
+    handleCancelClick(event) {
         event.preventDefault();
 
-        this.setState( { word: "", editMode: false } );
+        this.setState({ word: "", editMode: false });
     }
 
     onSubmit(event) {
@@ -125,11 +130,17 @@ export default class BannedWords extends React.Component {
 
     handleClick(i) {
         this.setState({ mode: i });
-        console.log( this.state.mode );
+    }
+
+    addClick() {
+        this.setState({ mode: 0, addedSuccessfully: true });
+        setTimeout(() => {
+            this.setState({ addedSuccessfully: false });
+        }, 1000).bind(this);
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.props.loading) {
             return <Loader />
         }
 
@@ -137,20 +148,35 @@ export default class BannedWords extends React.Component {
 
         switch (this.state.mode) {
             case 0:
-                child = <ViewBannedWords />
+                child = <ViewBannedWords bannedWords={this.props.bannedWords} loading={this.props.loading} addedSuccessfully={this.state.addedSuccessfully} />
                 break;
             case 1:
-                child = <CreateBannedWord />
+                child = <CreateBannedWord submitClick={this.addClick} />
                 break;
-            }
+        }
 
         return <div>
             <div style={{ display: "inline-block" }}>
-                <button className={ this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => this.handleClick(0)}>View</button>
+                <button className={this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => this.handleClick(0)}>View</button>
             </div>
             <div style={{ display: "inline-block" }}>
-                <button className={ this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => this.handleClick(1)}>Create New</button>
+                <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
+            <ErrorCatch>
+                <div style={{ display: "inline-block" }}>
+                    <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => { let x = this.grok.length }}>Create New</button>
+                </div>
+            </ErrorCatch>
+
+            {/* {this.state.addedSuccessfully ?
+            <Spring from={{ padding: "0px" }} to={{ padding: "20px" }}>
+                { props => (
+                    <div style={{ ...props, backgroundColor: "green", width: "100vh" }}><p>Item added successfully.</p></div>
+                )}
+            </Spring>
+            :
+            null
+            } */}
             {child}
         </div>
 

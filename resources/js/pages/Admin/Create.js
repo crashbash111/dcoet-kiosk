@@ -2,18 +2,22 @@ import React from "react";
 import Axios from "axios";
 
 import { Redirect } from "react-router-dom";
-import { runInThisContext } from "vm";
+//import { runInThisContext } from "vm";
 import withAuth from "../../components/withAuth";
 
 import AuthService from "../../components/AuthService";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 class Create extends React.Component {
     constructor(props) {
         super(props);
 
+        console.log( this.props );
+
+        console.log( this.props.page );
+
         this.state = {
-            page: null,
+            page: this.props.page,
             statsToDelete: [],
             imagesToDelete: [],
             audiosToDelete: [],
@@ -22,7 +26,7 @@ class Create extends React.Component {
             redirect: false,
             photos: null,
             audios: null,
-            editMode: (this.props.match != null && this.props.match.params != null && this.props.match.params.id != null),
+            editMode: this.props.page != null, //(this.props.match != null && this.props.match.params != null && this.props.match.params.id != null) || 
             error: false,
         }
 
@@ -388,7 +392,7 @@ class Create extends React.Component {
         }
 
         Axios({
-            url: "./api/pages" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
+            url: "./api/pages" + (this.state.editMode ? "/" + this.props.page.id : ""),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -411,7 +415,7 @@ class Create extends React.Component {
 
         if (this.state.editMode) {
 
-            fetch("./api/pages/" + this.props.match.params.id)
+            fetch("./api/pages/" + this.props.page.id )
                 .then(response => response.json())
                 .then(data => {
                     let copyright = [];
