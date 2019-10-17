@@ -5,7 +5,7 @@ import Axios from "axios";
 import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const ViewCategories = ({ history, categories, loading }) => {
+const ViewCategories = ({ history, categories, loading, createClick }) => {
 
     // const [categories, setCategories] = useState([]);
     // const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ const ViewCategories = ({ history, categories, loading }) => {
         { name: "actions", text: "Actions" }
     ];
 
-    return <AdminTable heads={ heads } items={ categories } actions={ [ "Edit", "Delete" ] } editClick={ editClick } />
+    return <AdminTable heads={ heads } items={ categories } actions={ [ "Edit", "Delete" ] } createClick={ createClick } editClick={ editClick } />
 
     return (
         <div>

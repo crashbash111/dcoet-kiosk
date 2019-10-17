@@ -21,17 +21,24 @@ import KioskPages from "../components/Admin/KioskPages";
 import Powerpoints from "../components/Admin/Powerpoints";
 import Videos from "../components/Admin/Videos";
 import ErrorCatch from "../components/ErrorCatch";
+import { thisExpression } from "@babel/types";
 
 class Admin extends React.Component {
     constructor() {
         super();
         this.state = {
+            mostViewed: [],
+            mostViewedLoading: false,
+            leastViewed: [],
+            leastViewedLoading: false,
             pages: [],
             pagesLoading: false,
             categories: [],
             categoriesLoading: false,
             powerpoints: [],
             powerpointsLoading: false,
+            games: [],
+            gamesLoading: false,
             bannedWords: [],
             bannedWordsLoading: false,
             videos: [],
@@ -58,9 +65,12 @@ class Admin extends React.Component {
         this.categoryClick = this.categoryClick.bind(this);
         this.toggleSidebar = this.toggleSidebar.bind(this);
 
+        this.fetchMostViewed = this.fetchMostViewed.bind( this );
+        this.fetchLeastViewed = this.fetchLeastViewed.bind( this );
         this.fetchPages = this.fetchPages.bind(this);
         this.fetchCategories = this.fetchCategories.bind(this);
         this.fetchPowerpoints = this.fetchPowerpoints.bind( this );
+        this.fetchGames = this.fetchGames.bind( this );
         this.fetchBannedWords = this.fetchBannedWords.bind( this );
         this.fetchVideos = this.fetchVideos.bind( this );
     }
@@ -72,24 +82,47 @@ class Admin extends React.Component {
 
     componentDidMount() {
         this.setState({ loading: true });
+        this.fetchMostViewed();
+        this.fetchLeastViewed();
         this.fetchPages();
         this.fetchCategories();
         this.fetchPowerpoints();
+        this.fetchGames();
         this.fetchBannedWords();
         this.fetchVideos();
     }
 
+    fetchMostViewed() {
+        this.setState( { mostViewedLoading: true } );
+        Auth.fetch( "./api/pages/mostviewed" )
+        .then( response => response.json() )
+        .then( data => this.setState( { mostViewed: data, mostViewedLoading: false } ) )
+        .catch( error => console.log( error ) );
+    }
+
+    fetchLeastViewed() {
+        this.setState( { leastViewedLoading: true } );
+        Auth.fetch( "./api/pages/leastviewed" )
+        .then( response => response.json() )
+        .then( data => this.setState( { leastViewed: data, leastViewedLoading: false } ) )
+        .catch( error => console.log( error ) );
+    }
+
     fetchPages() {
         this.setState( { pagesLoading: true } );
-        fetch("./api/pages")
-            .then(response => response.json())
-            .then(data => this.setState({ pages: data, pagesLoading: false }))
-            .catch(error => console.log(error));
+        Auth.fetch( "./api/pages" )
+        .then( response => response.json() )
+        .then( data => this.setState( { pages: data, pagesLoading: false } ) )
+        .catch( error => console.log( error ) );
+        // fetch( "./api/pages" )
+        //     .then(response => response.json())
+        //     .then(data => this.setState({ pages: data, pagesLoading: false }))
+        //     .catch(error => console.log(error));
     }
 
     fetchCategories() {
         this.setState( { categoriesLoading: true } );
-        fetch("./api/categories")
+        fetch( "./api/categories" )
             .then(response => response.json())
             .then(data => this.setState({ categories: data, categoriesLoading: false }))
             .catch(error => console.log(error));
@@ -103,11 +136,19 @@ class Admin extends React.Component {
             .catch( error => console.log( error ) );
     }
 
+    fetchGames() {
+        this.setState( { gamesLoading: true } );
+        Auth.fetch( "./api/games" )
+            .then( response => response.json() )
+            .then( data => this.setState( { games: data, gamesLoading: false } ) )
+            .catch( error => console.log( error ) );
+    }
+
     fetchBannedWords() {
         this.setState( { bannedWordsLoading: true } );
         fetch( "./api/bannedwords" )
             .then( response => response.json() )
-            .then( data => { this.setState( { bannedWords: data, bannedWordsLoading: false } ); console.log( data ) } )
+            .then( data => this.setState( { bannedWords: data, bannedWordsLoading: false } ) )
             .catch( error => console.log( error ) );
     }
 
@@ -182,7 +223,8 @@ class Admin extends React.Component {
             {
                 id: 0,
                 text: "Dashboard",
-                component: <Dashboard />
+                component: <Dashboard key={ 0 } mostViewed={ this.state.mostViewed } mostViewedLoading={ this.state.mostViewedLoading }
+                    leastViewed={ this.state.leastViewed } leastViewedLoading={ this.state.leastViewedLoading } />
             },
             {
                 id: 1,
@@ -202,7 +244,7 @@ class Admin extends React.Component {
             {
                 id: 4,
                 text: "Games",
-                component: <Games key={4} />
+                component: <Games key={4} games={ this.state.games } loading={ this.state.gamesLoading } />
             },
             {
                 id: 5,
@@ -226,8 +268,6 @@ class Admin extends React.Component {
             }
         });
 
-        console.log(this.props.user);
-
         let verticalCenter = {
             margin: "0",
             position: "absolute",
@@ -242,7 +282,7 @@ class Admin extends React.Component {
                     {/* <div style={{ backgroundColor: "rgba( 0,0,0,0.8)", width: "100%", height: "100%" }}> */}
 
                     <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={this.state.tabIndex} ref={this._sidebarRef} />
-                    <div style={{ minHeight: "105vh", backgroundImage: `url( "./images/background_main_dark.jpg" )`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow'}>
+                    <div style={{ minHeight: "100vh", backgroundImage: `url( "./images/background_main_dark.jpg" )`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow'}>
                         <div style={{ height: "50px", width: "100%" }}>
                             {isMobile ? <span className="sidebartoggle" style={{ float: "left" }} onClick={this.toggleSidebar}>&#9776; Open</span> : null}
                             <div style={{ float: "right" }}>

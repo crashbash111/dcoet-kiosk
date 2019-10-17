@@ -5,7 +5,7 @@ import Axios from "axios";
 import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const ViewPowerpoints = ({history, powerpoints, loading }) => {
+const ViewPowerpoints = ({history, powerpoints, loading, createClick }) => {
 
     // const [powerpoints, setPowerpoints] = useState([]);
     // const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ const ViewPowerpoints = ({history, powerpoints, loading }) => {
         { name: "actions", text: "Actions" }
     ];
 
-    return <AdminTable heads={ heads } items={ powerpoints } actions={ [ "View", "Edit", "Delete" ] } viewClick={ viewClick } editClick={ editClick } />
+    return <AdminTable heads={ heads } items={ powerpoints } actions={ [ "View", "Edit", "Delete" ] } createClick={ createClick } viewClick={ viewClick } editClick={ editClick } />
 
     return (
         <div>

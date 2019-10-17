@@ -491,7 +491,7 @@ class Create extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <button style={{ width: "100%", height: "100%" }} className={softDeleted ? "btn btn-primary" : "btn btn-danger"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
+                            <button style={{ width: "100%", height: "100%" }} className={softDeleted ? "btn btn-primary btn-square" : "btn btn-danger btn-square"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
                         </div>
                     </div>
                 </div>
@@ -691,7 +691,7 @@ class Create extends React.Component {
                                     :
                                     null
                                 }
-                                <button className="btn btn-primary">Submit</button>
+                                <button className="btn btn-primary btn-square">Submit</button>
                             </form>
                         </div>
                     </div>

@@ -5,28 +5,28 @@ import LeastViewed from "./Dashboard/LeastViewed";
 import Loader from "../Loader";
 import MostViewed from "./Dashboard/MostViewed";
 
-const Dashboard = () => {
+const Dashboard = ( { mostViewed, mostViewedLoading, leastViewed, leastViewedLoading } ) => {
     // const [mostViewed, setMostViewed] = useState([]);
     const [mode, setMode] = useState(0);
-    const [leastViewed, setLeastViewed] = useState([]);
+    //const [leastViewed, setLeastViewed] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        // const fetchMostViewed = async () => {
-        //     setLoading(true);
-        //     const res = await Axios.get("./api/pages/mostviewed");
-        //     setMostViewed(res.data);
-        //     //setLoading(false);
-        // }
+    // useEffect(() => {
+    //     // const fetchMostViewed = async () => {
+    //     //     setLoading(true);
+    //     //     const res = await Axios.get("./api/pages/mostviewed");
+    //     //     setMostViewed(res.data);
+    //     //     //setLoading(false);
+    //     // }
 
-        const fetchLeastViewed = async () => {
-            setLoading(true);
-            const res = await Axios.get("./api/pages/leastviewed");
-            setLeastViewed(res.data);
-            setLoading(false);
-        }
-        // fetchMostViewed();
-    }, []);
+    //     // const fetchLeastViewed = async () => {
+    //     //     setLoading(true);
+    //     //     const res = await Axios.get("./api/pages/leastviewed");
+    //     //     setLeastViewed(res.data);
+    //     //     setLoading(false);
+    //     // }
+    //     // fetchMostViewed();
+    // }, []);
 
     if (loading) {
         return <div>
@@ -40,10 +40,10 @@ const Dashboard = () => {
 
     switch (mode) {
         case 0:
-            child = <MostViewed />
+            child = <MostViewed mostViewed={ mostViewed } loading={ mostViewedLoading } />
             break;
         case 1:
-            child = <LeastViewed />
+            child = <LeastViewed leastViewed={ leastViewed } loading={ leastViewedLoading } />
             break;
         }
 

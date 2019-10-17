@@ -2,6 +2,7 @@ import React from "react";
 
 import CreateCategory from "./KioskCategories/CreateCategory";
 import Loader from "../Loader";
+import Message from "./Message";
 import ViewCategories from "./KioskCategories/ViewCategories";
 
 export default class KioskCategories extends React.Component {
@@ -10,9 +11,25 @@ export default class KioskCategories extends React.Component {
 
         this.state = {
             mode: 0,
+            addedSuccessfully: false
         };
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleCreateClick = this.handleCreateClick.bind( this );
+        this.handleSubmitted = this.handleSubmitted.bind( this );
+    }
+
+    handleCreateClick()
+    {
+        this.setState( { mode: 1 } );
+    }
+
+    handleSubmitted()
+    {
+        this.setState( { mode: 0, addedSuccessfully: true } );
+        setTimeout( () => {
+            this.setState( { addedSuccessfully: false } );
+        }).bind( this );
     }
 
     handleClick(i) {
@@ -29,10 +46,12 @@ export default class KioskCategories extends React.Component {
 
         switch (this.state.mode) {
             case 0:
-                child = <ViewCategories categories={ this.props.categories } loading={ this.props.loading } />
+                child = <ViewCategories categories={ this.props.categories }
+                    createClick={ this.handleCreateClick} handleEditClick={ this.handleEditClick } loading={ this.props.loading }
+                />
                 break;
             case 1:
-                child = <CreateCategory />
+                child = <CreateCategory handleSubmitted={ this.handleSubmitted } />
                 break;
         }
 
@@ -43,6 +62,7 @@ export default class KioskCategories extends React.Component {
             <div style={{ display: "inline-block" }}>
                 <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
+            <Message shown={this.state.addedSuccessfully} message={"Added successfully."} />
             {child}
         </div>
     }

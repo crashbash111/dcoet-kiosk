@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
+import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const MostViewed = () => {
+const MostViewed = ({ mostViewed, loading }) => {
 
-    const [loading, setLoading] = useState(false);
-    const [mostViewed, setMostViewed] = useState([]);
+    // const [loading, setLoading] = useState(false);
+    // const [mostViewed, setMostViewed] = useState([]);
 
     // useEffect(() => {
     //     (async function() {
@@ -28,29 +29,38 @@ const MostViewed = () => {
     //     };
     //   }, [url])
 
-    useEffect(() => {
-        const fetchMostViewed = async () => {
-            setLoading(true);
-            try
-            {
-                const res = await Axios.get("./api/pages/mostviewed" );
-                setMostViewed(res.data);
-            }
-            catch( err )
-            {
-                console.log( err );
-            }
-            setLoading(false);
-        }
-        const x = fetchMostViewed();
+    // useEffect(() => {
+    //     const fetchMostViewed = async () => {
+    //         setLoading(true);
+    //         try
+    //         {
+    //             const res = await Axios.get("./api/pages/mostviewed" );
+    //             setMostViewed(res.data);
+    //         }
+    //         catch( err )
+    //         {
+    //             console.log( err );
+    //         }
+    //         setLoading(false);
+    //     }
+    //     const x = fetchMostViewed();
 
-        return function() {
-        }
-    }, []);
+    //     return function() {
+    //     }
+    // }, []);
 
     if (loading) {
         return <Loader />;
     }
+
+    const heads = [
+        { name: "id", text: "ID" },
+        { name: "heading", text: "Heading" },
+        { name: "categoryname", text: "Category" },
+        { name: "times_viewed", text: "Times Viewed" }
+    ];
+
+    return <AdminTable heads={ heads } items={ mostViewed } />
 
     return (
         <div>

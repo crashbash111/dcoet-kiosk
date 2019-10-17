@@ -13,13 +13,14 @@ export default class CreateVideo extends React.Component {
             length: -1,
             progressValue: 0,
             error: false,
+            showBar: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.postData = this.postData.bind(this);
         this.submit = this.submit.bind(this);
-        this.updateProgressBarValue = this.updateProgressBarValue.bind( this );
+        this.updateProgressBarValue = this.updateProgressBarValue.bind(this);
 
         this.video = React.createRef();
         this.thumbnail = React.createRef();
@@ -28,7 +29,9 @@ export default class CreateVideo extends React.Component {
     handleChange(event) {
         let { name, value, files } = event.target;
 
-        if (name != "video" || name != "thumbnail" ) {
+        this.setState({ showBar: false });
+
+        if (name != "video" || name != "thumbnail") {
             this.setState({ [name]: value });
         }
         else {
@@ -40,13 +43,13 @@ export default class CreateVideo extends React.Component {
 
     postData(duration) {
         if (this.state.title.length < 3 || this.state.description.length < 3 || this.video == null || this.video.current == null || this.video.current.files == null || this.video.current.files.length < 1) {
-            Console.log( "Please fill out all fields" );
+            Console.log("Please fill out all fields");
             return;
         }
 
         let formData = new FormData();
 
-        formData.append( "token", localStorage.getItem( "id_token" ) );
+        formData.append("token", localStorage.getItem("id_token"));
 
         formData.append("title", this.state.title);
         formData.append("description", this.state.description);
@@ -55,10 +58,11 @@ export default class CreateVideo extends React.Component {
 
         formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
 
-        if( this.thumbnail.current != null )
-        {
-            formData.append( "thumbnail", this.thumbnail.current.files[0], this.thumbnail.current.files[0].name );
+        if (this.thumbnail.current != null) {
+            formData.append("thumbnail", this.thumbnail.current.files[0], this.thumbnail.current.files[0].name);
         }
+
+        this.setState({ showBar: true });
 
         Axios({
             onUploadProgress: (progressEvent) => {
@@ -82,13 +86,12 @@ export default class CreateVideo extends React.Component {
             })
             .catch(err => {
                 console.log(err.response.data);
-                this.setState( { error: true } );
+                this.setState({ error: true });
             });
     }
 
-    updateProgressBarValue( x )
-    {
-        this.setState( { progressValue: x } );
+    updateProgressBarValue(x) {
+        this.setState({ progressValue: x });
     }
 
     submit(video) {
@@ -142,7 +145,7 @@ export default class CreateVideo extends React.Component {
                     </div>
                     <div className="form-group">
                         <label><h3>Thumbnail</h3>
-                        <p>Optionally, choose a thumbnail to show on the kiosk page.</p>
+                            <p>Optionally, choose a thumbnail to show on the kiosk page.</p>
                             <input className="form-control" type="file" name="thumbnail" accept="image/*" onChange={this.handleChange} value={this.state.file} ref={this.thumbnail} />
                         </label>
                     </div>
@@ -153,16 +156,20 @@ export default class CreateVideo extends React.Component {
                     </div>
                     <button className="btn btn-primary">Submit</button>
                     <div style={{ width: "300px", backgroundColor: "green", backgroundPosition: `${100 - this.state.progressValue}% 0` }}></div>
-                    
-                    
-                    <div className="progress" style={{ width: "500px" }}>
-                        <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
-                    </div>
+
                     {
-                        this.state.error ? 
-                        <p>Something went wrong. Please contact an administrator.</p>
+                        this.state.showBar ?
+                        <div className="progress" style={{ width: "500px" }}>
+                            <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
+                        </div>
                         :
                         null
+                    }
+                    {
+                        this.state.error ?
+                            <p>Something went wrong. Please contact an administrator.</p>
+                            :
+                            null
                     }
                 </form>
             </div>

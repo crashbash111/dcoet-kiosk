@@ -19,6 +19,7 @@ export default class CreateCategory extends React.Component
 
         this.handleChange = this.handleChange.bind( this );
         this.handleSubmit = this.handleSubmit.bind( this );
+        this.showError = this.showError.bind( this );
     }
 
     handleChange( event )
@@ -30,14 +31,17 @@ export default class CreateCategory extends React.Component
 
     handleSubmit( event )
     {
+        event.preventDefault();
+
+        this.showError();
+        return;
+
         if( this.state.name.length < 3 || this.state.description.length < 3 )
         {
             this.setState( { error: true } );
             return;
         }
-
-        console.log( this.state );
-        event.preventDefault();
+        
         let formData = new FormData();
 
         if (this.state.editMode) {
@@ -58,9 +62,18 @@ export default class CreateCategory extends React.Component
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ redirect: false });
+                //this.setState({ redirect: false });
+                this.props.handleSubmitted();
             })
-            .catch(err => console.log(err.response.data));
+            .catch(err => { console.log(err.response.data); this.showError() });
+    }
+
+    showError()
+    {
+        this.setState( { error: true } );
+        setTimeout( () => {
+            this.setState( { error: false } );
+        }).bind( this );
     }
 
     componentWillMount()
@@ -70,7 +83,8 @@ export default class CreateCategory extends React.Component
             this.setState( { loading: true } );
             fetch( "./api/categories/" + this.props.match.params.id )
                 .then( response => response.json() )
-                .then( data => this.setState( { name: data.name, description: data.description, loading: false } ) );
+                .then( data => this.setState( { name: data.name, description: data.description, loading: false } ) )
+                .catch( error => console.log( error ) );
         }
     }
 
@@ -81,6 +95,7 @@ export default class CreateCategory extends React.Component
                 <div className="container">
                     <h1>Create Category Page</h1>
                     <br />
+                    <Message shown={this.state.error} message={ "There was an error submitting." } color={ "red" } />
                     <form onSubmit={ this.handleSubmit } encType="multipart/form-data">
                         <div className="form-group">
                             <label><h3>Name</h3>
@@ -102,7 +117,7 @@ export default class CreateCategory extends React.Component
                             :
                             null
                         }
-                        <button className="btn btn-primary">Submit</button>
+                        <button className="btn btn-primary btn-square">Submit</button>
                     </form>
                 </div>
             </div>

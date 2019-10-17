@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 
+import AdminTable from "./AdminTable";
 import Highscores from "./Games/Highscores";
 import Loader from "../Loader";
 
@@ -75,9 +76,21 @@ export default class Games extends React.Component {
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.props.loading) {
             return <Loader />;
         }
+
+        const heads = [
+            { name: "id", text: "ID" },
+            { name: "name", text: "Name" },
+            { name: "description", text: "Description" },
+            { name: "enabled", text: "Enabled" },
+            { name: "actions", text: "Actions", actionType: "games" }
+        ];
+
+        //id	name	description	enabled	created_at	updated_at	image_path
+
+        return <AdminTable heads={ heads } items={ this.props.games } />
 
         if( this.state.highscoreId > 0 )
         {

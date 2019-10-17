@@ -15,11 +15,16 @@ export default class KioskPages extends React.Component
         };
 
         this.handleClick = this.handleClick.bind( this );
+        this.createClick = this.createClick.bind( this );
     }
 
     handleClick(i) {
         this.setState({ mode: i });
         console.log( this.state.mode );
+    }
+
+    createClick() {
+        this.setState( { mode: 1 } );
     }
 
     render() {
@@ -31,7 +36,7 @@ export default class KioskPages extends React.Component
 
         switch (this.state.mode) {
             case 0:
-                child = <ViewPowerpoints powerpoints={ this.props.powerpoints } loading={ this.props.loading } />
+                child = <ViewPowerpoints powerpoints={ this.props.powerpoints } loading={ this.props.loading } createClick={ this.createClick } />
                 break;
             case 1:
                 child = <CreatePowerpoint />

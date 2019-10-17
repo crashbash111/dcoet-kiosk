@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
+import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const LeastViewed = () => {
+const LeastViewed = ( { leastViewed, loading } ) => {
 
-    const [loading, setLoading] = useState(false);
-    const [leastViewed, setLeastViewed] = useState([]);
+    // const [loading, setLoading] = useState(false);
+    // const [leastViewed, setLeastViewed] = useState([]);
 
-    useEffect(() => {
-        const fetchLeastViewed = async () => {
-            setLoading(true);
-            const res = await Axios.get("./api/pages/leastviewed");
-            setLeastViewed(res.data);
-            setLoading(false);
-        }
-        fetchLeastViewed();
-    }, []);
+    // useEffect(() => {
+    //     const fetchLeastViewed = async () => {
+    //         setLoading(true);
+    //         const res = await Axios.get("./api/pages/leastviewed");
+    //         setLeastViewed(res.data);
+    //         setLoading(false);
+    //     }
+    //     fetchLeastViewed();
+    // }, []);
 
     if (loading) {
         return <Loader />;
     }
+
+    const heads = [
+        { name: "id", text: "ID" },
+        { name: "name", text: "Name" },
+        { name: "categoryname", text: "Category" },
+        { name: "times_viewed", text: "Times Viewed" }
+    ];
+
+    return <AdminTable heads={ heads } items={ leastViewed } />
 
     return (
         <div>

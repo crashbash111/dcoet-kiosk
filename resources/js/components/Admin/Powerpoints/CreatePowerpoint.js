@@ -101,7 +101,7 @@ export default class CreatePowerpoint extends React.Component {
                         </label>
                         <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
                     </div>
-                    <button className="btn btn-primary">Submit</button>
+                    <button className="btn btn-primary btn-square">Submit</button>
                 </form>
 
                 <div style={{ width: "200vh" }}>

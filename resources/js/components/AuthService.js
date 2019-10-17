@@ -18,6 +18,7 @@ export default class AuthService {
                 password: password
             })
         })
+        .then( response => response.json() )
         .then( res => {
             console.log( "ree" );
             console.log( res );
@@ -85,7 +86,7 @@ export default class AuthService {
             ...options
         })
         .then( this._checkStatus )
-        .then( response => response.json() );
+        //.then( response => response.json() );
     }
 
     _checkStatus( response )

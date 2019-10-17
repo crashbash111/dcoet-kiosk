@@ -99373,15 +99373,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Admin_CreatePowerpoint__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/Admin/CreatePowerpoint */ "./resources/js/pages/Admin/CreatePowerpoint.js");
 /* harmony import */ var _pages_Admin_CreateVideo__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/Admin/CreateVideo */ "./resources/js/pages/Admin/CreateVideo.js");
 /* harmony import */ var _pages_Admin_EditPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/Admin/EditPage */ "./resources/js/pages/Admin/EditPage.js");
-/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
-/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
-/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
-/* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.js");
-/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
-/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
-/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
-/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./history */ "./resources/js/history.js");
+/* harmony import */ var _components_ErrorCatch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/ErrorCatch */ "./resources/js/components/ErrorCatch.js");
+/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
+/* harmony import */ var _pages_KioskPage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/KioskPage */ "./resources/js/pages/KioskPage.js");
+/* harmony import */ var _pages_Layout__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/Layout */ "./resources/js/pages/Layout.js");
+/* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.js");
+/* harmony import */ var _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/PowerpointPage */ "./resources/js/pages/PowerpointPage.js");
+/* harmony import */ var _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/Admin/Powerpoints */ "./resources/js/pages/Admin/Powerpoints.js");
+/* harmony import */ var _pages_Splash__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/Splash */ "./resources/js/pages/Splash.js");
+/* harmony import */ var _pages_VideoPage__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/VideoPage */ "./resources/js/pages/VideoPage.js");
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./history */ "./resources/js/history.js");
 
  //import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
@@ -99405,15 +99406,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var app = document.getElementById('app');
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ErrorCatch__WEBPACK_IMPORTED_MODULE_13__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/splash",
-  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _pages_Splash__WEBPACK_IMPORTED_MODULE_20__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/kiosk/:id",
-  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_14__["default"]
+  component: _pages_KioskPage__WEBPACK_IMPORTED_MODULE_15__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin",
@@ -99433,15 +99435,15 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoints/:id",
-  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _pages_PowerpointPage__WEBPACK_IMPORTED_MODULE_18__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/powerpoints",
-  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _pages_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_19__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/videos/:id",
-  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_20__["default"]
+  component: _pages_VideoPage__WEBPACK_IMPORTED_MODULE_21__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/admin/createVideo/:id?",
@@ -99457,12 +99459,12 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/login",
-  component: _pages_Login__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _pages_Login__WEBPACK_IMPORTED_MODULE_17__["default"]
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
   exact: true,
   path: "/:category?",
-  component: _pages_Home__WEBPACK_IMPORTED_MODULE_13__["default"]
-})))), app);
+  component: _pages_Home__WEBPACK_IMPORTED_MODULE_14__["default"]
+}))))), app);
 
 /***/ }),
 
@@ -99726,12 +99728,24 @@ function (_React$Component) {
           heads = _this$props.heads,
           items = _this$props.items,
           actions = _this$props.actions,
+          createClick = _this$props.createClick,
           viewClick = _this$props.viewClick,
           editClick = _this$props.editClick,
           deleteClick = _this$props.deleteClick;
 
       if (items.length == 0) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Loading...");
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          style: {
+            textAlign: "center",
+            top: "5vh"
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "No items to display."), createClick != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "btn btn-square btn-primary",
+          onClick: function onClick(event) {
+            createClick();
+          }
+        }, "Create New") : null);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "No results to display :(");
       } //console.log("bee");
       //console.log(sortName);
 
@@ -100332,7 +100346,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
-          var x = _this5.grok.length;
+          _this5.addClick();
         }
       }, "Create New"))), child); // if (this.state.redirect) {
       //     return <Redirect to={`./createBannedWord/${this.state.redirectId}`} />
@@ -100703,7 +100717,7 @@ var ViewBannedWords = function ViewBannedWords(_ref) {
       })
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Item added successfully."));
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Banned Words"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: profaneView ? "btn btn-success" : "btn btn-warning",
+    className: profaneView ? "btn btn-success btn-square" : "btn btn-warning btn-square",
     onClick: profaneView ? function () {
       setProfaneView(false);
     } : function () {
@@ -100822,21 +100836,13 @@ var CategoryTable = function CategoryTable(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Dashboard_LeastViewed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Dashboard/LeastViewed */ "./resources/js/components/Admin/Dashboard/LeastViewed.js");
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
-/* harmony import */ var _Dashboard_MostViewed__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Dashboard/MostViewed */ "./resources/js/components/Admin/Dashboard/MostViewed.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Dashboard_LeastViewed__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Dashboard/LeastViewed */ "./resources/js/components/Admin/Dashboard/LeastViewed.js");
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
+/* harmony import */ var _Dashboard_MostViewed__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Dashboard/MostViewed */ "./resources/js/components/Admin/Dashboard/MostViewed.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -100851,106 +100857,86 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Dashboard = function Dashboard() {
+var Dashboard = function Dashboard(_ref) {
+  var mostViewed = _ref.mostViewed,
+      mostViewedLoading = _ref.mostViewedLoading,
+      leastViewed = _ref.leastViewed,
+      leastViewedLoading = _ref.leastViewedLoading;
+
   // const [mostViewed, setMostViewed] = useState([]);
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState2 = _slicedToArray(_useState, 2),
       mode = _useState2[0],
-      setMode = _useState2[1];
+      setMode = _useState2[1]; //const [leastViewed, setLeastViewed] = useState([]);
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      leastViewed = _useState4[0],
-      setLeastViewed = _useState4[1];
+      loading = _useState4[0],
+      setLoading = _useState4[1]; // useEffect(() => {
+  //     // const fetchMostViewed = async () => {
+  //     //     setLoading(true);
+  //     //     const res = await Axios.get("./api/pages/mostviewed");
+  //     //     setMostViewed(res.data);
+  //     //     //setLoading(false);
+  //     // }
+  //     // const fetchLeastViewed = async () => {
+  //     //     setLoading(true);
+  //     //     const res = await Axios.get("./api/pages/leastviewed");
+  //     //     setLeastViewed(res.data);
+  //     //     setLoading(false);
+  //     // }
+  //     // fetchMostViewed();
+  // }, []);
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      loading = _useState6[0],
-      setLoading = _useState6[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    // const fetchMostViewed = async () => {
-    //     setLoading(true);
-    //     const res = await Axios.get("./api/pages/mostviewed");
-    //     setMostViewed(res.data);
-    //     //setLoading(false);
-    // }
-    var fetchLeastViewed =
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                setLoading(true);
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("./api/pages/leastviewed");
-
-              case 3:
-                res = _context.sent;
-                setLeastViewed(res.data);
-                setLoading(false);
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function fetchLeastViewed() {
-        return _ref.apply(this, arguments);
-      };
-    }(); // fetchMostViewed();
-
-  }, []);
 
   if (loading) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   }
 
-  var child = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Dashboard");
+  var child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Dashboard");
 
   switch (mode) {
     case 0:
-      child = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Dashboard_MostViewed__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+      child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard_MostViewed__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        mostViewed: mostViewed,
+        loading: mostViewedLoading
+      });
       break;
 
     case 1:
-      child = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Dashboard_LeastViewed__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+      child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard_LeastViewed__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        leastViewed: leastViewed,
+        loading: leastViewedLoading
+      });
       break;
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: "inline-block"
     }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
     onClick: function onClick(event) {
       return setMode(0);
     }
-  }, "Most Viewed")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Most Viewed")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: "inline-block"
     }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
     onClick: function onClick(event) {
       return setMode(1);
     }
   }, "Least Viewed")), child);
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Dashboard_MostViewed__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Least Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard_MostViewed__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Least Viewed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "admin-table-new"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, leastViewed.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, leastViewed.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.categoryname), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.times_viewed));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.categoryname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.times_viewed));
   }))));
 };
 
@@ -100967,91 +100953,61 @@ var Dashboard = function Dashboard() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AdminTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../AdminTable */ "./resources/js/components/Admin/AdminTable.js");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Loader */ "./resources/js/components/Loader.js");
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var LeastViewed = function LeastViewed(_ref) {
+  var leastViewed = _ref.leastViewed,
+      loading = _ref.loading;
 
-
-var LeastViewed = function LeastViewed() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      leastViewed = _useState4[0],
-      setLeastViewed = _useState4[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var fetchLeastViewed =
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                setLoading(true);
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("./api/pages/leastviewed");
-
-              case 3:
-                res = _context.sent;
-                setLeastViewed(res.data);
-                setLoading(false);
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function fetchLeastViewed() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    fetchLeastViewed();
-  }, []);
-
+  // const [loading, setLoading] = useState(false);
+  // const [leastViewed, setLeastViewed] = useState([]);
+  // useEffect(() => {
+  //     const fetchLeastViewed = async () => {
+  //         setLoading(true);
+  //         const res = await Axios.get("./api/pages/leastviewed");
+  //         setLeastViewed(res.data);
+  //         setLoading(false);
+  //     }
+  //     fetchLeastViewed();
+  // }, []);
   if (loading) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+  var heads = [{
+    name: "id",
+    text: "ID"
+  }, {
+    name: "name",
+    text: "Name"
+  }, {
+    name: "categoryname",
+    text: "Category"
+  }, {
+    name: "times_viewed",
+    text: "Times Viewed"
+  }];
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    heads: heads,
+    items: leastViewed
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     className: "big-shadow"
-  }, "Least Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  }, "Least Viewed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "admin-table-new"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, leastViewed.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, leastViewed.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.categoryname), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.times_viewed));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.categoryname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.times_viewed));
   }))));
 };
 
@@ -101068,41 +101024,24 @@ var LeastViewed = function LeastViewed() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AdminTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../AdminTable */ "./resources/js/components/Admin/AdminTable.js");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Loader */ "./resources/js/components/Loader.js");
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var MostViewed = function MostViewed(_ref) {
+  var mostViewed = _ref.mostViewed,
+      loading = _ref.loading;
 
-
-var MostViewed = function MostViewed() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      mostViewed = _useState4[0],
-      setMostViewed = _useState4[1]; // useEffect(() => {
+  // const [loading, setLoading] = useState(false);
+  // const [mostViewed, setMostViewed] = useState([]);
+  // useEffect(() => {
   //     (async function() {
   //       setIsError(false);
   //       setIsLoading(true);
@@ -101120,68 +101059,53 @@ var MostViewed = function MostViewed() {
   //        */
   //     };
   //   }, [url])
-
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var fetchMostViewed =
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                setLoading(true);
-                _context.prev = 1;
-                _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("./api/pages/mostviewed");
-
-              case 4:
-                res = _context.sent;
-                setMostViewed(res.data);
-                _context.next = 11;
-                break;
-
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](1);
-                console.log(_context.t0);
-
-              case 11:
-                setLoading(false);
-
-              case 12:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[1, 8]]);
-      }));
-
-      return function fetchMostViewed() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    var x = fetchMostViewed();
-    return function () {};
-  }, []);
-
+  // useEffect(() => {
+  //     const fetchMostViewed = async () => {
+  //         setLoading(true);
+  //         try
+  //         {
+  //             const res = await Axios.get("./api/pages/mostviewed" );
+  //             setMostViewed(res.data);
+  //         }
+  //         catch( err )
+  //         {
+  //             console.log( err );
+  //         }
+  //         setLoading(false);
+  //     }
+  //     const x = fetchMostViewed();
+  //     return function() {
+  //     }
+  // }, []);
   if (loading) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+  var heads = [{
+    name: "id",
+    text: "ID"
+  }, {
+    name: "heading",
+    text: "Heading"
+  }, {
+    name: "categoryname",
+    text: "Category"
+  }, {
+    name: "times_viewed",
+    text: "Times Viewed"
+  }];
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    heads: heads,
+    items: mostViewed
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     className: "big-shadow"
-  }, "Most Viewed"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  }, "Most Viewed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "admin-table-new"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, mostViewed.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Heading"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Times Viewed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, mostViewed.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: item.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.categoryname), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, item.times_viewed));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.categoryname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.times_viewed));
   }))));
 };
 
@@ -101205,8 +101129,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Games_Highscores__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Games/Highscores */ "./resources/js/components/Admin/Games/Highscores.js");
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
+/* harmony import */ var _AdminTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AdminTable */ "./resources/js/components/Admin/AdminTable.js");
+/* harmony import */ var _Games_Highscores__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Games/Highscores */ "./resources/js/components/Admin/Games/Highscores.js");
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -101244,6 +101169,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -101418,12 +101344,35 @@ function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      if (this.state.loading) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+      if (this.props.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       }
 
+      var heads = [{
+        name: "id",
+        text: "ID"
+      }, {
+        name: "name",
+        text: "Name"
+      }, {
+        name: "description",
+        text: "Description"
+      }, {
+        name: "enabled",
+        text: "Enabled"
+      }, {
+        name: "actions",
+        text: "Actions",
+        actionType: "games"
+      }]; //id	name	description	enabled	created_at	updated_at	image_path
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AdminTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        heads: heads,
+        items: this.props.games
+      });
+
       if (this.state.highscoreId > 0) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Games_Highscores__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Games_Highscores__WEBPACK_IMPORTED_MODULE_4__["default"], {
           game: this.state.games.find(function (m) {
             return m.id == _this4.state.highscoreId;
           }),
@@ -101443,7 +101392,7 @@ function (_React$Component) {
             return _this4.handleEnableClick(item.id);
           },
           className: item.enabled == 1 ? "btn btn-danger btn-square" : "btn btn-success btn-square"
-        }, _this4.state.loadingItem == item.id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }, _this4.state.loadingItem == item.id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
           style: {
             position: "relative",
             top: "calc(50% - 0.5em)",
@@ -101668,7 +101617,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _KioskCategories_CreateCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./KioskCategories/CreateCategory */ "./resources/js/components/Admin/KioskCategories/CreateCategory.js");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader.js");
-/* harmony import */ var _KioskCategories_ViewCategories__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./KioskCategories/ViewCategories */ "./resources/js/components/Admin/KioskCategories/ViewCategories.js");
+/* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Message */ "./resources/js/components/Admin/Message.js");
+/* harmony import */ var _KioskCategories_ViewCategories__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./KioskCategories/ViewCategories */ "./resources/js/components/Admin/KioskCategories/ViewCategories.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101692,6 +101642,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var KioskCategories =
 /*#__PURE__*/
 function (_React$Component) {
@@ -101704,13 +101655,38 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(KioskCategories).call(this, props));
     _this.state = {
-      mode: 0
+      mode: 0,
+      addedSuccessfully: false
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleCreateClick = _this.handleCreateClick.bind(_assertThisInitialized(_this));
+    _this.handleSubmitted = _this.handleSubmitted.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(KioskCategories, [{
+    key: "handleCreateClick",
+    value: function handleCreateClick() {
+      this.setState({
+        mode: 1
+      });
+    }
+  }, {
+    key: "handleSubmitted",
+    value: function handleSubmitted() {
+      var _this2 = this;
+
+      this.setState({
+        mode: 0,
+        addedSuccessfully: true
+      });
+      setTimeout(function () {
+        _this2.setState({
+          addedSuccessfully: false
+        });
+      }).bind(this);
+    }
+  }, {
     key: "handleClick",
     value: function handleClick(i) {
       this.setState({
@@ -101721,7 +101697,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.state.loading) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null);
@@ -101731,14 +101707,18 @@ function (_React$Component) {
 
       switch (this.state.mode) {
         case 0:
-          child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_KioskCategories_ViewCategories__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_KioskCategories_ViewCategories__WEBPACK_IMPORTED_MODULE_4__["default"], {
             categories: this.props.categories,
+            createClick: this.handleCreateClick,
+            handleEditClick: this.handleEditClick,
             loading: this.props.loading
           });
           break;
 
         case 1:
-          child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_KioskCategories_CreateCategory__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+          child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_KioskCategories_CreateCategory__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            handleSubmitted: this.handleSubmitted
+          });
           break;
       }
 
@@ -101749,7 +101729,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: this.state.mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
-          return _this2.handleClick(0);
+          return _this3.handleClick(0);
         }
       }, "View")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -101758,9 +101738,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square",
         onClick: function onClick(event) {
-          return _this2.handleClick(1);
+          return _this3.handleClick(1);
         }
-      }, "Create New")), child);
+      }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Message__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        shown: this.state.addedSuccessfully,
+        message: "Added successfully."
+      }), child);
     }
   }]);
 
@@ -101829,6 +101812,7 @@ function (_React$Component) {
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.showError = _this.showError.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -101845,6 +101829,10 @@ function (_React$Component) {
     value: function handleSubmit(event) {
       var _this2 = this;
 
+      event.preventDefault();
+      this.showError();
+      return;
+
       if (this.state.name.length < 3 || this.state.description.length < 3) {
         this.setState({
           error: true
@@ -101852,8 +101840,6 @@ function (_React$Component) {
         return;
       }
 
-      console.log(this.state);
-      event.preventDefault();
       var formData = new FormData();
 
       if (this.state.editMode) {
@@ -101871,19 +101857,33 @@ function (_React$Component) {
         },
         data: formData
       }).then(function (response) {
-        console.log("from form submit ", response);
+        console.log("from form submit ", response); //this.setState({ redirect: false });
 
-        _this2.setState({
-          redirect: false
-        });
+        _this2.props.handleSubmitted();
       })["catch"](function (err) {
-        return console.log(err.response.data);
+        console.log(err.response.data);
+
+        _this2.showError();
       });
+    }
+  }, {
+    key: "showError",
+    value: function showError() {
+      var _this3 = this;
+
+      this.setState({
+        error: true
+      });
+      setTimeout(function () {
+        _this3.setState({
+          error: false
+        });
+      }).bind(this);
     }
   }, {
     key: "componentWillMount",
     value: function componentWillMount() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.state.editMode) {
         this.setState({
@@ -101892,11 +101892,13 @@ function (_React$Component) {
         fetch("./api/categories/" + this.props.match.params.id).then(function (response) {
           return response.json();
         }).then(function (data) {
-          return _this3.setState({
+          return _this4.setState({
             name: data.name,
             description: data.description,
             loading: false
           });
+        })["catch"](function (error) {
+          return console.log(error);
         });
       }
     }
@@ -101909,7 +101911,11 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Category Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Category Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Message, {
+        shown: this.state.error,
+        message: "There was an error submitting.",
+        color: "red"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         encType: "multipart/form-data"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -101941,7 +101947,7 @@ function (_React$Component) {
           display: this.state.description.length > 3 ? "none" : "block"
         }
       }, "Description is required")), this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to check all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary"
+        className: "btn btn-primary btn-square"
       }, "Submit"))));
     }
   }]);
@@ -101978,7 +101984,8 @@ __webpack_require__.r(__webpack_exports__);
 var ViewCategories = function ViewCategories(_ref) {
   var history = _ref.history,
       categories = _ref.categories,
-      loading = _ref.loading;
+      loading = _ref.loading,
+      createClick = _ref.createClick;
 
   // const [categories, setCategories] = useState([]);
   // const [loading, setLoading] = useState(false);
@@ -102019,6 +102026,7 @@ var ViewCategories = function ViewCategories(_ref) {
     heads: heads,
     items: categories,
     actions: ["Edit", "Delete"],
+    createClick: createClick,
     editClick: editClick
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102099,6 +102107,7 @@ function (_React$Component) {
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleEditClick = _this.handleEditClick.bind(_assertThisInitialized(_this));
+    _this.handleCreateClick = _this.handleCreateClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -102109,6 +102118,13 @@ function (_React$Component) {
         mode: i
       });
       console.log(this.state.mode);
+    }
+  }, {
+    key: "handleCreateClick",
+    value: function handleCreateClick() {
+      this.setState({
+        mode: 1
+      });
     }
   }, {
     key: "handleEditClick",
@@ -102133,6 +102149,7 @@ function (_React$Component) {
         case 0:
           child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_KioskPages_ViewPages__WEBPACK_IMPORTED_MODULE_3__["default"], {
             pages: this.props.pages,
+            handleCreateClick: this.handleCreateClick,
             loading: this.props.loading,
             handleEditClick: this.handleEditClick
           });
@@ -102216,7 +102233,8 @@ var ViewPages = function ViewPages(_ref) {
   var history = _ref.history,
       pages = _ref.pages,
       loading = _ref.loading,
-      handleEditClick = _ref.handleEditClick;
+      handleEditClick = _ref.handleEditClick,
+      handleCreateClick = _ref.handleCreateClick;
 
   //const [pages, setPages] = useState([]);
   //const [loading, setLoading] = useState(false);
@@ -102279,6 +102297,7 @@ var ViewPages = function ViewPages(_ref) {
     heads: heads,
     items: pages,
     actions: ["View", "Edit", "Delete"],
+    createClick: handleCreateClick,
     viewClick: viewClick,
     editClick: handleEditClick
   });
@@ -102308,6 +102327,62 @@ var ViewPages = function ViewPages(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(ViewPages));
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Message.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/Admin/Message.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var Message = function Message(_ref) {
+  var shown = _ref.shown,
+      message = _ref.message,
+      color = _ref.color;
+  var expand = Object(react__WEBPACK_IMPORTED_MODULE_0__["useTransition"])(shown, null, {
+    from: {
+      opacity: 0,
+      padding: "0px"
+    },
+    enter: {
+      opacity: 100,
+      padding: "20px"
+    },
+    leave: {
+      opacity: 0,
+      padding: "0px",
+      height: "0px"
+    }
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, expand.map(function (_ref2) {
+    var item = _ref2.item,
+        props = _ref2.props,
+        key = _ref2.key;
+    return item && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(animated.div, {
+      key: key,
+      style: _objectSpread({}, props, {
+        backgroundColor: color != null ? color : "green",
+        width: "100vh"
+      })
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, message));
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Message);
 
 /***/ }),
 
@@ -102364,6 +102439,7 @@ function (_React$Component) {
       mode: 0
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.createClick = _this.createClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -102374,6 +102450,13 @@ function (_React$Component) {
         mode: i
       });
       console.log(this.state.mode);
+    }
+  }, {
+    key: "createClick",
+    value: function createClick() {
+      this.setState({
+        mode: 1
+      });
     }
   }, {
     key: "render",
@@ -102390,7 +102473,8 @@ function (_React$Component) {
         case 0:
           child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Powerpoints_ViewPowerpoints__WEBPACK_IMPORTED_MODULE_3__["default"], {
             powerpoints: this.props.powerpoints,
-            loading: this.props.loading
+            loading: this.props.loading,
+            createClick: this.createClick
           });
           break;
 
@@ -102595,7 +102679,7 @@ function (_React$Component) {
           display: this.state.file == null ? "none" : "block"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Note that the best image size is above 512x512"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary"
+        className: "btn btn-primary btn-square"
       }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           width: "200vh"
@@ -102636,7 +102720,8 @@ __webpack_require__.r(__webpack_exports__);
 var ViewPowerpoints = function ViewPowerpoints(_ref) {
   var history = _ref.history,
       powerpoints = _ref.powerpoints,
-      loading = _ref.loading;
+      loading = _ref.loading,
+      createClick = _ref.createClick;
 
   // const [powerpoints, setPowerpoints] = useState([]);
   // const [loading, setLoading] = useState(false);
@@ -102678,6 +102763,7 @@ var ViewPowerpoints = function ViewPowerpoints(_ref) {
     heads: heads,
     items: powerpoints,
     actions: ["View", "Edit", "Delete"],
+    createClick: createClick,
     viewClick: viewClick,
     editClick: editClick
   });
@@ -102875,7 +102961,8 @@ function (_React$Component) {
       copyright: "",
       length: -1,
       progressValue: 0,
-      error: false
+      error: false,
+      showBar: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
@@ -102894,6 +102981,9 @@ function (_React$Component) {
           name = _event$target.name,
           value = _event$target.value,
           files = _event$target.files;
+      this.setState({
+        showBar: false
+      });
 
       if (name != "video" || name != "thumbnail") {
         this.setState(_defineProperty({}, name, value));
@@ -102925,6 +103015,9 @@ function (_React$Component) {
         formData.append("thumbnail", this.thumbnail.current.files[0], this.thumbnail.current.files[0].name);
       }
 
+      this.setState({
+        showBar: true
+      });
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         onUploadProgress: function onUploadProgress(progressEvent) {
           var totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
@@ -103070,7 +103163,7 @@ function (_React$Component) {
           backgroundColor: "green",
           backgroundPosition: "".concat(100 - this.state.progressValue, "% 0")
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), this.state.showBar ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "progress",
         style: {
           width: "500px"
@@ -103083,7 +103176,7 @@ function (_React$Component) {
           backgroundColor: this.state.error ? "red" : "green",
           width: "".concat(this.state.progressValue, "%")
         }
-      }, this.state.progressValue, "%")), this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Something went wrong. Please contact an administrator.") : null));
+      }, this.state.progressValue, "%")) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Something went wrong. Please contact an administrator.") : null));
     }
   }]);
 
@@ -103247,6 +103340,8 @@ function () {
           email: username,
           password: password
         })
+      }).then(function (response) {
+        return response.json();
       }).then(function (res) {
         console.log("ree");
         console.log(res);
@@ -103321,9 +103416,7 @@ function () {
 
       return fetch(url, _objectSpread({
         headers: headers
-      }, options)).then(this._checkStatus).then(function (response) {
-        return response.json();
-      });
+      }, options)).then(this._checkStatus); //.then( response => response.json() );
     })
   }, {
     key: "_checkStatus",
@@ -104528,6 +104621,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Admin_Powerpoints__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Admin/Powerpoints */ "./resources/js/components/Admin/Powerpoints.js");
 /* harmony import */ var _components_Admin_Videos__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Admin/Videos */ "./resources/js/components/Admin/Videos.js");
 /* harmony import */ var _components_ErrorCatch__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/ErrorCatch */ "./resources/js/components/ErrorCatch.js");
+/* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
+/* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_18__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104555,6 +104650,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var Auth = new _components_AuthService__WEBPACK_IMPORTED_MODULE_2__["default"]();
 
  // import AdminTable from "../components/AdminTable";
+
 
 
 
@@ -104608,12 +104704,18 @@ function (_React$Component) {
     });
 
     _this.state = {
+      mostViewed: [],
+      mostViewedLoading: false,
+      leastViewed: [],
+      leastViewedLoading: false,
       pages: [],
       pagesLoading: false,
       categories: [],
       categoriesLoading: false,
       powerpoints: [],
       powerpointsLoading: false,
+      games: [],
+      gamesLoading: false,
       bannedWords: [],
       bannedWordsLoading: false,
       videos: [],
@@ -104637,9 +104739,12 @@ function (_React$Component) {
     _this.handleTabClick = _this.handleTabClick.bind(_assertThisInitialized(_this));
     _this.categoryClick = _this.categoryClick.bind(_assertThisInitialized(_this));
     _this.toggleSidebar = _this.toggleSidebar.bind(_assertThisInitialized(_this));
+    _this.fetchMostViewed = _this.fetchMostViewed.bind(_assertThisInitialized(_this));
+    _this.fetchLeastViewed = _this.fetchLeastViewed.bind(_assertThisInitialized(_this));
     _this.fetchPages = _this.fetchPages.bind(_assertThisInitialized(_this));
     _this.fetchCategories = _this.fetchCategories.bind(_assertThisInitialized(_this));
     _this.fetchPowerpoints = _this.fetchPowerpoints.bind(_assertThisInitialized(_this));
+    _this.fetchGames = _this.fetchGames.bind(_assertThisInitialized(_this));
     _this.fetchBannedWords = _this.fetchBannedWords.bind(_assertThisInitialized(_this));
     _this.fetchVideos = _this.fetchVideos.bind(_assertThisInitialized(_this));
     return _this;
@@ -104657,35 +104762,79 @@ function (_React$Component) {
       this.setState({
         loading: true
       });
+      this.fetchMostViewed();
+      this.fetchLeastViewed();
       this.fetchPages();
       this.fetchCategories();
       this.fetchPowerpoints();
+      this.fetchGames();
       this.fetchBannedWords();
       this.fetchVideos();
     }
   }, {
-    key: "fetchPages",
-    value: function fetchPages() {
+    key: "fetchMostViewed",
+    value: function fetchMostViewed() {
       var _this2 = this;
 
       this.setState({
-        pagesLoading: true
+        mostViewedLoading: true
       });
-      fetch("./api/pages").then(function (response) {
+      Auth.fetch("./api/pages/mostviewed").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.setState({
-          pages: data,
-          pagesLoading: false
+          mostViewed: data,
+          mostViewedLoading: false
         });
       })["catch"](function (error) {
         return console.log(error);
       });
     }
   }, {
+    key: "fetchLeastViewed",
+    value: function fetchLeastViewed() {
+      var _this3 = this;
+
+      this.setState({
+        leastViewedLoading: true
+      });
+      Auth.fetch("./api/pages/leastviewed").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this3.setState({
+          leastViewed: data,
+          leastViewedLoading: false
+        });
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }, {
+    key: "fetchPages",
+    value: function fetchPages() {
+      var _this4 = this;
+
+      this.setState({
+        pagesLoading: true
+      });
+      Auth.fetch("./api/pages").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this4.setState({
+          pages: data,
+          pagesLoading: false
+        });
+      })["catch"](function (error) {
+        return console.log(error);
+      }); // fetch( "./api/pages" )
+      //     .then(response => response.json())
+      //     .then(data => this.setState({ pages: data, pagesLoading: false }))
+      //     .catch(error => console.log(error));
+    }
+  }, {
     key: "fetchCategories",
     value: function fetchCategories() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.setState({
         categoriesLoading: true
@@ -104693,7 +104842,7 @@ function (_React$Component) {
       fetch("./api/categories").then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this3.setState({
+        return _this5.setState({
           categories: data,
           categoriesLoading: false
         });
@@ -104704,7 +104853,7 @@ function (_React$Component) {
   }, {
     key: "fetchPowerpoints",
     value: function fetchPowerpoints() {
-      var _this4 = this;
+      var _this6 = this;
 
       this.setState({
         powerpointsLoading: true
@@ -104712,7 +104861,7 @@ function (_React$Component) {
       fetch("./api/powerpoints").then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this4.setState({
+        return _this6.setState({
           powerpoints: data,
           powerpointsLoading: false
         });
@@ -104721,9 +104870,28 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "fetchGames",
+    value: function fetchGames() {
+      var _this7 = this;
+
+      this.setState({
+        gamesLoading: true
+      });
+      Auth.fetch("./api/games").then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this7.setState({
+          games: data,
+          gamesLoading: false
+        });
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }, {
     key: "fetchBannedWords",
     value: function fetchBannedWords() {
-      var _this5 = this;
+      var _this8 = this;
 
       this.setState({
         bannedWordsLoading: true
@@ -104731,12 +104899,10 @@ function (_React$Component) {
       fetch("./api/bannedwords").then(function (response) {
         return response.json();
       }).then(function (data) {
-        _this5.setState({
+        return _this8.setState({
           bannedWords: data,
           bannedWordsLoading: false
         });
-
-        console.log(data);
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -104744,7 +104910,7 @@ function (_React$Component) {
   }, {
     key: "fetchVideos",
     value: function fetchVideos() {
-      var _this6 = this;
+      var _this9 = this;
 
       this.setState({
         videosLoading: true
@@ -104752,7 +104918,7 @@ function (_React$Component) {
       fetch("./api/videos").then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this6.setState({
+        return _this9.setState({
           videos: data,
           videosLoading: false
         });
@@ -104819,7 +104985,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this7 = this;
+      var _this10 = this;
 
       //variables for page sizing (dynamic rendering)
       var width = this.state.width;
@@ -104828,14 +104994,20 @@ function (_React$Component) {
       var indexOfLastPage = this.state.currentPage * this.state.postsPerPage;
       var indexOfFirstPage = indexOfLastPage - this.state.postsPerPage;
       var filteredPages = this.state.pages.filter(function (m) {
-        return m.category_id == _this7.state.activeCategory;
+        return m.category_id == _this10.state.activeCategory;
       });
       var currentPages = filteredPages.slice(indexOfFirstPage, indexOfLastPage); //object array to define the entries on the sidebar and what components they map to
 
       var items = [{
         id: 0,
         text: "Dashboard",
-        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_11__["default"], null)
+        component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          key: 0,
+          mostViewed: this.state.mostViewed,
+          mostViewedLoading: this.state.mostViewedLoading,
+          leastViewed: this.state.leastViewed,
+          leastViewedLoading: this.state.leastViewedLoading
+        })
       }, {
         id: 1,
         text: "Kiosk Pages",
@@ -104864,7 +105036,9 @@ function (_React$Component) {
         id: 4,
         text: "Games",
         component: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Admin_Games__WEBPACK_IMPORTED_MODULE_12__["default"], {
-          key: 4
+          key: 4,
+          games: this.state.games,
+          loading: this.state.gamesLoading
         })
       }, {
         id: 5,
@@ -104887,11 +105061,10 @@ function (_React$Component) {
       var child = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Please select a category"); //find the right component to render
 
       child = items.map(function (item) {
-        if (item.id == _this7.state.tabIndex) {
+        if (item.id == _this10.state.tabIndex) {
           return item.component;
         }
       });
-      console.log(this.props.user);
       var verticalCenter = {
         margin: "0",
         position: "absolute",
@@ -104910,7 +105083,7 @@ function (_React$Component) {
         ref: this._sidebarRef
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          minHeight: "105vh",
+          minHeight: "100vh",
           backgroundImage: "url( \"./images/background_main_dark.jpg\" )",
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
@@ -106047,7 +106220,7 @@ function (_React$Component) {
             width: "100%",
             height: "100%"
           },
-          className: softDeleted ? "btn btn-primary" : "btn btn-danger",
+          className: softDeleted ? "btn btn-primary btn-square" : "btn btn-danger btn-square",
           onClick: softDeleted ? _this4.handleStatDeleteUndo(idx) : _this4.handleStatRemove(idx)
         }, softDeleted ? "Undo" : "Delete"))));
       });
@@ -106294,7 +106467,7 @@ function (_React$Component) {
       }, "Current audios"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, oldAudios)) : null, this.audios.current != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "big-shadow"
       }, "Currently selected audio files"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to fulfill all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary"
+        className: "btn btn-primary btn-square"
       }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
         style: {
           position: "fixed"
@@ -108937,8 +109110,8 @@ function PostData(type, userData) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

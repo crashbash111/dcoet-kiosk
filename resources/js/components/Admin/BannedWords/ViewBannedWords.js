@@ -69,7 +69,7 @@ const ViewBannedWords = ({ history, bannedWords, loading, addedSuccessfully }) =
                 ))
             }
             <h2>Banned Words</h2>
-            <button className={profaneView ? "btn btn-success" : "btn btn-warning"} onClick={profaneView ? () => { setProfaneView(false) } : () => { setProfaneView(true) }}>Turn profane view {profaneView ? "on" : "off"}</button>
+            <button className={profaneView ? "btn btn-success btn-square" : "btn btn-warning btn-square"} onClick={profaneView ? () => { setProfaneView(false) } : () => { setProfaneView(true) }}>Turn profane view {profaneView ? "on" : "off"}</button>
             <AdminTable heads={heads} items={bw} actions={["Edit", "Delete"]} editClick={editClick} />
         </div>
     );

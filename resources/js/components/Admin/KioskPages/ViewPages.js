@@ -6,7 +6,7 @@ import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 import Pagination from "../../Pagination";
 
-const ViewPages = ({history, pages, loading, handleEditClick }) => {
+const ViewPages = ({history, pages, loading, handleEditClick, handleCreateClick }) => {
 
     //const [pages, setPages] = useState([]);
     //const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ const ViewPages = ({history, pages, loading, handleEditClick }) => {
         { name: "actions", text: "Actions" }
     ];
 
-    return <AdminTable heads={ heads } items={ pages } actions={ [ "View", "Edit", "Delete" ] } viewClick={ viewClick } editClick={ handleEditClick } />
+    return <AdminTable heads={ heads } items={ pages } actions={ [ "View", "Edit", "Delete" ] } createClick={ handleCreateClick } viewClick={ viewClick } editClick={ handleEditClick } />
 
     return (
         <div>

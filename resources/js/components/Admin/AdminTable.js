@@ -67,10 +67,16 @@ class AdminTable extends React.Component {
 
     render() {
         const { sortName, sortDirection, currentPage, itemsPerPage } = this.state;
-        const { heads, items, actions, viewClick, editClick, deleteClick } = this.props;
+        const { heads, items, actions, createClick, viewClick, editClick, deleteClick } = this.props;
 
         if (items.length == 0) {
-            return <h2>Loading...</h2>;
+            return <div style={{ textAlign: "center", top: "5vh" }}>
+                    <h2>No items to display.</h2>
+                    {
+                        createClick != null ? <button className="btn btn-square btn-primary" onClick={ (event) => { createClick() } }>Create New</button> : null
+                    }
+                </div>
+            return <h2>No results to display :(</h2>;
         }
 
         //console.log("bee");
