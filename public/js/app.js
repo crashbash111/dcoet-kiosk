@@ -100987,8 +100987,8 @@ var LeastViewed = function LeastViewed(_ref) {
     name: "id",
     text: "ID"
   }, {
-    name: "name",
-    text: "Name"
+    name: "heading",
+    text: "Heading"
   }, {
     name: "categoryname",
     text: "Category"
@@ -101360,16 +101360,8 @@ function (_React$Component) {
       }, {
         name: "enabled",
         text: "Enabled"
-      }, {
-        name: "actions",
-        text: "Actions",
-        actionType: "games"
       }]; //id	name	description	enabled	created_at	updated_at	image_path
-
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AdminTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        heads: heads,
-        items: this.props.games
-      });
+      //return <AdminTable heads={ heads } items={ this.props.games } />
 
       if (this.state.highscoreId > 0) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Games_Highscores__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -101740,10 +101732,7 @@ function (_React$Component) {
         onClick: function onClick(event) {
           return _this3.handleClick(1);
         }
-      }, "Create New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Message__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        shown: this.state.addedSuccessfully,
-        message: "Added successfully."
-      }), child);
+      }, "Create New")), child);
     }
   }]);
 
@@ -101911,11 +101900,7 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Category Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Message, {
-        shown: this.state.error,
-        message: "There was an error submitting.",
-        color: "red"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Category Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         encType: "multipart/form-data"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104215,11 +104200,10 @@ function (_React$Component) {
           transform: "translateY(0px)"
         }
       }, function (paramx) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "#/kiosk/".concat(_this2.props.item.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: _this2.props.item.id,
-          onClick: function onClick() {
-            return _this2.props.handleClick(_this2.props.item.id);
-          },
           "data-role": "tile",
           "data-cover": path,
           "data-size": "large",
@@ -104237,7 +104221,7 @@ function (_React$Component) {
           style: {
             textShadow: "2px 2px #111111"
           }
-        }, _this2.props.flag == "game" ? _this2.props.item.name : _this2.props.flag == "video" ? _this2.props.item.title : _this2.props.item.heading));
+        }, _this2.props.flag == "game" ? _this2.props.item.name : _this2.props.flag == "video" ? _this2.props.item.title : _this2.props.item.heading)));
       });
     }
   }]);
@@ -109110,8 +109094,8 @@ function PostData(type, userData) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Programs\xampp\htdocs\dcoet-kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -84,13 +84,12 @@ export default class Games extends React.Component {
             { name: "id", text: "ID" },
             { name: "name", text: "Name" },
             { name: "description", text: "Description" },
-            { name: "enabled", text: "Enabled" },
-            { name: "actions", text: "Actions", actionType: "games" }
+            { name: "enabled", text: "Enabled" }
         ];
 
         //id	name	description	enabled	created_at	updated_at	image_path
 
-        return <AdminTable heads={ heads } items={ this.props.games } />
+        //return <AdminTable heads={ heads } items={ this.props.games } />
 
         if( this.state.highscoreId > 0 )
         {

@@ -62,7 +62,7 @@ export default class KioskCategories extends React.Component {
             <div style={{ display: "inline-block" }}>
                 <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
-            <Message shown={this.state.addedSuccessfully} message={"Added successfully."} />
+            {/* <Message shown={this.state.addedSuccessfully} message={"Added successfully."} /> */}
             {child}
         </div>
     }

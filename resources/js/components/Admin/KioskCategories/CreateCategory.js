@@ -95,7 +95,7 @@ export default class CreateCategory extends React.Component
                 <div className="container">
                     <h1>Create Category Page</h1>
                     <br />
-                    <Message shown={this.state.error} message={ "There was an error submitting." } color={ "red" } />
+                    {/* <Message shown={this.state.error} message={ "There was an error submitting." } color={ "red" } /> */}
                     <form onSubmit={ this.handleSubmit } encType="multipart/form-data">
                         <div className="form-group">
                             <label><h3>Name</h3>

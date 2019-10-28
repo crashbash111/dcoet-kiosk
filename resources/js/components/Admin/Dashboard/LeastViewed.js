@@ -25,7 +25,7 @@ const LeastViewed = ( { leastViewed, loading } ) => {
 
     const heads = [
         { name: "id", text: "ID" },
-        { name: "name", text: "Name" },
+        { name: "heading", text: "Heading" },
         { name: "categoryname", text: "Category" },
         { name: "times_viewed", text: "Times Viewed" }
     ];
