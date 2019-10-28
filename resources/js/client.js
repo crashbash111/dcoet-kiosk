@@ -30,7 +30,7 @@ const app = document.getElementById('app');
 ReactDOM.render(
     <ErrorCatch>
         <HashRouter>
-            <div>
+            <div style={{ width: "100%", height: "100%"}}>
                 <Switch>
                     <Route exact path="/splash" component={Splash} />
                     {/* <Route exact path="/kiosk" component={CategoryIndex} /> */}

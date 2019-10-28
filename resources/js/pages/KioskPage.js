@@ -1,3 +1,5 @@
+'use strict';
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -5,7 +7,8 @@ import { Spring } from 'react-spring/renderprops';
 import { useSpring, animated, interpolate } from 'react-spring';
 import { Palette } from 'react-palette';
 import { useGesture } from 'react-with-gesture';
-import { blockStatement, whileStatement } from "@babel/types";
+
+import Slider from "../components/Slider";
 
 export default class KioskPage extends React.Component {
 
@@ -25,6 +28,9 @@ export default class KioskPage extends React.Component {
 
         this.fade = this.fade.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.slideTransitionEnd = this.slideTransitionEnd.bind( this );
+
+        this.sliderRef = React.createRef();
     }
 
     componentWillMount() {
@@ -58,9 +64,14 @@ export default class KioskPage extends React.Component {
         });
     }
 
-    
+    slideTransitionEnd( index, elem )
+    {
+        this.setState( { index: index } );
+    }
 
     render() {
+
+        let swipeE1;
 
         if (this.state.loading) {
             return (
@@ -110,8 +121,11 @@ export default class KioskPage extends React.Component {
                 )
             });
 
-
-
+            // return (
+            //     <div style={{ width: "100%", height: "100%", position: "absolute" }}>
+            //         <Slider />
+            //     </div>
+            // );
 
             return (
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
@@ -120,7 +134,10 @@ export default class KioskPage extends React.Component {
                             <Palette src={imgPath}>
                                 {(palette) => (
                                     <div>
-                                        <div onClick={this.handleClick}
+                                        <div style={{ width: "100%", height: "100%", position: "absolute" }}>
+                    <Slider slideTransitionEnd={ this.slideTransitionEnd } items={ this.state.page.images } sliderRef={ this.sliderRef } />
+                </div>
+                                        {/* <div onClick={this.handleClick}
                                             scr={imgPath}
                                             onError={() => this.div.style = { backgroundImage: "url(' ./storage/ui/err.png ')" }}
                                             style={{
@@ -131,7 +148,7 @@ export default class KioskPage extends React.Component {
                                                 backgroundPosition: "center",
                                                 backgroundSize: "cover",
                                                 transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
-                                            }} >
+                                            }} > */}
                                             <div className="hideScroll"
                                                 style={{
                                                     //styling for the side panel
@@ -186,7 +203,7 @@ export default class KioskPage extends React.Component {
                                                     }} >&#8592; Back to Home</Link>
                                             </div>
 
-                                        </div>
+                                        {/* </div> */}
                                         <div onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
                                             backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
                                             color: !palette.loading ? palette.data.darkMuted : "white",
