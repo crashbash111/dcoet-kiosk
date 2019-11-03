@@ -28,7 +28,7 @@ export default class KioskPage extends React.Component {
 
         this.fade = this.fade.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.slideTransitionEnd = this.slideTransitionEnd.bind( this );
+        this.slideTransitionEnd = this.slideTransitionEnd.bind(this);
 
         this.sliderRef = React.createRef();
     }
@@ -64,9 +64,8 @@ export default class KioskPage extends React.Component {
         });
     }
 
-    slideTransitionEnd( index, elem )
-    {
-        this.setState( { index: index } );
+    slideTransitionEnd(index, elem) {
+        this.setState({ index: index });
     }
 
     render() {
@@ -89,7 +88,7 @@ export default class KioskPage extends React.Component {
                 dotimgnav = this.state.page.images.map(item => {
                     i++;
                     return (
-                        <span index={i} className="dotimagenav" style={{
+                        <span key={i} index={item.id} className="dotimagenav" style={{
                             backgroundColor: i == this.state.index ? "white" : "darkgray",
                             transition: this.state.transitionTime,
                             opacity: i == this.state.index ? "1" : "0.8",
@@ -127,16 +126,19 @@ export default class KioskPage extends React.Component {
             //     </div>
             // );
 
+            let c = 0;
             return (
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
-                    {props => (
-                        <div className="hideScroll fixTransitions" style={props}>
+                    {props => {
+                        let c = 0;
+                        let f = 0;
+                        return <div key={c++} className="hideScroll fixTransitions" style={props}>
                             <Palette src={imgPath}>
                                 {(palette) => (
-                                    <div>
+                                    <div key={f++}>
                                         <div style={{ width: "100%", height: "100%", position: "absolute" }}>
-                    <Slider slideTransitionEnd={ this.slideTransitionEnd } items={ this.state.page.images } sliderRef={ this.sliderRef } />
-                </div>
+                                            <Slider slideTransitionEnd={this.slideTransitionEnd} startIndex={this.state.index} items={this.state.page.images} sliderRef={this.sliderRef} />
+                                        </div>
                                         {/* <div onClick={this.handleClick}
                                             scr={imgPath}
                                             onError={() => this.div.style = { backgroundImage: "url(' ./storage/ui/err.png ')" }}
@@ -149,59 +151,59 @@ export default class KioskPage extends React.Component {
                                                 backgroundSize: "cover",
                                                 transition: this.state.transitionTime,//"background-image " + this.state.transitionTime + ", background-color " + this.state.transitionTime,
                                             }} > */}
-                                            <div className="hideScroll"
-                                                style={{
-                                                    //styling for the side panel
-                                                    height: "100vh",
-                                                    width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    overflowY: "hidden",
-                                                    overflowX: "hidden",
-                                                    opacity: "0.8",
-                                                    transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
-                                                    backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
-                                                    color: !palette.loading ? palette.data.darkMuted : "white",
-                                                }}>
+                                        <div className="hideScroll"
+                                            style={{
+                                                //styling for the side panel
+                                                height: "100vh",
+                                                width: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                overflowY: "hidden",
+                                                overflowX: "hidden",
+                                                opacity: "0.8",
+                                                transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
+                                                backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
+                                                color: !palette.loading ? palette.data.darkMuted : "white",
+                                            }}>
 
-                                                <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
+                                            <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
 
 
-                                                <div className="hideScroll" style={{
-                                                    overflowY: "scroll",
-                                                    width: "100%",
-                                                    flex: "1",
-                                                    padding: this.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
-                                                    background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
-                                                }}>
-                                                    {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                                    {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
-                                                    <p style={{
-                                                        fontSize: "28px",
-                                                        textAlign: "left",
-                                                        paddingBottom: "5px",
-                                                    }}>{this.state.page.shortdesc}
-                                                    </p>
-                                                    <p style={{
-                                                        fontSize: "18px",
-                                                        textAlign: "justify",
-                                                        paddingBottom: "50px",
-                                                    }}>{this.state.page.longdesc}
-                                                    </p>
-                                                </div>
-                                                <Link to={`/${this.state.page.category_id}`} className="returns"
-                                                    style={{
-                                                        color: palette.loading ? "white" : palette.data.lightVibrant,
-                                                        padding: "8px 8px 8px 32px",
-                                                        width: this.state.sideSize + "vw",
-                                                        display: "block",
-                                                        bottom: "0px",
-                                                        position: "absolute",
-                                                        textDecoration: "none",
-                                                        fontSize: "25px",
-                                                        transition: this.state.transitionTime,
-                                                    }} >&#8592; Back to Home</Link>
+                                            <div className="hideScroll" style={{
+                                                overflowY: "scroll",
+                                                width: "100%",
+                                                flex: "1",
+                                                padding: this.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
+                                                background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
+                                            }}>
+                                                {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                                                {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                                                <p style={{
+                                                    fontSize: "28px",
+                                                    textAlign: "left",
+                                                    paddingBottom: "5px",
+                                                }}>{this.state.page.shortdesc}
+                                                </p>
+                                                <p style={{
+                                                    fontSize: "18px",
+                                                    textAlign: "justify",
+                                                    paddingBottom: "50px",
+                                                }}>{this.state.page.longdesc}
+                                                </p>
                                             </div>
+                                            <Link to={`/${this.state.page.category_id}`} className="returns"
+                                                style={{
+                                                    color: palette.loading ? "white" : palette.data.lightVibrant,
+                                                    padding: "8px 8px 8px 32px",
+                                                    width: this.state.sideSize + "vw",
+                                                    display: "block",
+                                                    bottom: "0px",
+                                                    position: "absolute",
+                                                    textDecoration: "none",
+                                                    fontSize: "25px",
+                                                    transition: this.state.transitionTime,
+                                                }} >&#8592; Back to Home</Link>
+                                        </div>
 
                                         {/* </div> */}
                                         <div onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
@@ -255,7 +257,7 @@ export default class KioskPage extends React.Component {
                             </Palette>
 
                         </div>
-                    )}
+                    }}
                 </Spring>
             );
         }

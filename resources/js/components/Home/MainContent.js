@@ -126,7 +126,7 @@ class MainContent extends React.Component {
                 {
                     var videoList = this.state.videos.map( item => {
                         return (
-                            <Tile key={ item.id + 100000 } item={ item } handleClick={ this.handleVideoClick } imgOverride={ ( (item.thumbnail_path == null || item.thumbnail_path == "" ) ? "./storage/video_thumbnails/nothumb.png" : `./storage/video_thumbnails/${item.thumbnail_path}` ) } flag="video" />
+                            <Tile key={ item.id + 100000 } linkOverride={`#/videos/${item.id}`} item={ item } handleClick={ this.handleVideoClick } imgOverride={ ( (item.thumbnail_path == null || item.thumbnail_path == "" ) ? "./storage/video_thumbnails/nothumb.png" : `./storage/video_thumbnails/${item.thumbnail_path}` ) } flag="video" />
                         );
                     });
 
@@ -142,7 +142,7 @@ class MainContent extends React.Component {
                     var pptList = this.state.ppts.map( item => {
                         console.log(`./storage/ppt_images/${item.ppt_images[0].filepath}`);
                         return (
-                            <Tile key={ item.id + 10000000 } item={ item } handleClick={ null } imgOverride={ `./storage/ppt_images/${item.ppt_images[0].filepath}` } flag="ppt" />
+                            <Tile key={ item.id + 10000000 } linkOverride={`#/powerpoints/${item.id}`} item={ item } handleClick={ null } imgOverride={ `./storage/ppt_images/${item.ppt_images[0].filepath}` } flag="ppt" />
                         );
                     });
 

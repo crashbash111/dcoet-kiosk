@@ -104401,12 +104401,14 @@ function (_React$Component) {
   _createClass(Logo, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#/admin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         style: {
           height: "80vh"
         },
         src: "./images/logo.png"
-      });
+      }));
     }
   }]);
 
@@ -104612,6 +104614,7 @@ function (_React$Component) {
             var videoList = this.state.videos.map(function (item) {
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 key: item.id + 100000,
+                linkOverride: "#/videos/".concat(item.id),
                 item: item,
                 handleClick: _this3.handleVideoClick,
                 imgOverride: item.thumbnail_path == null || item.thumbnail_path == "" ? "./storage/video_thumbnails/nothumb.png" : "./storage/video_thumbnails/".concat(item.thumbnail_path),
@@ -104635,6 +104638,7 @@ function (_React$Component) {
               console.log("./storage/ppt_images/".concat(item.ppt_images[0].filepath));
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Tile__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 key: item.id + 10000000,
+                linkOverride: "#/powerpoints/".concat(item.id),
                 item: item,
                 handleClick: null,
                 imgOverride: "./storage/ppt_images/".concat(item.ppt_images[0].filepath),
@@ -105049,7 +105053,7 @@ function (_React$Component) {
         }
       }, function (paramx) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#/kiosk/".concat(_this2.props.item.id)
+          href: _this2.props.linkOverride != null ? _this2.props.linkOverride : "#/kiosk/".concat(_this2.props.item.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: _this2.props.item.id,
           "data-role": "tile",
@@ -105263,7 +105267,8 @@ __webpack_require__.r(__webpack_exports__);
 var Slider = function Slider(_ref) {
   var items = _ref.items,
       sliderRef = _ref.sliderRef,
-      slideTransitionEnd = _ref.slideTransitionEnd;
+      slideTransitionEnd = _ref.slideTransitionEnd,
+      startIndex = _ref.startIndex;
   var ref1; //{"id":19,"image_name":"Stoat1_1570491952.jpg","alt":"","page_id":14,"created_at":"2019-10-07 23:45:53","updated_at":"2019-10-07 23:45:53","copyright":"","thumbnail_small":"Stoat1_small_1570491952.jpg","thumbnail_medium":"Stoat1_medium_1570491952.jpg","thumbnail_large":"Stoat1_large_1570491952.jpg"}
 
   var swipeItems = items.map(function (item) {
@@ -105279,6 +105284,9 @@ var Slider = function Slider(_ref) {
     });
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: function onClick() {
+      ref1.next();
+    },
     style: {
       width: "100%",
       height: "100%"
@@ -105288,10 +105296,9 @@ var Slider = function Slider(_ref) {
       return ref1 = o;
     },
     transitionEnd: slideTransitionEnd,
-    startSlide: 0,
+    startSlide: startIndex,
     speed: 300,
-    auto: 5000,
-    autoRestart: true,
+    auto: 0,
     disableScroll: true,
     continuous: true,
     style: {
@@ -105981,7 +105988,6 @@ function (_React$Component) {
         ref: this._sidebarRef
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          minHeight: "100vh",
           backgroundImage: "url( \"./images/background_main_dark.jpg\" )",
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
@@ -107239,7 +107245,7 @@ function (_React$Component) {
         style: {
           height: "100%",
           display: "grid",
-          gridTemplateColumns: "75vh auto"
+          gridTemplateColumns: "50vh auto"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "no-scrollbar",
@@ -107366,27 +107372,28 @@ function (_React$Component) {
         className: "big-shadow"
       }, "Currently selected audio files"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentAudios)) : null, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Make sure to fulfill all validation rules and try again.") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary btn-square"
-      }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
-        style: {
-          position: "fixed"
-        },
+      }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hideScroll",
         onclick: function onclick() {
           null;
+        },
+        style: {
+          //styling for the side panel
+          //filter: "color blur(60px)",
+          height: "100vh",
+          width: "400px",
+          display: "flex",
+          flexDirection: "column",
+          overflowY: "hidden",
+          overflowX: "hidden",
+          opacity: "0.8",
+          backgroundColor: "#01283D",
+          color: "white",
+          position: "fixed",
+          top: "100px",
+          right: "20vh"
         }
-      }, "style", {
-        //styling for the side panel
-        //filter: "color blur(60px)",
-        height: "100vh",
-        width: "400px",
-        display: "flex",
-        flexDirection: "column",
-        overflowY: "hidden",
-        overflowX: "hidden",
-        opacity: "0.8",
-        backgroundColor: "#01283D",
-        color: "white"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         style: {
           textAlign: "center",
           fontSize: "4em",
@@ -107433,7 +107440,7 @@ function (_React$Component) {
           fontSize: "25px",
           transition: this.state.transitionTime
         }
-      }, "\u2190 Back to Home"))));
+      }, "\u2190 Back to Home")))));
     }
   }]);
 
@@ -108910,7 +108917,10 @@ function (_React$Component) {
           transition: "grid-template-rows 2s"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "grid-item searchspace"
+        className: "grid-item searchspace",
+        style: {
+          paddingTop: "20px"
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_touch_screen_keyboard__WEBPACK_IMPORTED_MODULE_7___default.a, {
         enabled: true,
         onChange: this.handleValueChange,
@@ -109096,7 +109106,8 @@ function (_React$Component) {
           dotimgnav = this.state.page.images.map(function (item) {
             i++;
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-              index: i,
+              key: i,
+              index: item.id,
               className: "dotimagenav",
               style: {
                 backgroundColor: i == _this4.state.index ? "white" : "darkgray",
@@ -109137,6 +109148,7 @@ function (_React$Component) {
         //     </div>
         // );
 
+        var c = 0;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_spring_renderprops__WEBPACK_IMPORTED_MODULE_3__["Spring"], {
           from: {
             opacity: 0
@@ -109145,13 +109157,18 @@ function (_React$Component) {
             opacity: 1
           }
         }, function (props) {
+          var c = 0;
+          var f = 0;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: c++,
             className: "hideScroll fixTransitions",
             style: props
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_palette__WEBPACK_IMPORTED_MODULE_5__["Palette"], {
             src: imgPath
           }, function (palette) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              key: f++
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               style: {
                 width: "100%",
                 height: "100%",
@@ -109159,6 +109176,7 @@ function (_React$Component) {
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Slider__WEBPACK_IMPORTED_MODULE_7__["default"], {
               slideTransitionEnd: _this4.slideTransitionEnd,
+              startIndex: _this4.state.index,
               items: _this4.state.page.images,
               sliderRef: _this4.sliderRef
             })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -109537,7 +109555,7 @@ function (_React$Component) {
           backgroundImage: "url('./images/loginbackground.jpg')",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          backgroundColor: "red",
+          backgroundColor: "black",
           width: "100%",
           height: "100%"
         }

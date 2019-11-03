@@ -590,7 +590,7 @@ class Create extends React.Component {
 
         return (
             <div style={{ height: "100%" }}>
-                <div style={{ height: "100%", display: "grid", gridTemplateColumns: "75vh auto" }}>
+                <div style={{ height: "100%", display: "grid", gridTemplateColumns: "50vh auto" }}>
                     <div className="no-scrollbar" style={{ overflowY: "scroll" }}>
                         <h2>Create New Page</h2>
                         <br />
@@ -695,7 +695,8 @@ class Create extends React.Component {
                             </form>
                         </div>
                     </div>
-                    <div style={{ position: "fixed" }} className="hideScroll" onclick={() => { null }}
+                    <div>
+                    <div className="hideScroll" onclick={() => { null }}
                         style={{
                             //styling for the side panel
                             //filter: "color blur(60px)",
@@ -708,6 +709,9 @@ class Create extends React.Component {
                             opacity: "0.8",
                             backgroundColor: "#01283D",
                             color: "white",
+                            position: "fixed",
+                            top: "100px",
+                            right: "20vh"
                         }}>
 
                         <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
@@ -748,6 +752,7 @@ class Create extends React.Component {
                                 fontSize: "25px",
                                 transition: this.state.transitionTime,
                             }} >&#8592; Back to Home</p>
+                    </div>
                     </div>
 
                 </div>

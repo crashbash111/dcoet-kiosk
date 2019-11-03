@@ -152,7 +152,7 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div style={{ display: "grid", gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 85vh", transition: "grid-template-rows 2s" }}>
-                            <div className="grid-item searchspace">
+                            <div className="grid-item searchspace" style={{ paddingTop: "20px" }}>
                                 {/* <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} onFocus={this.onFocus} /> */}
                                 <KeyboardedInput
                                     enabled

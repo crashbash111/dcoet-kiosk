@@ -11,7 +11,7 @@ export default class Logo extends React.Component
     render()
     {
         return(
-                <img style={{ height: "80vh" }} src="./images/logo.png" />
+                <a href={`#/admin`}><img style={{ height: "80vh" }} src="./images/logo.png" /></a>
         );
     }
 }
