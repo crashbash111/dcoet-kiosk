@@ -167,7 +167,7 @@ class Home extends React.Component {
                                     :
                                     null}
                             </div>
-                            <div className="grid-item rightcontent">
+                            <div className="rightcontent">
                                 <MainContent filter={this.state.searchTerm} activeCategory={this.state.activeCategory} />
                             </div>
                         </div>

@@ -41,7 +41,7 @@ export default class Tile extends React.Component {
         return (
             <Spring key={this.props.item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
                 {paramx => (
-                    <a href={ this.props.linkOverride != null ? this.props.linkOverride : `#/kiosk/${this.props.item.id}` }>
+                    <a style={{ textDecoration: "none" }} href={ this.props.linkOverride != null ? this.props.linkOverride : `#/kiosk/${this.props.item.id}` }>
                         <div key={this.props.item.id} data-role="tile" data-cover={path} data-size="large"
                             style={{
                                 opacity: paramx.opacity, transform: paramx.transform, transition: this.state.fadeTime,

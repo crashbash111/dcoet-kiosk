@@ -192,6 +192,12 @@ class Admin extends React.Component {
 
     handleTabClick(id) {
         this.setState({ tabIndex: id });
+        console.log( "Ree" );
+        if( this.state.width <= 900 )
+        {
+            console.log( "Toggle" );
+            this.toggleSidebar();
+        }
     }
 
     paginate = pageNumber => this.setState({ currentPage: pageNumber });
@@ -282,7 +288,7 @@ class Admin extends React.Component {
                     {/* <div style={{ backgroundColor: "rgba( 0,0,0,0.8)", width: "100%", height: "100%" }}> */}
 
                     <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={this.state.tabIndex} ref={this._sidebarRef} />
-                    <div style={{ backgroundImage: `url( "./images/background_main_dark.jpg" )`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow'}>
+                    <div style={{ backgroundImage: `url( "./images/background_main_dark.jpg" )`, height: "100%", backgroundPositionY: "0", backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center", gridRowStart: "1", gridRowEnd: "100" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow'}>
                         <div style={{ height: "50px", width: "100%" }}>
                             {isMobile ? <span className="sidebartoggle" style={{ float: "left" }} onClick={this.toggleSidebar}>&#9776; Open</span> : null}
                             <div style={{ float: "right" }}>

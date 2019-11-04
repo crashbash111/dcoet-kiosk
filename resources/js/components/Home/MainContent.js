@@ -173,7 +173,7 @@ class MainContent extends React.Component {
 
                 //Making the main content view have a grid of tiles
                 return (
-                    <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateColumns: "auto auto auto auto", gridRowGap: "15px", overflowY: "scroll" }}>
+                    <div className="no-scrollbar main-content-div">
                         {pagesList}
                     </div>
                 );

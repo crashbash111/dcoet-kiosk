@@ -8,6 +8,8 @@ import withAuth from "../../components/withAuth";
 import AuthService from "../../components/AuthService";
 //import { Link } from "react-router-dom";
 
+import HelpButton from "../../components/Admin/HelpButton";
+
 class Create extends React.Component {
     constructor(props) {
         super(props);
@@ -597,7 +599,7 @@ class Create extends React.Component {
                         <div style={{ alignContent: "center", justifyContent: "center", textAlign: "center" }}>
                             <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
                                 <div className="form-group" id="heading">
-                                    <label><h3 className="big-shadow">Heading</h3>
+                                    <label><h3 className="big-shadow">Heading</h3><HelpButton position="right center" heading="Heading" text="The heading is what is shown at the top of the kiosk page. It is also what displays in the kiosk home page and is used for searching." />
                                         <input className="form-control" type="text" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
                                         <p className="red-shadow" style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
                                     </label>

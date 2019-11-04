@@ -63,8 +63,7 @@ const AdminTableBody = ( { heads, currentPage, itemsPerPage, items, actions, vie
                 }
                 
             }
-
-            if( !( !isNaN(parseFloat(item[ heads[ i ].name ])) && isFinite(item[ heads[ i ].name ]) ) )
+            else if( !( !isNaN(parseFloat(item[ heads[ i ].name ])) && isFinite(item[ heads[ i ].name ]) ) )
             {
                 if( !( item[ heads[ i ].name ] == null ) && item[ heads[ i ].name ].length > 20 )
                 {

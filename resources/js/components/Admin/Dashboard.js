@@ -5,7 +5,9 @@ import LeastViewed from "./Dashboard/LeastViewed";
 import Loader from "../Loader";
 import MostViewed from "./Dashboard/MostViewed";
 
-const Dashboard = ( { mostViewed, mostViewedLoading, leastViewed, leastViewedLoading } ) => {
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+
+const Dashboard = ({ mostViewed, mostViewedLoading, leastViewed, leastViewedLoading }) => {
     // const [mostViewed, setMostViewed] = useState([]);
     const [mode, setMode] = useState(0);
     //const [leastViewed, setLeastViewed] = useState([]);
@@ -38,27 +40,66 @@ const Dashboard = ( { mostViewed, mostViewedLoading, leastViewed, leastViewedLoa
 
     var child = <div>Dashboard</div>;
 
+    const data = [
+        {
+            name: 'Stoat', uv: 158, amt: 2400,
+        },
+        {
+            name: 'Kea', uv: 51, amt: 2210
+        }
+    ];
+
+    return <div style={{ width: "100%", height: "100%"}}>
+        {mostViewedLoading ? <Loader />
+            :
+            <div>
+                <h2>Most Viewed</h2>
+                <BarChart width={1500} height={300} data={mostViewed} style={{ color: "#00000" }}>
+                    <CartesianGrid strokeDasharray="3 3" style={{ color: "#ffffff" }} />
+                    <XAxis dataKey="heading" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="times_viewed" fill="#8884d8" />
+                </BarChart>
+            </div>
+        }
+        {leastViewedLoading ? <Loader />
+            :
+            <div>
+                <h2>Least Viewed</h2>
+                <BarChart width={1500} height={300} data={leastViewed} style={{ color: "#00000" }}>
+                    <CartesianGrid strokeDasharray="3 3" style={{ color: "#ffffff" }} />
+                    <XAxis dataKey="heading" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="times_viewed" fill="#8884d8" />
+                </BarChart>
+            </div>
+        }
+
+    </div>
+
     switch (mode) {
         case 0:
-            child = <MostViewed mostViewed={ mostViewed } loading={ mostViewedLoading } />
+            child = <MostViewed mostViewed={mostViewed} loading={mostViewedLoading} />
             break;
         case 1:
-            child = <LeastViewed leastViewed={ leastViewed } loading={ leastViewedLoading } />
+            child = <LeastViewed leastViewed={leastViewed} loading={leastViewedLoading} />
             break;
-        }
+    }
 
     return <div>
         <div style={{ display: "inline-block" }}>
-            <button className={ mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => setMode(0)}>Most Viewed</button>
+            <button className={mode == 0 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => setMode(0)}>Most Viewed</button>
         </div>
         <div style={{ display: "inline-block" }}>
-            <button className={ mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square" } onClick={(event) => setMode(1)}>Least Viewed</button>
+            <button className={mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => setMode(1)}>Least Viewed</button>
         </div>
         {child}
     </div>
 
     return (
-        
+
 
         <div>
             <h2>Dashboard</h2>
