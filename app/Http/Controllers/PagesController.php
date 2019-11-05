@@ -160,6 +160,8 @@ class PagesController extends Controller
         
         $filesx = $request->file("audios");
 
+        $allowedFileExtension = [ 'wav', 'mp3', 'ogg' ];
+
         if (is_array($filesx)) {
             foreach ($filesx as $file) {
                 $fileNameWithExt = $file->getClientOriginalName();
@@ -168,6 +170,7 @@ class PagesController extends Controller
                 $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
 
                 $extension = $file->getClientOriginalExtension();
+
                 $check = in_array($extension, $allowedFileExtension);
 
                 if ($check) {

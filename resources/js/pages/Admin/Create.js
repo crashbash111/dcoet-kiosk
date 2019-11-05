@@ -9,6 +9,8 @@ import AuthService from "../../components/AuthService";
 //import { Link } from "react-router-dom";
 
 import HelpButton from "../../components/Admin/HelpButton";
+import HeadingTab from "../../components/Admin/Create/HeadingTab";
+import TabCreator from "../../components/Admin/Create/TabCreator";
 
 class Create extends React.Component {
     constructor(props) {
@@ -30,6 +32,7 @@ class Create extends React.Component {
             audios: null,
             editMode: this.props.page != null, //(this.props.match != null && this.props.match.params != null && this.props.match.params.id != null) || 
             error: false,
+            preview: false,
         }
 
         this.AuthService = new AuthService();
@@ -66,6 +69,16 @@ class Create extends React.Component {
 
     change(event) {
         console.log(event.target.files);
+    }
+
+    handleBackClick( event )
+    {
+        this.setState( { preview: false } );
+    }
+
+    handlePreviewClick( event )
+    {
+        this.setState( { preview: true } );
     }
 
     handleChangeNew(event) {
@@ -377,6 +390,7 @@ class Create extends React.Component {
             }
 
             formData.append("audios[]", audio, audio.name);
+            console.log( "hereeee");
         }
 
         if (copyright != null) {
@@ -590,20 +604,89 @@ class Create extends React.Component {
             });
         }
 
+        // return <div style={{ height: "100%" }}>
+
+        // </div>
+
+        // return <TabCreator>
+        //     <HeadingTab heading={ this.state.heading } handleChange={ this.handleChange } />
+        //     </TabCreator>
+
+        if( this.state.preview )
+        {
+            return <div>
+                <button onClick={ (event) => this.handleBackClick( event ) } style={{ position: "absolute", right: "10px" }}>
+                    Back
+                </button>
+                <div className="hideScroll" onclick={() => { null }}
+                        style={{
+                            //styling for the side panel
+                            //filter: "color blur(60px)",
+                            height: "100vh",
+                            width: "400px",
+                            display: "flex",
+                            flexDirection: "column",
+                            overflowY: "hidden",
+                            overflowX: "hidden",
+                            opacity: "0.8",
+                            backgroundColor: "#01283D",
+                            color: "white",
+                            // position: "fixed",
+                            
+                        }}>
+
+                        <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
+
+
+                        <div className="hideScroll" style={{
+                            overflowY: "scroll",
+                            width: "100%",
+                            flex: "1",
+                            padding: "10px 20px 30px 20px",
+                            background: "linear-gradient(0deg, #141414 40px, transparent 100px)",
+                        }}>
+                            {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                            {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                            <p style={{
+                                fontSize: "28px",
+                                textAlign: "left",
+                                paddingBottom: "5px",
+                            }}>{this.state.page.text == "" ? "This is a sample short description." : this.state.page.text}
+                            </p>
+                            <p style={{
+                                fontSize: "18px",
+                                textAlign: "justify",
+                                paddingBottom: "50px",
+                            }}>{this.state.page.longdesc}
+                            </p>
+                        </div>
+                        <p className="returns"
+                            style={{
+                                //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                                color: "white",
+                                padding: "8px 8px 8px 32px",
+                                width: this.state.sideSize + "vw",
+                                display: "block",
+                                bottom: "0px",
+                                position: "absolute",
+                                textDecoration: "none",
+                                fontSize: "25px",
+                                transition: this.state.transitionTime,
+                            }} >&#8592; Back to Home</p>
+                    </div>
+            </div>
+        }
+
         return (
             <div style={{ height: "100%" }}>
-                <div style={{ height: "100%", display: "grid", gridTemplateColumns: "50vh auto" }}>
+                <button style={{position: "absolute", right: "10px", zIndex: 1 }} onClick={ (event) => this.handlePreviewClick(event) }>Preview</button>
+                <div style={{ height: "100%"}}>
                     <div className="no-scrollbar" style={{ overflowY: "scroll" }}>
                         <h2>Create New Page</h2>
                         <br />
                         <div style={{ alignContent: "center", justifyContent: "center", textAlign: "center" }}>
                             <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
-                                <div className="form-group" id="heading">
-                                    <label><h3 className="big-shadow">Heading</h3><HelpButton position="right center" heading="Heading" text="The heading is what is shown at the top of the kiosk page. It is also what displays in the kiosk home page and is used for searching." />
-                                        <input className="form-control" type="text" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
-                                        <p className="red-shadow" style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
-                                    </label>
-                                </div>
+                                <HeadingTab heading={ this.state.page.heading } handleChange={ this.handleChange } />
                                 <div className="form-group">
                                     <label><h3 className="big-shadow">Short Description</h3>
                                         <textarea rows="10" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
@@ -698,7 +781,7 @@ class Create extends React.Component {
                         </div>
                     </div>
                     <div>
-                    <div className="hideScroll" onclick={() => { null }}
+                    {/* <div className="hideScroll" onclick={() => { null }}
                         style={{
                             //styling for the side panel
                             //filter: "color blur(60px)",
@@ -754,7 +837,7 @@ class Create extends React.Component {
                                 fontSize: "25px",
                                 transition: this.state.transitionTime,
                             }} >&#8592; Back to Home</p>
-                    </div>
+                    </div> */}
                     </div>
 
                 </div>
