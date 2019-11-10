@@ -161,7 +161,7 @@ export default class KioskPage extends React.Component {
                                                 overflowY: "hidden",
                                                 overflowX: "hidden",
                                                 opacity: "0.8",
-                                                transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
+                                                transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime + ", left: " + this.state.transitionTime,
                                                 backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
                                                 color: !palette.loading ? palette.data.darkMuted : "white",
                                             }}>

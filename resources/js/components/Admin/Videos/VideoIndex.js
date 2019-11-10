@@ -30,13 +30,15 @@ const VideoIndex = ({history, videos, loading}) => {
 
     const editClick = ( i ) => history.push( `/kiosk/${i}` );
 
+    
+
     const heads = [
         { name: "id", text: "ID" },
         { name: "title", text: "Title" },
         { name: "description", text: "Description" },
         { name: "copyright", text: "Copyright" },
-        { name: "length", text: "Length" },
-        { name: "size", text: "Size" },
+        // { name: "length", text: "Length" },
+        // { name: "size", text: "Size" },
         { name: "actions", text: "Actions" }
     ];
 

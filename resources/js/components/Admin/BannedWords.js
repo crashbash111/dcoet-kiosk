@@ -163,9 +163,10 @@ export default class BannedWords extends React.Component {
                 <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => this.handleClick(1)}>Create New</button>
             </div>
             <ErrorCatch>
-                <div style={{ display: "inline-block" }}>
+                {/* <div style={{ display: "inline-block" }}>
                     <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => { this.addClick() }}>Create New</button>
-                </div>
+                </div> */}
+                {null}
             </ErrorCatch>
 
             {/* {this.state.addedSuccessfully ?

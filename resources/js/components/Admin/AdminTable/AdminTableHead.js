@@ -15,7 +15,7 @@ const AdminTableHead = ( { items, sortName, headItemClick } ) => {
     let i = 0;
     const rows = items.map( item => {
         //console.log( item.name );
-        return <th key={ i++ } onClick={ (event) => { headItemClick( item.name ) } } style={{ width: `calc(100% / ${ items.length })` }} className={ ( sortName == item.name ) ? "active" : null }>{ item.text }{ ( sortName == item.name ) ? <span className="caret-down"></span> : null }</th>
+        return <th key={ i++ } onClick={ (event) => { headItemClick( item.name ) } } style={{ width: ( i == 0 ? "25px" : "1fr" ) }} className={ ( sortName == item.name ) ? "active" : null }>{ item.text }{ ( sortName == item.name ) ? <span className="caret-down"></span> : null }</th>
     });
     
     return <thead>
