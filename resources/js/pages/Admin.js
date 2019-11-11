@@ -65,14 +65,14 @@ class Admin extends React.Component {
         this.categoryClick = this.categoryClick.bind(this);
         this.toggleSidebar = this.toggleSidebar.bind(this);
 
-        this.fetchMostViewed = this.fetchMostViewed.bind( this );
-        this.fetchLeastViewed = this.fetchLeastViewed.bind( this );
+        this.fetchMostViewed = this.fetchMostViewed.bind(this);
+        this.fetchLeastViewed = this.fetchLeastViewed.bind(this);
         this.fetchPages = this.fetchPages.bind(this);
         this.fetchCategories = this.fetchCategories.bind(this);
-        this.fetchPowerpoints = this.fetchPowerpoints.bind( this );
-        this.fetchGames = this.fetchGames.bind( this );
-        this.fetchBannedWords = this.fetchBannedWords.bind( this );
-        this.fetchVideos = this.fetchVideos.bind( this );
+        this.fetchPowerpoints = this.fetchPowerpoints.bind(this);
+        this.fetchGames = this.fetchGames.bind(this);
+        this.fetchBannedWords = this.fetchBannedWords.bind(this);
+        this.fetchVideos = this.fetchVideos.bind(this);
     }
 
     handleLogout() {
@@ -93,27 +93,27 @@ class Admin extends React.Component {
     }
 
     fetchMostViewed() {
-        this.setState( { mostViewedLoading: true } );
-        Auth.fetch( "./api/pages/mostviewed" )
-        .then( response => response.json() )
-        .then( data => this.setState( { mostViewed: data, mostViewedLoading: false } ) )
-        .catch( error => console.log( error ) );
+        this.setState({ mostViewedLoading: true });
+        Auth.fetch("./api/pages/mostviewed")
+            .then(response => response.json())
+            .then(data => this.setState({ mostViewed: data, mostViewedLoading: false }))
+            .catch(error => console.log(error));
     }
 
     fetchLeastViewed() {
-        this.setState( { leastViewedLoading: true } );
-        Auth.fetch( "./api/pages/leastviewed" )
-        .then( response => response.json() )
-        .then( data => this.setState( { leastViewed: data, leastViewedLoading: false } ) )
-        .catch( error => console.log( error ) );
+        this.setState({ leastViewedLoading: true });
+        Auth.fetch("./api/pages/leastviewed")
+            .then(response => response.json())
+            .then(data => this.setState({ leastViewed: data, leastViewedLoading: false }))
+            .catch(error => console.log(error));
     }
 
     fetchPages() {
-        this.setState( { pagesLoading: true } );
-        Auth.fetch( "./api/pages" )
-        .then( response => response.json() )
-        .then( data => this.setState( { pages: data, pagesLoading: false } ) )
-        .catch( error => console.log( error ) );
+        this.setState({ pagesLoading: true });
+        Auth.fetch("./api/pages")
+            .then(response => response.json())
+            .then(data => this.setState({ pages: data, pagesLoading: false }))
+            .catch(error => console.log(error));
         // fetch( "./api/pages" )
         //     .then(response => response.json())
         //     .then(data => this.setState({ pages: data, pagesLoading: false }))
@@ -121,44 +121,43 @@ class Admin extends React.Component {
     }
 
     fetchCategories() {
-        this.setState( { categoriesLoading: true } );
-        fetch( "./api/categories" )
+        this.setState({ categoriesLoading: true });
+        fetch("./api/categories")
             .then(response => response.json())
             .then(data => this.setState({ categories: data, categoriesLoading: false }))
             .catch(error => console.log(error));
     }
 
     fetchPowerpoints() {
-        this.setState( { powerpointsLoading: true } );
-        fetch( "./api/powerpoints" )
-            .then( response => response.json() )
-            .then( data => this.setState( {powerpoints: data, powerpointsLoading: false } ) )
-            .catch( error => console.log( error ) );
+        this.setState({ powerpointsLoading: true });
+        fetch("./api/powerpoints")
+            .then(response => response.json())
+            .then(data => this.setState({ powerpoints: data, powerpointsLoading: false }))
+            .catch(error => console.log(error));
     }
 
     fetchGames() {
-        this.setState( { gamesLoading: true } );
-        Auth.fetch( "./api/games" )
-            .then( response => response.json() )
-            .then( data => this.setState( { games: data, gamesLoading: false } ) )
-            .catch( error => console.log( error ) );
+        this.setState({ gamesLoading: true });
+        Auth.fetch("./api/games")
+            .then(response => response.json())
+            .then(data => this.setState({ games: data, gamesLoading: false }))
+            .catch(error => console.log(error));
     }
 
     fetchBannedWords() {
-        this.setState( { bannedWordsLoading: true } );
-        fetch( "./api/bannedwords" )
-            .then( response => response.json() )
-            .then( data => this.setState( { bannedWords: data, bannedWordsLoading: false } ) )
-            .catch( error => console.log( error ) );
+        this.setState({ bannedWordsLoading: true });
+        fetch("./api/bannedwords")
+            .then(response => response.json())
+            .then(data => this.setState({ bannedWords: data, bannedWordsLoading: false }))
+            .catch(error => console.log(error));
     }
 
-    fetchVideos()
-    {
-        this.setState( { videosLoading: true } );
-        fetch( "./api/videos" )
-            .then( response => response.json() )
-            .then( data => this.setState( { videos: data, videosLoading: false } ) )
-            .catch( error => console.log( error ) );
+    fetchVideos() {
+        this.setState({ videosLoading: true });
+        fetch("./api/videos")
+            .then(response => response.json())
+            .then(data => this.setState({ videos: data, videosLoading: false }))
+            .catch(error => console.log(error));
     }
 
     componentWillMount() {
@@ -192,10 +191,9 @@ class Admin extends React.Component {
 
     handleTabClick(id) {
         this.setState({ tabIndex: id });
-        console.log( "Ree" );
-        if( this.state.width <= 900 )
-        {
-            console.log( "Toggle" );
+        console.log("Ree");
+        if (this.state.width <= 900) {
+            console.log("Toggle");
             this.toggleSidebar();
         }
     }
@@ -229,8 +227,8 @@ class Admin extends React.Component {
             {
                 id: 0,
                 text: "Dashboard",
-                component: <Dashboard key={ 0 } mostViewed={ this.state.mostViewed } mostViewedLoading={ this.state.mostViewedLoading }
-                    leastViewed={ this.state.leastViewed } leastViewedLoading={ this.state.leastViewedLoading } />
+                component: <Dashboard key={0} mostViewed={this.state.mostViewed} mostViewedLoading={this.state.mostViewedLoading}
+                    leastViewed={this.state.leastViewed} leastViewedLoading={this.state.leastViewedLoading} />
             },
             {
                 id: 1,
@@ -240,27 +238,27 @@ class Admin extends React.Component {
             {
                 id: 2,
                 text: "Kiosk Categories",
-                component: <KioskCategories key={2} categories={ this.state.categories } loading={ this.state.categoriesLoading } />
+                component: <KioskCategories key={2} categories={this.state.categories} loading={this.state.categoriesLoading} refresh={this.fetchCategories} />
             },
             {
                 id: 3,
                 text: "Powerpoints",
-                component: <Powerpoints key={3} powerpoints={ this.state.powerpoints } loading={ this.state.powerpointsLoading } />
+                component: <Powerpoints key={3} powerpoints={this.state.powerpoints} loading={this.state.powerpointsLoading} />
             },
             {
                 id: 4,
                 text: "Games",
-                component: <Games key={4} games={ this.state.games } loading={ this.state.gamesLoading } />
+                component: <Games key={4} games={this.state.games} loading={this.state.gamesLoading} />
             },
             {
                 id: 5,
                 text: "Banned Words",
-                component: <BannedWords key={5} bannedWords={ this.state.bannedWords } loading={ this.state.bannedWordsLoading } />
+                component: <BannedWords key={5} bannedWords={this.state.bannedWords} loading={this.state.bannedWordsLoading} />
             },
             {
                 id: 6,
                 text: "Videos",
-                component: <Videos key={6} videos={ this.state.videos } loading={ this.state.videosLoading } />
+                component: <Videos key={6} videos={this.state.videos} loading={this.state.videosLoading} />
             }
         ];
 
@@ -308,7 +306,7 @@ class Admin extends React.Component {
                         <ErrorCatch>
                             {child}
                         </ErrorCatch>
-                        
+
                     </div>
                     {/* </div> */}
                 </div>

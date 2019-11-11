@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Axios from "axios";
 
 import AdminTable from "../AdminTable";
 import Loader from "../../Loader";
 
-const ViewCategories = ({ history, categories, loading, createClick }) => {
+const ViewCategories = ({ history, categories, loading, createClick, editClick }) => {
 
     // const [categories, setCategories] = useState([]);
     // const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const ViewCategories = ({ history, categories, loading, createClick }) => {
         return <Loader />;
     }
 
-    const editClick = ( i ) => history.push( `/kiosk/${i}` );
+    //const editClick = ( i ) => history.push( `/kiosk/${i}` );
 
     const heads = [
         { name: "id", text: "ID" },
@@ -34,7 +34,7 @@ const ViewCategories = ({ history, categories, loading, createClick }) => {
         { name: "actions", text: "Actions" }
     ];
 
-    return <AdminTable heads={ heads } items={ categories } actions={ [ "Edit", "Delete" ] } createClick={ createClick } editClick={ editClick } />
+    return <AdminTable heads={heads} items={categories} actions={["Edit", "Delete"]} createClick={createClick} editClick={editClick} />
 
     return (
         <div>
@@ -71,4 +71,4 @@ const ViewCategories = ({ history, categories, loading, createClick }) => {
     );
 };
 
-export default withRouter( ViewCategories );
+export default withRouter(ViewCategories);
