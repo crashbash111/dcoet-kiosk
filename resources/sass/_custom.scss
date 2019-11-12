@@ -111,7 +111,7 @@ textarea {
   //takes up right side
   grid-column: 2 / span 1;
   grid-row: 1 / span 2;
-  padding: 24px 24px 24px 24px;
+  //padding: 24px 24px 24px 24px;
 }
 
 .xadmin .fullarea {
@@ -684,6 +684,14 @@ video {
   font-size: 14px;
   text-align: center;
   color: black;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 // .caret {

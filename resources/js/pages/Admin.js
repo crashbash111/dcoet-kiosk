@@ -282,30 +282,33 @@ class Admin extends React.Component {
 
         return (
             <ErrorCatch>
-                <div className="xadmin" style={{}}>
+                <div className="xadmin" style={{ padding: "0" }}>
                     {/* <div style={{ backgroundColor: "rgba( 0,0,0,0.8)", width: "100%", height: "100%" }}> */}
 
                     <AdminSidebar isMobile={isMobile} handleTabClick={this.handleTabClick} items={items} activeTab={this.state.tabIndex} ref={this._sidebarRef} />
-                    <div style={{ backgroundImage: `url( "./images/background_main_dark.jpg" )`, height: "100%", backgroundPositionY: "0", backgroundSize: "cover", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundPosition: "center", gridRowStart: "1", gridRowEnd: "100" }} className={isMobile ? 'fullarea enshadow' : 'rightarea enshadow'}>
-                        <div style={{ height: "50px", width: "100%" }}>
-                            {isMobile ? <span className="sidebartoggle" style={{ float: "left" }} onClick={this.toggleSidebar}>&#9776; Open</span> : null}
-                            <div style={{ float: "right" }}>
-                                <div style={{ display: "inline-block" }}>
-                                    <h2 style={{ textShadow: "3px 3px #0c0c0c" }}>Welcome Admin</h2>
-                                </div>
-                                <div style={{ width: "20px", display: "inline-block" }}></div>
-                                <div style={{ display: "inline-block" }}>
-                                    <button type="button" className="btn btn-dark btn-square" onClick={this.handleLogout.bind(this)}>
-                                        Logout
-                                    </button>
-                                </div>
+                    <div style={{ padding: "0", backgroundColor: "whitesmoke" }} className={isMobile ? 'fullarea' : 'rightarea'}>
+
+                        {isMobile ? <span className="sidebartoggle" onClick={this.toggleSidebar}>&#9776; Open</span> : null}
+                        <div style={{ width: "100%", backgroundColor: "grey" }}>
+                            <div>
+                                <button><h2>Welcome Admin</h2></button>
+                                <button type="button" className="btn btn-dark btn-square" onClick={this.handleLogout.bind(this)}>
+                                    Logout
+                                </button>
                             </div>
-
-
+                            <div style={{ display: "inline-block" }}>
+                                
+                            </div>
                         </div>
-                        <ErrorCatch>
-                            {child}
-                        </ErrorCatch>
+
+                        <div style={{ border: "1px solid black", width: "80%", marginLeft: "auto", marginRight: "auto", marginTop: "40px", color: "black" }}>
+
+
+                            <ErrorCatch>
+                                {child}
+                            </ErrorCatch>
+                        </div>
+
 
                     </div>
                     {/* </div> */}

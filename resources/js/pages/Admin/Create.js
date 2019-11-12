@@ -16,9 +16,9 @@ class Create extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log( this.props );
+        console.log(this.props);
 
-        console.log( this.props.page );
+        console.log(this.props.page);
 
         this.state = {
             page: this.props.page,
@@ -33,6 +33,7 @@ class Create extends React.Component {
             editMode: this.props.page != null, //(this.props.match != null && this.props.match.params != null && this.props.match.params.id != null) || 
             error: false,
             preview: false,
+            tabIndex: 0,
         }
 
         this.AuthService = new AuthService();
@@ -63,6 +64,8 @@ class Create extends React.Component {
         this.handleCopyrightChange = this.handleCopyrightChange.bind(this);
         this.handleCopyrightChangeNew = this.handleCopyrightChangeNew.bind(this);
 
+        this.handleTabClick = this.handleTabClick.bind(this);
+
         this.photos = React.createRef();
         this.audios = React.createRef();
     }
@@ -71,14 +74,16 @@ class Create extends React.Component {
         console.log(event.target.files);
     }
 
-    handleBackClick( event )
-    {
-        this.setState( { preview: false } );
+    handleBackClick(event) {
+        this.setState({ preview: false });
     }
 
-    handlePreviewClick( event )
-    {
-        this.setState( { preview: true } );
+    handlePreviewClick(event) {
+        this.setState({ preview: true });
+    }
+
+    handleTabClick(i) {
+        this.setState({ tabIndex: i });
     }
 
     handleChangeNew(event) {
@@ -390,7 +395,7 @@ class Create extends React.Component {
             }
 
             formData.append("audios[]", audio, audio.name);
-            console.log( "hereeee");
+            console.log("hereeee");
         }
 
         if (copyright != null) {
@@ -431,7 +436,7 @@ class Create extends React.Component {
 
         if (this.state.editMode) {
 
-            fetch("./api/pages/" + this.props.page.id )
+            fetch("./api/pages/" + this.props.page.id)
                 .then(response => response.json())
                 .then(data => {
                     let copyright = [];
@@ -495,9 +500,10 @@ class Create extends React.Component {
             let softDeleted = this.state.statsToDelete.includes(item.id);
 
             return (
-                <div key={item.id} style={softDeleted ? { opacity: "0.4" } : null}>
+                <div key={count} style={softDeleted ? { opacity: "0.4" } : null}>
                     {count > 1 ? <hr /> : null}
-                    <div style={{ display: "grid", gridTemplateColumns: "auto 50px" }}>
+                    <h4>Stat #{count}</h4>
+                    <div style={{ display: "grid", gridTemplateColumns: "auto 100px" }}>
                         <div>
                             <div className="form-group">
                                 <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} name`} value={item.name} onChange={this.handleStatNameChange(idx)} />
@@ -507,7 +513,7 @@ class Create extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <button style={{ width: "100%", height: "100%" }} className={softDeleted ? "btn btn-primary btn-square" : "btn btn-danger btn-square"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
+                            <button className={softDeleted ? "btn btn-primary btn-square" : "btn btn-danger btn-square"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
                         </div>
                     </div>
                 </div>
@@ -612,176 +618,257 @@ class Create extends React.Component {
         //     <HeadingTab heading={ this.state.heading } handleChange={ this.handleChange } />
         //     </TabCreator>
 
-        if( this.state.preview )
-        {
+        if (this.state.preview) {
             return <div>
-                <button onClick={ (event) => this.handleBackClick( event ) } style={{ position: "absolute", right: "10px" }}>
+                <button onClick={(event) => this.handleBackClick(event)} style={{ position: "absolute", right: "10px" }}>
                     Back
                 </button>
                 <div className="hideScroll" onclick={() => { null }}
-                        style={{
-                            //styling for the side panel
-                            //filter: "color blur(60px)",
-                            height: "100vh",
-                            width: "400px",
-                            display: "flex",
-                            flexDirection: "column",
-                            overflowY: "hidden",
-                            overflowX: "hidden",
-                            opacity: "0.8",
-                            backgroundColor: "#01283D",
-                            color: "white",
-                            // position: "fixed",
-                            
-                        }}>
+                    style={{
+                        //styling for the side panel
+                        //filter: "color blur(60px)",
+                        height: "100vh",
+                        width: "400px",
+                        display: "flex",
+                        flexDirection: "column",
+                        overflowY: "hidden",
+                        overflowX: "hidden",
+                        opacity: "0.8",
+                        backgroundColor: "#01283D",
+                        color: "white",
+                        // position: "fixed",
 
-                        <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
+                    }}>
+
+                    <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
 
 
-                        <div className="hideScroll" style={{
-                            overflowY: "scroll",
-                            width: "100%",
-                            flex: "1",
-                            padding: "10px 20px 30px 20px",
-                            background: "linear-gradient(0deg, #141414 40px, transparent 100px)",
-                        }}>
-                            {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                            {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
-                            <p style={{
-                                fontSize: "28px",
-                                textAlign: "left",
-                                paddingBottom: "5px",
-                            }}>{this.state.page.text == "" ? "This is a sample short description." : this.state.page.text}
-                            </p>
-                            <p style={{
-                                fontSize: "18px",
-                                textAlign: "justify",
-                                paddingBottom: "50px",
-                            }}>{this.state.page.longdesc}
-                            </p>
-                        </div>
-                        <p className="returns"
-                            style={{
-                                //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
-                                color: "white",
-                                padding: "8px 8px 8px 32px",
-                                width: this.state.sideSize + "vw",
-                                display: "block",
-                                bottom: "0px",
-                                position: "absolute",
-                                textDecoration: "none",
-                                fontSize: "25px",
-                                transition: this.state.transitionTime,
-                            }} >&#8592; Back to Home</p>
+                    <div className="hideScroll" style={{
+                        overflowY: "scroll",
+                        width: "100%",
+                        flex: "1",
+                        padding: "10px 20px 30px 20px",
+                        background: "linear-gradient(0deg, #141414 40px, transparent 100px)",
+                    }}>
+                        {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                        {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                        <p style={{
+                            fontSize: "28px",
+                            textAlign: "left",
+                            paddingBottom: "5px",
+                        }}>{this.state.page.text == "" ? "This is a sample short description." : this.state.page.text}
+                        </p>
+                        <p style={{
+                            fontSize: "18px",
+                            textAlign: "justify",
+                            paddingBottom: "50px",
+                        }}>{this.state.page.longdesc}
+                        </p>
                     </div>
+                    <p className="returns"
+                        style={{
+                            //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                            color: "white",
+                            padding: "8px 8px 8px 32px",
+                            width: this.state.sideSize + "vw",
+                            display: "block",
+                            bottom: "0px",
+                            position: "absolute",
+                            textDecoration: "none",
+                            fontSize: "25px",
+                            transition: this.state.transitionTime,
+                        }} >&#8592; Back to Home</p>
+                </div>
             </div>
+        }
+
+        <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
+            {/* <HeadingTab heading={ this.state.page.heading } handleChange={ this.handleChange } /> */}
+
+
+            <div>
+                <button onClick={this.addStat}>Add Stat</button>
+            </div>
+            <div>
+                Stat fields
+                                    {statFields}
+            </div>
+            <div className="form-group">
+                <label><h3 className="big-shadow">Images</h3>
+                    <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
+                </label>
+                <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+            </div>
+            {
+                (this.state.page.images != null && this.photos.current != null && this.photos.current.files != null) ?
+                    <div>
+                        <div>
+                            <h3 className="big-shadow">Current Images</h3>
+                            <div>
+                                {oldImages}
+                            </div>
+                        </div>
+                    </div>
+                    : null
+            }
+            {
+                this.photos.current != null ?
+                    <div>
+                        <h3 className="big-shadow">Currently Selected Images</h3>
+                        <div>
+                            {currentImages}
+                        </div>
+                    </div>
+                    : null
+            }
+
+            <div className="form-group">
+                <label><h3 className="big-shadow">Audio Files</h3>
+                    <p style={{ textShadow: "1px 1px #121212" }}>Optional field. Add sounds here of the animal.</p>
+                    <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
+                </label>
+            </div>
+            {
+                this.state.page.audios != null ?
+                    <div>
+                        <h3 className="big-shadow">Current audios</h3>
+                        <div>
+                            {oldAudios}
+                        </div>
+                    </div>
+                    :
+                    null
+            }
+            {
+                this.audios.current != null ?
+                    <div>
+                        <h3 className="big-shadow">Currently selected audio files</h3>
+                        <div>
+                            {currentAudios}
+                        </div>
+                    </div>
+                    :
+                    null
+            }
+            {this.state.error ?
+                <div>Make sure to fulfill all validation rules and try again.</div>
+                :
+                null
+            }
+            <button className="btn btn-primary btn-square">Submit</button>
+        </form>
+
+        let currentTab = <h1>Loading...</h1>;
+
+        switch (this.state.tabIndex) {
+            case 0:
+                currentTab = <div>
+                    <div className="form-group">
+                        <label><h3>Heading</h3>
+                            <p style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
+                        </label>
+                        <input type="text" className="form-control" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
+                    </div>
+                    <div className="form-group">
+                        <label><h3>Short Description</h3>
+
+                            <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
+                        </label>
+                        <textarea rows="5" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
+                    </div>
+                    <div className="form-group">
+                        <label><h3>Long Description</h3>
+
+                            {/* <p style={{ color: "red", display: this.state.page.longdesc.length > 2 ? "none" : "block" }}>Long description requires at least 3 characters</p> */}
+                        </label>
+                        <textarea rows="10" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="Enter long description here..." />
+                    </div>
+                    <div>
+                        <button disabled className="btn btn-outline-dark btn-square">Previous</button>
+                        <button style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                    </div>
+                </div>;
+                break;
+            case 1:
+                //stats
+                currentTab = <div>
+                    <div className="form-group">
+                        <button className="btn btn-primary btn-square" onClick={this.addStat}>Add Stat</button>
+                    </div>
+                    <div className="form-group">
+                        {statFields}
+                    </div>
+                    <div>
+                        <button className="btn btn-outline-dark btn-square">Previous</button>
+                        <button style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                    </div>
+                </div>;
+                break;
+            case 2:
+                currentTab = <div>
+                    <div className="form-group">
+                        <h3>Category</h3>
+                        <select className="form-control" name="category_id" value={this.state.page.category_id} onChange={this.handleChange}>
+                            <option disabled hidden value="-1">--Select a category--</option>
+                            {itemsNew}
+                        </select>
+                        <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
+                    </div>
+                    <div>
+                        <button className="btn btn-outline-dark btn-square">Previous</button>
+                        <button style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                    </div>
+                </div>
+                break;
+            case 3:
+                currentTab = <div>
+                    <div className="form-group">
+                        <label><h3>Images</h3></label>
+                        <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
+                        <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+                    </div>
+                    <hr />
+                    <div>
+                        <h3>Chosen Images</h3>
+                        <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                            {currentImages}
+                        </div>
+                    </div>
+                </div>
+                break;
+            case 4:
+                currentTab = <div>
+                    <div className="form-group">
+                        <label><h3>Audio</h3></label>
+                        <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
+                    </div>
+                    <hr />
+                    <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                        {currentAudios}
+                    </div>
+                </div>
         }
 
         return (
             <div style={{ height: "100%" }}>
-                <button style={{position: "absolute", right: "10px", zIndex: 1 }} onClick={ (event) => this.handlePreviewClick(event) }>Preview</button>
-                <div style={{ height: "100%"}}>
-                    <div className="no-scrollbar" style={{ overflowY: "scroll" }}>
+                <button style={{ position: "absolute", right: "10px", zIndex: 1 }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
+                <div>
+                    <div style={{ padding: "20px" }}>
                         <h2>Create New Page</h2>
                         <br />
-                        <div style={{ alignContent: "center", justifyContent: "center", textAlign: "center" }}>
-                            <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
-                                <HeadingTab heading={ this.state.page.heading } handleChange={ this.handleChange } />
-                                <div className="form-group">
-                                    <label><h3 className="big-shadow">Short Description</h3>
-                                        <textarea rows="10" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
-                                        <p className="red-shadow" style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
-                                    </label>
-                                </div>
-                                <div className="form-group">
-                                    <label><h3 className="big-shadow">Long Description</h3>
-                                        <textarea rows="15" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="(OPTIONAL) Enter long description here..." />
-                                        {/* <p style={{ color: "red", display: this.state.page.longdesc.length > 2 ? "none" : "block" }}>Long description requires at least 3 characters</p> */}
-                                    </label>
-                                </div>
-                                <div className="form-group">
-                                    <h3 className="big-shadow">Category</h3>
-                                    <select className="form-control" name="category_id" value={this.state.page.category_id} onChange={this.handleChange}>
-                                        <option disabled hidden value="-1">--Select a category--</option>
-                                        {itemsNew}
-                                    </select>
-                                    <p className="red-shadow" style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
-                                </div>
-                                <div>
-                                    <button onClick={this.addStat}>Add Stat</button>
-                                </div>
-                                <div>
-                                    Stat fields
-                                    {statFields}
-                                </div>
-                                <div className="form-group">
-                                    <label><h3 className="big-shadow">Images</h3>
-                                        <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
-                                    </label>
-                                    <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
-                                </div>
-                                {
-                                    ( this.state.page.images != null && this.photos.current != null && this.photos.current.files != null ) ?
-                                        <div>
-                                            <div>
-                                                <h3 className="big-shadow">Current Images</h3>
-                                            <div>
-                                                    {oldImages}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        : null
-                                }
-                                {
-                                    this.photos.current != null ?
-                                        <div>
-                                            <h3 className="big-shadow">Currently Selected Images</h3>
-                                            <div>
-                                                {currentImages}
-                                            </div>
-                                        </div>
-                                        : null
-                                }
-
-                                <div className="form-group">
-                                    <label><h3 className="big-shadow">Audio Files</h3>
-                                        <p style={{ textShadow: "1px 1px #121212" }}>Optional field. Add sounds here of the animal.</p>
-                                        <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
-                                    </label>
-                                </div>
-                                {
-                                    this.state.page.audios != null ?
-                                        <div>
-                                            <h3 className="big-shadow">Current audios</h3>
-                                            <div>
-                                                {oldAudios}
-                                            </div>
-                                        </div>
-                                        :
-                                        null
-                                }
-                                {
-                                    this.audios.current != null ?
-                                        <div>
-                                            <h3 className="big-shadow">Currently selected audio files</h3>
-                                            <div>
-                                                {currentAudios}
-                                            </div>
-                                        </div>
-                                        :
-                                        null
-                                }
-                                {this.state.error ?
-                                    <div>Make sure to fulfill all validation rules and try again.</div>
-                                    :
-                                    null
-                                }
-                                <button className="btn btn-primary btn-square">Submit</button>
-                            </form>
+                        <div style={{ width: "100%" }}>
+                            <button style={{ width: "20%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
+                            <button style={{ width: "20%" }} className={this.state.tabIndex == 1 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(1) }}>Stats</button>
+                            <button style={{ width: "20%" }} className={this.state.tabIndex == 2 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(2) }}>Category</button>
+                            <button style={{ width: "20%" }} className={this.state.tabIndex == 3 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(3) }}>Images</button>
+                            <button style={{ width: "20%" }} className={this.state.tabIndex == 4 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(4) }}>Audio</button>
+                        </div>
+                        <div style={{ padding: "10px" }}>
+                            {currentTab}
                         </div>
                     </div>
                     <div>
-                    {/* <div className="hideScroll" onclick={() => { null }}
+                        {/* <div className="hideScroll" onclick={() => { null }}
                         style={{
                             //styling for the side panel
                             //filter: "color blur(60px)",
