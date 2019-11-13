@@ -1,9 +1,10 @@
 import React from "react";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import Create from "../../pages/Admin/Create";
 import Loader from "../Loader";
 import ViewPages from "./KioskPages/ViewPages";
+import Pagination from "../Pagination";
 
 class KioskPages extends React.Component {
     constructor(props) {
@@ -11,12 +12,19 @@ class KioskPages extends React.Component {
 
         this.state = {
             mode: 0,
-            pageId: -1
+            pageId: -1,
+            currentPage: 1,
+            itemsPerPage: 5,
+            searchTerm: "",
+            items: this.props.pages,
         };
 
         this.handleClick = this.handleClick.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind(this);
+        this.paginate = this.paginate.bind(this);
+        this.viewClick = this.viewClick.bind(this);
+        this.handleChange = this.handleChange.bind( this );
     }
 
     handleClick(i) {
@@ -33,6 +41,15 @@ class KioskPages extends React.Component {
         //this.props.history.push( `admin/pages/${i}/edit` );
     }
 
+    paginate = (number) => this.setState({ currentPage: number });
+
+    viewClick = (i) => history.push(`/kiosk/${i}`);
+
+    handleChange(event) {
+        //[name, value] = event.target;
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
     render() {
         if (this.state.loading) {
             return <Loader />
@@ -40,64 +57,62 @@ class KioskPages extends React.Component {
 
         let child = <div>Pages</div>;
 
-        const pages = this.props.pages.map(item => {
+        const filteredPages = this.state.items.filter( (m) => { return m.heading.toLowerCase().includes( this.state.searchTerm.toLowerCase() ) } );
+
+        const pages = filteredPages.map(item => {
             return (
                 <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.heading}</td>
                     <td>{item.times_viewed}</td>
                     <td>{item.created_at}</td>
-                    <td><button className="btn btn-success btn-square" onClick={ (event) => { this.handleEditClick( item.id ) } }>Edit</button> | <button className="btn btn-danger btn-square">Delete</button></td>
+                    <td>
+                        <button className="btn btn-outline-dark btn-square" onClick={(event) => { console.log(item.id) }}>View</button> | <button className="btn btn-success btn-square" onClick={(event) => { this.handleEditClick(item.id) }}>Edit</button> | <button className="btn btn-danger btn-square">Delete</button>
+                    </td>
                 </tr>
             );
         });
 
-        console.log( this.props.pages );
+        const indexOfLastItem = this.state.currentPage * this.state.itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - this.state.itemsPerPage;
+        const currentItems = pages.slice(indexOfFirstItem, indexOfLastItem);
+
+        console.log(this.props.pages);
 
         switch (this.state.mode) {
             case 0:
                 child = <div>
-                <div style={{ padding: "5px", backgroundColor: "grey" }}><h2>Kiosk Categories</h2></div>
-                <div style={{ padding: "10px" }}>
-                    <button className="btn btn-primary btn-square" onClick={ (event) => { this.handleCreateClick() } }>Create New</button>
-                    <hr />
-                    <input type="text" placeholder="Search term..." />
-                    <hr />
-    
-                    <table className="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th className="active" style={{ cursor: "pointer" }}>ID</th>
-                                <th>Name</th>
-                                <th>View Count</th>
-                                <th>Created</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pages}
-                        </tbody>
-                    </table>
-                    <ul className="pagination">
-                        <li className="page-item">
-                            <a className="page-link">1</a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link">2</a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link">3</a>
-                        </li>
-                    </ul>
-    
-                    {/* {child} */}
-                </div>
-                {/* <div style={{ display: "inline-block" }}>
+                    <div style={{ padding: "5px", backgroundColor: "grey" }}><h2>Kiosk Pages</h2></div>
+                    <div style={{ padding: "10px" }}>
+                        <button className="btn btn-primary btn-square" onClick={(event) => { this.handleCreateClick() }}>Create New</button>
+                        <hr />
+                        <input type="text" placeholder="Search term..." name="searchTerm" value={this.state.searchTerm} onChange={this.handleChange} />
+                        <hr />
+
+                        <table className="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th className="active" style={{ cursor: "pointer" }}>ID</th>
+                                    <th>Name</th>
+                                    <th>View Count</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentItems}
+                            </tbody>
+                        </table>
+                        <Pagination itemsPerPage={this.state.itemsPerPage} totalItems={filteredPages.length} paginate={this.paginate} />
+
+                        {/* {child} */}
+                    </div>
+                    {/* <div style={{ display: "inline-block" }}>
                     <button className={this.state.mode == 1 ? "btn btn-primary btn-square" : "btn btn-dark btn-square"} onClick={(event) => this.handleClick(1)}>Create New</button>
                 </div> */}
-                {/* <Message shown={this.state.addedSuccessfully} message={"Added successfully."} /> */}
-    
-            </div>
+                    {/* <Message shown={this.state.addedSuccessfully} message={"Added successfully."} /> */}
+
+                </div>
                 //<ViewPages pages={this.props.pages} handleCreateClick={this.handleCreateClick} loading={this.props.loading} handleEditClick={this.handleEditClick} />
                 break;
             case 1:
@@ -107,7 +122,7 @@ class KioskPages extends React.Component {
                 break;
         }
 
-        
+
 
         // <tr>
         //                     <td>1</td>
@@ -133,4 +148,4 @@ class KioskPages extends React.Component {
     }
 }
 
-export default withRouter( KioskPages );
+export default withRouter(KioskPages);

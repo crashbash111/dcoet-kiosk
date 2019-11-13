@@ -82,34 +82,34 @@ export default class CreateCategory extends React.Component {
 
     render() {
         return (
-            <div style={{ width: "100%" }}>
-                <div className="container">
-                    <h1>Create Category Page</h1>
-                    <br />
-                    {/* <Message shown={this.state.error} message={ "There was an error submitting." } color={ "red" } /> */}
-                    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                        <div className="form-group">
-                            <label><h3>Name</h3>
+            <div style={{ height: "100%" }}>
+                <div>
+                    <div style={{ padding: "20px" }}>
+                        <h2>Create New Category</h2>
+                        <hr />
+                        <div style={{ padding: "10px" }}>
+                            <div className="form-group">
+                                <label><h3>Name</h3></label>
+                                <p style={{ color: "red", display: this.state.name.length > 3 ? "none" : "block" }}>Name is required</p>
                                 <input className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name} placeholder="Enter a category name..." />
-                            </label>
-                            <p style={{ color: "red", display: this.state.name.length > 3 ? "none" : "block" }}>Name is required</p>
-                        </div>
-                        <div className="form-group">
-                            <label><h3>Description</h3>
-                                <textarea rows="10" className="form-control" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter a category description..." />
-                            </label>
-                            <p style={{ color: "red", display: this.state.description.length > 3 ? "none" : "block" }}>Description is required</p>
-                        </div>
-                        {
-                            this.state.error ?
-                                <div>
-                                    Make sure to check all validation rules and try again.
                             </div>
-                                :
-                                null
-                        }
-                        <button className="btn btn-primary btn-square">Submit</button>
-                    </form>
+                            <div className="form-group">
+                                <label><h3>Description</h3></label>
+                                <p style={{ color: "red", display: this.state.description.length > 3 ? "none" : "block" }}>Description is required</p>
+                                <textarea rows="3" className="form-control" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter a category description..." />
+                            </div>
+                            {
+                                this.state.error ?
+                                    <div>
+                                        Make sure to check all validation rules and try again.
+                            </div>
+                                    :
+                                    null
+                            }
+                            <hr />
+                            <button className="btn btn-primary btn-square">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

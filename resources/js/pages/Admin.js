@@ -242,7 +242,7 @@ class Admin extends React.Component {
             },
             {
                 id: 3,
-                text: "Powerpoints",
+                text: "Presentations",
                 component: <Powerpoints key={3} powerpoints={this.state.powerpoints} loading={this.state.powerpointsLoading} />
             },
             {

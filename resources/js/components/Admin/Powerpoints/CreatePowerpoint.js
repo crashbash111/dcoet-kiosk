@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export default class CreatePowerpoint extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class CreatePowerpoint extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind( this );
+        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.pptImages = React.createRef();
     }
@@ -25,47 +25,43 @@ export default class CreatePowerpoint extends React.Component {
         })
     }
 
-    handleSubmit( event )
-    {
+    handleSubmit(event) {
         event.preventDefault();
 
         let formData = new FormData();
 
-        formData.append( "token", localStorage.getItem( "id_token" ) );
+        formData.append("token", localStorage.getItem("id_token"));
 
-        formData.append( "title", this.state.title );
+        formData.append("title", this.state.title);
 
         var files = this.pptImages.current.files;
 
-        for( var i = 0; i < files.length; ++i )
-        {
-            var file = files[ i ];
+        for (var i = 0; i < files.length; ++i) {
+            var file = files[i];
 
-            if( !file.type.match( "image.*" ) )
-            {
+            if (!file.type.match("image.*")) {
                 continue;
             }
 
-            formData.append( "photos[]", file, file.name );
+            formData.append("photos[]", file, file.name);
         }
 
-        Axios( {
+        Axios({
             url: "./api/powerpoints",
             method: "POST",
             headers: {
             },
             data: formData,
         })
-        .then( response => {
-            console.log( response );
-            this.setState( { redirect: true } );
-        })
-        .catch( error => console.log( error.response.data ) );
+            .then(response => {
+                console.log(response);
+                this.setState({ redirect: true });
+            })
+            .catch(error => console.log(error.response.data));
     }
 
     render() {
-        if( this.state.redirect )
-        {
+        if (this.state.redirect) {
             return <Redirect to="/Admin" />
         }
 
@@ -83,6 +79,37 @@ export default class CreatePowerpoint extends React.Component {
                 )
             }
         }
+
+        return <div style={{ height: "100%" }}>
+            <div>
+                <div style={{ padding: "20px" }}>
+                    <h2>Create New Presentation</h2>
+                    <hr />
+                    <div style={{ padding: "10px" }}>
+                        <div className="form-group">
+                            <label><h3>Title</h3></label>
+                            <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Enter title here..." />
+                            <p style={{ color: "red", display: this.state.title.length > 2 ? "none" : "block" }}>Title requires at least 3 characters</p>
+                        </div>
+                        <div className="form-group">
+                            <label><h3>Images</h3></label>
+                            <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.pptImages} onChange={this.handleChange} />
+                            <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+                        </div>
+                        {
+                            this.state.error ?
+                                <div>
+                                    Make sure to check all validation rules and try again.
+                    </div>
+                                :
+                                null
+                        }
+                        <hr />
+                        <button className="btn btn-primary btn-square">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>;
 
         return (
             <div>

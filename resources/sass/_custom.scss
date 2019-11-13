@@ -694,6 +694,24 @@ video {
   transform: translateY(-50%);
 }
 
+span.deleteicon {
+  position: relative;
+}
+span.deleteicon span {
+  position: absolute;
+  display: block;
+  top: 5px;
+  right: 0px;
+  width: 16px;
+  height: 16px;
+  background: url('https://web.archive.org/web/20150101025546/http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=3c6263c3453b') 0 -690px;
+  cursor: pointer;
+}
+span.deleteicon input {
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
 // .caret {
 //   width: 0;
 //   height: 0;

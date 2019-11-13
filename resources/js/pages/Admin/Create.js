@@ -529,7 +529,7 @@ class Create extends React.Component {
             );
         });
 
-        let currentImages = null;
+        let currentImages = Array();
 
         if (this.photos.current != null) {
 
@@ -544,6 +544,13 @@ class Create extends React.Component {
                     <img src={imgPath} style={{ height: "100px" }} />
                     <input type="text" name="copyright" placeholder="Copyright information here" onChange={this.handleCopyrightChangeNew(y)} value={this.state.page.copyrightNew[y].text} />
                 </div>);
+            }
+        }
+        else {
+            for (var i = 0; i < 3; ++i) {
+                currentImages.push(<div key={i} style={{ backgroundColor: "#afafaf", width: "70%", height: "100px" }}>
+                </div>
+                );
             }
         }
 
@@ -573,11 +580,9 @@ class Create extends React.Component {
             });
         }
 
-        let currentAudios = null;
+        let currentAudios = Array();
 
         if (this.audios.current != null) {
-
-            currentAudios = Array();
 
             let x = this.audios.current.files.length;
 
@@ -587,6 +592,14 @@ class Create extends React.Component {
                 currentAudios.push(<div key={y}>
                     <embed src={audioPath} />
                 </div>);
+            }
+        }
+        else
+        {
+            for (var i = 0; i < 3; ++i) {
+                currentAudios.push(<div key={i} style={{ backgroundColor: "#afafaf", width: "70%", height: "100px" }}>
+                </div>
+                );
             }
         }
 
@@ -620,14 +633,14 @@ class Create extends React.Component {
 
         if (this.state.preview) {
             return <div>
-                <button onClick={(event) => this.handleBackClick(event)} style={{ position: "absolute", right: "10px" }}>
+                <button className="btn btn-danger btn-square" onClick={(event) => this.handleBackClick(event)} style={{ position: "absolute", top: "10px", right: "10px" }}>
                     Back
                 </button>
                 <div className="hideScroll" onclick={() => { null }}
                     style={{
                         //styling for the side panel
                         //filter: "color blur(60px)",
-                        height: "100vh",
+                        height: "80vh",
                         width: "400px",
                         display: "flex",
                         flexDirection: "column",
@@ -774,18 +787,19 @@ class Create extends React.Component {
 
                             <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
                         </label>
-                        <textarea rows="5" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
+                        <textarea rows="3" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
                     </div>
                     <div className="form-group">
                         <label><h3>Long Description</h3>
 
                             {/* <p style={{ color: "red", display: this.state.page.longdesc.length > 2 ? "none" : "block" }}>Long description requires at least 3 characters</p> */}
                         </label>
-                        <textarea rows="10" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="Enter long description here..." />
+                        <textarea rows="6" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="Enter long description here..." />
                     </div>
+                    <hr />
                     <div>
                         <button disabled className="btn btn-outline-dark btn-square">Previous</button>
-                        <button style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                        <button onClick={(event) => { this.handleTabClick(1) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
                     </div>
                 </div>;
                 break;
@@ -798,9 +812,10 @@ class Create extends React.Component {
                     <div className="form-group">
                         {statFields}
                     </div>
+                    <hr />
                     <div>
-                        <button className="btn btn-outline-dark btn-square">Previous</button>
-                        <button style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                        <button onClick={(event) => { this.handleTabClick(0) }} className="btn btn-outline-dark btn-square">Previous</button>
+                        <button onClick={(event) => { this.handleTabClick(2) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
                     </div>
                 </div>;
                 break;
@@ -814,9 +829,10 @@ class Create extends React.Component {
                         </select>
                         <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
                     </div>
+                    <hr />
                     <div>
-                        <button className="btn btn-outline-dark btn-square">Previous</button>
-                        <button style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                        <button onClick={(event) => { this.handleTabClick(1) }} className="btn btn-outline-dark btn-square">Previous</button>
+                        <button onClick={(event) => { this.handleTabClick(3) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
                     </div>
                 </div>
                 break;
@@ -834,6 +850,11 @@ class Create extends React.Component {
                             {currentImages}
                         </div>
                     </div>
+                    <hr />
+                    <div>
+                        <button onClick={(event) => { this.handleTabClick(2) }} className="btn btn-outline-dark btn-square">Previous</button>
+                        <button onClick={(event) => { this.handleTabClick(4) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                    </div>
                 </div>
                 break;
             case 4:
@@ -843,15 +864,24 @@ class Create extends React.Component {
                         <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
                     </div>
                     <hr />
-                    <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
-                        {currentAudios}
+                    <div>
+                        <h3>Chosen Audio</h3>
+                        <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                            {currentAudios}
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <button onClick={(event) => { this.handleTabClick(3) }} className="btn btn-outline-dark btn-square">Previous</button>
+                        <button disabled style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
                     </div>
                 </div>
+                break;
         }
 
         return (
             <div style={{ height: "100%" }}>
-                <button style={{ position: "absolute", right: "10px", zIndex: 1 }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
+                <button className="btn btn-success btn-square" style={{ position: "absolute", top: "10px", right: "10px", zIndex: 1 }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
                 <div>
                     <div style={{ padding: "20px" }}>
                         <h2>Create New Page</h2>
@@ -865,6 +895,8 @@ class Create extends React.Component {
                         </div>
                         <div style={{ padding: "10px" }}>
                             {currentTab}
+                            <hr />
+                            <button className="btn btn-primary btn-square">Submit</button>
                         </div>
                     </div>
                     <div>
