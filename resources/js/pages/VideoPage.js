@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import Loader from "../components/Loader";
+import VideoPlayer from "../components/VideoPlayer";
+import "video.js/dist/video-js.css";
 
 class VideoPage extends React.Component {
     constructor(props) {
@@ -9,9 +11,12 @@ class VideoPage extends React.Component {
         this.state = {
             videoId: this.props.match.params.id,
             video: null,
+            showMore: false,
         };
 
         this.video = React.createRef();
+
+        this.toggleDescription = this.toggleDescription.bind( this );
     }
 
     componentDidMount() {
@@ -32,20 +37,17 @@ class VideoPage extends React.Component {
                         var my = setInterval(() => {
                             let e = false;
 
-                            try
-                            {
+                            try {
                                 this.video.current.src = stream.url;
                             }
-                            catch( ex )
-                            {
+                            catch (ex) {
                                 e = true;
-                                console.log( ex );
+                                console.log(ex);
                             }
-                            if( !e )
-                            {
-                                clearInterval( my );
+                            if (!e) {
+                                clearInterval(my);
                             }
-                        }, 100 );
+                        }, 100);
 
                     }
                 })
@@ -57,11 +59,44 @@ class VideoPage extends React.Component {
                 clearInterval(myVar);
             }
         }, 100);
+    }
 
-
+    toggleDescription()
+    {
+        this.setState( (prevState) => {
+            return {
+                showMore: !prevState.showMore
+            };
+        });
     }
 
     render() {
+        const videoJsOptions = {
+            autoplay: false,
+            controls: true,
+            width: "768px",
+            sources: [{
+                src: "./api/videos/" + this.state.videoId + "/stream",
+                type: 'video/mp4'
+            }]
+        }
+
+        if( this.state.video == null )
+        {
+            return <Loader />
+        }
+
+        return <div style={{ width: "100%", padding: "20px" }}>
+            <VideoPlayer {...videoJsOptions}/>
+            <h1>{ this.state.video.title }</h1>
+            <h5>418 views | {this.state.video.created_at}</h5>
+            <p>{ this.state.video.description.length > 50 && !this.state.showMore ? this.state.video.description.substring( 0, 47 ) + "..." : this.state.video.description }</p>
+            {
+                this.state.video.description.length > 50 ? <button onClick={ (event) => { this.toggleDescription() } }>{ this.state.showMore ? "Show Less" : "Show More" }</button> : null
+            }
+        </div>;
+
+
         return (this.state.video == null ? <Loader />
             : <div>
                 <Link to={`/`} className="returns"
