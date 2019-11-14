@@ -13,7 +13,10 @@ export default class CreateVideo extends React.Component {
             length: -1,
             progressValue: 0,
             error: false,
-            showBar: false
+            showBar: false,
+            tabIndex: 0,
+            status: 200,
+            statusText: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -21,6 +24,7 @@ export default class CreateVideo extends React.Component {
         this.postData = this.postData.bind(this);
         this.submit = this.submit.bind(this);
         this.updateProgressBarValue = this.updateProgressBarValue.bind(this);
+        this.handleTabClick = this.handleTabClick.bind(this);
 
         this.video = React.createRef();
         this.thumbnail = React.createRef();
@@ -58,7 +62,7 @@ export default class CreateVideo extends React.Component {
 
         formData.append("video", this.video.current.files[0], this.video.current.files[0].name);
 
-        if (this.thumbnail.current != null) {
+        if (this.thumbnail.current != null && this.thumbnail.current.files != null && this.thumbnail.current.files.length > 0) {
             formData.append("thumbnail", this.thumbnail.current.files[0], this.thumbnail.current.files[0].name);
         }
 
@@ -71,7 +75,6 @@ export default class CreateVideo extends React.Component {
                 if (totalLength !== null) {
                     this.updateProgressBarValue(Math.round((progressEvent.loaded * 100) / totalLength));
                 }
-
             },
             url: "./api/videos", //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
             method: "POST",
@@ -82,11 +85,11 @@ export default class CreateVideo extends React.Component {
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ redirect: true });
+                this.setState({ redirect: true, status: response.status, statusText: response.statusText });
             })
             .catch(err => {
-                console.log(err.response.data);
-                this.setState({ error: true });
+                console.log(err.response);
+                this.setState({ error: true, status: err.response.status, statusText: err.response.statusText });
             });
     }
 
@@ -118,52 +121,138 @@ export default class CreateVideo extends React.Component {
             video = null;
             console.log(e);
         }
+    }
 
+    handleTabClick(i) {
+        this.setState({ tabIndex: i });
     }
 
     render() {
+
+        let child = <div>Select a tab</div>;
+
+        switch (this.state.tabIndex) {
+            case 0:
+                child = <div><div className="form-group">
+                    <label><h3>Title</h3></label>
+                    <p style={{ color: "red", display: this.state.title.length > 2 ? "none" : "block" }}>Title requires at least 3 characters</p>
+                    <input className="form-control" type="text" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Enter title here..." />
+                </div>
+                    <div className="form-group">
+                        <label><h3>Description</h3></label>
+                        <p style={{ color: "red", display: this.state.description.length > 2 ? "none" : "block" }}>Description requires at least 3 characters</p>
+                        <textarea rows="5" cols="20" style={{ resize: "none" }} className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter description here..." />
+                    </div>
+                </div>
+                break;
+            case 1:
+                child = <div>
+                    <div className="form-group">
+                        <label><h3>Video File</h3></label>
+                        <p style={{ color: "red", display: this.state.video != null ? "none" : "block" }}>Video file is required</p>
+                        <input className="form-control" type="file" name="video" accept="video/*" onChange={this.handleChange} value={this.state.file} ref={this.video} />
+                    </div>
+                    <div className="form-group">
+                        <label><h3>Thumbnail</h3></label>
+                        <p>Optionally, choose a thumbnail to show on the kiosk page.</p>
+                        <input className="form-control" type="file" name="thumbnail" accept="image/*" onChange={this.handleChange} value={this.state.file} ref={this.thumbnail} />
+                    </div>
+                    <div className="form-group">
+                        <label><h3>Copyright Information</h3></label>
+                        <input className="form-control" type="text" name="copyright" onChange={this.handleChange} value={this.state.copyright} placeholder="Enter copyright information here..." />
+                    </div>
+                </div>;
+                break;
+        }
+
+        return (
+            <div style={{ height: "100%" }}>
+                <div>
+                    <div style={{ padding: "20px" }}>
+                        <h2>Create New Video</h2>
+                        <br />
+                        <div style={{ width: "100%" }}>
+                            <button style={{ width: "50%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
+                            <button style={{ width: "50%" }} className={this.state.tabIndex == 1 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(1) }}>Video</button>
+                        </div>
+                        <div style={{ padding: "10px" }}>
+                            {child}
+                        </div>
+                        <hr />
+                        <div>
+                            <button disabled={this.state.tabIndex < 1} onClick={(event) => { this.handleTabClick(this.state.tabIndex - 1) }} className="btn btn-outline-dark btn-square">Previous</button>
+                            <button disabled={this.state.tabIndex == 1} onClick={(event) => { this.handleTabClick(this.state.tabIndex + 1) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                        </div>
+                        <hr />
+                        <button onClick={(event) => { this.onSubmit(event) }} className="btn btn-primary btn-square">Submit</button>
+                        {/* <div style={{ width: "300px", backgroundColor: "green", backgroundPosition: `${100 - this.state.progressValue}% 0` }}></div> */}
+                        {
+                            this.state.showBar ?
+                                <div>
+                                    <hr />
+                                    <div className="progress" style={{ width: "100%" }}>
+                                        <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
+                                    </div>
+                                    {
+                                        this.state.error ?
+                                            this.state.status == 413 ?
+                                                <div style={{ width: "100% "}}>
+                                                    <p style={{ textAlign: "center", color: "red" }}>File was too big.</p>
+                                                </div>
+                                                :
+                                            <div style={{ width: "100% "}}>
+                                                <p style={{ textAlign: "center", color: "red" }}>Something went wrong. Please contact a developer an show them this: </p>
+                                                <p>{ this.state.status + ": " + this.state.statusText }</p>
+                                            </div>
+                                            :
+                                            null
+                                    }
+                                </div>
+                                :
+                                null
+                        }
+                    </div>
+                </div>
+            </div>
+        );
+
         return (
             <div>
                 <form onSubmit={this.onSubmit} encType="multipart/form-data">
                     <div className="form-group">
-                        <label><h3>Title</h3>
-                            <input className="form-control" type="text" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Enter title here..." />
-                            <p style={{ color: "red", display: this.state.title.length > 2 ? "none" : "block" }}>Title requires at least 3 characters</p>
-                        </label>
+                        <label><h3>Title</h3></label>
+                        <input className="form-control" type="text" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Enter title here..." />
+                        <p style={{ color: "red", display: this.state.title.length > 2 ? "none" : "block" }}>Title requires at least 3 characters</p>
                     </div>
                     <div className="form-group">
-                        <label><h3>Description</h3>
-                            <textarea rows="5" cols="20" style={{ resize: "none" }} className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter description here..." />
-                            <p style={{ color: "red", display: this.state.description.length > 2 ? "none" : "block" }}>Description requires at least 3 characters</p>
-                        </label>
+                        <label><h3>Description</h3></label>
+                        <textarea rows="5" cols="20" style={{ resize: "none" }} className="form-control" type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter description here..." />
+                        <p style={{ color: "red", display: this.state.description.length > 2 ? "none" : "block" }}>Description requires at least 3 characters</p>
                     </div>
                     <div className="form-group">
-                        <label><h3>Video File</h3>
-                            <input className="form-control" type="file" name="video" accept="video/*" onChange={this.handleChange} value={this.state.file} ref={this.video} />
-                            <p style={{ color: "red", display: this.state.video != null ? "none" : "block" }}>Video file is required</p>
-                        </label>
+                        <label><h3>Video File</h3></label>
+                        <input className="form-control" type="file" name="video" accept="video/*" onChange={this.handleChange} value={this.state.file} ref={this.video} />
+                        <p style={{ color: "red", display: this.state.video != null ? "none" : "block" }}>Video file is required</p>
                     </div>
                     <div className="form-group">
-                        <label><h3>Thumbnail</h3>
-                            <p>Optionally, choose a thumbnail to show on the kiosk page.</p>
-                            <input className="form-control" type="file" name="thumbnail" accept="image/*" onChange={this.handleChange} value={this.state.file} ref={this.thumbnail} />
-                        </label>
+                        <label><h3>Thumbnail</h3></label>
+                        <p>Optionally, choose a thumbnail to show on the kiosk page.</p>
+                        <input className="form-control" type="file" name="thumbnail" accept="image/*" onChange={this.handleChange} value={this.state.file} ref={this.thumbnail} />
                     </div>
                     <div className="form-group">
-                        <label><h3>Copyright Information</h3>
-                            <input className="form-control" type="text" name="copyright" onChange={this.handleChange} value={this.state.copyright} placeholder="Enter copyright information here..." />
-                        </label>
+                        <label><h3>Copyright Information</h3></label>
+                        <input className="form-control" type="text" name="copyright" onChange={this.handleChange} value={this.state.copyright} placeholder="Enter copyright information here..." />
                     </div>
                     <button className="btn btn-primary">Submit</button>
                     <div style={{ width: "300px", backgroundColor: "green", backgroundPosition: `${100 - this.state.progressValue}% 0` }}></div>
 
                     {
                         this.state.showBar ?
-                        <div className="progress" style={{ width: "500px" }}>
-                            <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
-                        </div>
-                        :
-                        null
+                            <div className="progress" style={{ width: "500px" }}>
+                                <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
+                            </div>
+                            :
+                            null
                     }
                     {
                         this.state.error ?

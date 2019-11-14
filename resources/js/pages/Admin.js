@@ -253,7 +253,7 @@ class Admin extends React.Component {
             {
                 id: 5,
                 text: "Banned Words",
-                component: <BannedWords key={5} bannedWords={this.state.bannedWords} loading={this.state.bannedWordsLoading} />
+                component: <BannedWords key={5} bannedWords={this.state.bannedWords} loading={this.state.bannedWordsLoading} refresh={ this.fetchBannedWords } />
             },
             {
                 id: 6,

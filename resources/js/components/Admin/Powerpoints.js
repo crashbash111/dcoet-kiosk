@@ -12,11 +12,26 @@ export default class KioskPages extends React.Component {
         this.state = {
             mode: 0,
             items: this.props.powerpoints,
+            searchTerm: "",
+            currentPage: 1,
+            itemsPerPage: 5,
         };
 
         this.handleClick = this.handleClick.bind(this);
         this.createClick = this.createClick.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind( this );
+        this.handleChange = this.handleChange.bind( this );
+        this.paginate = this.paginate.bind( this );
+    }
+
+    handleChange( event )
+    {
+        this.setState( { [event.target.name ]: event.target.value } );
+    }
+
+    paginate( number )
+    {
+        this.setState( { currentPage: number } );
     }
 
     handleClick(i) {
@@ -40,14 +55,14 @@ export default class KioskPages extends React.Component {
 
         let child = <div>Powerpoints</div>;
 
-        const filteredPresentations = this.state.items.filter((m) => { return m.heading.toLowerCase().includes(this.state.searchTerm.toLowerCase()) });
+        const filteredPresentations = this.state.items.filter((m) => { return m.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) });
 
         const presentations = filteredPresentations.map(item => {
             return (
                 <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.title}</td>
-                    <td>{item.id}</td>
+                    <td>{item.ppt_images.length}</td>
                     <td>{item.created_at}</td>
                     <td>
                         <button className="btn btn-outline-dark btn-square" onClick={(event) => { console.log(item.id) }}>View</button> | <button className="btn btn-success btn-square" onClick={(event) => { this.handleEditClick(item.id) }}>Edit</button> | <button className="btn btn-danger btn-square">Delete</button>

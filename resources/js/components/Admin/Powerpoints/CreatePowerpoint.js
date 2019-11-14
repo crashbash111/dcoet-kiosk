@@ -105,7 +105,7 @@ export default class CreatePowerpoint extends React.Component {
                                 null
                         }
                         <hr />
-                        <button className="btn btn-primary btn-square">Submit</button>
+                        <button onClick={ (event) => { this.handleSubmit( event ) }} className="btn btn-primary btn-square">Submit</button>
                     </div>
                 </div>
             </div>

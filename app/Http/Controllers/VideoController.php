@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use App\Video;
+use App\VideoStream;
 
 class VideoController extends Controller
 {
@@ -76,35 +77,42 @@ class VideoController extends Controller
         return json_encode($video);
     }
 
-    public function stream($id)
-    {
+    public function stream($id) {
         $video = Video::find($id);
-
         $path = 'storage/videos/' . $video->file_path;
+        $stream = new VideoStream($path);
+        $stream->start();
+      }
 
-        $file_location = public_path($path);
+    // public function stream($id)
+    // {
+    //     $video = Video::find($id);
 
-        //return $file_location;
+    //     $path = 'storage/videos/' . $video->file_path;
 
-        $extension = pathinfo($file_location, PATHINFO_EXTENSION);
+    //     $file_location = public_path($path);
 
-        $mimetypes = new \Illuminate\Http\Testing\MimeType;
+    //     //return $file_location;
 
-        $mime = $mimetypes->get($extension);
+    //     $extension = pathinfo($file_location, PATHINFO_EXTENSION);
 
-        $filesize = File::size($file_location);
+    //     $mimetypes = new \Illuminate\Http\Testing\MimeType;
 
-        $headers = [
-            "Content-type" => $mime,
-            "Content-length" => $filesize,
-            "Content-disposition" => 'attachment; filename="' . basename($file_location) . '"',
-        ];
+    //     $mime = $mimetypes->get($extension);
 
-        return Response::stream(function () use ($file_location) {
-            $stream = fopen($file_location, 'r');
-            fpassthru($stream);
-        }, 200, $headers);
-    }
+    //     $filesize = File::size($file_location);
+
+    //     $headers = [
+    //         "Content-type" => $mime,
+    //         "Content-length" => $filesize,
+    //         "Content-disposition" => 'attachment; filename="' . basename($file_location) . '"',
+    //     ];
+
+    //     return Response::stream(function () use ($file_location) {
+    //         $stream = fopen($file_location, 'r');
+    //         fpassthru($stream);
+    //     }, 200, $headers);
+    // }
 
     public function update(Request $request, $id)
     { }

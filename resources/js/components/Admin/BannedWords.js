@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import Loader from "../Loader";
 import ViewBannedWords from "./BannedWords/ViewBannedWords";
 import CreateBannedWord from "./BannedWords/CreateBannedWord";
+import Pagination from "../Pagination";
 
 import ErrorCatch from "../ErrorCatch";
 
@@ -27,7 +28,12 @@ export default class BannedWords extends React.Component {
             editMode: false,
             id: -1,
             mode: 0,
-            addedSuccessfully: false
+            addedSuccessfully: false,
+
+            items: this.props.bannedWords.map( (item) => { return { ...item, profane: false } } ),
+            currentPage: 1,
+            itemsPerPage: 5,
+            searchTerm: "",
         };
 
         this.handleEditClick = this.handleEditClick.bind(this);
@@ -38,6 +44,9 @@ export default class BannedWords extends React.Component {
         this.handleCancelClick = this.handleCancelClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.addClick = this.addClick.bind(this);
+        this.showWord = this.showWord.bind( this );
+        this.hideWord = this.hideWord.bind( this );
+        this.paginate = this.paginate.bind( this );
     }
 
     componentDidMount() {
@@ -46,6 +55,11 @@ export default class BannedWords extends React.Component {
             .then(response => response.json())
             .then(data => { this.setState({ bannedWords: data, loading: false }); console.log(data) })
             .catch(err => console.log(err));
+    }
+
+    paginate( number )
+    {
+        this.setState( { currentPage: number } );
     }
 
     handleEditClick(i, word) {
@@ -96,7 +110,7 @@ export default class BannedWords extends React.Component {
         formData.append("word", this.state.word);
 
         Axios({
-            url: "./api/bannedwords" + (this.state.editMode ? "/" + this.state.id : ""),
+            url: "/api/bannedwords" + (this.state.editMode ? "/" + this.state.id : ""),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -105,24 +119,32 @@ export default class BannedWords extends React.Component {
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ added: true });
-                if (!this.editMode) {
-                    this.setState({ bannedWords: [...this.state.bannedWords, { id: response.data.id, word: response.data.word }] });
-                }
-                else {
-                    this.setState({
-                        bannedWords: this.state.bannedWords.map(item => {
-                            if (item.id == this.state.id) {
-                                return { id: item.id, word: this.state.word };
-                            }
-                            else {
-                                return item;
-                            }
-                        })
-                    });
-                }
-                this.setState({ editMode: false, id: -1, word: "" });
-                setTimeout(() => { this.setState({ added: false }) }, 1000);
+                this.setState( (prevState) => {
+                    return(
+                        {
+                            word: "", items: [ ...prevState.items, { id: response.data.id, word: response.data.word, profane: false, created_at: response.data.created_at } ]
+                        }
+                    );
+                } );
+                //this.props.refresh();
+                // this.setState({ added: true });
+                // if (!this.editMode) {
+                //     this.setState({ bannedWords: [...this.state.bannedWords, { id: response.data.id, word: response.data.word }] });
+                // }
+                // else {
+                //     this.setState({
+                //         bannedWords: this.state.bannedWords.map(item => {
+                //             if (item.id == this.state.id) {
+                //                 return { id: item.id, word: this.state.word };
+                //             }
+                //             else {
+                //                 return item;
+                //             }
+                //         })
+                //     });
+                // }
+                // this.setState({ editMode: false, id: -1, word: "" });
+                // setTimeout(() => { this.setState({ added: false }) }, 1000);
                 //this.setState({ redirect: r });
             })
             .catch(err => console.log(err.response.data));
@@ -132,11 +154,54 @@ export default class BannedWords extends React.Component {
         this.setState({ mode: i });
     }
 
+    handleCreateClick( event )
+    {
+        this.setState( { mode: 1 } );
+    }
+
     addClick() {
         this.setState({ mode: 0, addedSuccessfully: true });
         setTimeout(() => {
             this.setState({ addedSuccessfully: false });
         }, 1000).bind(this);
+    }
+
+    handleAddClick( event )
+    {
+
+    }
+
+    showWord( id )
+    {
+        this.setState( ( prevState ) => {
+            return(
+                {
+                    items: prevState.items.map( (item) => {
+                        if( item.id != id )
+                        {
+                            return {...item, profane: false };
+                        }
+                        else
+                        {
+                            return {...item, profane: true };
+                        }
+                    })
+                }
+            );
+        });
+    }
+
+    hideWord( id )
+    {
+        this.setState( (prevState) => {
+            return(
+                {
+                    items: prevState.items.map( (item) => {
+                        return {...item, profane: false };
+                    })
+                }
+            )
+        } );
     }
 
     render() {
@@ -146,14 +211,62 @@ export default class BannedWords extends React.Component {
 
         let child = <div>Banned Words</div>;
 
+        const filteredWords = this.state.items.filter((m) => { return m.word.toLowerCase().includes(this.state.searchTerm.toLowerCase()) });
+
+        const words = filteredWords.map(item => {
+            return (
+                <tr key={item.id} onMouseEnter={ (event) => { this.showWord( item.id ) } } onMouseLeave={ (event) => { this.hideWord( item.id ) } }>
+                    <td>{item.id}</td>
+                    <td>{item.profane ? item.word : item.word[0] + "*" + item.word[2] }</td>
+                    <td>{item.created_at}</td>
+                    <td>
+                        <button className="btn btn-danger btn-square">Delete</button>
+                    </td>
+                </tr>
+            );
+        });
+
+        const indexOfLastItem = this.state.currentPage * this.state.itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - this.state.itemsPerPage;
+        const currentItems = words.slice(indexOfFirstItem, indexOfLastItem);
+
         switch (this.state.mode) {
             case 0:
-                child = <ViewBannedWords bannedWords={this.props.bannedWords} loading={this.props.loading} addedSuccessfully={this.state.addedSuccessfully} />
+                child = <div>
+                    <div style={{ padding: "5px", backgroundColor: "grey" }}><h2>Kiosk Categories</h2></div>
+                    <div style={{ padding: "10px" }}>
+                        {/* <button className="btn btn-primary btn-square" onClick={(event) => { this.handleCreateClick() }}>Create New</button>
+                        <hr /> */}
+                        <input type="text" placeholder="Add word..." name="word" value={this.state.word} onChange={this.handleChange} />
+                        <button className="btn btn-primary btn-square" onClick={ (event) => { this.onSubmit( event ) }}>Add</button>
+                        <hr />
+                        <input type="text" placeholder="Search term..." name="searchTerm" value={this.state.searchTerm} onChange={this.handleChange} />
+                        <hr />
+                        
+                        <table className="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th className="active" style={{ cursor: "pointer" }}>ID</th>
+                                    <th>Word</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentItems}
+                            </tbody>
+                        </table>
+                        <Pagination itemsPerPage={this.state.itemsPerPage} totalItems={filteredWords.length} paginate={this.paginate} />
+                    </div>
+                </div>;
+                //child = <ViewBannedWords bannedWords={this.props.bannedWords} loading={this.props.loading} addedSuccessfully={this.state.addedSuccessfully} />
                 break;
             case 1:
                 child = <CreateBannedWord submitClick={this.addClick} />
                 break;
         }
+
+        return <div>{child}</div>;
 
         return <div>
             <div style={{ display: "inline-block" }}>
@@ -178,7 +291,7 @@ export default class BannedWords extends React.Component {
             :
             null
             } */}
-            {child}
+            
         </div>
 
         // if (this.state.redirect) {
