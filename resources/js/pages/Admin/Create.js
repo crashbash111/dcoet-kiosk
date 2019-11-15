@@ -594,8 +594,7 @@ class Create extends React.Component {
                 </div>);
             }
         }
-        else
-        {
+        else {
             for (var i = 0; i < 3; ++i) {
                 currentAudios.push(<div key={i} style={{ backgroundColor: "#afafaf", width: "70%", height: "100px" }}>
                 </div>
@@ -633,9 +632,12 @@ class Create extends React.Component {
 
         if (this.state.preview) {
             return <div>
-                <button className="btn btn-danger btn-square" onClick={(event) => this.handleBackClick(event)} style={{ position: "absolute", top: "10px", right: "10px" }}>
-                    Back
-                </button>
+                <div>
+                    <button className="btn btn-danger btn-square" onClick={(event) => this.handleBackClick(event)} style={{ float: "right", paddingTop: "10px", paddingRight: "10px" }}>
+                        Back
+                    </button>
+                </div>
+
                 <div className="hideScroll" onclick={() => { null }}
                     style={{
                         //styling for the side panel
@@ -796,26 +798,19 @@ class Create extends React.Component {
                         </label>
                         <textarea rows="6" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="Enter long description here..." />
                     </div>
-                    <hr />
-                    <div>
-                        <button disabled className="btn btn-outline-dark btn-square">Previous</button>
-                        <button onClick={(event) => { this.handleTabClick(1) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
-                    </div>
+
                 </div>;
                 break;
             case 1:
                 //stats
                 currentTab = <div>
                     <div className="form-group">
+                        <h3>Stats</h3>
+                        <br />
                         <button className="btn btn-primary btn-square" onClick={this.addStat}>Add Stat</button>
                     </div>
                     <div className="form-group">
                         {statFields}
-                    </div>
-                    <hr />
-                    <div>
-                        <button onClick={(event) => { this.handleTabClick(0) }} className="btn btn-outline-dark btn-square">Previous</button>
-                        <button onClick={(event) => { this.handleTabClick(2) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
                     </div>
                 </div>;
                 break;
@@ -828,11 +823,6 @@ class Create extends React.Component {
                             {itemsNew}
                         </select>
                         <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
-                    </div>
-                    <hr />
-                    <div>
-                        <button onClick={(event) => { this.handleTabClick(1) }} className="btn btn-outline-dark btn-square">Previous</button>
-                        <button onClick={(event) => { this.handleTabClick(3) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
                     </div>
                 </div>
                 break;
@@ -850,11 +840,6 @@ class Create extends React.Component {
                             {currentImages}
                         </div>
                     </div>
-                    <hr />
-                    <div>
-                        <button onClick={(event) => { this.handleTabClick(2) }} className="btn btn-outline-dark btn-square">Previous</button>
-                        <button onClick={(event) => { this.handleTabClick(4) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
-                    </div>
                 </div>
                 break;
             case 4:
@@ -870,21 +855,18 @@ class Create extends React.Component {
                             {currentAudios}
                         </div>
                     </div>
-                    <hr />
-                    <div>
-                        <button onClick={(event) => { this.handleTabClick(3) }} className="btn btn-outline-dark btn-square">Previous</button>
-                        <button disabled style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
-                    </div>
                 </div>
                 break;
         }
 
         return (
             <div style={{ height: "100%" }}>
-                <button className="btn btn-success btn-square" style={{ position: "absolute", top: "10px", right: "10px", zIndex: 1 }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
                 <div>
                     <div style={{ padding: "20px" }}>
-                        <h2>Create New Page</h2>
+                        <div>
+                            <h2 style={{ display: "inline-block" }}>Create New Page</h2>
+                            <button className="btn btn-outline-success btn-square" style={{ float: "right", display: "inline-block" }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
+                        </div>
                         <br />
                         <div style={{ width: "100%" }}>
                             <button style={{ width: "20%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
@@ -893,10 +875,19 @@ class Create extends React.Component {
                             <button style={{ width: "20%" }} className={this.state.tabIndex == 3 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(3) }}>Images</button>
                             <button style={{ width: "20%" }} className={this.state.tabIndex == 4 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(4) }}>Audio</button>
                         </div>
+                        <br />
+                        <div>
+                            <button disabled={this.state.tabIndex < 1} onClick={(event) => { this.handleTabClick(this.state.tabIndex - 1) }} className="btn btn-outline-dark btn-square">Previous</button>
+                            <button disabled={this.state.tabIndex == 4} onClick={(event) => { this.handleTabClick(this.state.tabIndex + 1) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                        </div>
+                        <hr />
                         <div style={{ padding: "10px" }}>
                             {currentTab}
                             <hr />
-                            <button className="btn btn-primary btn-square">Submit</button>
+                            <div>
+                                <button className="btn btn-outline-danger btn-square">Cancel</button>
+                                <button style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
+                            </div>
                         </div>
                     </div>
                     <div>
