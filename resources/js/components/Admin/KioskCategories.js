@@ -29,6 +29,7 @@ class KioskCategories extends React.Component {
         this.paginate = this.paginate.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind( this );
+        this.handleCancelCreateClick = this.handleCancelCreateClick.bind( this );
     }
 
     handleCreateClick() {
@@ -40,11 +41,19 @@ class KioskCategories extends React.Component {
     }
 
     handleSubmitted() {
+        console.log( "refreshing" );
         this.props.refresh();
-        this.setState({ mode: 0, addedSuccessfully: true });
-        setTimeout(() => {
-            this.setState({ addedSuccessfully: false });
-        }).bind(this);
+        // this.setState({ mode: 0, addedSuccessfully: true });
+        // setTimeout(() => {
+        //     this.setState({ addedSuccessfully: false });
+        // }).bind(this);
+    }
+
+    handleCancelCreateClick( event )
+    {
+        event.preventDefault();
+        console.log( "Reeeee" );
+        this.setState( { mode: 0 } );
     }
 
     handleClick(i) {
@@ -122,8 +131,10 @@ class KioskCategories extends React.Component {
                 </div>;
                 break;
             case 1:
-                child = <CreateCategory handleSubmitted={this.handleSubmitted} refresh={this.props.refresh}
-                    editMode={this.state.editMode} editId={this.state.editId}
+                const category = this.state.items.find( m => m.id == this.state.editId );
+                child = <CreateCategory 
+                    handleCancelCreateClick={ this.handleCancelCreateClick }
+                    handleSubmitted={this.handleSubmitted} refresh={this.props.refresh} category={category}
                 />
                 break;
         }

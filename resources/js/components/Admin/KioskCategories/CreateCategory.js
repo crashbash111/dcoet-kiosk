@@ -7,9 +7,9 @@ export default class CreateCategory extends React.Component {
         super(props);
 
         this.state = {
-            name: "",
-            description: "",
-            editMode: this.props.editMode,
+            editMode: (this.props.category != null),
+            name: this.props.category != null ? this.props.category.name : "",
+            description: this.props.category != null ? this.props.category.description : "",
             redirect: false,
             loading: false,
             error: false,
@@ -22,7 +22,6 @@ export default class CreateCategory extends React.Component {
 
     handleChange(event) {
         let { name, value } = event.target;
-
         this.setState({ [name]: value });
     }
 
@@ -32,6 +31,8 @@ export default class CreateCategory extends React.Component {
         // this.showError();
         // return;
 
+        const editMode = this.props.category != null;
+
         if (this.state.name.length < 3 || this.state.description.length < 3) {
             this.setState({ error: true });
             return;
@@ -39,7 +40,7 @@ export default class CreateCategory extends React.Component {
 
         let formData = new FormData();
 
-        if (this.state.editMode) {
+        if (editMode) {
             formData.append("_method", "PUT");
             console.log("put");
         }
@@ -48,7 +49,7 @@ export default class CreateCategory extends React.Component {
         formData.append("description", this.state.description);
 
         Axios({
-            url: "./api/categories" + (this.state.editMode ? "/" + this.props.match.params.id : ""),
+            url: "./api/categories" + (editMode ? "/" + this.props.category.id : ""),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -60,7 +61,7 @@ export default class CreateCategory extends React.Component {
                 //this.setState({ redirect: false });
                 this.props.handleSubmitted();
             })
-            .catch(err => { console.log(err.response.data); this.showError() });
+            .catch(err => { console.log(err.response); this.showError() });
     }
 
     showError() {
@@ -70,15 +71,15 @@ export default class CreateCategory extends React.Component {
         });
     }
 
-    componentWillMount() {
-        if (this.state.editMode) {
-            this.setState({ loading: true });
-            fetch("./api/categories/" + this.props.editId)
-                .then(response => response.json())
-                .then(data => this.setState({ name: data.name, description: data.description, loading: false }))
-                .catch(error => console.log(error));
-        }
-    }
+    // componentWillMount() {
+    //     if (this.state.editMode) {
+    //         this.setState({ loading: true });
+    //         fetch("./api/categories/" + this.props.editId)
+    //             .then(response => response.json())
+    //             .then(data => this.setState({ name: data.name, description: data.description, loading: false }))
+    //             .catch(error => console.log(error));
+    //     }
+    // }
 
     render() {
         return (
@@ -107,7 +108,10 @@ export default class CreateCategory extends React.Component {
                                     null
                             }
                             <hr />
-                            <button className="btn btn-primary btn-square">Submit</button>
+                            <div>
+                                <button onClick={ this.props.handleCancelCreateClick } className="btn btn-outline-danger btn-square">Cancel</button>
+                                <button onClick={(event) => { this.handleSubmit(event) }} style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </div>

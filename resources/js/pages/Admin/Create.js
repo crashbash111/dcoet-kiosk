@@ -16,7 +16,7 @@ class Create extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props);
+        console.log(props);
 
         console.log(this.props.page);
 
@@ -321,7 +321,7 @@ class Create extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        if (this.state.page.heading.length < 3 || this.state.page.text.length < 3 || this.state.page.category_id == -1 || !this.state.editMode && this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length < 1) {
+        if (this.state.page.heading.length < 3 || this.state.page.shortdesc.length < 3 || this.state.page.category_id == -1 || !this.state.editMode && this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length < 1) {
             this.setState({ error: true });
             return;
         }
@@ -346,7 +346,7 @@ class Create extends React.Component {
             copyright = this.state.page.copyright;
         }
         formData.append("heading", this.state.page.heading);
-        formData.append("shortdesc", this.state.page.text);
+        formData.append("shortdesc", this.state.page.shortdesc);
         formData.append("longdesc", this.state.page.longdesc);
         formData.append("category", this.state.page.category_id);
 
@@ -436,19 +436,19 @@ class Create extends React.Component {
 
         if (this.state.editMode) {
 
-            fetch("./api/pages/" + this.props.page.id)
-                .then(response => response.json())
-                .then(data => {
-                    let copyright = [];
-                    for (var i = 0; i < data.images.length; ++i) {
-                        copyright.push({ id: data.images[i].id, text: data.images[i].copyright });
-                    }
-                    this.setState({ page: { ...data, copyright: copyright } });
-                    console.log(data);
-                });
+            // fetch("./api/pages/" + this.props.page.id)
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         let copyright = [];
+            //         for (var i = 0; i < data.images.length; ++i) {
+            //             copyright.push({ id: data.images[i].id, text: data.images[i].copyright });
+            //         }
+            //         this.setState({ page: { ...data, copyright: copyright } });
+            //         console.log(data);
+            //     });
         }
         else {
-            this.setState({ page: { heading: "", text: "", longdesc: "", images: [], category_id: -1, stats: [], audios: [], copyright: [], copyrightNew: [], }, loading: false });
+            this.setState({ page: { heading: "", shortdesc: "", longdesc: "", images: [], category_id: -1, stats: [], audios: [], copyright: [], copyrightNew: [], }, loading: false });
         }
 
     }
@@ -493,32 +493,40 @@ class Create extends React.Component {
 
         let count = 0;
 
-        let statFields = this.state.page.stats.map((item, idx) => {
+        let statFields;
 
-            count++;
+        if (this.state.page.stats != null) {
+            statFields = this.state.page.stats.map((item, idx) => {
 
-            let softDeleted = this.state.statsToDelete.includes(item.id);
+                count++;
 
-            return (
-                <div key={count} style={softDeleted ? { opacity: "0.4" } : null}>
-                    {count > 1 ? <hr /> : null}
-                    <h4>Stat #{count}</h4>
-                    <div style={{ display: "grid", gridTemplateColumns: "auto 100px" }}>
-                        <div>
-                            <div className="form-group">
-                                <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} name`} value={item.name} onChange={this.handleStatNameChange(idx)} />
+                let softDeleted = this.state.statsToDelete.includes(item.id);
+
+                return (
+                    <div key={count} style={softDeleted ? { opacity: "0.4" } : null}>
+                        {count > 1 ? <hr /> : null}
+                        <h4>Stat #{count}</h4>
+                        <div style={{ display: "grid", gridTemplateColumns: "auto 100px" }}>
+                            <div>
+                                <div className="form-group">
+                                    <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} name`} value={item.name} onChange={this.handleStatNameChange(idx)} />
+                                </div>
+                                <div className="form-group">
+                                    <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} value`} value={item.value} onChange={this.handleStatValueChange(idx)} />
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <input className="form-control" type="text" name="stats" placeholder={`Stat #${idx + 1} value`} value={item.value} onChange={this.handleStatValueChange(idx)} />
+                            <div>
+                                <button className={softDeleted ? "btn btn-primary btn-square" : "btn btn-danger btn-square"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
                             </div>
-                        </div>
-                        <div>
-                            <button className={softDeleted ? "btn btn-primary btn-square" : "btn btn-danger btn-square"} onClick={softDeleted ? this.handleStatDeleteUndo(idx) : this.handleStatRemove(idx)}>{softDeleted ? "Undo" : "Delete"}</button>
                         </div>
                     </div>
-                </div>
-            );
-        });
+                );
+            });
+        }
+        else
+        {
+            statFields = <div></div>
+        }
 
         let statTableItems = this.state.page.stats.map(item => {
             return (
@@ -573,7 +581,7 @@ class Create extends React.Component {
                 return (
                     <div key={item.id} style={softDeleted ? deletedStyle : null}>
                         <img src={imgPath} style={{ width: "100px" }} />
-                        <input type="text" name="copyright" value={this.state.page.copyright[idx].text} onChange={this.handleCopyrightChange(idx)} placeholder="Copyright information here..." />
+                        {/* <input type="text" name="copyright" value={this.state.page.copyright[idx].text} onChange={this.handleCopyrightChange(idx)} placeholder="Copyright information here..." /> */}
                         <button onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
                     </div>
                 );
@@ -671,7 +679,7 @@ class Create extends React.Component {
                             fontSize: "28px",
                             textAlign: "left",
                             paddingBottom: "5px",
-                        }}>{this.state.page.text == "" ? "This is a sample short description." : this.state.page.text}
+                        }}>{this.state.page.shortdesc == "" ? "This is a sample short description." : this.state.page.shortdesc}
                         </p>
                         <p style={{
                             fontSize: "18px",
@@ -787,9 +795,9 @@ class Create extends React.Component {
                     <div className="form-group">
                         <label><h3>Short Description</h3>
 
-                            <p style={{ color: "red", display: this.state.page.text.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
+                            <p style={{ color: "red", display: this.state.page.shortdesc.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
                         </label>
-                        <textarea rows="3" className="form-control" name="text" value={this.state.page.text} onChange={this.handleChange} placeholder="Enter short description here..." />
+                        <textarea rows="3" className="form-control" name="shortdesc" value={this.state.page.shortdesc} onChange={this.handleChange} placeholder="Enter short description here..." />
                     </div>
                     <div className="form-group">
                         <label><h3>Long Description</h3>
@@ -885,8 +893,8 @@ class Create extends React.Component {
                             {currentTab}
                             <hr />
                             <div>
-                                <button className="btn btn-outline-danger btn-square">Cancel</button>
-                                <button style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
+                                <button onClick={ this.props.handleCancelCreateClick } className="btn btn-outline-danger btn-square">Cancel</button>
+                                <button onClick={(event) => { this.handleSubmit(event) }} style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -956,4 +964,4 @@ class Create extends React.Component {
     }
 }
 
-export default withAuth(Create);
+export default Create;

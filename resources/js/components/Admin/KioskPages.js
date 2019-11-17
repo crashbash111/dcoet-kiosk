@@ -5,6 +5,7 @@ import Create from "../../pages/Admin/Create";
 import Loader from "../Loader";
 import ViewPages from "./KioskPages/ViewPages";
 import Pagination from "../Pagination";
+import { runInThisContext } from "vm";
 
 class KioskPages extends React.Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class KioskPages extends React.Component {
             itemsPerPage: 5,
             searchTerm: "",
             items: this.props.pages,
+            sortColumn: 0,
+            sortDirection: false,
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -25,6 +28,9 @@ class KioskPages extends React.Component {
         this.paginate = this.paginate.bind(this);
         this.viewClick = this.viewClick.bind(this);
         this.handleChange = this.handleChange.bind( this );
+        this.handleClear = this.handleClear.bind( this );
+        this.handleSortClick = this.handleSortClick.bind( this );
+        this.handleCancelCreateClick = this.handleCancelCreateClick.bind( this );
     }
 
     handleClick(i) {
@@ -37,8 +43,33 @@ class KioskPages extends React.Component {
     }
 
     handleEditClick(i) {
+        console.log( i );
+        console.log( this.props.pages.find( m => m.id == i ) );
         this.setState({ pageId: i, mode: 1 });
         //this.props.history.push( `admin/pages/${i}/edit` );
+    }
+
+    handleCancelCreateClick( event )
+    {
+        event.preventDefault();
+        console.log( "Tard" );
+        this.setState( { mode: 0 } );
+    }
+
+    handleSortClick( i )
+    {
+        if( this.state.sortColumn == i )
+        {
+            this.setState( prevState => {
+                return {
+                    sortDirection: !prevState.sortDirection
+                };
+            });
+        }
+        else
+        {
+            this.setState( { sortColumn: i, sortDirection: false } );
+        }
     }
 
     paginate = (number) => this.setState({ currentPage: number });
@@ -47,7 +78,17 @@ class KioskPages extends React.Component {
 
     handleChange(event) {
         //[name, value] = event.target;
+        if( event.target.name == "searchTerm" )
+        {
+            this.setState( { currentPage: 1, sortColumn: 0, sortDirection: false } );
+        }
+
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleClear()
+    {
+        this.setState( { searchTerm: "", currentPage: 1, sortColumn: 0, sortDirection: false } );
     }
 
     render() {
@@ -56,8 +97,61 @@ class KioskPages extends React.Component {
         }
 
         let child = <div>Pages</div>;
-
-        const filteredPages = this.state.items.filter( (m) => { return m.heading.toLowerCase().includes( this.state.searchTerm.toLowerCase() ) } );
+        
+        let filteredPages = this.state.items.filter( (m) => { return m.heading.toLowerCase().includes( this.state.searchTerm.toLowerCase() ) } );
+        if( this.state.sortColumn == 0 )
+        {
+            if( !this.state.sortDirection )
+            {
+                filteredPages = filteredPages.sort( (x, y) => { return x.id - y.id } );
+            }
+            else
+            {
+                filteredPages = filteredPages.sort( (x, y) => { return y.id - x.id } );
+            }
+        }
+        else if( this.state.sortColumn == 1 )
+        {
+            if( !this.state.sortDirection )
+            {
+                filteredPages = filteredPages.sort( (x, y ) => { return x.heading.localeCompare( y.heading ) });
+            }
+            else
+            {
+                filteredPages = filteredPages.sort( (x, y ) => { return y.heading.localeCompare( x.heading ) });
+            }
+        }
+        else if( this.state.sortColumn == 2 )
+        {
+            if( !this.state.sortDirection )
+            {
+                filteredPages = filteredPages.sort( (x, y ) => { return x.times_viewed - y.times_viewed });
+            }
+            else
+            {
+                filteredPages = filteredPages.sort( (x, y ) => { return y.times_viewed - x.times_viewed });
+            }
+        }
+        else if( this.state.sortColumn == 3 )
+        {
+            if( !this.state.sortDirection )
+            {
+                filteredPages = filteredPages.sort( (x, y ) => {
+                    const d1 = new Date( x.created_at );
+                    const d2 = new Date( y.created_at );
+                    console.log( d1 );
+                    return d1 > d2 ? -1 : d1 < d2 ? 1 : 0;
+                });
+            }
+            else
+            {
+                filteredPages = filteredPages.sort( (x, y ) => {
+                    const d1 = new Date( x.created_at );
+                    const d2 = new Date( y.created_at );
+                    return d1 > d2 ? 1 : d1 < d2 ? -1 : 0;
+                });
+            }
+        }
 
         const pages = filteredPages.map(item => {
             return (
@@ -67,7 +161,7 @@ class KioskPages extends React.Component {
                     <td>{item.times_viewed}</td>
                     <td>{item.created_at}</td>
                     <td>
-                        <button className="btn btn-outline-dark btn-square" onClick={(event) => { console.log(item.id) }}>View</button> | <button className="btn btn-success btn-square" onClick={(event) => { this.handleEditClick(item.id) }}>Edit</button> | <button className="btn btn-danger btn-square">Delete</button>
+                        <a href={`#/kiosk/${item.id}`}><button className="btn btn-outline-dark btn-square" onClick={(event) => { console.log(item.id) }}>View</button></a> | <button className="btn btn-success btn-square" onClick={(event) => { this.handleEditClick(item.id) }}>Edit</button> | <button className="btn btn-danger btn-square">Delete</button>
                     </td>
                 </tr>
             );
@@ -87,15 +181,16 @@ class KioskPages extends React.Component {
                         <button className="btn btn-primary btn-square" onClick={(event) => { this.handleCreateClick() }}>Create New</button>
                         <hr />
                         <input type="text" placeholder="Search term..." name="searchTerm" value={this.state.searchTerm} onChange={this.handleChange} />
+                        { this.state.searchTerm != "" ? <p>{ `Showing results ${indexOfFirstItem + 1}-${indexOfLastItem} out of ${pages.length}` } <p onClick={ (event) => { this.handleClear() } } style={{ display: "inline-block", textDecoration: "underline", cursor: "pointer", color: "blue"}}>clear</p></p> : null }
                         <hr />
 
                         <table className="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th className="active" style={{ cursor: "pointer" }}>ID</th>
-                                    <th>Name</th>
-                                    <th>View Count</th>
-                                    <th>Created</th>
+                                    <th onClick={ (event) => { this.handleSortClick( 0 ) } } className={ this.state.sortColumn == 0 ? this.state.sortDirection ? "headerSortUp" : "headerSortDown" : null } style={{ cursor: "pointer" }}>ID</th>
+                                    <th onClick={ (event) => { this.handleSortClick( 1 ) } } className={ this.state.sortColumn == 1 ? this.state.sortDirection ? "headerSortUp" : "headerSortDown" : null } style={{ cursor: "pointer" }}>Name</th>
+                                    <th onClick={ (event) => { this.handleSortClick( 2 ) } } className={ this.state.sortColumn == 2 ? this.state.sortDirection ? "headerSortUp" : "headerSortDown" : null } style={{ cursor: "pointer" }}>View Count</th>
+                                    <th onClick={ (event) => { this.handleSortClick( 3 ) } } className={ this.state.sortColumn == 3 ? this.state.sortDirection ? "headerSortUp" : "headerSortDown" : null } style={{ cursor: "pointer" }}>Created</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -118,9 +213,16 @@ class KioskPages extends React.Component {
             case 1:
                 const page = (this.state.pageId) != -1 ? this.props.pages.find(m => (m.id == this.state.pageId)) : null;
                 console.log(page);
-                child = <Create page={(this.state.pageId) != -1 ? this.props.pages.find(m => (m.id == this.state.pageId)) : null} />
+                child = <Create page={page} handleCancelCreateClick={ this.handleCancelCreateClick } />
                 break;
         }
+
+        // if( this.state.mode == 1 )
+        // {
+        //     const page = (this.state.pageId) != -1 ? this.props.pages.find(m => (m.id == this.state.pageId)) : null;
+        //     console.log(page);
+        //     return <Create page={ page } />
+        // }
 
 
 

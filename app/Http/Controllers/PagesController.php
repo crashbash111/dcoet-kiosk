@@ -25,6 +25,8 @@ class PagesController extends Controller
         $pages = Page::all();
         foreach ($pages as $page) {
             $page->images = Image::where("page_id", $page->id)->get();
+            $page->stats = Stat::where( "page_id", $page->id )->get();
+            $page->audios = Audio::where( "page_id", $page->id)->get();
         }
         return json_encode($pages);
     }
