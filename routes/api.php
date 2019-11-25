@@ -21,12 +21,18 @@ Route::group(['middleware' => ['web'] ], function () {
     Route::get( "pages/leastviewed", "PagesController@leastViewed" );
     Route::resource( "pages", "PagesController", [ "except" => [ "edit", "create" ] ] );
     Route::resource( "powerpoints", "PowerpointController", [ "except" => [ "edit", "create" ] ] );
-    Route::resource( "categories", "CategoryController", [ "except" => [ "edit", "create" ] ] );
+    Route::resource( "categories", "CategoryController", [ "except" => [ "edit", "create", "destroy" ] ] );
+    Route::post( "categories/{id}/{reassign}", "CategoryController@destroy" );
     Route::resource( "videos", "VideoController", [ "except" => [ "edit", "create" ] ] );
     Route::get( "videos/{id}/stream", [ "uses" => "VideoController@stream" ] );
     Route::resource( "bannedwords", "BannedWordController", [ "except" => [ "edit", "create" ] ] );
     Route::get( "games/{id}/highscores", "GamesController@highscores" );
     Route::resource( "games", "GamesController", [ "only" => [ "index", "update" ] ] );
+    Route::get( "dashboard/misc", "DashboardController@misc" );
+    Route::get( "dashboard/mostViewed", "DashboardController@mostViewed" );
+    Route::get( "dashboard/leastViewed", "DashboardController@leastViewed" );
+
+    Route::delete( "games/{id}", "GamesController@clearGameHighscores" );
 
     Route::post('login','User\AuthController@login');
     Route::post('register', 'User\AuthController@register' )->middleware( "cors" );

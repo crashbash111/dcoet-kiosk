@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BannedWord;
+use App\GameGameScore;
+use App\GameTimedScore;
+use App\FindingGameScores;
 
 class BannedWordController extends Controller
 {
@@ -21,6 +24,36 @@ class BannedWordController extends Controller
 
     public function store( Request $request )
     {
+        $all = GameGameScore::all();
+
+        foreach( $all as $a )
+        {
+            if( $a->initials == $request->input( "word" ) )
+            {
+                $a->delete();
+            }
+        }
+
+        $all = GameTimedScore::all();
+
+        foreach( $all as $a )
+        {
+            if( $a->initials == $request->input( "word" ) )
+            {
+                $a->delete();
+            }
+        }
+
+        $all = FindingGameScores::all();
+
+        foreach( $all as $a )
+        {
+            if( $a->initials == $request->input( "word" ) )
+            {
+                $a->delete();
+            }
+        }
+
         $this->validate( $request, [
             "word" => "required",
         ]);
@@ -29,6 +62,11 @@ class BannedWordController extends Controller
         $word->word = $request->input( "word" );
 
         $word->save();
+
+        // foreach(  as $row )
+        // {
+        //     $row->delete();
+        // }
 
         return $word;
     }
@@ -52,5 +90,6 @@ class BannedWordController extends Controller
     {
         $word = BannedWord::find( $id );
         $word->delete();
+        return "Deleted!";
     }
 }

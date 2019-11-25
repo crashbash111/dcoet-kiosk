@@ -7,7 +7,7 @@ import MostViewed from "./Dashboard/MostViewed";
 
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-const Dashboard = ({ mostViewed, mostViewedLoading, leastViewed, leastViewedLoading }) => {
+const Dashboard = ({ mostViewed, mostViewedLoading, leastViewed, leastViewedLoading, misc, miscLoading }) => {
     // const [mostViewed, setMostViewed] = useState([]);
     const [mode, setMode] = useState(0);
     //const [leastViewed, setLeastViewed] = useState([]);
@@ -49,7 +49,115 @@ const Dashboard = ({ mostViewed, mostViewedLoading, leastViewed, leastViewedLoad
         }
     ];
 
-    return <div style={{ width: "100%", height: "100%"}}>
+    if( miscLoading )
+    {
+        return <Loader />;
+    }
+
+    const mv = mostViewed.map( item => {
+        return <tr key={item.id}>
+            <td>{item.id}</td>
+            <td>{item.heading}</td>
+            <td>{item.times_viewed}</td>
+        </tr>
+    });
+
+    const lv = leastViewed.map( item => {
+        return <tr key={item.id}>
+            <td>{item.id}</td>
+            <td>{item.heading}</td>
+            <td>{item.times_viewed}</td>
+        </tr>
+    });
+
+    return <div>
+        <div className="admin-boxshadow">
+            <div className="admin-top-box"><h2>Overview</h2></div>
+            <div style={{ padding: "30px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat( 4, 25% )", paddingLeft: "20px", paddingRight: "20px", gridGap: "20px", justifyContent: "space-evenly" }}>
+                    <div className="dashboard-box1">
+                        <p style={{ fontSize: "3em" }}>{ misc.pagesCount }</p>
+                        <p>Pages</p>
+                        {/* <img src="/images/page.png" width="50px" /> */}
+                    </div>
+                    <div className="dashboard-box2">
+                        <p style={{ fontSize: "3em" }}>{ misc.categoriesCount }</p>
+                        <p>Categories</p>
+                    </div>
+                    <div className="dashboard-box3">
+                        <p style={{ fontSize: "3em" }}>{ misc.presentationsCount }</p>
+                        <p>Presentations</p>
+                    </div>
+                    <div className="dashboard-box4">
+                        <p style={{ fontSize: "3em" }}>{ misc.videosCount }</p>
+                        <p>Videos</p>
+                    </div>
+                </div>
+
+                {/* <table style={{ width: "100%", textAlign: "center" }}>
+                <tr style={{ width: "100%" }}>
+                    <td style={{ width: "33.33%", border: "1px solid black", borderRadius: "3px" }}>
+                        <div>
+                            <h3>Pages</h3>
+                            <p>7</p>
+                        </div>
+                    </td>
+                    <td style={{ width: "33.33%", border: "1px solid black", borderRadius: "3px" }}>
+                        <div>
+                            <h3>Categories</h3>
+                            <p>2</p>
+                        </div>
+                    </td>
+                    <td style={{ width: "33.33%", border: "1px solid black", borderRadius: "3px" }}>
+                        <div>
+                            <h3>Zettai Ryouki</h3>
+                            <p>4-2.4-1</p>
+                        </div>
+                    </td>
+                </tr>
+            </table> */}
+            </div>
+        </div>
+        <div style={{ width: "100%", display: "grid", gridTemplateColumns: "repeat( 2, calc( 50% - 10px ) )", gridGap: "20px", justifyContent: "space-evenly" }}>
+            <div className="admin-boxshadow">
+                <div className="admin-top-box"><h2>Most Viewed Pages</h2></div>
+                <div style={{ padding: "10px" }}>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Heading</th>
+                                <th>View Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mv}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div className="admin-boxshadow">
+                <div className="admin-top-box"><h2>Least Viewed Pages</h2></div>
+                <div style={{ padding: "10px" }}>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Heading</th>
+                                <th>View Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {lv}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    return <div style={{ width: "100%", height: "100%" }}>
         {mostViewedLoading ? <Loader />
             :
             <div>

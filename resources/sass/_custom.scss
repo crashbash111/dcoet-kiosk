@@ -736,6 +736,159 @@ span.deleteicon input {
   padding-right: 10px;
 }
 
+.admin-boxshadow
+{
+  box-shadow: 2px 2px 10px #666;
+  margin-bottom: 40px;
+}
+
+.dashboard-box1
+{
+  color: white;
+  background-color: #F26859;
+  background-image: url( "/images/page-trans.png" );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: "2px";
+  width: 100%;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+.dashboard-box2
+{
+  color: white;
+  background-color: #2FC1EE;
+  background-image: url( "/images/category-trans.png" );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: "2px";
+  width: 100%;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+.dashboard-box3
+{
+  color: white;
+  background-color: #EF9B28;
+  background-image: url( "/images/pres-trans.png" );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: "2px";
+  width: 100%;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+.dashboard-box4
+{
+  color: white;
+  background-color: #1FA85C;
+  background-image: url( "/images/vid-trans.png" );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: "2px";
+  width: 100%;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+.admin-top-box
+{
+  color: white;
+  background-color: #013856;
+  padding: 10px;
+}
+
+.admin-top-box-red
+{
+  color: white;
+  padding: 10px;
+  background-color: red;
+}
+
+.admin-navbar
+{
+  padding: 0;
+  width: 100%;
+  background-color: #013856;
+  box-shadow: 0px 2px 10px #666;
+}
+
+.admin-navbar ul
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-navbar ul li
+{
+  display: inline-block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.admin-navbar ul li p
+{
+  text-align: center;
+  display: block;
+  color: white;
+  background-color: #012345;
+  padding: 8px 16px;
+  margin-bottom: 0;
+  font-size: 1.25em;
+}
+
+.my-container
+{
+  width: 80%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  color: black;
+}
+
+.my-pagination-active
+{
+  background-color: #012345;
+  color: white;
+}
+
+.fa
+{
+  display: inline-block;
+}
+
+.fa-play
+{
+  color: red;
+}
+
+.fa-play:before
+{
+  content: url( "/images/play.svg" );
+}
+
+.fa-pause:before
+{
+  content: url( "/images/pause.png" );
+}
+
 // .caret {
 //   width: 0;
 //   height: 0;

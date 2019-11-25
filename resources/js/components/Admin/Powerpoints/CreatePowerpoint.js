@@ -7,7 +7,8 @@ export default class CreatePowerpoint extends React.Component {
         super(props);
 
         this.state = {
-            title: "",
+            editMode: this.props.powerpoint != null,
+            title: this.props.powerpoint != null ? this.props.powerpoint.title : "",
             redirect: false,
         };
 
@@ -28,11 +29,19 @@ export default class CreatePowerpoint extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
+        if (title.length < 3 || this.pptImages == null || this.pptImages.current == null || this.pptImages.current.files == null || this.pptImages.current.files.length < 1) {
+            return;
+        }
+
         let formData = new FormData();
 
         formData.append("token", localStorage.getItem("id_token"));
 
         formData.append("title", this.state.title);
+
+        if (this.state.editMode) {
+            formData.append("_method", "PUT");
+        }
 
         var files = this.pptImages.current.files;
 
@@ -55,7 +64,8 @@ export default class CreatePowerpoint extends React.Component {
         })
             .then(response => {
                 console.log(response);
-                this.setState({ redirect: true });
+                //this.setState({ redirect: true });
+                this.props.handleSubmitted();
             })
             .catch(error => console.log(error.response.data));
     }
@@ -80,33 +90,45 @@ export default class CreatePowerpoint extends React.Component {
             }
         }
 
-        return <div style={{ height: "100%" }}>
-            <div>
-                <div style={{ padding: "20px" }}>
-                    <h2>Create New Presentation</h2>
-                    <hr />
-                    <div style={{ padding: "10px" }}>
-                        <div className="form-group">
-                            <label><h3>Title</h3></label>
-                            <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Enter title here..." />
-                            <p style={{ color: "red", display: this.state.title.length > 2 ? "none" : "block" }}>Title requires at least 3 characters</p>
+        return <div>
+            <div className="admin-top-box">
+                <h2>Create New Presentation</h2>
+            </div>
+            <br />
+            <div style={{ padding: "20px" }}>
+                <div className="form-group">
+                    <label><h3>Title</h3></label>
+                    <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Enter title here..." />
+                    <p style={{ color: "red", display: this.state.title.length > 2 ? "none" : "block" }}>Title requires at least 3 characters</p>
+                </div>
+                <div className="form-group">
+                    <label><h3>Images</h3></label>
+                    <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.pptImages} onChange={this.handleChange} />
+                    <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+                </div>
+                {
+                    this.state.editMode ?
+                        <div>
+                            <hr />
+                            <div className="form-group">
+                                <label><h3>Current Images</h3></label>
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label><h3>Images</h3></label>
-                            <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.pptImages} onChange={this.handleChange} />
-                            <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
-                        </div>
-                        {
-                            this.state.error ?
-                                <div>
-                                    Make sure to check all validation rules and try again.
+                        :
+                        null
+                }
+                {
+                    this.state.error ?
+                        <div>
+                            Make sure to check all validation rules and try again.
                     </div>
-                                :
-                                null
-                        }
-                        <hr />
-                        <button onClick={ (event) => { this.handleSubmit( event ) }} className="btn btn-primary btn-square">Submit</button>
-                    </div>
+                        :
+                        null
+                }
+                <hr />
+                <div>
+                    <button onClick={this.props.handleCancelCreateClick} className="btn btn-outline-danger btn-square">Cancel</button>
+                    <button onClick={(event) => { this.handleSubmit(event) }} style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
                 </div>
             </div>
         </div>;

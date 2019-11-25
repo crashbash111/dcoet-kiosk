@@ -11,6 +11,7 @@ import AuthService from "../../components/AuthService";
 import HelpButton from "../../components/Admin/HelpButton";
 import HeadingTab from "../../components/Admin/Create/HeadingTab";
 import TabCreator from "../../components/Admin/Create/TabCreator";
+import { thisTypeAnnotation } from "@babel/types";
 
 class Create extends React.Component {
     constructor(props) {
@@ -34,6 +35,9 @@ class Create extends React.Component {
             error: false,
             preview: false,
             tabIndex: 0,
+            submitting: false,
+            error: false,
+            photosCurrent: null,
         }
 
         this.AuthService = new AuthService();
@@ -66,6 +70,8 @@ class Create extends React.Component {
 
         this.handleTabClick = this.handleTabClick.bind(this);
 
+        this.updateProgressBarValue = this.updateProgressBarValue.bind(this);
+
         this.photos = React.createRef();
         this.audios = React.createRef();
     }
@@ -94,6 +100,8 @@ class Create extends React.Component {
         }
         else if (name == "photos") {
             //this.setState( { page: { ...this.state.page, image: event.target.files } } );
+
+            this.setState({ photosCurrent: this.photos.current.files });
 
             let temp = [];
 
@@ -240,7 +248,7 @@ class Create extends React.Component {
         //console.log(this.state.page.image[idx].id);
 
         this.setState({
-            imagesToDelete: this.state.imagesToDelete.concat(this.state.page.image[idx].id)
+            imagesToDelete: this.state.imagesToDelete.concat(this.state.page.images[idx].id)
         });
     }
 
@@ -251,7 +259,7 @@ class Create extends React.Component {
             return (
                 {
                     statsToDelete: prevState.imagesToDelete.map(item => {
-                        if (item == prevState.page.image[idx].id) {
+                        if (item == prevState.page.images[idx].id) {
                             return null;
                         }
                         return item;
@@ -270,7 +278,7 @@ class Create extends React.Component {
             return (
                 {
                     imagesToDelete: prevState.imagesToDelete.map(item => {
-                        if (item == prevState.page.image[idx].id) {
+                        if (item == prevState.page.images[idx].id) {
                             return null;
                         }
                         return item;
@@ -313,7 +321,9 @@ class Create extends React.Component {
             console.log(files[0]);
         }
         else {
-            this.setState({ page: { ...this.state.page, [name]: value } });
+            if (value.length < 16777215) {
+                this.setState({ page: { ...this.state.page, [name]: value } });
+            }
         }
         console.log(this.state);
     }
@@ -409,8 +419,14 @@ class Create extends React.Component {
         if (copyrightNew != null) {
             for (var i = 0; i < copyrightNew.length; ++i) {
                 formData.append("copyright_new[]", copyrightNew[i].text);
+                console.log("appended");
             }
         }
+        else {
+            console.log("reeeee");
+        }
+
+        this.setState({ submitting: true });
 
         Axios({
             url: "./api/pages" + (this.state.editMode ? "/" + this.props.page.id : ""),
@@ -418,13 +434,26 @@ class Create extends React.Component {
             headers: {
                 "Content-Type": "application/json"
             },
+            onUploadProgress: (progressEvent) => {
+                const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+                console.log("onUploadProgress", totalLength);
+                if (totalLength !== null) {
+                    this.updateProgressBarValue(Math.round((progressEvent.loaded * 100) / totalLength));
+                }
+            },
             data: formData
         })
             .then(response => {
                 console.log("from form submit ", response);
-                this.setState({ redirect: true });
+                //this.setState({ redirect: true });
+                this.setState({ submitting: false });
+                this.props.handleSubmitted( this.state.editMode );
             })
-            .catch(err => console.log(err.response.data));
+            .catch(err => { console.log(err.response); this.setState({ submitting: false }) });
+    }
+
+    updateProgressBarValue(x) {
+        this.setState({ progressValue: x });
     }
 
     componentDidMount() {
@@ -470,6 +499,18 @@ class Create extends React.Component {
                     Loading...
                 </div>
             )
+        }
+
+        if (this.state.submitting) {
+            return <div className="admin-boxshadow">
+                <div className="admin-top-box"><h2>Submitting...</h2></div>
+                <div style={{ padding: "30px" }}>
+                    <label>{this.state.submitting ? "Uploading..." : "Done!"}</label>
+                    <div className="progress" style={{ width: "100%" }}>
+                        <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
+                    </div>
+                </div>
+            </div>
         }
 
         let items = this.state.categories.map(item => {
@@ -523,8 +564,7 @@ class Create extends React.Component {
                 );
             });
         }
-        else
-        {
+        else {
             statFields = <div></div>
         }
 
@@ -582,7 +622,7 @@ class Create extends React.Component {
                     <div key={item.id} style={softDeleted ? deletedStyle : null}>
                         <img src={imgPath} style={{ width: "100px" }} />
                         {/* <input type="text" name="copyright" value={this.state.page.copyright[idx].text} onChange={this.handleCopyrightChange(idx)} placeholder="Copyright information here..." /> */}
-                        <button onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
+                        <button className="btn btn-danger btn-square" onClick={!softDeleted ? this.handleImageDelete(idx) : this.handleImageDeleteUndo(idx)}>Delete</button>
                     </div>
                 );
             });
@@ -623,8 +663,8 @@ class Create extends React.Component {
 
                 return (
                     <div key={item.id} style={softDeleted ? deletedStyle : null}>
-                        <embed src={audioPath} />
-                        <button onClick={softDeleted ? this.handleAudioDeleteUndo(idx) : this.handleAudioDelete(idx)}>Delete</button>
+                        <embed autoStart="0" src={audioPath} />
+                        <button className="btn btn-danger btn-square" onClick={softDeleted ? this.handleAudioDeleteUndo(idx) : this.handleAudioDelete(idx)}>Delete</button>
                     </div>
                 );
             });
@@ -849,7 +889,6 @@ class Create extends React.Component {
                         </div>
                     </div>
                 </div>
-                break;
             case 4:
                 currentTab = <div>
                     <div className="form-group">
@@ -867,39 +906,167 @@ class Create extends React.Component {
                 break;
         }
 
+        // return <div className="admin-boxshadow">
+        //     <div className="admin-top-box">
+        //         <h2>Create New Page</h2>
+        //     </div>
+        //     <br />
+        //     <div style={{ padding: "20px" }}>
+        //         <div style={{ width: "100%" }}>
+
+        //         </div>
+        //     </div>
+        // </div>
+
         return (
-            <div style={{ height: "100%" }}>
-                <div>
-                    <div style={{ padding: "20px" }}>
-                        <div>
-                            <h2 style={{ display: "inline-block" }}>Create New Page</h2>
-                            <button className="btn btn-outline-success btn-square" style={{ float: "right", display: "inline-block" }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
-                        </div>
-                        <br />
+            <div className="admin-boxshadow">
+                <div className="admin-top-box">
+                    <h2 style={{ display: "inline-block" }}>Create New Page</h2>
+                    <button className="btn btn-outline-success btn-square" style={{ float: "right", display: "inline-block" }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
+                </div>
+                <br />
+                <div style={{ padding: "20px" }}>
+                    {!this.state.editMode ? <div style={{ width: "100%" }}>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 1 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(1) }}>Stats</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 2 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(2) }}>Category</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 3 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(3) }}>Images</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 4 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(4) }}>Audio</button>
+                    </div>
+                        :
                         <div style={{ width: "100%" }}>
-                            <button style={{ width: "20%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
-                            <button style={{ width: "20%" }} className={this.state.tabIndex == 1 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(1) }}>Stats</button>
-                            <button style={{ width: "20%" }} className={this.state.tabIndex == 2 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(2) }}>Category</button>
-                            <button style={{ width: "20%" }} className={this.state.tabIndex == 3 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(3) }}>Images</button>
-                            <button style={{ width: "20%" }} className={this.state.tabIndex == 4 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(4) }}>Audio</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 1 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(1) }}>Stats</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 2 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(2) }}>Category</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 3 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(3) }}>Images</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 4 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(4) }}>Audio</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 5 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(5) }}>Current Images</button>
+                            <button style={{ width: "14.28%" }} className={this.state.tabIndex == 6 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(6) }}>Current Audio</button>
                         </div>
-                        <br />
-                        <div>
-                            <button disabled={this.state.tabIndex < 1} onClick={(event) => { this.handleTabClick(this.state.tabIndex - 1) }} className="btn btn-outline-dark btn-square">Previous</button>
-                            <button disabled={this.state.tabIndex == 4} onClick={(event) => { this.handleTabClick(this.state.tabIndex + 1) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                    }
+                    {/* <div style={{ width: "100%" }}>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 0 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(0) }}>Text</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 1 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(1) }}>Stats</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 2 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(2) }}>Category</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 3 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(3) }}>Images</button>
+                        <button style={{ width: "20%" }} className={this.state.tabIndex == 4 ? "btn btn-dark btn-square" : "btn btn-outline-dark btn-square"} onClick={(event) => { this.handleTabClick(4) }}>Audio</button>
+                    </div> */}
+                    <br />
+                    <div>
+                        <button disabled={this.state.tabIndex < 1} onClick={(event) => { this.handleTabClick(this.state.tabIndex - 1) }} className="btn btn-outline-dark btn-square">Previous</button>
+                        <button disabled={this.state.editMode ? (this.state.tabIndex == 6) : (this.state.tabIndex == 4)} onClick={(event) => { this.handleTabClick(this.state.tabIndex + 1) }} style={{ float: "right" }} className="btn btn-dark btn-square">Next</button>
+                    </div>
+                    <hr />
+                    <div style={{ padding: "10px" }}>
+                        <div style={{ display: this.state.tabIndex == 0 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <label><h3>Heading</h3>
+                                    <p style={{ color: "red", display: this.state.page.heading.length > 2 ? "none" : "block" }}>Heading requires at least 3 characters</p>
+                                </label>
+                                <input type="text" className="form-control" name="heading" value={this.state.page.heading} onChange={this.handleChange} placeholder="Enter heading here..." />
+                            </div>
+                            <div className="form-group">
+                                <label><h3>Short Description</h3>
+
+                                    <p style={{ color: "red", display: this.state.page.shortdesc.length > 2 ? "none" : "block" }}>Short description requires at least 3 characters</p>
+                                </label>
+                                <textarea rows="3" className="form-control" name="shortdesc" value={this.state.page.shortdesc} onChange={this.handleChange} placeholder="Enter short description here..." />
+                            </div>
+                            <div className="form-group">
+                                <label><h3>Long Description</h3>
+
+                                    {/* <p style={{ color: "red", display: this.state.page.longdesc.length > 2 ? "none" : "block" }}>Long description requires at least 3 characters</p> */}
+                                </label>
+                                <textarea rows="6" className="form-control" name="longdesc" value={this.state.page.longdesc} onChange={this.handleChange} placeholder="Enter long description here..." />
+                            </div>
+
                         </div>
-                        <hr />
-                        <div style={{ padding: "10px" }}>
-                            {currentTab}
-                            <hr />
-                            <div>
-                                <button onClick={ this.props.handleCancelCreateClick } className="btn btn-outline-danger btn-square">Cancel</button>
-                                <button onClick={(event) => { this.handleSubmit(event) }} style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
+                        <div style={{ display: this.state.tabIndex == 1 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <h3>Stats</h3>
+                                <br />
+                                <button className="btn btn-primary btn-square" onClick={this.addStat}>Add Stat</button>
+                            </div>
+                            <div className="form-group">
+                                {statFields}
                             </div>
                         </div>
+                        <div style={{ display: this.state.tabIndex == 2 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <h3>Category</h3>
+                                <select className="form-control" name="category_id" value={this.state.page.category_id} onChange={this.handleChange}>
+                                    <option disabled hidden value="-1">--Select a category--</option>
+                                    {itemsNew}
+                                </select>
+                                <p style={{ color: "red", display: this.state.page.category_id != -1 ? "none" : "block" }}>Category is required</p>
+                            </div>
+                        </div>
+                        <div style={{ display: this.state.tabIndex == 3 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <label><h3>Images</h3></label>
+                                <input multiple name="photos" className="form-control" type="file" accept="image/png, image/jpeg" ref={this.photos} onChange={this.handleChangeNew} />
+                                <p style={{ color: "orange", display: this.state.file == null ? "none" : "block" }}><i>Note that the best image size is above 512x512</i></p>
+                            </div>
+                            <hr />
+                            <div>
+                                <h3>Chosen Images</h3>
+                                <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                                    {currentImages}
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{ display: this.state.tabIndex == 4 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <label><h3>Audio</h3></label>
+                                <input multiple name="audios" className="form-control" type="file" accept="audio/*" ref={this.audios} onChange={this.handleChangeNew} />
+                            </div>
+                            <hr />
+                            <div>
+                                <h3>Chosen Audio</h3>
+                                <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                                    {currentAudios}
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{ display: this.state.tabIndex == 5 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <label><h3>Current Images</h3></label>
+                                <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                                    {oldImages}
+                                </div>
+                            </div>
+                            <hr />
+                            {/* <div>
+                                <h3>Chosen Audio</h3>
+                                <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                                    {currentAudios}
+                                </div>
+                            </div> */}
+                        </div>
+                        <div style={{ display: this.state.tabIndex == 6 ? "block" : "none" }}>
+                            <div className="form-group">
+                                <label><h3>Current Audio</h3></label>
+                                <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                                    {oldAudios}
+                                </div>
+                            </div>
+                            <hr />
+                            {/* <div>
+                                <h3>Chosen Audio</h3>
+                                <div style={{ display: "grid", gridTemplateColumns: "33.33% 33.33% 33.33%" }}>
+                                    {currentAudios}
+                                </div>
+                            </div> */}
+                        </div>
+                        <hr />
+                        <div>
+                            <button onClick={this.props.handleCancelCreateClick} className="btn btn-outline-danger btn-square">Cancel</button>
+                            <button onClick={(event) => { this.handleSubmit(event) }} style={{ float: "right" }} className="btn btn-primary btn-square">Submit</button>
+                        </div>
                     </div>
-                    <div>
-                        {/* <div className="hideScroll" onclick={() => { null }}
+                </div>
+                <div>
+                    {/* <div className="hideScroll" onclick={() => { null }}
                         style={{
                             //styling for the side panel
                             //filter: "color blur(60px)",
@@ -956,8 +1123,6 @@ class Create extends React.Component {
                                 transition: this.state.transitionTime,
                             }} >&#8592; Back to Home</p>
                     </div> */}
-                    </div>
-
                 </div>
             </div>
         );

@@ -158,4 +158,28 @@ class GamesController extends Controller
     {
         return json_encode( GameTimedScore::orderBy( "score", "DESC" )->orderBy( "initials", "ASC" )->orderBy( "created_at", "DESC" )->take(10)->get() );
     }
+
+    public function clearGameHighscores( $id )
+    {
+        if( $id == 1 )
+        {
+            GameGameScore::query()->delete();
+            GameTimedScore::query()->delete();
+            return "Cleared!";
+            // foreach( GameGameScore::all() as $game )
+            // {
+            //     $game->delete();
+            // }
+            // foreach( GameTimedScore::all() as $game )
+            // {
+            //     $game->delete();
+            // }
+        }
+        else if( $id == 2 )
+        {
+            FindingGameScores::query()->delete();
+            return "Cleared!";
+        }
+        return "Not found";
+    }
 }

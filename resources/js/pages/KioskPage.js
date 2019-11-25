@@ -24,11 +24,14 @@ export default class KioskPage extends React.Component {
             sideOpen: true,
             sideSize: "25",
             sidebarColor: "",
+            playingIndex: -1,
+            currentAudio: null,
         };
 
         this.fade = this.fade.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.slideTransitionEnd = this.slideTransitionEnd.bind(this);
+        this.startPlaying = this.startPlaying.bind( this );
 
         this.sliderRef = React.createRef();
     }
@@ -66,6 +69,19 @@ export default class KioskPage extends React.Component {
 
     slideTransitionEnd(index, elem) {
         this.setState({ index: index });
+    }
+
+    startPlaying(i) {
+        if (this.state.currentAudio != null)
+        {
+            this.state.currentAudio.pause();
+            this.setState( { currentAudio: null } );
+        }
+        var audio = new Audio( `./storage/audio_files/${this.state.page.audios[i].filepath}` );
+        audio.play();
+        audio.onended = function() { audio = null; this.setState( { currentAudio: null, playingIndex: -1 } ) }.bind( this )
+        // console.log( new Audio( `./storage/audio_files/${this.state.page.audios[0].filepath}` ) );
+        this.setState({ playingIndex: i, currentAudio: audio });
     }
 
     render() {
@@ -111,11 +127,13 @@ export default class KioskPage extends React.Component {
                 );
             });
 
+            let h = 0;
             let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
+                h++;
                 return (
-                    <div key={item.id}>
-                        <embed src={filePath} />
+                    <div style={{ display: "inline" }} key={item.id}>
+                        <a style={{ display: "inline" }} onClick={ (event) => { this.startPlaying( h - 1) } }><img style={{ display: "inline" }} src="images/play.svg" width="40%" /></a>
                     </div>
                 )
             });
@@ -177,7 +195,7 @@ export default class KioskPage extends React.Component {
                                                 background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
                                             }}>
                                                 {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                                {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
+                                                {this.state.page.audios.length > 0 ? <div><h3>Audio</h3><div>{audioItems}</div></div> : null}
                                                 <p style={{
                                                     fontSize: "28px",
                                                     textAlign: "left",

@@ -57,9 +57,22 @@ class CategoryController extends Controller
         $category->save();
     }
 
-    public function destroy( $id )
+    public function destroy( $id, $reassign )
     {
+        //return $reassign;
         $category = Category::find( $id );
+        if( $reassign != -1 )
+        {
+            $pages = Page::where( 'category_id', $id )->get();
+            foreach( $pages as $page )
+            {
+                $page->category_id = intval( $reassign );
+                $page->save();
+            }
+        }
+        $category->delete();
+        return "Done";
+        //return json_encode( $category );
     }
 
     //create store edit update show delete

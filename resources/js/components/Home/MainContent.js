@@ -107,7 +107,7 @@ class MainContent extends React.Component {
                     var gamesList = this.state.games.map(item => {
                         if( item.id == 3 ) return null;
                         return (
-                            <Tile key={ item.id + 10000 } item={ item } handleClick={ this.handleGameClick } imgOverride={ "./storage/game_cover_images/" + item.image_path } flag="game" />
+                            <Tile key={ item.id + 10000 } item={ item } linkOverride={ item.id == 1 ? "/gameGame" : "/findingGame" } handleClick={ this.handleGameClick } imgOverride={ "./storage/game_cover_images/" + item.image_path } flag="game" />
 
                             // <div key={item.id} onClick={() => window.open("../Resources/Game/index.html", "_blank")} data-role="tile" data-cover={ item.image_path } data-size="large" style={{ backgroundColor: "black" }}>
                             //     <h3 style={{ textShadow: "2px 2px #111111" }}>{item.name}</h3>

@@ -16,7 +16,7 @@ class VideoPage extends React.Component {
 
         this.video = React.createRef();
 
-        this.toggleDescription = this.toggleDescription.bind( this );
+        this.toggleDescription = this.toggleDescription.bind(this);
     }
 
     componentDidMount() {
@@ -26,44 +26,71 @@ class VideoPage extends React.Component {
             .then(response => response.json())
             .then(data => { this.setState({ video: data }) });
 
-        var myVar = setInterval(() => {
-            let error = false;
-            fetch("./api/videos/" + this.state.videoId + "/stream")
-                .then(stream => {
-                    try {
-                        this.video.srcObject = stream;
-                    }
-                    catch (err) {
-                        var my = setInterval(() => {
-                            let e = false;
+        fetch("./api/videos/" + this.state.videoId + "/stream")
+            .then(stream => {
+                try {
+                    this.video.srcObject = stream;
+                }
+                catch (err) {
+                    var my = setInterval(() => {
+                        let e = false;
 
-                            try {
-                                this.video.current.src = stream.url;
-                            }
-                            catch (ex) {
-                                e = true;
-                                console.log(ex);
-                            }
-                            if (!e) {
-                                clearInterval(my);
-                            }
-                        }, 100);
+                        try {
+                            this.video.current.src = stream.url;
+                        }
+                        catch (ex) {
+                            e = true;
+                            console.log(ex);
+                        }
+                        if (!e) {
+                            clearInterval(my);
+                        }
+                    }, 100);
 
-                    }
-                })
-                .catch(err => {
-                    error = true;
-                    console.log(Error(`Unable to fetch stream ${err}`));
-                });
-            if (!error) {
-                clearInterval(myVar);
-            }
-        }, 100);
+                }
+            })
+            .catch(err => {
+                error = true;
+                console.log(Error(`Unable to fetch stream ${err}`));
+            });
+
+        // var myVar = setInterval(() => {
+        //     let error = false;
+        //     fetch("./api/videos/" + this.state.videoId + "/stream")
+        //         .then(stream => {
+        //             try {
+        //                 this.video.srcObject = stream;
+        //             }
+        //             catch (err) {
+        //                 var my = setInterval(() => {
+        //                     let e = false;
+
+        //                     try {
+        //                         this.video.current.src = stream.url;
+        //                     }
+        //                     catch (ex) {
+        //                         e = true;
+        //                         console.log(ex);
+        //                     }
+        //                     if (!e) {
+        //                         clearInterval(my);
+        //                     }
+        //                 }, 100);
+
+        //             }
+        //         })
+        //         .catch(err => {
+        //             error = true;
+        //             console.log(Error(`Unable to fetch stream ${err}`));
+        //         });
+        //     if (!error) {
+        //         clearInterval(myVar);
+        //     }
+        // }, 100);
     }
 
-    toggleDescription()
-    {
-        this.setState( (prevState) => {
+    toggleDescription() {
+        this.setState((prevState) => {
             return {
                 showMore: !prevState.showMore
             };
@@ -81,18 +108,17 @@ class VideoPage extends React.Component {
             }]
         }
 
-        if( this.state.video == null )
-        {
+        if (this.state.video == null) {
             return <Loader />
         }
 
         return <div style={{ width: "100%", padding: "20px" }}>
-            <VideoPlayer {...videoJsOptions}/>
-            <h1>{ this.state.video.title }</h1>
+            <VideoPlayer {...videoJsOptions} />
+            <h1>{this.state.video.title}</h1>
             <h5>418 views | {this.state.video.created_at}</h5>
-            <p>{ this.state.video.description.length > 50 && !this.state.showMore ? this.state.video.description.substring( 0, 47 ) + "..." : this.state.video.description }</p>
+            <p>{this.state.video.description.length > 50 && !this.state.showMore ? this.state.video.description.substring(0, 47) + "..." : this.state.video.description}</p>
             {
-                this.state.video.description.length > 50 ? <button onClick={ (event) => { this.toggleDescription() } }>{ this.state.showMore ? "Show Less" : "Show More" }</button> : null
+                this.state.video.description.length > 50 ? <button onClick={(event) => { this.toggleDescription() }}>{this.state.showMore ? "Show Less" : "Show More"}</button> : null
             }
         </div>;
 

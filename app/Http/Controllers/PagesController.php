@@ -79,7 +79,6 @@ class PagesController extends Controller
 
     public function store(Request $request)
     {
-
         $this->validate($request, [
             "heading" => "required",
             "shortdesc" => "required",
@@ -98,6 +97,8 @@ class PagesController extends Controller
 
         $files = $request->file("photos");
 
+
+        $x = 0;
         foreach ($files as $file) {
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
@@ -136,6 +137,8 @@ class PagesController extends Controller
                 $img->thumbnail_small = $smallThumb;
                 $img->thumbnail_medium = $mediumThumb;
                 $img->thumbnail_large = $largeThumb;
+
+                $img->copyright = $request->input('copyright_new')[$x++];
 
                 $img->save();
             }
@@ -200,7 +203,7 @@ class PagesController extends Controller
     {
         $this->validate($request, [
             "heading" => "required",
-            "text" => "required",
+            "shortdesc" => "required",
             //"photos" => "required",
         ]);
 
@@ -254,14 +257,47 @@ class PagesController extends Controller
                     $img = new Image;
                     //filename to store
                     $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                    $smallThumb = $fileName . "_small_" . time() . "." . $extension;
+                    $mediumThumb = $fileName . "_medium_" . time() . "." . $extension;
+                    $largeThumb = $fileName . "_large_" . time() . "." . $extension;
                     //upload image
                     $path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+                    $path_s = $file->storeAs('/public/kiosk_images', $smallThumb);
+                    $path_m = $file->storeAs('/public/kiosk_images', $mediumThumb);
+                    $path_l = $file->storeAs('/public/kiosk_images', $largeThumb);
+    
+                    $smallPath = public_path('storage/kiosk_images/' . $smallThumb);
+                    $this->createThumbnail($smallPath, 150, 93);
+    
+                    $mediumPath = public_path('storage/kiosk_images/' . $mediumThumb);
+                    $this->createThumbnail($mediumPath, 300, 185);
+    
+                    $largePath = public_path('storage/kiosk_images/' . $largeThumb);
+                    $this->createThumbnail($largePath, 550, 340);
+    
                     $img->alt = "";
                     $img->image_name = $fileNameToStore;
                     $img->page_id = $page->id;
-                    $img->copyright = $request->input("copyright_new")[$x++];
-
+                    $img->copyright = "";
+                    $img->thumbnail_small = $smallThumb;
+                    $img->thumbnail_medium = $mediumThumb;
+                    $img->thumbnail_large = $largeThumb;
+    
+                    $img->copyright = $request->input('copyright_new')[$x++];
+    
                     $img->save();
+
+                    // $img = new Image;
+                    // //filename to store
+                    // $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+                    // //upload image
+                    // $path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+                    // $img->alt = "";
+                    // $img->image_name = $fileNameToStore;
+                    // $img->page_id = $page->id;
+                    // $img->copyright = $request->input("copyright_new")[$x++];
+
+                    // $img->save();
                 }
             }
         }
@@ -387,5 +423,6 @@ class PagesController extends Controller
     public function destroy($id)
     {
         Page::findOrFail($id)->delete();
+        return "Deleted";
     }
 }

@@ -64,7 +64,7 @@ export default class PowerpointPage extends React.Component {
         }
 
         return (
-            <div style={{ display: "grid", gridTemplateColumns: "50vh auto 50vh", width: "200vh", height: "100vh", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "20% auto 20%", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
                 <div style={{ backgroundColor: "blue", opacity: "0", height: "100%" }} onClick={this.handleLeftClick}></div>
                 <div style={{ backgroundColor: "white", opacity: "0", height: "100%" }}></div>
                 <div style={{ backgroundColor: "red", opacity: "0", height: "100%" }} onClick={this.handleRightClick} ></div>

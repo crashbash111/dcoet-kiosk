@@ -115,7 +115,61 @@ class VideoController extends Controller
     // }
 
     public function update(Request $request, $id)
-    { }
+    {
+        $this->validate($request, [
+            "title" => "required",
+            "description" => "required",
+        ]);
+
+        $video = Video::find( $id );
+        $video->title = $request->input("title");
+        $video->description = $request->input("description");
+        $video->copyright = $request->input("copyright");
+        
+        if( $request->hasFile( "video" ) )
+        {
+            $filesize = $request->header("content-length");
+            $video->size = $filesize;
+            $video->length = $request->input("length");
+            $file = $request->file("video");
+
+        $fileNameWithExt = $file->getClientOriginalName();
+        $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+        $extension = $file->getClientOriginalExtension();
+
+        $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+
+        //upload image
+        Storage::putFileAs('public/videos', $file, $fileNameToStore);
+        //$path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+
+        $video->file_path = $fileNameToStore;
+
+        }
+
+        if ($request->hasFile(("thumbnail"))) {
+            $thumb = $request->file("thumbnail");
+
+            $fileNameWithExt = $thumb->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+            $extension = $thumb->getClientOriginalExtension();
+
+            $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+
+            //upload image
+            Storage::putFileAs('public/video_thumbnails', $thumb, $fileNameToStore);
+            //$path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+
+            $video->thumbnail_path = $fileNameToStore;
+        }
+
+        //save video
+        $video->save();
+
+        return $video;
+    }
 
     public function destroy($id)
     {
