@@ -165,7 +165,7 @@ class MainContent extends React.Component {
                 }));
                 pagesList.push(...this.state.videos.map(item => {
                     return (
-                        <Tile key={item.id + 100000} category={-3} linkOverride={`#/videos/${item.id}`} item={item} handleClick={this.handleVideoClick} imgOverride={((item.thumbnail_path == null || item.thumbnail_path == "") ? "./storage/video_thumbnails/nothumb.png" : `./storage/video_thumbnails/${item.thumbnail_path}`)} flag="video" />
+                        <Tile key={item.id + 100000} category={-3} linkOverride={`#/videos/${item.id}`} item={item} handleClick={this.handleVideoClick} imgOverride={((item.thumbnail_path == null || item.thumbnail_path == "") ? "/images/play_white.png" : `./storage/video_thumbnails/${item.thumbnail_path}`)} flag="video" />
                     );
                 }));
                 pagesList.push(...this.state.ppts.map(item => {

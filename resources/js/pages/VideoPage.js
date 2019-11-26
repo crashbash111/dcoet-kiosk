@@ -27,10 +27,10 @@ class VideoPage extends React.Component {
 
         // window.addEventListener('resize', this.handleWindowResize);
 
-        fetch("./api/videos/" + this.state.videoId)
+        fetch( "./api/videos/2" )
             .then(response => response.json())
             .then(data => { this.setState({ video: data }) })
-            .catch(error => this.setState({ error: true }));
+            .catch(error => { console.log( error ); this.setState({ error: true })});
 
         // fetch("./api/videos/" + this.state.videoId + "/stream")
         //     .then(stream => {
