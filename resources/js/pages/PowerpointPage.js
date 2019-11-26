@@ -1,6 +1,9 @@
 import React from "react";
+import {withRouter} from "react-router-dom";
 
-export default class PowerpointPage extends React.Component {
+import Loader from "../components/Loader";
+
+class PowerpointPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,7 +22,7 @@ export default class PowerpointPage extends React.Component {
     componentDidMount() {
         this.setState({ loading: true });
 
-        fetch("./powerpoints/" + this.props.match.params.id)
+        fetch("./api/powerpoints/" + this.props.match.params.id)
             .then(response => response.json())
             .then(data => this.setState({
                 title: data.title,
@@ -54,16 +57,16 @@ export default class PowerpointPage extends React.Component {
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.state.loading)
+        {
             return (
-                <div>
-                    Loading...
-                </div>
+                <Loader />
             );
         }
 
         return (
-            <div style={{ display: "grid", gridTemplateColumns: "50vh auto 50vh", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "20% auto 20%", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
+                <button style={{ position: "absolute", top: "10px", right: "10px", zIndex: 1 }} onClick={ (event) =>{ this.props.history.push( "/" ) }} className="btn btn-outline-dark btn-square">Back to Kiosk</button>
                 <div style={{ backgroundColor: "blue", opacity: "0", height: "100%" }} onClick={this.handleLeftClick}></div>
                 <div style={{ backgroundColor: "white", opacity: "0", height: "100%" }}></div>
                 <div style={{ backgroundColor: "red", opacity: "0", height: "100%" }} onClick={this.handleRightClick} ></div>
@@ -71,3 +74,5 @@ export default class PowerpointPage extends React.Component {
         );
     }
 }
+
+export default withRouter( PowerpointPage );

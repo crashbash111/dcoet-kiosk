@@ -13,27 +13,15 @@ class PowerpointController extends Controller
 
     public function index()
     {
-        return "Hello";
-    }
-
-    public function all()
-    {
         $all = Powerpoint::all();
 
         foreach( $all as $a )
         {
-            if( $a->ppt_images != null )
-            {
-                $a->ppt_images;
-            }
+            $a->ppt_images = PPT_Image::where( "powerpoint_id", $a->id )->get();
+            $a->length = sizeof( $a->ppt_images );
         }
 
         return json_encode( $all );
-    }
-
-    public function create()
-    {
-
     }
 
     public function store( Request $request )
@@ -59,6 +47,10 @@ class PowerpointController extends Controller
 
             $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME );
 
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+            // $fileName = strtr( $fileName, [ '(' => '_' ] );
+            // $fileName= strtr( $fileName, [ ')' = '_' ] );
+
             $extension = $file->getClientOriginalExtension();
             $check = in_array( $extension, $allowedExtensions );
 
@@ -81,11 +73,6 @@ class PowerpointController extends Controller
         return $request;
     }
 
-    public function edit( $id )
-    {
-
-    }
-
     public function update( Request $request, $id )
     {
 
@@ -101,6 +88,8 @@ class PowerpointController extends Controller
 
     public function destroy( $id )
     {
-
+        $ppt = Powerpoint::find( $id );
+        $ppt->delete();
+        return "Deleted!";
     }
 }

@@ -10,31 +10,28 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get( "/", "PagesController@index" );
+
+Route::get( "/findingGame", [ "uses" => "GamesController@findingGame" ] );
+Route::get( "/gameGame", [ "uses" => "GamesController@gameGame" ] );
+
+Route::get( "/", "DefaultController@index" );
 
 Route::post( "/findingGamePost", [ "middleware" => "cors", "uses" => "GamesController@findingGamePost" ] );
+Route::post( "/gameGamePost", [ "middleware" => "cors", "uses" => "GamesController@gameGamePost" ] );
+Route::post( "/gameTimedPost", [ "middleware" => "cors", "uses" => "GamesController@gameTimedPost" ] );
+Route::get( "/findinghighscores", [ "uses" => "GamesController@findinghighscores" ] );
+Route::get( "/gamehighscores", [ "uses" => "GamesController@gamehighscores" ] );
+Route::get( "/gametimedhighscores", [ "uses" => "GamesController@gametimedhighscores" ] );
 
-Route::get( "/pages/all", "PagesController@all" );
-Route::get( "/pages/allCategories", "PagesController@allCategories" );
-Route::get( "/allGames", "PagesController@allGames" );
+//Route::get( "/allGames", "PagesController@allGames" );
 
 Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
 
 Route::get( "/category/{id}/pages", [ "uses" => "PagesController@categoryPages" ] );
 
-Route::resource( "pages", "PagesController" );
+//Route::get( "/powerpoints/all", "PowerpointController@all" );
 
-Route::get( "/powerpoints/all", "PowerpointController@all" );
-Route::resource( "powerpoints", "PowerpointController" );
+Route::resource( "bannedwords", "BannedWordController" );
 
-Route::resource( "categories", "CategoryController" );
+Auth::routes();
 
-Route::get( "/test1", "PagesController@test1" );
-Route::get( "/test2", "PagesController@test2" );
-Route::get( "/data1", "PagesController@data1" );
-Route::get( "/data2/{id}", ["uses" => "PagesController@data2" ] );
-Route::get( "/dataPests", "PagesController@dataPests" );
-Route::get( "/admin", "PagesController@admin" );
-Route::get( "/allBirds", [ "uses" => "PagesController@allBirds" ] );
-
-//Route::get( "/{id}", ["uses" => "PagesController@page" ] );

@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
+use App\Page;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return json_encode( Category::all() );
-    }
-
-    public function create()
-    {
-
+        $categories = Category::all();
+        foreach( $categories as $category )
+        {
+            $category->numPages = Page::where( "category_id", $category->id )->count();
+        }
+        return json_encode( $categories );
     }
 
     public function store( Request $request )
@@ -37,12 +38,8 @@ class CategoryController extends Controller
     public function show( $id )
     {
         $category = Category::find( $id );
+        $category->numPages = Page::where( "category_id", $id )->count();
         return json_encode( $category );
-    }
-
-    public function edit( $id )
-    {
-
     }
 
     public function update( Request $request, $id )
@@ -60,9 +57,22 @@ class CategoryController extends Controller
         $category->save();
     }
 
-    public function destroy( $id )
+    public function destroy( $id, $reassign )
     {
+        //return $reassign;
         $category = Category::find( $id );
+        if( $reassign != -1 )
+        {
+            $pages = Page::where( 'category_id', $id )->get();
+            foreach( $pages as $page )
+            {
+                $page->category_id = intval( $reassign );
+                $page->save();
+            }
+        }
+        $category->delete();
+        return "Done";
+        //return json_encode( $category );
     }
 
     //create store edit update show delete
