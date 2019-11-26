@@ -39,7 +39,8 @@ export default class Tile extends React.Component {
         let backgroundColourIndex = this.getRandomInt(0, this.state.defaultBackColour.length - 1);
 
         return (
-            <Spring key={this.props.item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}>
+            // <Spring key={this.props.item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}></Spring>
+            <Spring key={this.props.item.id} from={{ opacity: 0 }} to={{ opacity: 1 }}>
                 {paramx => (
                     <a style={{ textDecoration: "none" }} href={ this.props.linkOverride != null ? this.props.linkOverride : `#/kiosk/${this.props.item.id}` }>
                         <div key={this.props.item.id} data-role="tile" data-cover={path} data-size="large"
