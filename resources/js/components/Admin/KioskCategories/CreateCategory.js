@@ -90,12 +90,12 @@ export default class CreateCategory extends React.Component {
             <div style={{ padding: "20px" }}>
                 <div className="form-group">
                     <label><h3>Name</h3></label>
-                    <p style={{ color: "red", display: this.state.name.length > 3 ? "none" : "block" }}>Name is required</p>
+                    <p style={{ color: "red", display: this.state.name.length >= 3 ? "none" : "block" }}>Name is required</p>
                     <input className="form-control" type="text" name="name" onChange={this.handleChange} value={this.state.name} placeholder="Enter a category name..." />
                 </div>
                 <div className="form-group">
                     <label><h3>Description</h3></label>
-                    <p style={{ color: "red", display: this.state.description.length > 3 ? "none" : "block" }}>Description is required</p>
+                    <p style={{ color: "red", display: this.state.description.length >= 3 ? "none" : "block" }}>Description is required</p>
                     <textarea rows="3" className="form-control" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Enter a category description..." />
                 </div>
                 {

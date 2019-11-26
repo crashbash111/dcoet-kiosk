@@ -353,6 +353,10 @@ class Create extends React.Component {
                 formData.append("imagesToDelete[]", item);
             });
 
+            this.state.audiosToDelete.map(item => {
+                formData.append("audiosToDelete[]", item);
+            })
+
             copyright = this.state.page.copyright;
         }
         formData.append("heading", this.state.page.heading);
@@ -447,7 +451,7 @@ class Create extends React.Component {
                 console.log("from form submit ", response);
                 //this.setState({ redirect: true });
                 this.setState({ submitting: false });
-                this.props.handleSubmitted( this.state.editMode );
+                this.props.handleSubmitted(this.state.editMode);
             })
             .catch(err => { console.log(err.response); this.setState({ submitting: false }) });
     }
@@ -630,25 +634,25 @@ class Create extends React.Component {
 
         let currentAudios = Array();
 
-        if (this.audios.current != null) {
+        if (this.audios.current != null && this.audios.current.files != null) {
 
             let x = this.audios.current.files.length;
 
             for (var y = 0; y < x; ++y) {
                 let audioPath = URL.createObjectURL(this.audios.current.files[y]);
 
-                currentAudios.push(<div key={y}>
-                    <embed src={audioPath} />
-                </div>);
+                currentAudios.push(<div style={{ display: "inline" }} key={y}>
+                <a style={{ display: "inline" }} onClick={ (event) => { var audio = new Audio( audioPath ); audio.play(); } }><img style={{ display: "inline" }} src="images/play.svg" width="40%" /></a>
+            </div>);
             }
         }
-        else {
-            for (var i = 0; i < 3; ++i) {
-                currentAudios.push(<div key={i} style={{ backgroundColor: "#afafaf", width: "70%", height: "100px" }}>
-                </div>
-                );
-            }
-        }
+        // else {
+        //     for (var i = 0; i < 3; ++i) {
+        //         currentAudios.push(<div key={i} style={{ backgroundColor: "#afafaf", width: "70%", height: "100px" }}>
+        //         </div>
+        //         );
+        //     }
+        // }
 
         let oldAudios = null;
 
@@ -663,7 +667,9 @@ class Create extends React.Component {
 
                 return (
                     <div key={item.id} style={softDeleted ? deletedStyle : null}>
-                        <embed autoStart="0" src={audioPath} />
+                        <audio controls>
+                            <source src={audioPath} />
+                        </audio>
                         <button className="btn btn-danger btn-square" onClick={softDeleted ? this.handleAudioDeleteUndo(idx) : this.handleAudioDelete(idx)}>Delete</button>
                     </div>
                 );
@@ -678,72 +684,12 @@ class Create extends React.Component {
         //     <HeadingTab heading={ this.state.heading } handleChange={ this.handleChange } />
         //     </TabCreator>
 
-        if (this.state.preview) {
-            return <div>
-                <div>
-                    <button className="btn btn-danger btn-square" onClick={(event) => this.handleBackClick(event)} style={{ float: "right", paddingTop: "10px", paddingRight: "10px" }}>
-                        Back
-                    </button>
-                </div>
 
-                <div className="hideScroll" onclick={() => { null }}
-                    style={{
-                        //styling for the side panel
-                        //filter: "color blur(60px)",
-                        height: "80vh",
-                        width: "400px",
-                        display: "flex",
-                        flexDirection: "column",
-                        overflowY: "hidden",
-                        overflowX: "hidden",
-                        opacity: "0.8",
-                        backgroundColor: "#01283D",
-                        color: "white",
-                        // position: "fixed",
-
-                    }}>
-
-                    <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
-
-
-                    <div className="hideScroll" style={{
-                        overflowY: "scroll",
-                        width: "100%",
-                        flex: "1",
-                        padding: "10px 20px 30px 20px",
-                        background: "linear-gradient(0deg, #141414 40px, transparent 100px)",
-                    }}>
-                        {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                        {this.state.page.audios.length > 0 ? <div>Audios<div>{audioItems}</div></div> : null}
-                        <p style={{
-                            fontSize: "28px",
-                            textAlign: "left",
-                            paddingBottom: "5px",
-                        }}>{this.state.page.shortdesc == "" ? "This is a sample short description." : this.state.page.shortdesc}
-                        </p>
-                        <p style={{
-                            fontSize: "18px",
-                            textAlign: "justify",
-                            paddingBottom: "50px",
-                        }}>{this.state.page.longdesc}
-                        </p>
-                    </div>
-                    <p className="returns"
-                        style={{
-                            //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
-                            color: "white",
-                            padding: "8px 8px 8px 32px",
-                            width: this.state.sideSize + "vw",
-                            display: "block",
-                            bottom: "0px",
-                            position: "absolute",
-                            textDecoration: "none",
-                            fontSize: "25px",
-                            transition: this.state.transitionTime,
-                        }} >&#8592; Back to Home</p>
-                </div>
-            </div>
-        }
+        //
+        //
+        //
+        //
+        //
 
         <form className="create-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
             {/* <HeadingTab heading={ this.state.page.heading } handleChange={ this.handleChange } /> */}
@@ -918,8 +864,77 @@ class Create extends React.Component {
         //     </div>
         // </div>
 
-        return (
-            <div className="admin-boxshadow">
+        return (<div>
+            <div style={{ display: this.state.preview ? "block" : "none" }}>
+
+                <div style={{ width: "100%", height: "100%", position: "absolute" }}>
+                    <img src={this.photos != null && this.photos.current != null && this.photos.current.files != null && this.photos.current.files.length > 0 ? URL.createObjectURL(this.photos.current.files[0]) : null} style={{ width: "100%", height: "100%" }} />
+                </div>
+
+                <div>
+                    <button className="btn btn-danger btn-square" onClick={(event) => this.handleBackClick(event)} style={{ float: "right", paddingTop: "10px", paddingRight: "10px" }}>
+                        Back
+                        </button>
+                </div>
+
+                <div className="hideScroll" onclick={() => { null }}
+                    style={{
+                        //styling for the side panel
+                        //filter: "color blur(60px)",
+                        height: "80vh",
+                        width: "400px",
+                        display: "flex",
+                        flexDirection: "column",
+                        overflowY: "hidden",
+                        overflowX: "hidden",
+                        opacity: "0.8",
+                        backgroundColor: "#01283D",
+                        color: "white",
+                        // position: "fixed",
+
+                    }}>
+
+                    <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading == "" ? "Sample Heading" : this.state.page.heading}</h1>
+
+
+                    <div className="hideScroll" style={{
+                        overflowY: "scroll",
+                        width: "100%",
+                        flex: "1",
+                        padding: "10px 20px 30px 20px",
+                        background: "linear-gradient(0deg, #141414 40px, transparent 100px)",
+                    }}>
+                        {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
+                        {this.state.page.audios.length > 0 ? <div><h3>Audios</h3><div>{currentAudios}</div></div> : null}
+                        <p style={{
+                            fontSize: "28px",
+                            textAlign: "left",
+                            paddingBottom: "5px",
+                        }}>{this.state.page.shortdesc == "" ? "This is a sample short description." : this.state.page.shortdesc}
+                        </p>
+                        <p style={{
+                            fontSize: "18px",
+                            textAlign: "justify",
+                            paddingBottom: "50px",
+                        }}>{this.state.page.longdesc}
+                        </p>
+                    </div>
+                    <p className="returns"
+                        style={{
+                            //backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                            color: "white",
+                            padding: "8px 8px 8px 32px",
+                            width: this.state.sideSize + "vw",
+                            display: "block",
+                            bottom: "0px",
+                            position: "absolute",
+                            textDecoration: "none",
+                            fontSize: "25px",
+                            transition: this.state.transitionTime,
+                        }} >&#8592; Back to Home</p>
+                </div>
+            </div>
+            <div style={{ display: this.state.preview ? "none" : "block" }} className="admin-boxshadow">
                 <div className="admin-top-box">
                     <h2 style={{ display: "inline-block" }}>Create New Page</h2>
                     <button className="btn btn-outline-success btn-square" style={{ float: "right", display: "inline-block" }} onClick={(event) => this.handlePreviewClick(event)}>Preview</button>
@@ -1125,6 +1140,7 @@ class Create extends React.Component {
                     </div> */}
                 </div>
             </div>
+        </div>
         );
     }
 }

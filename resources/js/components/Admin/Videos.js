@@ -71,7 +71,8 @@ class Videos extends React.Component {
     }
 
     handleEditClick( i ) {
-        this.setState( { video: this.props.videos.find( m => m.id == i ), mode: 1 } );
+        const vid = this.props.videos.find( m => m.id == i );
+        this.setState( { video: { ...vid, copyright: vid.copyright == "null" ? "" : vid.copyright }, mode: 1 } );
     }
 
     handleCancelCreateClick(event) {

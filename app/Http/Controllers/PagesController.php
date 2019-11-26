@@ -382,11 +382,21 @@ class PagesController extends Controller
                 if ($page->images->find($imagesToDelete[$x]) != null) {
                     $d = $page->images->find($imagesToDelete[$x]);
 
-                    $file = Storage::get('/public/kiosk_images/' . $d->file_name);
+                    $file = Storage::get('/public/kiosk_images/' . $d->image_name );
 
-                    if ($file != null) {
-                        Storage::delete($file);
-                    }
+                    unlink(storage_path('app/public/kiosk_images/'. $d->image_name ) );
+
+                    unlink(storage_path('app/public/kiosk_images/'. $d->thumbnail_small ) );
+
+                    unlink(storage_path('app/public/kiosk_images/'. $d->thumbnail_medium ) );
+
+                    unlink(storage_path('app/public/kiosk_images/'. $d->thumbnail_large ) );
+
+                    // return $file;
+
+                    // if ($file != null) {
+                    //     Storage::delete($file);
+                    // }
 
                     $d->delete();
                 }
@@ -401,14 +411,26 @@ class PagesController extends Controller
 
         if (is_array($audiosToDelete)) {
             while ($x < sizeof($audiosToDelete)) {
-                if ($page->audios->find($audiosToDelete[$x] != null)) {
-                    $a = $page->audios->find($audiosToDelete[$x]);
+                if ($page->audio->find($audiosToDelete[$x]) != null) {
+                    $a = $page->audio->find($audiosToDelete[$x]);
 
                     $file = Storage::get('/public/audio_files/' . $a->filepath);
 
-                    if ($file != null) {
-                        Storage::delete($file);
-                    }
+                    unlink(storage_path('app/public/audio_files/'. $a->filepath ) );
+
+                    //Storage::delete( $file );
+
+                    //return '/public/audio_files/' . $a->filepath;
+
+                    //return ( $file );
+
+                    // if ($file != null) {
+                    //     unlink( public_path() . "/storage/audio_files/" . $a->filepath );
+                    //     ('public/audio_files/' . $a->filepath);
+                    //     return "not null";
+                    //     Storage::delete($file);
+                    //     $deleted = Storage::disk('public')->delete( '/public/audio_files/' . $a->filepath );
+                    // }
 
                     $a->delete();
                 }
@@ -422,6 +444,7 @@ class PagesController extends Controller
 
     public function destroy($id)
     {
+        //TODO: delete all images, audio
         Page::findOrFail($id)->delete();
         return "Deleted";
     }

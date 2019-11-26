@@ -88,6 +88,8 @@ class PowerpointController extends Controller
 
     public function destroy( $id )
     {
-
+        $ppt = Powerpoint::find( $id );
+        $ppt->delete();
+        return "Deleted!";
     }
 }

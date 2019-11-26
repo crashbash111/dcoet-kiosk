@@ -80,7 +80,7 @@ export default class CreateVideo extends React.Component {
                     this.updateProgressBarValue(Math.round((progressEvent.loaded * 100) / totalLength));
                 }
             },
-            url: "./api/videos", //+ (this.state.editMode ? "/" + this.props.match.params.id : "")
+            url: "./api/videos" + (this.props.video != null ? `/${this.props.video.id}` : "" ),
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -155,7 +155,8 @@ export default class CreateVideo extends React.Component {
                     console.log("from form submit ", response);
                     //this.props.handleSubmitted();
                     this.setState({ completed: true, status: response.status, statusText: response.statusText });
-                    this.props.handleEditDone();
+                    //this.props.handleEditDone();
+                    this.props.handleSubmitted()
                 })
                 .catch(err => {
                     console.log(err.response);

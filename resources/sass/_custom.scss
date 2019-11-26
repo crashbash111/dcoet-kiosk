@@ -111,6 +111,7 @@ textarea {
   //takes up right side
   grid-column: 2 / span 1;
   grid-row: 1 / span 2;
+  height: 110%;
   //padding: 24px 24px 24px 24px;
 }
 
@@ -662,6 +663,7 @@ video {
   {
     grid-template-columns: auto;
     justify-content: space-evenly;
+    padding: 50px;
   }
 }
 

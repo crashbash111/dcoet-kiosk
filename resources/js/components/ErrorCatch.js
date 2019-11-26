@@ -20,7 +20,7 @@ class ErrorCatch extends React.Component {
     if (this.props.error || this.state.hasError) {
       return <div className="error-box">
         <h1>Something went wrong.</h1>
-        <button onClick={ () => { location.reload() } } className="btn btn-primary btn-square">Reload</button>
+        <button onClick={ () => { this.props.newUrl == null ? location.reload() : location = this.props.newUrl } } className="btn btn-primary btn-square">Reload</button>
         <br />
       </div>;
     }

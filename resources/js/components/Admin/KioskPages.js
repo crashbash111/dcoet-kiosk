@@ -249,8 +249,8 @@ class KioskPages extends React.Component {
                 break;
             case 1:
                 const page = (this.state.pageId) != -1 ? this.props.pages.find(m => (m.id == this.state.pageId)) : null;
-                console.log(page);
-                child = <Create page={page} handleSubmitted={ this.handleSubmitted } handleCancelCreateClick={this.handleCancelCreateClick} />
+                //console.log(page);
+                child = <Create page={ this.state.pageId != -1 ? { ...page, longdesc: ( page != null && page.longdesc == "null" ) ? "" : page.longdesc } : null } handleSubmitted={ this.handleSubmitted } handleCancelCreateClick={this.handleCancelCreateClick} />
                 break;
             case 2:
                 child = <DeletePage handleCancelDeleteClick={ this.handleCancelDeleteClick } handleActualDeleteClick={ this.handleActualDeleteClick }

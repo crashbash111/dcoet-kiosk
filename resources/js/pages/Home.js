@@ -12,6 +12,7 @@ import SideBar from "../components/Home/SideBar";
 import KeyboardedInput from 'react-touch-screen-keyboard';
 //import 'react-touch-screen-keyboard/lib/Keyboard.css'; // if you just want css
 import 'react-touch-screen-keyboard/lib/Keyboard.scss';
+import ErrorCatch from "../components/ErrorCatch";
 
 class Home extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class Home extends React.Component {
             keyboardLayout: "default",
             value: "",
             top: -1,
+            error: false,
         }
 
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -70,7 +72,8 @@ class Home extends React.Component {
     componentDidMount() {
         fetch("./api/categories")
             .then(response => response.json())
-            .then(data => this.setState({ categories: data }));
+            .then(data => this.setState({ categories: data }))
+            .catch( error => this.setState( {error: true}));
     }
 
     handleCategoryChange(i) {
@@ -130,6 +133,12 @@ class Home extends React.Component {
     }
 
     render() {
+
+        if( this.state.error )
+        {
+            return <ErrorCatch error={ true } newUrl="/"></ErrorCatch>
+        }
+
         let categoryList = this.state.categories.map(item => {
             return (
                 <div key={item.id} data-role="tile" data-size="medium" style={{ backgroundColor: "lightblue" }}>
@@ -141,6 +150,7 @@ class Home extends React.Component {
 
         return (
             <div style={{ height: "100%", backgroundImage: "url( './images/background_main.jpg' )", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
+                <img onClick={ (event) => { window.location = "/" } } style={{ cursor: "pointer", position: "absolute", right: "10px", "bottom": "10px", zIndex: 10, height: "3%" }} src={ this.state.activeCategory == -1 && this.state.searchTerm == "" ? "/images/refresh-white.png" : "/images/refresh-white.png" } />
                 <div style={{ backgroundColor: `rgba( 25, 25, 25, ${ (this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "0" : "0.8" } )` }}>
                     <div style={{ display: "grid", gridTemplateColumns: "300px auto" }}>
                         <div className="fade-gradient" style={{ display: "grid", gridTemplateRows: "15vh 85vh", backgroundImage: `radial-gradient(farthest-corner at 0% ${this.state.top}px, rgba(0,0,0,1), rgba(0,0,0,0))` }}>

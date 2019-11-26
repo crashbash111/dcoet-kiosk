@@ -7,6 +7,8 @@ import Pagination from "../Pagination";
 import ErrorPage from "./ErrorPage";
 
 import {withRouter} from "react-router-dom";
+import DeletePowerpoint from "./Powerpoints/DeletePowerpoint";
+import Axios from "axios";
 
 class Powerpoints extends React.Component {
     constructor(props) {
@@ -21,6 +23,8 @@ class Powerpoints extends React.Component {
             sortColumn: 0,
             sortDirection: false,
             powerpoint: null,
+            deleteItem: null,
+            deleteLoading: false,
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -33,6 +37,9 @@ class Powerpoints extends React.Component {
         this.handleCancelCreateClick = this.handleCancelCreateClick.bind( this );
         this.handleSubmitted = this.handleSubmitted.bind( this );
         this.handleEditClick = this.handleEditClick.bind( this );
+        this.handleDeleteClick = this.handleDeleteClick.bind( this );
+        this.handleCancelDeleteClick = this.handleCancelDeleteClick.bind( this );
+        this.handleActualDeleteClick = this.handleActualDeleteClick.bind( this );
     }
 
     handleChange( event )
@@ -94,6 +101,34 @@ class Powerpoints extends React.Component {
         console.log( "refreshing" );
         this.props.refresh();
         this.setState( { mode: 0, currentPage: Math.ceil( ( this.props.powerpoints.length + 1 ) / this.state.itemsPerPage ) } );
+    }
+
+    handleDeleteClick(i) {
+        const di = this.state.items.find(m => m.id == i);
+        this.setState({ mode: 2, deleteItem: di });
+    }
+
+    handleCancelDeleteClick()
+    {
+        this.setState( { mode: 0, deleteItem: null, deleteLoading: false } );
+    }
+
+    handleActualDeleteClick(event) {
+        //const url = qs.stringify
+        this.setState({ deleteLoading: true });
+        Axios.delete(`/api/powerpoints/${this.state.deleteItem.id}`,
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("id_token")
+                }
+            }
+        )
+            .then(response => {
+                console.log(response)
+                this.setState({ deleteLoading: false, deleteItem: null, mode: 0 });
+                this.props.refresh();
+            })
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -174,7 +209,7 @@ class Powerpoints extends React.Component {
                     <td>{item.created_at}</td>
                     <td>
                     {/* | <button className="btn btn-success btn-square" onClick={(event) => { this.handleEditClick(item.id) }}>Edit</button> */}
-                        <button className="btn btn-outline-dark btn-square" onClick={(event) => { this.props.history.push( `/powerpoints/${item.id}` ) }}>View</button> | <button className="btn btn-danger btn-square">Delete</button>
+                        <button className="btn btn-outline-dark btn-square" onClick={(event) => { this.props.history.push( `/powerpoints/${item.id}` ) }}>View</button> | <button onClick={ (event) => { this.handleDeleteClick( item.id ) } } className="btn btn-danger btn-square">Delete</button>
                     </td>
                 </tr>
             );
@@ -216,6 +251,9 @@ class Powerpoints extends React.Component {
             case 1:
                 child = <CreatePowerpoint powerpoint={ this.state.powerpoint } handleSubmitted={ this.handleSubmitted } handleCancelCreateClick={ this.handleCancelCreateClick } />
                 break;
+            case 2:
+                child = <DeletePowerpoint handleCancelDeleteClick={ this.handleCancelDeleteClick } handleActualDeleteClick={ this.handleActualDeleteClick }
+                item={ this.state.deleteItem } deleteLoading={ this.state.deleteLoading } />
         }
 
         return <div>
