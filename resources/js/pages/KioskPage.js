@@ -7,6 +7,8 @@ import { Spring } from 'react-spring/renderprops';
 import { useSpring, animated, interpolate } from 'react-spring';
 import { Palette } from 'react-palette';
 import { useGesture } from 'react-with-gesture';
+import { useSwipeable, Swipeable } from 'react-swipeable';
+import SwiperBox from "../components/SwiperBox";
 
 import Slider from "../components/Slider";
 import ErrorCatch from "../components/ErrorCatch";
@@ -33,6 +35,8 @@ export default class KioskPage extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.slideTransitionEnd = this.slideTransitionEnd.bind(this);
         this.startPlaying = this.startPlaying.bind(this);
+        this.swipedLeft = this.swipedLeft.bind( this );
+        this.swipedRight = this.swipedRight.bind( this );
 
         this.sliderRef = React.createRef();
     }
@@ -50,7 +54,7 @@ export default class KioskPage extends React.Component {
                     //console.log("preloaded!");
                 });
             })
-            .catch( error => { console.log( error ); this.setState( { error: true }); });
+            .catch(error => { console.log(error); this.setState({ error: true }); });
     }
 
     handleClick(event) {
@@ -75,9 +79,8 @@ export default class KioskPage extends React.Component {
 
     startPlaying(i) {
         // console.log( i );
-        if( this.state.playingIndex == -1 )
-        {
-            var aud = this.state.page.audios.find( m => m.id = i );
+        if (this.state.playingIndex == -1) {
+            var aud = this.state.page.audios.find(m => m.id = i);
             var audio = new Audio(`./storage/audio_files/${aud.filepath}`);
             audio.play();
             audio.onended = function () { audio = null; this.setState({ currentAudio: null, playingIndex: -1 }) }
@@ -101,10 +104,26 @@ export default class KioskPage extends React.Component {
         // }
     }
 
+    swipedRight()
+    {
+        this.setState( { index: ( this.state.index + 1 ) % this.state.page.images.length });
+    }
+
+    swipedLeft()
+    {
+        if( this.state.index == 0 )
+        {
+            this.setState( { index: ( this.state.page.images.length - 1 ) });
+        }
+        else
+        {
+            this.setState( { index: ( this.state.index - 1 ) });
+        }
+    }
+
     render() {
 
-        if( this.state.error )
-        {
+        if (this.state.error) {
             return <ErrorCatch error={true} newUrl="/"></ErrorCatch>
         }
 
@@ -137,7 +156,7 @@ export default class KioskPage extends React.Component {
             }
             catch (e) //catch
             {
-                this.setState( { error: true });
+                this.setState({ error: true });
                 console.error(e.message); //console log error
             }
 
@@ -151,12 +170,12 @@ export default class KioskPage extends React.Component {
             });
 
             let h = 0;
-            console.log( this.state );
+            console.log(this.state);
             let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
                     <div style={{ display: "inline" }} key={item.id}>
-                        <a style={{ display: "inline" }} onClick={(event) => { if( this.state.playingIndex == item.id ) { this.state.currentAudio.pause(); this.setState( {currentAudio: null, playingIndex: -1 })  } else{ if( this.state.currentAudio != null ) { this.state.currentAudio.pause(); this.setState( {currentAudio: null, playingIndex: -1 }) }; var aud = new Audio( filePath ); aud.play(); this.setState( { playingIndex: item.id, currentAudio: aud } ); aud.onended = (event) => { this.setState({playingIndex: -1, currentAudio: null }) } } }}>{ this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop.png" width="40%" /> : <img style={{ display: "inline" }} src="images/play.svg" width="40%" />}</a>
+                        <a style={{ display: "inline" }} onClick={(event) => { if (this.state.playingIndex == item.id) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) } else { if (this.state.currentAudio != null) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) }; var aud = new Audio(filePath); aud.play(); this.setState({ playingIndex: item.id, currentAudio: aud }); aud.onended = (event) => { this.setState({ playingIndex: -1, currentAudio: null }) } } }}>{this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop.png" width="40%" /> : <img style={{ display: "inline" }} src="images/play.svg" width="40%" />}</a>
                     </div>
                 )
             });
@@ -166,6 +185,15 @@ export default class KioskPage extends React.Component {
             //         <Slider />
             //     </div>
             // );
+
+            const config = {
+                delta: 10,                             // min distance(px) before a swipe starts
+                preventDefaultTouchmoveEvent: false,   // preventDefault on touchmove, *See Details*
+                trackTouch: true,                      // track touch input
+                trackMouse: false,                     // track mouse input
+                rotationAngle: 0,                      // set a rotation angle
+                nodeName: 'div',    // internally rendered component dom node
+            };
 
             let c = 0;
             return (
@@ -179,7 +207,13 @@ export default class KioskPage extends React.Component {
                                     {(palette) => (
                                         <div key={f++}>
                                             <div style={{ width: "100%", height: "100%", position: "absolute" }}>
-                                                <Slider slideTransitionEnd={this.slideTransitionEnd} startIndex={this.state.index} items={this.state.page.images} sliderRef={this.sliderRef} />
+                                                <Swipeable style={{ width: "100%", height: "100%", backgroundImage: "url(' " + imgPath + "')",
+                                                backgroundColor: !palette.loading ? palette.data.darkMuted : "#141414",
+                                                opacity: this.state.opacity,
+                                                backgroundPosition: "center",
+                                                backgroundSize: "cover", }} onSwipedLeft={ (event) => { this.swipedRight() }} onSwipedRight={ (event) => { this.swipedLeft() } } {...config} >
+                                            </Swipeable>
+                                                {/* <Slider slideTransitionEnd={this.slideTransitionEnd} startIndex={this.state.index} items={this.state.page.images} sliderRef={this.sliderRef} /> */}
                                             </div>
                                             {/* <div onClick={this.handleClick}
                                             scr={imgPath}
