@@ -19,9 +19,9 @@ const Slider = ({ items, sliderRef, slideTransitionEnd, startIndex }) => {
     ));
 
     return (
-        <div onClick={ () => { ref1.next() } } style={{ width: "100%", height: "100%" }}>
+        <div  style={{ width: "100%", height: "100%" }}>
             
-            <Swipe ref={ o => ref1 = o } transitionEnd={ slideTransitionEnd } startSlide={startIndex} speed={300} auto={ 0 } disableScroll={false} continuous={true} style={{ width: "100%", height: "100%" }}
+            <Swipe ref={ o => ref1 = o } transitionEnd={ slideTransitionEnd } draggable={true} startSlide={startIndex} speed={300} auto={ 0 } disableScroll={false} continuous={true} style={{ width: "100%", height: "100%" }}
             >
                 {swipeItems}
             </Swipe>

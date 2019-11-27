@@ -97,7 +97,6 @@ class PagesController extends Controller
 
         $files = $request->file("photos");
 
-
         $x = 0;
         foreach ($files as $file) {
             $fileNameWithExt = $file->getClientOriginalName();
