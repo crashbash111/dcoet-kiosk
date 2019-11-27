@@ -57,7 +57,7 @@ class KioskCategories extends React.Component {
     handleSubmitted() {
         console.log("refreshing");
         this.props.refresh();
-        this.setState({ mode: 0, currentPage: Math.ceil( ( this.props.categories.length + 1 ) / this.state.itemsPerPage )});
+        this.setState({ mode: 0, currentPage: Math.ceil((this.props.categories.length + 1) / this.state.itemsPerPage) });
         // this.setState({ mode: 0, addedSuccessfully: true });
         // setTimeout(() => {
         //     this.setState({ addedSuccessfully: false });
@@ -107,7 +107,7 @@ class KioskCategories extends React.Component {
     handleActualDeleteClick(event) {
         //const url = qs.stringify
         this.setState({ deleteLoading: true });
-        Axios.post(`/api/categories/${this.state.deleteItem.id}/${this.state.reassignCategory}`,
+        Axios.post(`./api/categories/${this.state.deleteItem.id}/${this.state.reassignCategory}`,
             {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("id_token")
@@ -118,6 +118,7 @@ class KioskCategories extends React.Component {
                 console.log(response)
                 this.setState({ deleteLoading: false, deleteItem: null, mode: 0 });
                 this.props.refresh();
+                this.props.refreshPages();
             })
             .catch(err => console.log(err));
     }
@@ -235,7 +236,7 @@ class KioskCategories extends React.Component {
                                 {currentItems}
                             </tbody>
                         </table>
-                        <Pagination itemsPerPage={this.state.itemsPerPage} totalItems={filteredCategories.length} paginate={this.paginate} activePage={ this.state.currentPage} />
+                        <Pagination itemsPerPage={this.state.itemsPerPage} totalItems={filteredCategories.length} paginate={this.paginate} activePage={this.state.currentPage} />
                     </div>
                 </div>;
                 break;

@@ -38,9 +38,7 @@ export default class CreateVideo extends React.Component {
         this.setState({ showBar: false });
 
         if (name != "video" || name != "thumbnail") {
-            if (value.length < 191) {
-                this.setState({ [name]: value });
-            }
+            this.setState({ [name]: value });
         }
         else {
             this.setState({ [name]: files[0] });
@@ -58,6 +56,11 @@ export default class CreateVideo extends React.Component {
         let formData = new FormData();
 
         formData.append("token", localStorage.getItem("id_token"));
+
+        if( this.props.video != null )
+        {
+            formData.append( "_method", "PUT" );
+        }
 
         formData.append("title", this.state.title);
         formData.append("description", this.state.description);

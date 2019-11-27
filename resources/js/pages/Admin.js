@@ -45,6 +45,8 @@ class Admin extends React.Component {
             powerpointsErrorObj: null,
             games: [],
             gamesLoading: false,
+            gamesError: false,
+            gamesErrorObj: null,
             bannedWords: [],
             bannedWordsLoading: false,
             bannedWordsError: false,
@@ -163,8 +165,8 @@ class Admin extends React.Component {
         this.setState({ gamesLoading: true });
         Auth.fetch("./api/games")
             .then(response => response.json())
-            .then(data => this.setState({ games: data, gamesLoading: false }))
-            .catch(error => console.log(error));
+            .then(data => this.setState({ games: data, gamesLoading: false, gamesError: false }))
+            .catch(error => { console.log(error); this.setState( { gamesError: true, gamesErrorObj: error.response }) });
     }
 
     fetchBannedWords() {
@@ -266,6 +268,7 @@ class Admin extends React.Component {
                 id: 2,
                 text: "Kiosk Categories",
                 component: <KioskCategories key={2} categories={this.state.categories} loading={this.state.categoriesLoading} refresh={this.fetchCategories}
+                    refreshPages={this.fetchPages}
                     error={ this.state.categoriesError } errorObj={ this.state.categoriesErrorObj }
                 />
             },
@@ -279,7 +282,9 @@ class Admin extends React.Component {
             {
                 id: 4,
                 text: "Games",
-                component: <Games key={4} games={this.state.games} loading={this.state.gamesLoading} />
+                component: <Games key={4} games={this.state.games} loading={this.state.gamesLoading} error={ this.state.gamesError } refresh={ this.fetchGames }
+                    errorObj={ this.state.gamesErrorObj }
+                />
             },
             {
                 id: 5,

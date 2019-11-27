@@ -25,8 +25,8 @@ class PagesController extends Controller
         $pages = Page::all();
         foreach ($pages as $page) {
             $page->images = Image::where("page_id", $page->id)->get();
-            $page->stats = Stat::where( "page_id", $page->id )->get();
-            $page->audios = Audio::where( "page_id", $page->id)->get();
+            $page->stats = Stat::where("page_id", $page->id)->get();
+            $page->audios = Audio::where("page_id", $page->id)->get();
         }
         return json_encode($pages);
     }
@@ -91,7 +91,9 @@ class PagesController extends Controller
         $page->longdesc = $request->input('longdesc');
         $page->category_id = $request->input('category');
 
-        $allowedFileExtension = ['jpg', 'jpeg', 'png'];
+        $page->save();
+
+        $allowedFileExtension = ['jpg', "JPG", 'jpeg', "JPEG", 'png', "PNG" ];
 
         $files = $request->file("photos");
 
@@ -100,7 +102,7 @@ class PagesController extends Controller
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
 
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedFileExtension);
@@ -159,17 +161,17 @@ class PagesController extends Controller
                 $x++;
             }
         }
-        
+
         $filesx = $request->file("audios");
 
-        $allowedFileExtension = [ 'wav', 'mp3', 'ogg' ];
+        $allowedFileExtension = ['wav', "WAV", 'mp3', "MP3", 'ogg', "OGG"];
 
         if (is_array($filesx)) {
             foreach ($filesx as $file) {
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
 
                 $extension = $file->getClientOriginalExtension();
 
@@ -189,8 +191,6 @@ class PagesController extends Controller
                 }
             }
         }
-
-        $page->save();
 
         return response()->json([
             "success" => true,
@@ -218,7 +218,7 @@ class PagesController extends Controller
 
         //return $request->all();
 
-        $allowedFileExtension = ['jpg', 'jpeg', 'png'];
+        $allowedFileExtension = ['jpg', "JPG", 'jpeg', "JPEG", 'png', "PNG" ];
         //$files = $request->all()[ "photos" ];
 
         $files = $request->file("photos");
@@ -245,7 +245,7 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
 
                 $extension = $file->getClientOriginalExtension();
                 $check = in_array($extension, $allowedFileExtension);
@@ -264,16 +264,16 @@ class PagesController extends Controller
                     $path_s = $file->storeAs('/public/kiosk_images', $smallThumb);
                     $path_m = $file->storeAs('/public/kiosk_images', $mediumThumb);
                     $path_l = $file->storeAs('/public/kiosk_images', $largeThumb);
-    
+
                     $smallPath = public_path('storage/kiosk_images/' . $smallThumb);
                     $this->createThumbnail($smallPath, 150, 93);
-    
+
                     $mediumPath = public_path('storage/kiosk_images/' . $mediumThumb);
                     $this->createThumbnail($mediumPath, 300, 185);
-    
+
                     $largePath = public_path('storage/kiosk_images/' . $largeThumb);
                     $this->createThumbnail($largePath, 550, 340);
-    
+
                     $img->alt = "";
                     $img->image_name = $fileNameToStore;
                     $img->page_id = $page->id;
@@ -281,9 +281,9 @@ class PagesController extends Controller
                     $img->thumbnail_small = $smallThumb;
                     $img->thumbnail_medium = $mediumThumb;
                     $img->thumbnail_large = $largeThumb;
-    
+
                     $img->copyright = $request->input('copyright_new')[$x++];
-    
+
                     $img->save();
 
                     // $img = new Image;
@@ -335,7 +335,7 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
 
                 $extension = $file->getClientOriginalExtension();
                 //$check = in_array($extension, $allowedFileExtension);
@@ -381,15 +381,15 @@ class PagesController extends Controller
                 if ($page->images->find($imagesToDelete[$x]) != null) {
                     $d = $page->images->find($imagesToDelete[$x]);
 
-                    $file = Storage::get('/public/kiosk_images/' . $d->image_name );
+                    $file = Storage::get('/public/kiosk_images/' . $d->image_name);
 
-                    unlink(storage_path('app/public/kiosk_images/'. $d->image_name ) );
+                    unlink(storage_path('app/public/kiosk_images/' . $d->image_name));
 
-                    unlink(storage_path('app/public/kiosk_images/'. $d->thumbnail_small ) );
+                    unlink(storage_path('app/public/kiosk_images/' . $d->thumbnail_small));
 
-                    unlink(storage_path('app/public/kiosk_images/'. $d->thumbnail_medium ) );
+                    unlink(storage_path('app/public/kiosk_images/' . $d->thumbnail_medium));
 
-                    unlink(storage_path('app/public/kiosk_images/'. $d->thumbnail_large ) );
+                    unlink(storage_path('app/public/kiosk_images/' . $d->thumbnail_large));
 
                     // return $file;
 
@@ -415,7 +415,7 @@ class PagesController extends Controller
 
                     $file = Storage::get('/public/audio_files/' . $a->filepath);
 
-                    unlink(storage_path('app/public/audio_files/'. $a->filepath ) );
+                    unlink(storage_path('app/public/audio_files/' . $a->filepath));
 
                     //Storage::delete( $file );
 
@@ -443,7 +443,24 @@ class PagesController extends Controller
 
     public function destroy($id)
     {
-        //TODO: delete all images, audio
+        $stats = Stat::where('page_id', $id)->get();
+        foreach ($stats as $stat) {
+            $stat->delete();
+        }
+        $images = Image::where('page_id', $id)->get();
+        foreach ($images as $image) {
+            unlink(storage_path('app/public/kiosk_images/' . $image->image_name));
+            unlink(storage_path('app/public/kiosk_images/' . $image->thumbnail_small));
+            unlink(storage_path('app/public/kiosk_images/' . $image->thumbnail_medium));
+            unlink(storage_path('app/public/kiosk_images/' . $image->thumbnail_large));
+            $image->delete();
+        }
+        $audios = Audio::where( 'page_id', $id )->get();
+        foreach( $audios as $audio )
+        {
+            unlink(storage_path('app/public/audio_files/' . $audio->filepath));
+            $audio->delete();
+        }
         Page::findOrFail($id)->delete();
         return "Deleted";
     }

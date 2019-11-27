@@ -37,7 +37,7 @@ class VideoController extends Controller
 
         $fileNameWithExt = $file->getClientOriginalName();
         $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+        $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
         $extension = $file->getClientOriginalExtension();
 
         $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -53,7 +53,7 @@ class VideoController extends Controller
 
             $fileNameWithExt = $thumb->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
             $extension = $thumb->getClientOriginalExtension();
 
             $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -77,12 +77,13 @@ class VideoController extends Controller
         return json_encode($video);
     }
 
-    public function stream($id) {
+    public function stream($id)
+    {
         $video = Video::find($id);
         $path = 'storage/videos/' . $video->file_path;
         $stream = new VideoStream($path);
         $stream->start();
-      }
+    }
 
     // public function stream($id)
     // {
@@ -121,31 +122,31 @@ class VideoController extends Controller
             "description" => "required",
         ]);
 
-        $video = Video::find( $id );
+        $video = Video::find($id);
         $video->title = $request->input("title");
         $video->description = $request->input("description");
         $video->copyright = $request->input("copyright");
-        
-        if( $request->hasFile( "video" ) )
-        {
+
+        if ($request->hasFile("video")) {
+            unlink(storage_path('app/public/videos/' . $video->file_path));
+
             $filesize = $request->header("content-length");
             $video->size = $filesize;
             $video->length = $request->input("length");
             $file = $request->file("video");
 
-        $fileNameWithExt = $file->getClientOriginalName();
-        $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
-        $extension = $file->getClientOriginalExtension();
+            $fileNameWithExt = $file->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+            $extension = $file->getClientOriginalExtension();
 
-        $fileNameToStore = $fileName . "_" . time() . "." . $extension;
+            $fileNameToStore = $fileName . "_" . time() . "." . $extension;
 
-        //upload image
-        Storage::putFileAs('public/videos', $file, $fileNameToStore);
-        //$path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
+            //upload image
+            Storage::putFileAs('public/videos', $file, $fileNameToStore);
+            //$path = $file->storeAs('/public/kiosk_images', $fileNameToStore);
 
-        $video->file_path = $fileNameToStore;
-
+            $video->file_path = $fileNameToStore;
         }
 
         if ($request->hasFile(("thumbnail"))) {
@@ -153,7 +154,7 @@ class VideoController extends Controller
 
             $fileNameWithExt = $thumb->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
             $extension = $thumb->getClientOriginalExtension();
 
             $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -173,6 +174,12 @@ class VideoController extends Controller
 
     public function destroy($id)
     {
-        Video::findOrFail($id)->delete();
+        $video = Video::find( $id );
+        if( $video->thumbnail_path != null )
+        {
+            unlink( storage_path( 'app/public/video_thumbnails/' . $video->thumbnail_path ) );
+        }
+        unlink(storage_path('app/public/videos/' . $video->file_path));
+        $video->delete();
     }
 }

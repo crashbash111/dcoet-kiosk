@@ -60,7 +60,7 @@ class KioskPages extends React.Component {
 
     handleCancelCreateClick(event) {
         event.preventDefault();
-        this.setState({ mode: 0 });
+        this.setState({ mode: 0, pageId: -1 });
     }
 
     handleSortClick(i) {

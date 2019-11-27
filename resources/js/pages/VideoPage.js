@@ -4,13 +4,14 @@ import Loader from "../components/Loader";
 import VideoPlayer from "../components/VideoPlayer";
 import "video.js/dist/video-js.css";
 import ErrorCatch from "../components/ErrorCatch";
+import { thisExpression } from "@babel/types";
 
 class VideoPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            videoId: this.props.match.params.id,
+            videoId: -1,
             video: null,
             showMore: false,
             error: false,
@@ -27,10 +28,12 @@ class VideoPage extends React.Component {
 
         // window.addEventListener('resize', this.handleWindowResize);
 
-        fetch( "./api/videos/2" )
+        this.setState({ videoId: this.props.match.params.id });
+
+        fetch("./api/videos/" + this.props.match.params.id)
             .then(response => response.json())
             .then(data => { this.setState({ video: data }) })
-            .catch(error => { console.log( error ); this.setState({ error: true })});
+            .catch(error => { console.log(error); this.setState({ error: true }) });
 
         // fetch("./api/videos/" + this.state.videoId + "/stream")
         //     .then(stream => {
@@ -87,9 +90,8 @@ class VideoPage extends React.Component {
         // }, 100);
     }
 
-    componentDidCatch( error )
-    {
-        alert( "An error has occurred." );
+    componentDidCatch(error) {
+        alert("An error has occurred.");
         window.location = "/";
     }
 
@@ -150,21 +152,46 @@ class VideoPage extends React.Component {
                 src: "./api/videos/" + this.state.videoId + "/stream",
                 type: 'video/mp4'
             }],
-            hideControls: [ "seekbar" ],
+            hideControls: ["seekbar"],
         }
 
         if (this.state.video == null) {
             return <Loader />
         }
 
-        return <div style={{ width: "100%", height: "100%", padding: "20px", zIndex: 1000000 }}>
-            <div style={{ width: `${w}px`}}>
-                <button onClick={ (event) => { this.props.history.push( "/" ) } } className="btn btn-outline-danger btn-square">Back to Kiosk</button>
+        return <div style={{ width: "100%", height: "100%", padding: "20px" }}>
+            <img onClick={ (event) => { this.props.history.push( "/-3" )} } style={{ zIndex: 1, cursor: "pointer", position: "absolute", top: "10px", left: "10px", height: "7%" }} src="/images/back-arrow-white.png" />
+            {/* <div style={{ width: `${w}px`}}>
+            </div> */}
+            <div style={{ height: "calc( 7% + 10px )" }}></div>
+            <div style={{ width: `calc( ${w}px + 50px )` }}>
+                <VideoPlayer {...videoJsOptions} />
                 <h1 style={{ display: "inline" }}>{this.state.video.title}</h1>
+                <h5>Uploaded {this.state.video.created_at}</h5>
+                {/* <p>{this.state.video.description}</p> */}
+                <div>
+                    {this.state.video.description.length > 50 ?
+                        this.state.showMore ?
+                            <div>
+                                <p>{this.state.video.description}</p>
+                                <hr />
+                                <p onClick={ (event) => { this.toggleDescription()} } style={{ cursor: "pointer" }}><strong>Show Less</strong></p>
+                            </div>
+                            :
+                            <div>
+                                <p>{this.state.video.description.substring(0, 47) + "..."}</p>
+                                <hr />
+                                <p onClick={ (event) => { this.toggleDescription()} } style={{ cursor: "pointer" }}><strong>Show More</strong></p>
+                            </div>
+                        :
+                        <div>
+                            <p>{this.state.video.description}</p>
+                            <hr />
+                        </div>
+                    }
+                </div>
             </div>
-            <VideoPlayer {...videoJsOptions} />
-            <h5>Uploaded {this.state.video.created_at}</h5>
-            <p>{this.state.video.description}</p>
+
             {/* <p>{this.state.video.description.length > 50 && !this.state.showMore ? this.state.video.description.substring(0, 47) + "..." : this.state.video.description}</p>
             {
                 this.state.video.description.length > 50 ? <button onClick={(event) => { this.toggleDescription() }}>{this.state.showMore ? "Show Less" : "Show More"}</button> : null

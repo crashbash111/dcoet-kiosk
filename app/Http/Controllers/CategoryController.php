@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Category;
 use App\Page;
+use App\Http\Controllers\PagesController;
 
 class CategoryController extends Controller
 {
@@ -68,6 +69,16 @@ class CategoryController extends Controller
             {
                 $page->category_id = intval( $reassign );
                 $page->save();
+            }
+        }
+        else
+        {
+            $pages = Page::where( 'category_id', $id )->get();
+            foreach( $pages as $page )
+            {
+                app('App\Http\Controllers\PagesController')->destroy( $page->id );
+                //PagesController::destroy( $page->id );
+                //return "here";
             }
         }
         $category->delete();

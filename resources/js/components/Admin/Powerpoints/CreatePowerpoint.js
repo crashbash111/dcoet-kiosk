@@ -29,7 +29,7 @@ export default class CreatePowerpoint extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        if (title.length < 3 || this.pptImages == null || this.pptImages.current == null || this.pptImages.current.files == null || this.pptImages.current.files.length < 1) {
+        if (this.state.title.length < 3 || this.pptImages == null || this.pptImages.current == null || this.pptImages.current.files == null || this.pptImages.current.files.length < 1) {
             return;
         }
 

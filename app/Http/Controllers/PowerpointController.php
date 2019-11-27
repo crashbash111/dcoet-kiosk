@@ -15,54 +15,51 @@ class PowerpointController extends Controller
     {
         $all = Powerpoint::all();
 
-        foreach( $all as $a )
-        {
-            $a->ppt_images = PPT_Image::where( "powerpoint_id", $a->id )->get();
-            $a->length = sizeof( $a->ppt_images );
+        foreach ($all as $a) {
+            $a->ppt_images = PPT_Image::where("powerpoint_id", $a->id)->get();
+            $a->length = sizeof($a->ppt_images);
         }
 
-        return json_encode( $all );
+        return json_encode($all);
     }
 
-    public function store( Request $request )
+    public function store(Request $request)
     {
-        $this->validate( $request, [
+        $this->validate($request, [
             "title" => "required",
             "photos" => "required",
         ]);
 
         $ppt = new Powerpoint;
-        $ppt->title = $request->input( "title" );
+        $ppt->title = $request->input("title");
 
         $ppt->save();
 
-        $allowedExtensions = [ "jpg", "jpeg", "png" ];
+        $allowedExtensions = [ "jpg", "JPG", "jpeg", "JPEG", "png", "PNG" ];
 
-        $files = $request->file( "photos" );
+        $files = $request->file("photos");
 
-        foreach( $files as $file )
-        {
+        foreach ($files as $file) {
             //return "there";
             $fileNameWithExt = $file->getClientOriginalName();
 
-            $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME );
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_' ]);
+            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
             // $fileName = strtr( $fileName, [ '(' => '_' ] );
             // $fileName= strtr( $fileName, [ ')' = '_' ] );
 
             $extension = $file->getClientOriginalExtension();
-            $check = in_array( $extension, $allowedExtensions );
+            $check = in_array($extension, $allowedExtensions);
 
-            if( $check )
-            {
+            if ($check) {
                 //return $file;
 
                 $img = new PPT_Image;
                 //filename to store
                 $fileNameToStore = $fileName . "_" . time() . "." . $extension;
                 //upload image
-                $path = $file->storeAs( 'public/ppt_images', $fileNameToStore );
+                $path = $file->storeAs('public/ppt_images', $fileNameToStore);
                 $img->filepath = $fileNameToStore;
                 $img->powerpoint_id = $ppt->id;
 
@@ -73,22 +70,25 @@ class PowerpointController extends Controller
         return $request;
     }
 
-    public function update( Request $request, $id )
-    {
+    public function update(Request $request, $id)
+    { }
 
-    }
-
-    public function show( $id )
+    public function show($id)
     {
-        $ppt = Powerpoint::find( $id );
+        $ppt = Powerpoint::find($id);
         $ppt->ppt_images;
         //$ppt->photos = PPT_Image::where( "powerpoint_id", $id )->get();
-        return json_encode( $ppt );
+        return json_encode($ppt);
     }
 
-    public function destroy( $id )
+    public function destroy($id)
     {
-        $ppt = Powerpoint::find( $id );
+        $images = PPT_Image::where('powerpoint_id', $id)->get();
+        foreach ($images as $image) {
+            unlink(storage_path('app/public/ppt_images/' . $image->filepath));
+            $image->delete();
+        }
+        $ppt = Powerpoint::find($id);
         $ppt->delete();
         return "Deleted!";
     }

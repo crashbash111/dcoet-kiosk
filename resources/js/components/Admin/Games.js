@@ -5,6 +5,7 @@ import AdminTable from "./AdminTable";
 import Highscores from "./Games/Highscores";
 import Loader from "../Loader";
 import Pagination from "../Pagination";
+import ErrorPage from "./ErrorPage";
 
 export default class Games extends React.Component {
     constructor(props) {
@@ -65,6 +66,7 @@ export default class Games extends React.Component {
                                 }
                             )
                         });
+                        this.props.refresh();
                     });
             }
             postEnable();
@@ -94,6 +96,9 @@ export default class Games extends React.Component {
     }
 
     render() {
+        if (this.props.error) {
+            return <ErrorPage errorObj={this.props.errorObj} reload={this.props.refresh} />
+        }
         if (this.props.loading) {
             return <Loader />;
         }
@@ -105,7 +110,7 @@ export default class Games extends React.Component {
             { name: "enabled", text: "Enabled" }
         ];
 
-        const items = this.state.games.map(item => {
+        const items = this.props.games.map(item => {
             return <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
