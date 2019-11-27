@@ -40,12 +40,12 @@ export default class Tile extends React.Component {
 
         return (
             // <Spring key={this.props.item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}></Spring>
-            <Spring key={this.props.item.id} from={{ opacity: 0 }} to={{ opacity: 1 }}>
-                {paramx => (
+            // <Spring key={this.props.item.id} from={{ opacity: 0 }} to={{ opacity: 1 }}>
+            //     {paramx => (
                     <a style={{ textDecoration: "none" }} href={ this.props.linkOverride != null ? this.props.linkOverride : `#/kiosk/${this.props.item.id}` }>
                         <div key={this.props.item.id} data-role="tile" data-cover={path} data-size="large"
                             style={{
-                                opacity: paramx.opacity, transform: paramx.transform, transition: this.state.fadeTime,
+                                // opacity: paramx.opacity, transform: paramx.transform, transition: this.state.fadeTime,
                                 backgroundColor: this.state.defaultBackColour[backgroundColourIndex]
                             }}>
                             {
@@ -57,8 +57,8 @@ export default class Tile extends React.Component {
                             {/* <span class="branding-bar">{this.props.category}</span> */}
                         </div>
                     </a>
-                )}
-            </Spring>
+                // )}
+            // </Spring>
         )
     }
 }
