@@ -91,8 +91,6 @@ class PagesController extends Controller
         $page->longdesc = $request->input('longdesc');
         $page->category_id = $request->input('category');
 
-        $page->save();
-
         $allowedFileExtension = ['jpg', 'jpeg', 'png'];
 
         $files = $request->file("photos");
@@ -191,6 +189,8 @@ class PagesController extends Controller
                 }
             }
         }
+
+        $page->save();
 
         return response()->json([
             "success" => true,
