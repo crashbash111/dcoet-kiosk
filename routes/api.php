@@ -35,9 +35,9 @@ Route::group(['middleware' => ['web'] ], function () {
 
     Route::delete( "games/{id}", "GamesController@clearGameHighscores" );
 
-    // Route::post('login','User\AuthController@login');
+    Route::post('login','User\AuthController@login');
     // Route::post('register', 'User\AuthController@register' )->middleware( "cors" );
-    // Route::post('logout','Auth\LoginController@logout');
+    Route::post('logout','Auth\LoginController@logout');
     // Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail');
     // Route::post('password/reset','Auth\ResetPasswordController@reset');
 });

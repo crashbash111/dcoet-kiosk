@@ -85,7 +85,7 @@ export default class Login extends React.Component {
                         <br />
                         <button className="btn btn-primary" style={{ textAlign: "center" }}>Login</button>
                     </form>
-                    <button onClick={ (event) => { this.setState( { username: "admin@dcoet.com", password: "dcoet2019" }) } }>Fill</button>
+                    {/* <button onClick={ (event) => { this.setState( { username: "admin@dcoet.com", password: "dcoet2019" }) } }>Fill</button> */}
                 </div>
             </div>
         );
