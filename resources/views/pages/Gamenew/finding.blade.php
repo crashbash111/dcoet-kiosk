@@ -564,7 +564,7 @@
         };
 
         drawEntity = function(something) {
-            ctx.save();
+            //ctx.save();
 
             // ctx.drawImage(
             //     imgList[something.imgId],
@@ -592,7 +592,7 @@
              something.width,
              something.height)
             }
-            ctx.restore();
+            //ctx.restore();
             if ((frameCount * 100 * something.spdX) % 300 == 0){
                 something.animFrame = (something.animFrame + 1) % img.numFrames;
             }
@@ -871,7 +871,7 @@
                     }
                 }
             }
-            myVar = setInterval(update, 200);
+            myVar = setInterval(update, 40);
         };
 
         function myStopFunction() {
