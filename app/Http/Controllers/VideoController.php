@@ -42,7 +42,9 @@ class VideoController extends Controller
 
         $fileNameWithExt = $file->getClientOriginalName();
         $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+        //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+        $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
+
         $extension = $file->getClientOriginalExtension();
 
         $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -58,7 +60,9 @@ class VideoController extends Controller
 
             $fileNameWithExt = $thumb->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+            //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+            $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
+
             $extension = $thumb->getClientOriginalExtension();
 
             $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -142,7 +146,9 @@ class VideoController extends Controller
 
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+            //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+            $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
+
             $extension = $file->getClientOriginalExtension();
 
             $fileNameToStore = $fileName . "_" . time() . "." . $extension;
@@ -159,7 +165,9 @@ class VideoController extends Controller
 
             $fileNameWithExt = $thumb->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+            //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+            $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
+
             $extension = $thumb->getClientOriginalExtension();
 
             $fileNameToStore = $fileName . "_" . time() . "." . $extension;

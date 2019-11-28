@@ -48,7 +48,9 @@ class PowerpointController extends Controller
 
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+            //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+            $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
+
             // $fileName = strtr( $fileName, [ '(' => '_' ] );
             // $fileName= strtr( $fileName, [ ')' = '_' ] );
 

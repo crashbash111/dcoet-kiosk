@@ -102,7 +102,8 @@ class PagesController extends Controller
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-            $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+            //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+            $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
 
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedFileExtension);
@@ -171,7 +172,8 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+                //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+                $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
 
                 $extension = $file->getClientOriginalExtension();
 
@@ -245,7 +247,8 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+                //$fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
+                $fileName = preg_replace('/[^a-z0-9]+/', '_', strtolower($fileName));
 
                 $extension = $file->getClientOriginalExtension();
                 $check = in_array($extension, $allowedFileExtension);
@@ -335,7 +338,7 @@ class PagesController extends Controller
                 $fileNameWithExt = $file->getClientOriginalName();
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_']);
+                $fileName = strtr($fileName, [' ' => '', '(' => '_', ')' => '_', "'" => "_" ]);
 
                 $extension = $file->getClientOriginalExtension();
                 //$check = in_array($extension, $allowedFileExtension);
