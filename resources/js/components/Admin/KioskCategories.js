@@ -107,13 +107,29 @@ class KioskCategories extends React.Component {
     handleActualDeleteClick(event) {
         //const url = qs.stringify
         this.setState({ deleteLoading: true });
-        Axios.post(`./api/categories/${this.state.deleteItem.id}/${this.state.reassignCategory}`,
-            {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("id_token")
+        // Axios.post(`./api/categories/${this.state.deleteItem.id}/${this.state.reassignCategory}`, {},
+        //     {
+        //         headers: {
+        //             "Authorization": "Bearer " + localStorage.getItem("id_token")
+        //         }
+        //     }
+        // )
+        Axios({
+            url: `./api/categories/${this.state.deleteItem.id}/${this.state.reassignCategory}`,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("id_token")
+            },
+            onUploadProgress: (progressEvent) => {
+                const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+                console.log("onUploadProgress", totalLength);
+                if (totalLength !== null) {
+                    this.updateProgressBarValue(Math.round((progressEvent.loaded * 100) / totalLength));
                 }
-            }
-        )
+            },
+            data: formData
+        })
             .then(response => {
                 console.log(response)
                 this.setState({ deleteLoading: false, deleteItem: null, mode: 0 });
