@@ -570,7 +570,7 @@
             //     imgList[something.imgId],
             //     something.x - something.width / 2,
             //     something.y - something.height / 2,
-            //     something.width,
+            //     something.width,c
             //     something.height
             // );
             // ctx.restore();
