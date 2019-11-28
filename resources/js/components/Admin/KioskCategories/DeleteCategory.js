@@ -28,14 +28,14 @@ export default class DeleteCategory extends React.Component {
                     this.props.item.numPages > 0 ?
                         <div>
                             <h4 style={{ color: "red" }}><strong>This category still has {this.props.item.numPages} assigned pages.</strong></h4>
-                            <p>Either reassign them separately, choose a new category to assign them to here, or they will all be deleted.</p>
-                            <div className="form-group">
+                            <p>Either reassign them or they will be deleted.</p>
+                            {/* <div className="form-group">
                                 <label><h3>New Category</h3></label>
                                 <select className="form-control" name="reassignCategory" onChange={this.props.handleChange} value={this.props.reassign}>
                                     <option value="-1">--None (delete all)--</option>
                                     {options}
                                 </select>
-                            </div>
+                            </div> */}
                             <hr />
                         </div>
                         :

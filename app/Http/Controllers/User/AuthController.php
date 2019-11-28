@@ -19,43 +19,43 @@ class AuthController extends Controller
         $this->user = new User;
     }
 
-    public function register( Request $request )
-    {
-        $validator = Validator::make( $request->only( "name", 'email', 'password' ), [
-            "email" => "required|email",
-            "name" => "required|string",
-            "password" => "required|string|min:6",
-        ] );
+    // public function register( Request $request )
+    // {
+    //     $validator = Validator::make( $request->only( "name", 'email', 'password' ), [
+    //         "email" => "required|email",
+    //         "name" => "required|string",
+    //         "password" => "required|string|min:6",
+    //     ] );
 
-        if( $validator->fails() )
-        {
-            return response()->json( [
-                "success" => false,
-                "message" => $validator->messages()->toArray(),
-            ], 400);
-        }
+    //     if( $validator->fails() )
+    //     {
+    //         return response()->json( [
+    //             "success" => false,
+    //             "message" => $validator->messages()->toArray(),
+    //         ], 400);
+    //     }
 
-        $check_email = $this->user->where( "email", $request->email )->count();
+    //     $check_email = $this->user->where( "email", $request->email )->count();
 
-        if( $check_email > 0 )
-        {
-            return response()->json([
-                "success" => false,
-                "message" => "This email is already taken",
-            ], 400);
-        }
+    //     if( $check_email > 0 )
+    //     {
+    //         return response()->json([
+    //             "success" => false,
+    //             "message" => "This email is already taken",
+    //         ], 400);
+    //     }
 
-        $registerComplete = $this->user::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => Hash::make( $request->password ),
-        ]);
+    //     $registerComplete = $this->user::create([
+    //         "name" => $request->name,
+    //         "email" => $request->email,
+    //         "password" => Hash::make( $request->password ),
+    //     ]);
 
-        if( $registerComplete )
-        {
-            return $this->login( $request );
-        }
-    }
+    //     if( $registerComplete )
+    //     {
+    //         return $this->login( $request );
+    //     }
+    // }
 
     public function login( Request $request )
     {

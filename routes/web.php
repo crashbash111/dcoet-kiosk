@@ -25,9 +25,9 @@ Route::get( "/gametimedhighscores", [ "uses" => "GamesController@gametimedhighsc
 
 //Route::get( "/allGames", "PagesController@allGames" );
 
-Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
+//Route::get( "/category/{id}", [ "uses" => "PagesController@category" ] );
 
-Route::get( "/category/{id}/pages", [ "uses" => "PagesController@categoryPages" ] );
+//Route::get( "/category/{id}/pages", [ "uses" => "PagesController@categoryPages" ] );
 
 //Route::get( "/powerpoints/all", "PowerpointController@all" );
 

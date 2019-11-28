@@ -63,21 +63,21 @@ class CategoryController extends Controller
         $category->save();
     }
 
-    public function destroy( $id, $reassign )
+    public function destroy( $id )
     {
         //return $reassign;
         $category = Category::find( $id );
-        if( $reassign != -1 )
-        {
-            $pages = Page::where( 'category_id', $id )->get();
-            foreach( $pages as $page )
-            {
-                $page->category_id = intval( $reassign );
-                $page->save();
-            }
-        }
-        else
-        {
+        //if( $reassign != -1 )
+        //{
+            // $pages = Page::where( 'category_id', $id )->get();
+            // foreach( $pages as $page )
+            // {
+            //     $page->category_id = intval( $reassign );
+            //     $page->save();
+            // }
+        //}
+        //else
+        //{
             $pages = Page::where( 'category_id', $id )->get();
             foreach( $pages as $page )
             {
@@ -85,7 +85,7 @@ class CategoryController extends Controller
                 //PagesController::destroy( $page->id );
                 //return "here";
             }
-        }
+        //}
         $category->delete();
         return "Done";
         //return json_encode( $category );
