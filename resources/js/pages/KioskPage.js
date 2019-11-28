@@ -190,8 +190,8 @@ class KioskPage extends React.Component {
             let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
-                    <div style={{ display: "inline" }} key={item.id}>
-                        <a style={{ display: "inline" }} onClick={(event) => { if (this.state.playingIndex == item.id) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) } else { if (this.state.currentAudio != null) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) }; var aud = new Audio(filePath); aud.play(); this.setState({ playingIndex: item.id, currentAudio: aud }); aud.onended = (event) => { this.setState({ playingIndex: -1, currentAudio: null }) } } }}>{this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop-white.png" width="40%" /> : <img style={{ display: "inline" }} src="images/play-white.png" width="40%" />}</a>
+                    <div key={item.id}>
+                        <a style={{ display: "inline" }} onClick={(event) => { if (this.state.playingIndex == item.id) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) } else { if (this.state.currentAudio != null) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) }; var aud = new Audio(filePath); aud.play(); this.setState({ playingIndex: item.id, currentAudio: aud }); aud.onended = (event) => { this.setState({ playingIndex: -1, currentAudio: null }) } } }}>{this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop-white.png" width="50%" /> : <img style={{ display: "inline" }} src="images/play-white.png" width="50%" />}</a>
                     </div>
                 )
             });
@@ -201,6 +201,13 @@ class KioskPage extends React.Component {
             //         <Slider />
             //     </div>
             // );
+
+            let longDescParts;
+
+            if( this.state.page.longdesc != null )
+            {
+                longDescParts = this.state.page.longdesc.split( "<br>" );
+            }
 
             let c = 0;
             return (
@@ -256,18 +263,30 @@ class KioskPage extends React.Component {
                                                     background: `linear-gradient(0deg, ${this.state.randomColour[1]} 40px, transparent 100px)`,
                                                 }}>
                                                     {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
-                                                    {this.state.page.audios.length > 0 ? <div><h2>Audio</h2><div>{audioItems}</div></div> : null}
+                                                    <br />
+                                                    <br />
+                                                    {this.state.page.audios.length > 0 ? <div><h2>Audio</h2><div style={{ display: "grid", gridTemplateColumns: "auto auto auto", justifyContent: "space-evenly" }}>{audioItems}</div></div> : null}
+                                                    <br />
+                                                    <br />
                                                     <p style={{
                                                         fontSize: "28px",
                                                         textAlign: "left",
                                                         paddingBottom: "5px",
                                                     }}>{this.state.page.shortdesc}
                                                     </p>
+                                                    <br />
+                                                    <br />
                                                     <p style={{
                                                         fontSize: "18px",
                                                         textAlign: "justify",
                                                         paddingBottom: "50px",
-                                                    }}>{this.state.page.longdesc}
+                                                    }}>{ longDescParts != null && longDescParts.length > 1 ?
+                                                        longDescParts.map( part => {
+                                                            return <span>{part}<br /></span>
+                                                        })
+                                                        :
+                                                        this.state.page.longdesc
+                                                    }
                                                     </p>
                                                 </div>
                                                 <a onClick={(event) => { this.props.history.push(`/${this.state.page.category_id}`) }} className="returns"
@@ -281,6 +300,7 @@ class KioskPage extends React.Component {
                                                         textDecoration: "none",
                                                         fontSize: "25px",
                                                         transition: this.state.transitionTime,
+                                                        backgroundImage: "linear-gradient( 0deg, black, rgba( 0, 0, 0, 0 )"
                                                     }} >&#8592; Back to Home</a>
                                             </div>
 
