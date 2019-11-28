@@ -113,7 +113,7 @@
             </button>
             <button 
                 style="font-size:3.5vmin;" 
-                onclick="window.location = './'" 
+                onclick="window.location = './#/-2'"
             >
                 Close
             </button>
@@ -407,7 +407,7 @@
         };
 
         var bannedWords = [
-            {"id":2,"word":"FUT","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
+            {"id":2,"word":"FUC","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
             {"id":3,"word":"SUK","created_at":"2019-10-01 03:02:57","updated_at":"2019-10-01 04:29:27"},
             {"id":4,"word":"CUC","created_at":"2019-10-01 03:03:28","updated_at":"2019-10-01 03:03:28"},
             {"id":5,"word":"ASS","created_at":"2019-10-01 03:39:03","updated_at":"2019-10-01 04:23:25"},
@@ -422,9 +422,12 @@
             {"id":14,"word":"FAT","created_at":"2019-10-01 04:22:44","updated_at":"2019-10-01 04:22:44"},
             {"id":15,"word":"CNT","created_at":"2019-10-01 04:23:10","updated_at":"2019-10-01 04:23:10"},
             {"id":16,"word":"SLT","created_at":"2019-10-01 04:28:22","updated_at":"2019-10-01 04:28:22"},
-            {"id":17,"word":"POO","created_at":"2019-10-01 04:28:39","updated_at":"2019-10-01 04:28:39"},
-            {"id":18,"word":"JZZ","created_at":"2019-10-01 04:29:18","updated_at":"2019-10-01 04:29:18"}
         ];
+
+        fetch( "/api/bannedwords" )
+        .then( response => response.json() )
+        .then( data => bannedWords = data )
+        .catch( error => console.log( error ) );
 
         // var imgPaths = [
         //     "./assets/images/animal1.png",
@@ -446,16 +449,16 @@
         }
 
         var highscores = [
-            {"id":2,"initials":"ASS","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-            {"id":4,"initials":"ASS","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-            {"id":3,"initials":"ASS","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-            {"id":5,"initials":"ASS","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-            {"id":1,"initials":"ASS","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
-            {"id":6,"initials":"ASS","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
-            {"id":8,"initials":"ASS","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
-            {"id":9,"initials":"ASS","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
-            {"id":7,"initials":"ASS","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
-            {"id":10,"initials":"ASS","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
+            {"id":2,"initials":"KTM","score":91,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":4,"initials":"KTM","score":79,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":3,"initials":"KTM","score":63,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":5,"initials":"KTM","score":59,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":1,"initials":"KTM","score":43,"created_at":"2019-09-25 04:00:38","updated_at":"2019-09-25 04:00:38"},
+            {"id":6,"initials":"KTM","score":38,"created_at":"2019-09-25 04:02:20","updated_at":"2019-09-25 04:02:20"},
+            {"id":8,"initials":"KTM","score":35,"created_at":"2019-09-25 04:11:42","updated_at":"2019-09-25 04:11:42"},
+            {"id":9,"initials":"KTM","score":26,"created_at":"2019-09-25 04:11:36","updated_at":"2019-09-25 04:11:36"},
+            {"id":7,"initials":"KTM","score":15,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"},
+            {"id":10,"initials":"KTM","score":12,"created_at":"2019-09-25 05:08:32","updated_at":"2019-09-25 05:08:32"}
         ];
 
         highscores[ 0 ].score
@@ -761,9 +764,9 @@
 
             http.open('POST', url, true);
 
-            console.log( document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
+            //console.log( document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
 
-            http.setRequestHeader( 'X-CSRF-Token', document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
+            //http.setRequestHeader( 'X-CSRF-Token', document.getElementById( "csrf-meta" ).getAttribute( "content" ) );
             http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
             http.onreadystatechange = function(){

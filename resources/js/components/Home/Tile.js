@@ -42,7 +42,7 @@ export default class Tile extends React.Component {
             // <Spring key={this.props.item.id} from={{ opacity: 0, transform: "translateY(20px)" }} to={{ opacity: 1, transform: "translateY(0px)" }}></Spring>
             // <Spring key={this.props.item.id} from={{ opacity: 0 }} to={{ opacity: 1 }}>
             //     {paramx => (
-                    <a style={{ textDecoration: "none" }} href={ this.props.linkOverride != null ? this.props.linkOverride : `#/kiosk/${this.props.item.id}` }>
+                    <a style={{ textDecoration: "none", width: "310px", height: "310px" }} href={ this.props.linkOverride != null ? this.props.linkOverride : `#/kiosk/${this.props.item.id}` }>
                         <div key={this.props.item.id} data-role="tile" data-cover={path} data-size="large"
                             style={{
                                 // opacity: paramx.opacity, transform: paramx.transform, transition: this.state.fadeTime,
@@ -50,9 +50,9 @@ export default class Tile extends React.Component {
                             }}>
                             {
                                 this.props.flag == "ppt" ?
-                                    <h3 style={{ textShadow: "2px 2px #111111" }}>{this.props.item.title}</h3>
+                                    <h1 style={{ textShadow: "2px 2px 15px #111111", padding: "10px", textAlign: "center" }}>{this.props.item.title}</h1>
                                     :
-                                    <h3 style={{ textShadow: "2px 2px #111111" }}>{this.props.flag == "game" ? this.props.item.name : this.props.flag == "video" ? this.props.item.title : this.props.item.heading}</h3>
+                                    <h1 style={{ textShadow: "2px 2px 15px #111111", padding: "10px", textAlign: "center" }}>{this.props.flag == "game" ? this.props.item.name : this.props.flag == "video" ? this.props.item.title : this.props.item.heading}</h1>
                             }
                             {/* <span class="branding-bar">{this.props.category}</span> */}
                         </div>

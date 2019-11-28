@@ -77,7 +77,7 @@ class Videos extends React.Component {
 
     handleCancelCreateClick(event) {
         event.preventDefault();
-        this.setState({ mode: 0 });
+        this.setState({ mode: 0, video: null });
     }
 
     handleClear() {
@@ -104,14 +104,14 @@ class Videos extends React.Component {
     }
 
     handleDeleteClick(i) {
-        const di = this.state.items.find(m => m.id == i);
-        this.setState({ mode: 2, deleteItem: di });
+        const di = this.props.videos.find(m => m.id == i);
+        this.setState({  deleteItem: di, mode: 2 });
     }
 
     handleCancelDeleteClick(event) {
         console.log("ree");
         event.preventDefault();
-        this.setState({ mode: 0, deleteItem: null });
+        this.setState({ deleteItem: null, mode: 0 });
     }
 
     handleActualDeleteClick(event) {
@@ -126,7 +126,7 @@ class Videos extends React.Component {
         )
             .then(response => {
                 console.log(response)
-                this.setState({ deleteLoading: false, deleteItem: null, mode: 0 });
+                this.setState({ deleteLoading: false, deleteItem: null, mode: 0, video: null });
                 this.props.refresh();
             })
             .catch(err => console.log(err));
@@ -252,6 +252,7 @@ class Videos extends React.Component {
             case 2:
                 child = <DeleteVideo handleCancelDeleteClick={ this.handleCancelDeleteClick } handleActualDeleteClick={ this.handleActualDeleteClick }
                 item={ this.state.deleteItem } deleteLoading={ this.state.deleteLoading } />
+                //this.state.deleteItem
                 break;
         }
 

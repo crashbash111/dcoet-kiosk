@@ -76,7 +76,11 @@ export default class BannedWords extends React.Component {
             let notId = t => t.id !== id;
             let updatedList = this.state.bannedWords.filter(notId);
             //this.setState({ bannedWords: updatedList });
-            Axios.delete("./api/bannedwords/" + id);
+            Axios.delete("./api/bannedwords/" + id, {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("id_token")
+                }
+            });
 
             this.setState((prevState) => {
                 console.log(prevState.items.map((item) => {
@@ -137,7 +141,8 @@ export default class BannedWords extends React.Component {
             url: "/api/bannedwords" + (this.state.editMode ? "/" + this.state.id : ""),
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("id_token")
             },
             data: formData
         })

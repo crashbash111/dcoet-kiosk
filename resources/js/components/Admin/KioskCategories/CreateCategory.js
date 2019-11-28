@@ -40,6 +40,8 @@ export default class CreateCategory extends React.Component {
 
         let formData = new FormData();
 
+        formData.append("token", localStorage.getItem("id_token"));
+
         if (editMode) {
             formData.append("_method", "PUT");
             console.log("put");

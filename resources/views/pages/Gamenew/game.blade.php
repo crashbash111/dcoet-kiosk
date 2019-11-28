@@ -180,7 +180,7 @@
             background-image: url( './assets/images/stats.png' ); text-align: left; display: none;"
         >
             <h3 id="statText" style="font-size:3vmin"></h3>
-            <button id="killGame" onclick="die()">Die</button>
+            {{-- <button id="killGame" onclick="die()">Die</button> --}}
         </div>
         <div
             id="end"
@@ -311,7 +311,7 @@
         }
 
         closeGame = function( event ) {
-            window.location = "./";
+            window.location = "./#/-2";
         }
 
         canvasClick = function(event) {
@@ -578,8 +578,27 @@
         };
 
         var bannedWords = [
-            {"id":2,"word":"ABC","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
+            {"id":2,"word":"FUC","created_at":"2019-10-01 02:59:22","updated_at":"2019-10-01 04:15:48"},
+            {"id":3,"word":"SUK","created_at":"2019-10-01 03:02:57","updated_at":"2019-10-01 04:29:27"},
+            {"id":4,"word":"CUC","created_at":"2019-10-01 03:03:28","updated_at":"2019-10-01 03:03:28"},
+            {"id":5,"word":"ASS","created_at":"2019-10-01 03:39:03","updated_at":"2019-10-01 04:23:25"},
+            {"id":6,"word":"HOE","created_at":"2019-10-01 03:39:38","updated_at":"2019-10-01 03:39:38"},
+            {"id":7,"word":"JIZ","created_at":"2019-10-01 03:46:41","updated_at":"2019-10-01 03:46:41"},
+            {"id":8,"word":"CUM","created_at":"2019-10-01 03:47:22","updated_at":"2019-10-01 03:47:22"},
+            {"id":9,"word":"KUK","created_at":"2019-10-01 03:58:28","updated_at":"2019-10-01 03:58:28"},
+            {"id":10,"word":"FAG","created_at":"2019-10-01 03:58:40","updated_at":"2019-10-01 03:58:40"},
+            {"id":11,"word":"GAY","created_at":"2019-10-01 04:15:59","updated_at":"2019-10-01 04:15:59"},
+            {"id":12,"word":"FGT","created_at":"2019-10-01 04:21:40","updated_at":"2019-10-01 04:21:40"},
+            {"id":13,"word":"FUC","created_at":"2019-10-01 04:22:07","updated_at":"2019-10-01 04:22:07"},
+            {"id":14,"word":"FAT","created_at":"2019-10-01 04:22:44","updated_at":"2019-10-01 04:22:44"},
+            {"id":15,"word":"CNT","created_at":"2019-10-01 04:23:10","updated_at":"2019-10-01 04:23:10"},
+            {"id":16,"word":"SLT","created_at":"2019-10-01 04:28:22","updated_at":"2019-10-01 04:28:22"},
         ];
+
+        fetch( "/api/bannedwords" )
+        .then( response => response.json() )
+        .then( data => bannedWords = data )
+        .catch( error => console.log( error ) );
 
         var letters = [];
         for (var i = 65; i <= 90; i++){
@@ -1309,7 +1328,7 @@
             showMenu("");
             timeWhenGameStarted = Date.now();
             frameCount = 0;
-            health = 1000000;
+            health = 100;
             score = 0;
             tappedRubbish = 0;
             tappedAnimals = 0;

@@ -7,14 +7,28 @@ import { Spring } from 'react-spring/renderprops';
 import { useSpring, animated, interpolate } from 'react-spring';
 import { Palette } from 'react-palette';
 import { useGesture } from 'react-with-gesture';
+import { withRouter } from "react-router-dom";
 
 import Slider from "../components/Slider";
 import ErrorCatch from "../components/ErrorCatch";
 
-export default class KioskPage extends React.Component {
+class KioskPage extends React.Component {
 
     constructor(props) {
         super(props);
+
+        const betterColours = [
+            [
+                "rgba( 54, 54, 54, 0.8 )",
+                "rgba( 1, 1, 1, 0.8 )"
+            ],
+            [
+                "rgba(1, 35, 69, 0.8)",
+                "rgba(0, 18, 52, 0.8)"
+            ],
+        ];
+
+        //const colours = [ "#363636", "#010101", "#012345" ];
 
         this.state = {
             loading: true,
@@ -27,17 +41,35 @@ export default class KioskPage extends React.Component {
             sidebarColor: "",
             playingIndex: -1,
             currentAudio: null,
+            randomColour: betterColours[Math.floor(Math.random() * betterColours.length)],
+            rotate: false,
+            toggle: false,
         };
+
+        console.log(this.state.randomColour);
 
         this.fade = this.fade.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.slideTransitionEnd = this.slideTransitionEnd.bind(this);
         this.startPlaying = this.startPlaying.bind(this);
+        this.rotateDone = this.rotateDone.bind(this);
 
         this.sliderRef = React.createRef();
+        //this.triangleRef = React.createRef();
+    }
+
+    rotateDone() {
+        this.setState(function (state) {
+            return {
+                toggle: !state.toggle,
+                rotate: false
+            };
+        });
     }
 
     componentDidMount() {
+        //const triangleRef = this.triangleRef;
+        //triangleRef.addEventListener("animationend", this.rotateDone);
         this.setState({ loading: true });
         let { id } = this.props.match.params;
         //console.log(id);
@@ -50,7 +82,12 @@ export default class KioskPage extends React.Component {
                     //console.log("preloaded!");
                 });
             })
-            .catch( error => { console.log( error ); this.setState( { error: true }); });
+            .catch(error => { console.log(error); this.setState({ error: true }); });
+    }
+
+    componentWillUnmount() {
+        //const triangleRef = this.triangleRef;
+        //triangleRef.removeEventListener("animationend", this.rotateDone);
     }
 
     handleClick(event) {
@@ -75,9 +112,8 @@ export default class KioskPage extends React.Component {
 
     startPlaying(i) {
         // console.log( i );
-        if( this.state.playingIndex == -1 )
-        {
-            var aud = this.state.page.audios.find( m => m.id = i );
+        if (this.state.playingIndex == -1) {
+            var aud = this.state.page.audios.find(m => m.id = i);
             var audio = new Audio(`./storage/audio_files/${aud.filepath}`);
             audio.play();
             audio.onended = function () { audio = null; this.setState({ currentAudio: null, playingIndex: -1 }) }
@@ -103,8 +139,7 @@ export default class KioskPage extends React.Component {
 
     render() {
 
-        if( this.state.error )
-        {
+        if (this.state.error) {
             return <ErrorCatch error={true} newUrl="/"></ErrorCatch>
         }
 
@@ -137,7 +172,7 @@ export default class KioskPage extends React.Component {
             }
             catch (e) //catch
             {
-                this.setState( { error: true });
+                this.setState({ error: true });
                 console.error(e.message); //console log error
             }
 
@@ -151,12 +186,12 @@ export default class KioskPage extends React.Component {
             });
 
             let h = 0;
-            console.log( this.state );
+            console.log(this.state);
             let audioItems = this.state.page.audios.map(item => {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
                     <div style={{ display: "inline" }} key={item.id}>
-                        <a style={{ display: "inline" }} onClick={(event) => { if( this.state.playingIndex == item.id ) { this.state.currentAudio.pause(); this.setState( {currentAudio: null, playingIndex: -1 })  } else{ if( this.state.currentAudio != null ) { this.state.currentAudio.pause(); this.setState( {currentAudio: null, playingIndex: -1 }) }; var aud = new Audio( filePath ); aud.play(); this.setState( { playingIndex: item.id, currentAudio: aud } ); aud.onended = (event) => { this.setState({playingIndex: -1, currentAudio: null }) } } }}>{ this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop.png" width="40%" /> : <img style={{ display: "inline" }} src="images/play.svg" width="40%" />}</a>
+                        <a style={{ display: "inline" }} onClick={(event) => { if (this.state.playingIndex == item.id) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) } else { if (this.state.currentAudio != null) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) }; var aud = new Audio(filePath); aud.play(); this.setState({ playingIndex: item.id, currentAudio: aud }); aud.onended = (event) => { this.setState({ playingIndex: -1, currentAudio: null }) } } }}>{this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop-white.png" width="40%" /> : <img style={{ display: "inline" }} src="images/play-white.png" width="40%" />}</a>
                     </div>
                 )
             });
@@ -178,6 +213,7 @@ export default class KioskPage extends React.Component {
                                 <Palette src={imgPath}>
                                     {(palette) => (
                                         <div key={f++}>
+                                            <img onClick={(event) => { this.props.history.push(`/${this.state.page.category_id}`) }} style={{ display: this.state.sideOpen ? "none" : "block", transition: "opacity 1s ease-in-out", position: "absolute", bottom: "10px", left: "10px", height: "7%", zIndex: 10 }} src="images/back-arrow-white.png" />
                                             <div style={{ width: "100%", height: "100%", position: "absolute" }}>
                                                 <Slider slideTransitionEnd={this.slideTransitionEnd} draggable={true} startIndex={this.state.index} items={this.state.page.images} sliderRef={this.sliderRef} />
                                             </div>
@@ -202,13 +238,14 @@ export default class KioskPage extends React.Component {
                                                     flexDirection: "column",
                                                     overflowY: "hidden",
                                                     overflowX: "hidden",
-                                                    opacity: "0.8",
+                                                    // opacity: "0.8",
                                                     transition: this.state.transitionTime,//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime + ", left: " + this.state.transitionTime,
-                                                    backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",
-                                                    color: !palette.loading ? palette.data.darkMuted : "white",
+                                                    backgroundColor: this.state.randomColour[0],
+                                                    color: "white",
+                                                    zIndex: 11,
                                                 }}>
 
-                                                <h1 style={{ textAlign: "center", fontSize: "4em", display: "block", width: "100%" }}>{this.state.page.heading}</h1>
+                                                <h1 style={{ textAlign: "center", padding: "20px", fontSize: "4em", display: "block", width: "100%", opacity: "1" }}>{this.state.page.heading}</h1>
 
 
                                                 <div className="hideScroll" style={{
@@ -216,7 +253,7 @@ export default class KioskPage extends React.Component {
                                                     width: "100%",
                                                     flex: "1",
                                                     padding: this.state.sideOpen ? "10px 20px 30px 20px" : "10px 0px 30px 0px",
-                                                    background: "linear-gradient(0deg, " + (!palette.loading ? palette.data.darkMuted : "#141414") + " 40px, transparent 100px)",
+                                                    background: `linear-gradient(0deg, ${this.state.randomColour[1]} 40px, transparent 100px)`,
                                                 }}>
                                                     {this.state.page.stats.length > 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>{statTableItems}</div> : null}
                                                     {this.state.page.audios.length > 0 ? <div><h2>Audio</h2><div>{audioItems}</div></div> : null}
@@ -233,9 +270,9 @@ export default class KioskPage extends React.Component {
                                                     }}>{this.state.page.longdesc}
                                                     </p>
                                                 </div>
-                                                <Link to={`/${this.state.page.category_id}`} className="returns"
+                                                <a onClick={(event) => { this.props.history.push(`/${this.state.page.category_id}`) }} className="returns"
                                                     style={{
-                                                        color: palette.loading ? "white" : palette.data.lightVibrant,
+                                                        color: "white",
                                                         padding: "8px 8px 8px 32px",
                                                         width: this.state.sideSize + "vw",
                                                         display: "block",
@@ -244,26 +281,31 @@ export default class KioskPage extends React.Component {
                                                         textDecoration: "none",
                                                         fontSize: "25px",
                                                         transition: this.state.transitionTime,
-                                                    }} >&#8592; Back to Home</Link>
+                                                    }} >&#8592; Back to Home</a>
                                             </div>
 
                                             {/* </div> */}
                                             <div onClick={() => { this.setState({ sideOpen: !this.state.sideOpen }) }} style={{
-                                                backgroundColor: !palette.loading ? palette.data.lightVibrant : "#363636",//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
-                                                color: !palette.loading ? palette.data.darkMuted : "white",
+                                                backgroundColor: this.state.randomColour[0],//"background-color " + this.state.transitionTime + ", color " + this.state.transitionTime + ", width: " + this.state.transitionTime,
+                                                color: "white",
                                                 position: "absolute",
                                                 top: "calc(50% - 60px)",
                                                 borderRadius: "0px 15px 15px 0px",
                                                 width: "45px",
                                                 height: "120px",
-                                                opacity: "0.8",
+                                                // opacity: "0.8",
                                                 transition: this.state.transitionTime,
                                                 left: this.state.sideOpen ? this.state.sideSize + "vw" : "0px",
                                             }}>
                                                 <h1 style={{
                                                     textAlign: "center",
                                                     padding: "50% 0px 50% 0px",
-                                                }}>&lt;</h1>
+                                                }}><img src={ this.state.toggle ? "/images/triangle-white-r.png" : "/images/triangle-white.png" } style={{ width: "100%" }}
+                                                    // ref={ elm => { this.triangleRef = elm } }
+                                                    onAnimationEnd={ (event) => { this.rotateDone() }}
+                                                    onClick={(event) => this.setState({ rotate: true })}
+                                                    className={ this.state.rotate ? "rotate" : ""}
+                                                    /></h1>
                                             </div>
 
                                             {/* Image dot navigation */}
@@ -311,3 +353,5 @@ export default class KioskPage extends React.Component {
         event.style.backgroundImage = "url(' ./storage/ui/err.png ')";
     }
 }
+
+export default withRouter(KioskPage);

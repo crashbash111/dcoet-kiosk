@@ -162,9 +162,13 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div style={{ display: "grid", gridTemplateRows: this.state.showKeyboard ? "30vh 70vh" : "15vh 85vh", transition: "grid-template-rows 2s" }}>
-                            <div className="grid-item searchspace" style={{ paddingTop: "20px" }}>
+                            <div className="grid-item searchspace" style={{ paddingTop: ( this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "40vh" : "20px" }}>
                                 {/* <SearchBar searchTerm={this.state.searchTerm} handleChange={this.handleFormChange} onFocus={this.onFocus} /> */}
+                                <h2 style={{ paddingLeft: "75px", textShadow: "2px 2px 15px #111111", display: ( this.state.activeCategory == -1 && this.state.searchTerm == "" ) ? "block" : "none" }}>
+                                    Search or select a category to get started.
+                                </h2>
                                 <KeyboardedInput
+                                    inputClassName="searchBar"
                                     enabled
                                     onChange={this.handleValueChange}
                                     value={this.state.searchTerm}

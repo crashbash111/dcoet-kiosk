@@ -11,6 +11,11 @@ use App\VideoStream;
 
 class VideoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( "auth:users", ["except" => ["index", "show", "stream" ] ] );
+    }
+
     public function index()
     {
         return Video::all();

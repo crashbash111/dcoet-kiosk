@@ -748,10 +748,10 @@ span.deleteicon input {
 {
   color: white;
   background-color: #F26859;
-  background-image: url( "/images/page-trans.png" );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-image: url( "/images/page-icon.png" );
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
   border-radius: "2px";
   width: 100%;
   height: 150px;
@@ -764,10 +764,10 @@ span.deleteicon input {
 {
   color: white;
   background-color: #2FC1EE;
-  background-image: url( "/images/category-trans.png" );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-image: url( "/images/category-icon.png" );
+  // background-size: 30%;
+  // background-position: right center;
+  // background-repeat: no-repeat;
   border-radius: "2px";
   width: 100%;
   height: 150px;
@@ -780,10 +780,10 @@ span.deleteicon input {
 {
   color: white;
   background-color: #EF9B28;
-  background-image: url( "/images/pres-trans.png" );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-image: url( "/images/presentation-icon.png" );
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
   border-radius: "2px";
   width: 100%;
   height: 150px;
@@ -796,10 +796,10 @@ span.deleteicon input {
 {
   color: white;
   background-color: #1FA85C;
-  background-image: url( "/images/vid-trans.png" );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-image: url( "/images/video-icon.png" );
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
   border-radius: "2px";
   width: 100%;
   height: 150px;
@@ -881,6 +881,12 @@ span.deleteicon input {
   color: red;
 }
 
+.searchBar
+{
+  border: none;
+  border-radius: 10px;
+}
+
 .fa-play:before
 {
   content: url( "/images/play.svg" );
@@ -890,6 +896,20 @@ span.deleteicon input {
 {
   content: url( "/images/pause.png" );
 }
+
+.rotate {
+  animation: rotate-keyframes 0.5s;
+ }
+ 
+ @keyframes rotate-keyframes {
+  from {
+   transform: rotate(0deg);
+  }
+ 
+  to {
+   transform: rotate(180deg);
+  }
+ }
 
 // .caret {
 //   width: 0;

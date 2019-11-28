@@ -8,6 +8,8 @@ import withAuth from "../../components/withAuth";
 import AuthService from "../../components/AuthService";
 //import { Link } from "react-router-dom";
 
+const Auth = new AuthService();
+
 import HelpButton from "../../components/Admin/HelpButton";
 import HeadingTab from "../../components/Admin/Create/HeadingTab";
 import TabCreator from "../../components/Admin/Create/TabCreator";
@@ -38,6 +40,7 @@ class Create extends React.Component {
             submitting: false,
             error: false,
             photosCurrent: null,
+            progressValue: 0,
         }
 
         this.AuthService = new AuthService();
@@ -463,9 +466,10 @@ class Create extends React.Component {
     componentDidMount() {
         this.setState({ loading: true });
 
-        fetch("./api/categories")
-            .then(response => response.json())
-            .then(data => this.setState({ categories: data }));
+        // Auth.fetch("./api/categories")
+        //     .then(response => response.json())
+        //     .then(data => this.setState({ categories: data }))
+        //     .catch( error => { console.log( error ); })
 
         if (this.state.editMode) {
 
@@ -517,7 +521,7 @@ class Create extends React.Component {
             </div>
         }
 
-        let items = this.state.categories.map(item => {
+        let items = this.props.categories.map(item => {
             return (
                 <div key={item.id}>
                     <label>{item.name}
@@ -528,7 +532,7 @@ class Create extends React.Component {
             )
         });
 
-        let itemsNew = this.state.categories.map(item => {
+        let itemsNew = this.props.categories.map(item => {
             return (
                 <option key={item.id} value={item.id}>
                     {item.name}
@@ -642,8 +646,11 @@ class Create extends React.Component {
                 let audioPath = URL.createObjectURL(this.audios.current.files[y]);
 
                 currentAudios.push(<div style={{ display: "inline" }} key={y}>
-                <a style={{ display: "inline" }} onClick={ (event) => { var audio = new Audio( audioPath ); audio.play(); } }><img style={{ display: "inline" }} src="images/play.svg" width="40%" /></a>
-            </div>);
+                    <audio controls>
+                        <source src={audioPath} />
+                    </audio>
+                    {/* <a style={{ display: "inline" }} onClick={ (event) => { var audio = new Audio( audioPath ); audio.play(); } }><img style={{ display: "inline" }} src="images/play.svg" width="40%" /></a> */}
+                </div>);
             }
         }
         // else {

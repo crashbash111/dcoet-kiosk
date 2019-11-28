@@ -10,10 +10,13 @@ export default class CreatePowerpoint extends React.Component {
             editMode: this.props.powerpoint != null,
             title: this.props.powerpoint != null ? this.props.powerpoint.title : "",
             redirect: false,
+            submitting: false,
+            progressValue: 0,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.updateProgressBarValue = this.updateProgressBarValue.bind( this );
 
         this.pptImages = React.createRef();
     }
@@ -26,12 +29,18 @@ export default class CreatePowerpoint extends React.Component {
         })
     }
 
+    updateProgressBarValue(x) {
+        this.setState({ progressValue: x });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
         if (this.state.title.length < 3 || this.pptImages == null || this.pptImages.current == null || this.pptImages.current.files == null || this.pptImages.current.files.length < 1) {
             return;
         }
+
+        this.setState({ submitting: true });
 
         let formData = new FormData();
 
@@ -60,14 +69,22 @@ export default class CreatePowerpoint extends React.Component {
             method: "POST",
             headers: {
             },
+            onUploadProgress: (progressEvent) => {
+                const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+                console.log("onUploadProgress", totalLength);
+                if (totalLength !== null) {
+                    this.updateProgressBarValue(Math.round((progressEvent.loaded * 100) / totalLength));
+                }
+            },
             data: formData,
         })
             .then(response => {
                 console.log(response);
+                this.setState({ submitting: true });
                 //this.setState({ redirect: true });
                 this.props.handleSubmitted();
             })
-            .catch(error => console.log(error.response.data));
+            .catch(error => { console.log(error.response.data); this.setState({ submitting: true }); } );
     }
 
     render() {
@@ -88,6 +105,18 @@ export default class CreatePowerpoint extends React.Component {
                     </div>
                 )
             }
+        }
+
+        if (this.state.submitting) {
+            return <div className="admin-boxshadow">
+                <div className="admin-top-box"><h2>Submitting...</h2></div>
+                <div style={{ padding: "30px" }}>
+                    <label>{this.state.submitting ? "Uploading..." : "Done!"}</label>
+                    <div className="progress" style={{ width: "100%" }}>
+                        <div className="progress-bar" role="progressbar" style={{ color: "black", backgroundColor: this.state.error ? "red" : "green", width: `${this.state.progressValue}%` }}>{this.state.progressValue}%</div>
+                    </div>
+                </div>
+            </div>
         }
 
         return <div>

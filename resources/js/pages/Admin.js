@@ -146,10 +146,10 @@ class Admin extends React.Component {
         this.setState({ categoriesLoading: true });
         Auth.fetch("./api/categories")
             .then(response => response.json())
-            .then(data => this.setState({ categories: data, categoriesLoading: false, categoriesError: false }))
+            .then(data => this.setState({ categories: data, categoriesLoading: false, categoriesError: false, pagesError: false }))
             .catch(error => {
                 console.log(error);
-                this.setState({ categoriesError: true, categoriesErrorObj: error.response });
+                this.setState({ categoriesError: true, pagesError: true, categoriesErrorObj: error.response, pagesErrorObj: error.response });
             } );
     }
 
@@ -260,7 +260,7 @@ class Admin extends React.Component {
             {
                 id: 1,
                 text: "Kiosk Pages",
-                component: <KioskPages key={1} pages={this.state.pages} loading={this.state.pagesLoading} refresh={ this.fetchPages }
+                component: <KioskPages key={1} pages={this.state.pages} categories={ this.state.categories } loading={this.state.pagesLoading} refresh={ this.fetchPages }
                     error={ this.state.pagesError } errorObj={ this.state.pagesErrorObj }
                 />
             },
@@ -329,10 +329,8 @@ class Admin extends React.Component {
                     <div style={{ padding: "0", backgroundColor: "whitesmoke", backgroundPosition: "fixed" }} className={isMobile ? 'fullarea' : 'rightarea'}>
 
                         {isMobile ? <span className="sidebartoggle" onClick={this.toggleSidebar}>&#9776; Open</span> : null}
-                        <div className="admin-navbar">
+                        <div className="admin-navbar" style={{ height: "44px"}}>
                             <ul>
-                                <li><p>a</p></li>
-                                
                                 <li style={{ float: "right", cursor: "pointer" }} onClick={ (event) => { this.handleLogout() } }><p style={{ backgroundColor: "#001234" }}>Logout</p></li>
                                 <li style={{ float: "right" }}><p>Welcome Admin</p></li>
                             </ul>

@@ -7,13 +7,11 @@ export default class SearchBar extends React.Component {
         super(props);
     }
 
-    
-
     render() {
         return (
             <div>
                 <form>
-                    <input onFocus={ this.props.onFocus } style={{ borderRadius: "15px" }} type="text" name="searchTerm" placeholder="Search..." value={ this.props.searchTerm } onChange={ this.props.handleChange } />
+                    <input onFocus={ this.props.onFocus } style={{ borderRadius: "100px" }} type="text" name="searchTerm" placeholder="Search..." value={ this.props.searchTerm } onChange={ this.props.handleChange } />
                 </form>
             </div>
         );

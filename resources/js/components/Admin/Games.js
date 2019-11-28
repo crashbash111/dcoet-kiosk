@@ -54,6 +54,10 @@ export default class Games extends React.Component {
                 this.setState({ loadingItem: i });
                 const res = await Axios.post("./api/games/" + i, {
                     ...game, enabled: game.enabled == 1 ? 0 : 1, _method: "PUT"
+                }, {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("id_token")
+                    }
                 }, {})
                     .then((res) => {
                         console.log(res);
@@ -90,7 +94,11 @@ export default class Games extends React.Component {
     }
 
     handleClearActualClick(i) {
-        Axios.delete(`./api/games/${i}`)
+        Axios.delete(`./api/games/${i}`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("id_token")
+            }
+        } )
             .then(response => { console.log(response); this.setState( { mode: 0, gameId: -1 } ) })
             .catch( error => console.log( error ) );
     }

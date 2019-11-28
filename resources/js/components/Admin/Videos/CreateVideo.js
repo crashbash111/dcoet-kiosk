@@ -159,7 +159,7 @@ export default class CreateVideo extends React.Component {
                     //this.props.handleSubmitted();
                     this.setState({ completed: true, status: response.status, statusText: response.statusText });
                     //this.props.handleEditDone();
-                    this.props.handleSubmitted()
+                    this.props.handleSubmitted();
                 })
                 .catch(err => {
                     console.log(err.response);

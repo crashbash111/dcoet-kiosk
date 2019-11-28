@@ -12,6 +12,11 @@ use Validator;
 
 class GamesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( "auth:users", ["only" => ["update", "clearGameHighscores" ] ] );
+    }
+
     public function index()
     {
         $file_path = "./storage/game_cover_images/";

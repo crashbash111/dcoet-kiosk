@@ -73,7 +73,7 @@ class PowerpointPage extends React.Component {
 
         return (
             <div style={{ display: "grid", gridTemplateColumns: "20% auto 20%", width: "100%", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center", backgroundImage: "url( './storage/ppt_images/" + this.state.photos[ this.state.slideIndex ].filepath + "' )" }}>
-                <button style={{ position: "absolute", top: "10px", right: "10px", zIndex: 1 }} onClick={ (event) =>{ this.props.history.push( "/-4" ) }} className="btn btn-outline-dark btn-square">Back to Kiosk</button>
+                <button style={{ position: "absolute", bottom: "10px", left: "10px", zIndex: 1 }} onClick={ (event) =>{ this.props.history.push( "/-4" ) }} className="btn btn-outline-dark btn-square">Back to Kiosk</button>
                 <div style={{ backgroundColor: "blue", opacity: "0", height: "100%" }} onClick={this.handleLeftClick}></div>
                 <div style={{ backgroundColor: "white", opacity: "0", height: "100%" }}></div>
                 <div style={{ backgroundColor: "red", opacity: "0", height: "100%" }} onClick={this.handleRightClick} ></div>

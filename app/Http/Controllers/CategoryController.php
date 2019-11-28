@@ -10,6 +10,11 @@ use App\Http\Controllers\PagesController;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( "auth:users", ["except" => ["index", "show" ] ] );
+    }
+
     public function index()
     {
         $categories = Category::all();
