@@ -871,7 +871,7 @@
                     }
                 }
             }
-            myVar = setInterval(update, 40);
+            myVar = setInterval(update, 200);
         };
 
         function myStopFunction() {
