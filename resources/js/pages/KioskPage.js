@@ -18,6 +18,10 @@ class KioskPage extends React.Component {
         super(props);
 
         const betterColours = [
+            // [
+            //     "rgba( 119,31,31, 0.8 )",
+
+            // ]
             [
                 "rgba( 54, 54, 54, 0.8 )",
                 "rgba( 1, 1, 1, 0.8 )"
@@ -191,7 +195,7 @@ class KioskPage extends React.Component {
                 let filePath = "./storage/audio_files/" + item.filepath;
                 return (
                     <div key={item.id}>
-                        <a style={{ display: "inline" }} onClick={(event) => { if (this.state.playingIndex == item.id) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) } else { if (this.state.currentAudio != null) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) }; var aud = new Audio(filePath); aud.play(); this.setState({ playingIndex: item.id, currentAudio: aud }); aud.onended = (event) => { this.setState({ playingIndex: -1, currentAudio: null }) } } }}>{this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop-white.png" width="50%" /> : <img style={{ display: "inline" }} src="images/play-white.png" width="50%" />}</a>
+                        <a style={{ display: "inline" }} onClick={(event) => { if (this.state.playingIndex == item.id) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) } else { if (this.state.currentAudio != null) { this.state.currentAudio.pause(); this.setState({ currentAudio: null, playingIndex: -1 }) }; var aud = new Audio(filePath); aud.play(); this.setState({ playingIndex: item.id, currentAudio: aud }); aud.onended = (event) => { this.setState({ playingIndex: -1, currentAudio: null }) } } }}>{this.state.playingIndex == item.id ? <img style={{ display: "inline" }} src="images/stop-white.png" width="59px" /> : <img style={{ display: "inline" }} src="images/play-white.png" width="59px" />}</a>
                     </div>
                 )
             });
@@ -285,7 +289,7 @@ class KioskPage extends React.Component {
                                                             return <span>{part}<br /></span>
                                                         })
                                                         :
-                                                        this.state.page.longdesc
+                                                        this.state.page.longdesc != null ? this.state.page.longdesc : ""
                                                     }
                                                     </p>
                                                 </div>

@@ -29,7 +29,7 @@ export default class SideBar extends React.Component {
         sideBarEntries.push(<SideBarEntry ref={ this.props.activeCategory == pptId ? this.props.r : null } key={pptId} id={pptId} isActive={this.props.activeCategory == pptId} name="Powerpoints" description="Powerpoint slides." handleChange={this.props.handleChange} />);
         
         return (
-            <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateRows: "repeat(6, 75px)", overflowY: "scroll", overflowX: "hidden" }}>
+            <div className="no-scrollbar" style={{ height: "100%", display: "grid", gridTemplateRows: `repeat(${sideBarEntries.length}, 75px)`, overflowY: "scroll", overflowX: "hidden" }}>
                 {sideBarEntries}
             </div>
         );
