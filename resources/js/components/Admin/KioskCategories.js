@@ -114,13 +114,16 @@ class KioskCategories extends React.Component {
         //         }
         //     }
         // )
+        let formData = new FormData();
+        formData.append( "token", localStorage.getItem( "id_token" ) );
         Axios({
             url: `./api/categories/${this.state.deleteItem.id}/${this.state.reassignCategory}`,
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("id_token")
-            }
+            },
+            data: formData,
         })
             .then(response => {
                 console.log(response)
