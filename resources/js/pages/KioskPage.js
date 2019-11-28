@@ -267,6 +267,7 @@ class KioskPage extends React.Component {
                                                         fontSize: "18px",
                                                         textAlign: "justify",
                                                         paddingBottom: "50px",
+                                                        zIndex: 10,
                                                     }}>{this.state.page.longdesc}
                                                     </p>
                                                 </div>
@@ -281,6 +282,7 @@ class KioskPage extends React.Component {
                                                         textDecoration: "none",
                                                         fontSize: "25px",
                                                         transition: this.state.transitionTime,
+                                                        zIndex: 100,
                                                     }} >&#8592; Back to Home</a>
                                             </div>
 
