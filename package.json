@@ -33,7 +33,7 @@
         "history": "^4.10.1",
         "jsonwebtoken": "^9.0.2",
         "jwt-decode": "^2.2.0",
-        "metro4": "^4.3.4",
+        "metro4": "^4.5.1",
         "qs": "^6.9.1",
         "react-image": "^2.2.1",
         "react-palette": "^1.0.1",
@@ -50,6 +50,7 @@
         "simple-keyboard": "^2.27.20",
         "swipejs": "^2.2.14",
         "video.js": "^7.6.6",
-        "watch": "^0.13.0"
+        "watch": "^0.13.0",
+        "xml2js": "^0.6.2"
     }
 }
