@@ -5,7 +5,7 @@ import Create from "../../pages/Admin/Create";
 import Loader from "../Loader";
 import ViewPages from "./KioskPages/ViewPages";
 import Pagination from "../Pagination";
-import { runInThisContext } from "vm";
+// import { runInThisContext } from "vm";
 import DeletePage from "./KioskPages/DeletePage";
 import Axios from "axios";
 import ErrorPage from "./ErrorPage";
