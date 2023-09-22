@@ -3,6 +3,8 @@
 # About
 A web-based touch solution developed for the Deep Cove Outdoor Education Trust. Designed to be displayed on touch screen kiosks, and served on a local server on-site with no local internet access.
 
+[![Technologies Used](https://skillicons.dev/icons?i=react,laravel,js,html,css,sass)]([https://skillicons.dev](https://skillicons.dev/icons?i=react,laravel,js,html,css,sass))
+
 ## Screenshots
 
 Designed to be easy to use on touch-based kisoks
@@ -12,7 +14,6 @@ Designed to be easy to use on touch-based kisoks
 Includes a content management system to modify kiosk content
 
 ![admin-kioskpages2](https://github.com/crashbash111/dcoet-kiosk/assets/50429378/86149603-36f9-47be-9ee6-3e9421b7fc06)
-
 
 ## How to load project
 To load this project you will need to have the following installed on your system:
